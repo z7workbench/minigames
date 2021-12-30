@@ -1,0 +1,19 @@
+name: macOS & iOS build
+on: [push, pull_request]
+jobs:
+  web:
+    name: build macOS & iOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-jave@v2
+        with:
+          java-version: '11'
+          java-package: jdk
+          architecture: x64
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - run: flutter pub get
+      - run: flutter build ios --release --no-codesign
+      - run: flutter build macos

@@ -1,0 +1,19 @@
+name: Windows build
+on: [push, pull_request]
+jobs:
+  windows:
+    name: build Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-jave@v2
+        with:
+          java-version: '11'
+          java-package: jdk
+          architecture: x64
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - run: flutter config --enable-windows-desktop
+      - run: flutter pub get
+      - run: flutter build windows
