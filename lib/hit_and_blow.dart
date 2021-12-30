@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class HitAndBlowHome extends StatefulWidget {
-  const HitAndBlowHome({Key? key, required this.title}) : super(key: key);
+  const HitAndBlowHome({Key? key}) : super(key: key);
 
-  final String title;
+  final String title = "Hit and Blow";
 
   // description
   final String desc = "";
@@ -17,22 +17,25 @@ class HitAndBlowHome extends StatefulWidget {
 class _HitAndBlowState extends State<HitAndBlowHome> {
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(widget.title)),
-        body: Column(children: <Widget>[
-          Text(
-            widget.desc,
-            textAlign: TextAlign.center,
-          ),
-          MaterialButton(
-            onPressed: () => {},
-            child: Text("Start"),
-          ),
-          MaterialButton(
-            onPressed: () => {},
-            child: Text("Leaderboard"),
-          ),
-        ]),
-      );
+      appBar: AppBar(title: Text(widget.title)),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                widget.desc,
+                textAlign: TextAlign.center,
+              ),
+              MaterialButton(
+                onPressed: () => {},
+                child: Text("Start"),
+              ),
+              MaterialButton(
+                onPressed: () => {},
+                child: Text("Leaderboard"),
+              ),
+            ]),
+      ));
 }
 
 class HitAndBlowEngine {
