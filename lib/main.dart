@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(fontSize: 16.0),)
                 ],
               ),
-              onTapUp: (detail) {
+              onTapUp: (_) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
