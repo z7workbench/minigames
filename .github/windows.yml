@@ -1,0 +1,5 @@
+name: Windows build
+on: [push, push_request]
+jobs:
+  run:
+    name:

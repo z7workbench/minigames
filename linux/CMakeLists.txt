@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "minigames")
-set(APPLICATION_ID "com.example.minigames")
+set(APPLICATION_ID "top.z7workbench.minigames")
 
 cmake_policy(SET CMP0063 NEW)
 
