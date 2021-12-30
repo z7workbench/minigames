@@ -1,14 +1,14 @@
 import 'dart:collection';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:minigames/generated/l10n.dart';
 
 class HitAndBlowHome extends StatefulWidget {
-  const HitAndBlowHome({Key? key}) : super(key: key);
-
-  final String title = "Hit and Blow";
+  HitAndBlowHome({Key? key}) : super(key: key);
+  String title = S().hnb_title;
 
   // description
-  final String desc = "";
+  String desc = S().hnb_desc;
 
   @override
   State<HitAndBlowHome> createState() => _HitAndBlowState();
