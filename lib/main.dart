@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'MiniGames',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: "MiSans"
       ),
       home: const MyHomePage(title: 'Mini Games'),
       localizationsDelegates: const [
@@ -67,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HitAndBlowHome()));
+                        builder: (context) => const HitAndBlowHome()));
               },
             ),
             const Padding(padding: EdgeInsets.all(8.0)),

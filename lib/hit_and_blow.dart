@@ -23,11 +23,11 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
               ),
               MaterialButton(
                 onPressed: () => {},
-                child: Text("Start"),
+                child: Text(S.of(context).start_game),
               ),
               MaterialButton(
                 onPressed: () => {},
-                child: Text("Leaderboard"),
+                child: Text(S.of(context).leaderboard),
               ),
             ]),
       ));

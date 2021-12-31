@@ -69,6 +69,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Start Game`
+  String get start_game {
+    return Intl.message(
+      'Start Game',
+      name: 'start_game',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leaderboard`
+  String get leaderboard {
+    return Intl.message(
+      'Leaderboard',
+      name: 'leaderboard',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
