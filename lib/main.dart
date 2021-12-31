@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/hit_and_blow.dart';
 
@@ -18,6 +19,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Mini Games'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: S.delegate.supportedLocales,
     );
   }
 }
@@ -47,13 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             GestureDetector(
               child: Column(
-                children: const [
-                  Text(
-                    "Hit and Blow",
-                    style: TextStyle(fontSize: 24.0, color: Colors.black),
+                children: [
+                  Text(S.of(context).hnb_title,
+                    style: const TextStyle(fontSize: 24.0, color: Colors.black),
                   ),
-                  Text("desc",
-                  style: TextStyle(fontSize: 16.0),)
+                  Text(S.of(context).hnb_desc,
+                  style: const TextStyle(fontSize: 16.0),)
                 ],
               ),
               onTapUp: (_) {
@@ -77,15 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             )
-
-            // MaterialButton(
-            //   onPressed: () => Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) =>
-            //               const HitAndBlowHome())),
-            //   child: Text("Hit and Blow"),
-            // )
           ],
         ),
       )),

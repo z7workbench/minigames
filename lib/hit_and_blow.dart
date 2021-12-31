@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:minigames/generated/l10n.dart';
 
 class HitAndBlowHome extends StatefulWidget {
-  HitAndBlowHome({Key? key}) : super(key: key);
-  String title = S().hnb_title;
-
-  // description
-  String desc = S().hnb_desc;
+  const HitAndBlowHome({Key? key}) : super(key: key);
 
   @override
   State<HitAndBlowHome> createState() => _HitAndBlowState();
@@ -17,13 +13,12 @@ class HitAndBlowHome extends StatefulWidget {
 class _HitAndBlowState extends State<HitAndBlowHome> {
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(title: Text(S.of(context).hnb_title)),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text(
-                widget.desc,
+              Text(S.of(context).hnb_desc,
                 textAlign: TextAlign.center,
               ),
               MaterialButton(
