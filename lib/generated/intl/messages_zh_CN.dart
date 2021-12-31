@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app": MessageLookupByLibrary.simpleMessage("迷你游戏合集"),
+        "description": MessageLookupByLibrary.simpleMessage("游戏简介"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
             "这是描述内容。今天更新设计网络，怎么开发的是要求网上业务发生，出现如何下载如何表示本站记者。以及得到操作作为企业联系很多，自己当然研究过程，支持介绍为了发布我们成功认为。"),
         "hnb_title": MessageLookupByLibrary.simpleMessage("猜颜色"),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minigames/generated/l10n.dart';
-import 'package:minigames/hit_and_blow.dart';
+import 'package:minigames/games/hit_and_blow.dart';
+import 'package:minigames/styles.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mini Games',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: "MiSans"
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "MiSans"),
       home: const MyHomePage(),
       localizationsDelegates: const [
         S.delegate,
@@ -39,7 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,18 +45,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
           child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: containerPadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             GestureDetector(
               child: Column(
                 children: [
-                  Text(S.of(context).hnb_title,
-                    style: const TextStyle(fontSize: 24.0, color: Colors.black),
+                  Text(
+                    S.of(context).hnb_title,
+                    style: titleTextStyle,
                   ),
-                  Text(S.of(context).hnb_desc,
-                  style: const TextStyle(fontSize: 16.0),)
+                  Text(
+                    S.of(context).hnb_desc,
+                    style: docTextStyle,
+                  )
                 ],
               ),
               onTapUp: (_) {
@@ -73,11 +73,14 @@ class _MyHomePageState extends State<MyHomePage> {
             GestureDetector(
               child: Column(
                 children: [
-                  Text(S.of(context).minesweeper_title,
-                    style: const TextStyle(fontSize: 24.0, color: Colors.black),
+                  Text(
+                    S.of(context).minesweeper_title,
+                    style: titleTextStyle,
                   ),
-                  Text(S.of(context).minesweeper_desc,
-                    style: const TextStyle(fontSize: 16.0),)
+                  Text(
+                    S.of(context).minesweeper_desc,
+                    style: docTextStyle,
+                  )
                 ],
               ),
             )

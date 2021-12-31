@@ -110,6 +110,16 @@ class S {
     );
   }
 
+  /// `Game info`
+  String get description {
+    return Intl.message(
+      'Game info',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Mini Games`
   String get app {
     return Intl.message(
