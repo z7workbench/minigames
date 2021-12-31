@@ -70,6 +70,26 @@ class S {
     );
   }
 
+  /// `Minesweeper`
+  String get minesweeper_title {
+    return Intl.message(
+      'Minesweeper',
+      name: 'minesweeper_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get ask reduce skin. Child never forget less herself reveal. City example similar service billion store large. Book term although believe. Religious out opportunity upon note.`
+  String get minesweeper_desc {
+    return Intl.message(
+      'Get ask reduce skin. Child never forget less herself reveal. City example similar service billion store large. Book term although believe. Religious out opportunity upon note.',
+      name: 'minesweeper_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Start Game`
   String get start_game {
     return Intl.message(
@@ -85,6 +105,16 @@ class S {
     return Intl.message(
       'Leaderboard',
       name: 'leaderboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mini Games`
+  String get app {
+    return Intl.message(
+      'Mini Games',
+      name: 'app',
       desc: '',
       args: [],
     );

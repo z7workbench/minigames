@@ -22,10 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "app": MessageLookupByLibrary.simpleMessage("迷你游戏合集"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
-            "这是描述内容。 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. "),
+            "这是描述内容。今天更新设计网络，怎么开发的是要求网上业务发生，出现如何下载如何表示本站记者。以及得到操作作为企业联系很多，自己当然研究过程，支持介绍为了发布我们成功认为。"),
         "hnb_title": MessageLookupByLibrary.simpleMessage("猜颜色"),
         "leaderboard": MessageLookupByLibrary.simpleMessage("排行榜"),
+        "minesweeper_desc": MessageLookupByLibrary.simpleMessage(
+            "网上或者看到软件查看，新闻我们发生主题包括工具其实，为什您的新闻看到只是都是下载。任何语言这里更多，帮助人民不能工程经济操作。欢迎新闻具有游戏，发布之间其实一个。"),
+        "minesweeper_title": MessageLookupByLibrary.simpleMessage("扫雷"),
         "start_game": MessageLookupByLibrary.simpleMessage("开始游戏")
       };
 }
