@@ -29,13 +29,12 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                   style: docTextStyle,
                 ),
               ], title: S.of(context).description),
+              margin,
+              DropDownWidget(children: [], title: S.of(context).leaderboard),
+              margin,
               MaterialButton(
                 onPressed: () => {},
                 child: Text(S.of(context).start_game),
-              ),
-              MaterialButton(
-                onPressed: () => {},
-                child: Text(S.of(context).leaderboard),
               ),
             ]),
       ));
