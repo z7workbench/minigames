@@ -1,6 +1,4 @@
-<p align="center"><img src="arts/minigames-small.webp"></p>
-
-<p align="center"><img src="arts/minigames-title.webp"></p>
+<p align="center"><img src="arts/minigames-main.webp"></p>
 
 <p align="center">
     <a href="https://github.com/z7workbench/minigames/actions/workflows/android.yml"><img alt="Android build" src="https://github.com/z7workbench/minigames/actions/workflows/android.yml/badge.svg"></a>
