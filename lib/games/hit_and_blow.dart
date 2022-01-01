@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/styles.dart';
-import 'package:minigames/widgets/drop_down.dart';
+import 'package:minigames/widgets/dropdown.dart';
 
 class HitAndBlowHome extends StatefulWidget {
   const HitAndBlowHome({Key? key}) : super(key: key);
@@ -23,14 +23,14 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              DropDownWidget(children: [
+              DropdownWidget(children: [
                 Text(
                   S.of(context).hnb_desc,
                   style: docTextStyle,
                 ),
               ], title: S.of(context).description),
               margin,
-              DropDownWidget(children: [], title: S.of(context).leaderboard),
+              DropdownWidget(children: [], title: S.of(context).leaderboard),
               margin,
               MaterialButton(
                 onPressed: () => {},

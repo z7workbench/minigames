@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:minigames/styles.dart';
 
-class DropDownWidget extends StatefulWidget {
-  const DropDownWidget({Key? key, required this.children, required this.title}) : super(key: key);
+class DropdownWidget extends StatefulWidget {
+  const DropdownWidget({Key? key, required this.children, required this.title}) : super(key: key);
   final List<Widget> children;
   final String title;
 
   @override
-  State<DropDownWidget> createState() => _DropDownWidgetState();
+  State<DropdownWidget> createState() => _DropdownWidgetState();
 }
 
-class _DropDownWidgetState extends State<DropDownWidget> {
+class _DropdownWidgetState extends State<DropdownWidget> {
   var visibility = false;
 
   @override
