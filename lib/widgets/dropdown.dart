@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:minigames/styles.dart';
 
 class DropdownWidget extends StatefulWidget {
-  const DropdownWidget({Key? key, required this.children, required this.title}) : super(key: key);
+  const DropdownWidget({Key? key, required this.children, required this.title})
+      : super(key: key);
   final List<Widget> children;
   final String title;
 
@@ -15,44 +16,48 @@ class _DropdownWidgetState extends State<DropdownWidget> {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-    child: Column(
-      children: [
-        Row(
+        child: Column(
           children: [
-            Expanded(
-              child: Text(
-                widget.title,
-                style: titleTextStyle,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.title,
+                    style: titleTextStyle,
+                  ),
+                ),
+                Offstage(
+                  offstage: visibility,
+                  child: const Icon(Icons.expand_less),
+                ),
+                Offstage(
+                  offstage: !visibility,
+                  child: const Icon(Icons.expand_more),
+                )
+              ],
+            ),
+            AnimatedOpacity(
+              opacity: visibility ? 0.0 : 1.0,
+              duration: const Duration(milliseconds: 500),
+              child: Offstage(
+                offstage: visibility,
+                child: Column(
+                  children: widget.children,
+                ),
               ),
-            ),
-            Offstage(
-              offstage: visibility,
-              child: const Icon(Icons.expand_less),
-            ),
-            Offstage(
-              offstage: !visibility,
-              child: const Icon(Icons.expand_more),
             )
           ],
         ),
-        Offstage(
-          offstage: visibility,
-          child: Column(
-            children: widget.children,
-          ),
-        )
-      ],
-    ),
-    onTapUp: (_) {
-      if (visibility) {
-        setState(() {
-          visibility = false;
-        });
-      } else {
-        setState(() {
-          visibility = true;
-        });
-      }
-    },
-  );
+        onTapUp: (_) {
+          if (visibility) {
+            setState(() {
+              visibility = false;
+            });
+          } else {
+            setState(() {
+              visibility = true;
+            });
+          }
+        },
+      );
 }
