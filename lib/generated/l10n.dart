@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Correct answer`
+  String get hnb_answer {
+    return Intl.message(
+      'Correct answer',
+      name: 'hnb_answer',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Minesweeper`
   String get minesweeper_title {
     return Intl.message(

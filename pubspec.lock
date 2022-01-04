@@ -322,3 +322,4 @@ packages:
     version: "0.2.0"
 sdks:
   dart: ">=2.16.0-80.1.beta <3.0.0"
+  flutter: ">=2.5.0"
