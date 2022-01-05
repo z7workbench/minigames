@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/styles.dart';
+import 'package:minigames/widgets/codeboard.dart';
 import 'package:minigames/widgets/dropdown.dart';
 
 class HitAndBlowHome extends StatefulWidget {
@@ -37,7 +38,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                   ),
                 ], title: S.of(context).description),
                 margin,
-                DropdownWidget(children: [], title: S.of(context).leaderboard),
+                DropdownWidget(children: const [], title: S.of(context).leaderboard),
                 margin,
                 MaterialButton(
                   onPressed: () => {
@@ -153,14 +154,16 @@ class _HitAndBlowItemState extends State<_HitAndBlowItemWidget> {
   @override
   Widget build(BuildContext context) => Row(
         children: [
-          Text("done")
-          // VerificationBox(
-          //   count: widget.balls,
-          //   borderColor: Colors.grey,
-          //   focusBorderColor: Colors.blue,
-          //   borderWidth: 3,
-          //   borderRadius: 50,
-          // )
+          CodeBoard(
+            count: widget.balls,
+            borderColor: Colors.grey,
+            focusBorderColor: Colors.blue,
+            borderWidth: 3,
+            borderRadius: 50,
+            finished: (value) => {
+              
+            },
+          )
         ],
       );
 }
