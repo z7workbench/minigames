@@ -17,3 +17,7 @@ jobs:
           channel: 'dev'
       - run: flutter pub get
       - run: flutter build web
+      - uses: actions/upload-artifact@v2
+        with:
+          name: web-release
+          path: build/web

@@ -17,4 +17,7 @@ jobs:
           channel: 'dev'
       - run: flutter pub get
       - run: flutter build apk
-      - run: flutter build appbundle
+      - uses: actions/upload-artifact@v2
+        with:
+          name: android-release
+          path: build/app/outputs/flutter-apk/app-release.apk
