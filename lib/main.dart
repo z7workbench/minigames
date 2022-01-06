@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => const HitAndBlowHome()));
               },
             ),
-            const Padding(padding: EdgeInsets.all(8.0)),
+            margin,
             GestureDetector(
               child: Column(
                 children: [
