@@ -42,57 +42,63 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                 DropdownWidget(
                     children: const [], title: S.of(context).leaderboard),
                 margin,
-                MaterialButton(
-                  onPressed: () => {
-                    setState(() {
-                      if (notShowGame) notShowGame = false;
-                      _engine = HitAndBlowEngine(4, allowDuplicate);
-                      finished = false;
-                      times = 1;
-                      items.clear();
-                      items.add(addCodeBoard());
-                    })
-                  },
-                  child: Text(finished
-                      ? S.of(context).start_game
-                      : S.of(context).restart_game),
-                ),
-                margin,
-                Offstage(
-                  offstage: notShowGame,
-                  child: Column(
-                    children: [
-                      Row(
+                AnimatedOpacity(
+                    opacity: notShowGame ? 0.0 : 1.0,
+                    duration: const Duration(milliseconds: 500),
+                    child: Offstage(
+                      offstage: notShowGame,
+                      child: Column(
                         children: [
-                          Text(
-                            S.of(context).hnb_answer,
-                            textAlign: TextAlign.start,
-                            style: subtitleTextStyleRed,
+                          Row(
+                            children: [
+                              Text(
+                                S.of(context).hnb_answer,
+                                textAlign: TextAlign.start,
+                                style: subtitleTextStyleRed,
+                              ),
+                              margin,
+                              Text(
+                                answerText,
+                                style: subtitleTextStyleBlack,
+                              ),
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
                           ),
                           margin,
-                          Text(
-                            answerText,
-                            style: subtitleTextStyleBlack,
-                          ),
+                          Wrap(
+                            direction: Axis.horizontal,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 8.0,
+                            runSpacing: 4.0,
+                            alignment: WrapAlignment.start,
+                            children: items,
+                          )
                         ],
-                        mainAxisAlignment: MainAxisAlignment.center,
                       ),
-                      Wrap(
-                        direction: Axis.horizontal,
-                        spacing: 8.0,
-                        runSpacing: 4.0,
-                        alignment: WrapAlignment.start,
-                        children: items,
-                      )
-                    ],
-                  ),
-                )
+                    )),
               ]),
         )),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: onPressed(),
+            label: Text(finished
+                ? S.of(context).start_game
+                : S.of(context).restart_game)),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
 
-  CodeBoard addCodeBoard() {
-    return CodeBoard(
+  VoidCallback onPressed() => () {
+        setState(() {
+          if (notShowGame) notShowGame = false;
+          _engine = HitAndBlowEngine(4, allowDuplicate);
+          finished = false;
+          times = 1;
+          items.clear();
+          items.add(addCodeBoard());
+        });
+      };
+
+  CheckBoard addCodeBoard() {
+    return CheckBoard(
       times: times,
       count: _engine.balls,
       borderColor: Colors.blue,

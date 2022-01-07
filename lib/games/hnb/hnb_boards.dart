@@ -3,15 +3,15 @@ import 'package:minigames/games/hnb/hnb_engine.dart';
 import 'package:minigames/styles.dart';
 import 'package:minigames/generated/l10n.dart';
 
-class CodeBoard extends StatefulWidget {
-  const CodeBoard(
+class CheckBoard extends StatefulWidget {
+  const CheckBoard(
       {Key? key,
-        this.count = 4,
-        this.borderWidth = 2.0,
-        this.borderRadius = 25.0,
-        required this.times,
-        required this.borderColor,
-        required this.finished})
+      this.count = 4,
+      this.borderWidth = 2.0,
+      this.borderRadius = 25.0,
+      required this.times,
+      required this.borderColor,
+      required this.finished})
       : super(key: key);
 
   final int times;
@@ -22,11 +22,12 @@ class CodeBoard extends StatefulWidget {
   final ValueChanged finished;
 
   @override
-  State<StatefulWidget> createState() => _CodeBoardState();
+  State<StatefulWidget> createState() => _CheckBoardState();
 }
 
-class _CodeBoardState extends State<CodeBoard> {
+class _CheckBoardState extends State<CheckBoard> {
   final List<int> _contentList = [];
+
   List get content => _contentList;
   final List<int> _candidates = [];
 
@@ -44,21 +45,38 @@ class _CodeBoardState extends State<CodeBoard> {
   @override
   Widget build(BuildContext context) => Container(
       decoration: BoxDecoration(
-          border: Border.all(
-              color: widget.borderColor,
-              width: widget.borderWidth),
+          border:
+              Border.all(color: widget.borderColor, width: widget.borderWidth),
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius))),
       child: Padding(
         padding: containerPadding,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text("try: ${widget.times}"),
-            Row(children: [
-              Row(
-                children: List.generate(
-                    widget.count,
-                        (index) => DropdownButtonHideUnderline(
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Try: ${widget.times}"),
+                margin,
+                MaterialButton(
+                  onPressed: () => {widget.finished(_contentList)},
+                  child: Text(S.of(context).check),
+                )
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: List.generate(
+                  widget.count,
+                  (index) => Padding(
+                        padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                         child: DropdownButton<int>(
+                          icon: const Visibility(
+                              visible: false,
+                              child: Icon(Icons.arrow_downward)),
                           onChanged: (value) {
                             setState(() {
                               _contentList[index] = value ?? 0;
@@ -67,17 +85,13 @@ class _CodeBoardState extends State<CodeBoard> {
                           value: _contentList[index],
                           items: _candidates
                               .map((e) => DropdownMenuItem<int>(
-                            value: e,
-                            child: Text(e.toString()),
-                          ))
+                                    value: e,
+                                    child: Text(e.toString()),
+                                  ))
                               .toList(),
-                        ))),
-              ),
-              MaterialButton(
-                onPressed: () => {widget.finished(_contentList)},
-                child: Text(S.of(context).check),
-              )
-            ])
+                        ),
+                      )),
+            )
           ],
         ),
       ));
@@ -113,24 +127,34 @@ class _ResultBoardState extends State<ResultBoard> {
               Border.all(color: widget.borderColor, width: widget.borderWidth),
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius))),
       child: Padding(
-        padding: containerPadding,
+        padding: containerLargePadding,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("try: ${widget.times}"),
-            Row(children: [
-              Text(widget.match.join(" ")),
-              margin,
-              Row(
-                children: List.generate(
-                        widget.result.allCorrect,
-                        (index) => const Icon(
-                              Icons.done,
-                              color: Colors.green,
-                            )) +
-                    List.generate(widget.result.halfCorrect,
-                        (index) => const Icon(Icons.done, color: Colors.grey)),
-              )
-            ])
+            Text("Try: ${widget.times}"),
+            margin,
+            Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(widget.match.join(" ")),
+                  margin,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: List.generate(
+                            widget.result.allCorrect,
+                            (index) => const Icon(
+                                  Icons.done,
+                                  color: Colors.green,
+                                )) +
+                        List.generate(
+                            widget.result.halfCorrect,
+                            (index) =>
+                                const Icon(Icons.done, color: Colors.grey)),
+                  )
+                ])
           ],
         ),
       ));
