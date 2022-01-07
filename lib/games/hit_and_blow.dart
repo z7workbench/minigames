@@ -23,7 +23,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   int times = 1;
   List results = [];
 
-  List<Widget> items = List.empty(growable: true);
+  List<Widget> items = [];
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -99,7 +99,6 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
       count: _engine.balls,
       borderColor: Colors.blue,
       borderWidth: 3,
-      borderRadius: 25,
       finished: (value) {
         if (!value.contains(0)) {
           var result = _engine.check(value);
@@ -107,9 +106,17 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
           if (result.allCorrect == _engine.balls) {
             finished = true;
             answerText = _engine.answer.join(" ");
+            setState(() {
+              items.removeLast();
+              items.add(addResultBoard(result, value));
+            });
           } else {
-            items.removeLast();
-            items.add(addResultBoard(result, value));
+            setState(() {
+              items.removeLast();
+              items.add(addResultBoard(result, value));
+              times++;
+              items.add(addCodeBoard());
+            });
           }
         }
       },
@@ -151,14 +158,14 @@ class HitAndBlowEngine {
   }
 
   HitAndBlowResult check(List<int> candidate) {
-    var allRight = List.empty();
-    var halfRight = List.empty();
+    var allRight = [];
+    var halfRight = [];
     var map = Map.of(stats);
     for (var i = 0; i < balls; i++) {
       if (map.containsKey(candidate[i]) &&
           map[candidate[i]]! > 0 &&
           candidate[i] == answer[i]) {
-        map[candidate[i]] = map[candidate]! - 1;
+        map[candidate[i]] = map[candidate[i]]! - 1;
         allRight.add(i);
       }
     }

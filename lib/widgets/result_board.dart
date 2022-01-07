@@ -7,7 +7,7 @@ class ResultBoard extends StatefulWidget {
   const ResultBoard(
       {Key? key,
       this.borderWidth = 2.0,
-      this.borderRadius = 5.0,
+      this.borderRadius = 25.0,
       required this.times,
       required this.borderColor,
       required this.result,
