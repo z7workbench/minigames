@@ -23,7 +23,7 @@ jobs:
         with:
           name: linux-release
           path: build/linux/x64/release/bundle
-      - run: tar cvf minigames-linux-release-x64.tar build/linux/x64/release/bundle
+      - run: tar cvf minigames-linux-release-x64.tar -C build/linux/x64/release bundle
       - name: release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
