@@ -8,10 +8,8 @@ class CodeBoard extends StatefulWidget {
       this.count = 4,
       this.borderWidth = 2.0,
       this.borderRadius = 5.0,
-      this.focused = true,
       required this.times,
       required this.borderColor,
-      required this.focusBorderColor,
       required this.finished})
       : super(key: key);
 
@@ -19,10 +17,8 @@ class CodeBoard extends StatefulWidget {
   final int count;
   final double borderWidth;
   final Color borderColor;
-  final Color focusBorderColor;
   final double borderRadius;
   final ValueChanged finished;
-  final bool focused;
 
   @override
   State<StatefulWidget> createState() => _CodeBoardState();
@@ -48,8 +44,7 @@ class _CodeBoardState extends State<CodeBoard> {
   Widget build(BuildContext context) => Container(
       decoration: BoxDecoration(
           border: Border.all(
-              color:
-                  widget.focused ? widget.focusBorderColor : widget.borderColor,
+              color: widget.borderColor,
               width: widget.borderWidth),
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius))),
       child: Padding(
@@ -68,7 +63,6 @@ class _CodeBoardState extends State<CodeBoard> {
                               _contentList[index] = value ?? 0;
                             });
                           },
-                          hint: Text(S.of(context).check),
                           value: _contentList[index],
                           items: _candidates
                               .map((e) => DropdownMenuItem<int>(
@@ -80,7 +74,7 @@ class _CodeBoardState extends State<CodeBoard> {
               ),
               MaterialButton(
                 onPressed: () => {widget.finished(_contentList)},
-                child: const Text("check"),
+                child: Text(S.of(context).check),
               )
             ])
           ],

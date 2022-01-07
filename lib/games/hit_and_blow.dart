@@ -5,6 +5,7 @@ import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/styles.dart';
 import 'package:minigames/widgets/codeboard.dart';
 import 'package:minigames/widgets/dropdown.dart';
+import 'package:minigames/widgets/result_board.dart';
 
 class HitAndBlowHome extends StatefulWidget {
   const HitAndBlowHome({Key? key}) : super(key: key);
@@ -20,8 +21,9 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   bool finished = true;
   String answerText = "x x x x";
   int times = 1;
+  List results = [];
 
-  List<_HitAndBlowItemWidget> items = List.empty(growable: true);
+  List<Widget> items = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -49,10 +51,8 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                       _engine = HitAndBlowEngine(4, allowDuplicate);
                       finished = false;
                       times = 1;
-                      items.add(_HitAndBlowItemWidget(
-                        times: times,
-                        balls: _engine.balls,
-                      ));
+                      items.clear();
+                      items.add(addCodeBoard());
                     })
                   },
                   child: Text(finished
@@ -79,7 +79,11 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
                       ),
-                      Column(
+                      Wrap(
+                        direction: Axis.horizontal,
+                        spacing: 8.0,
+                        runSpacing: 4.0,
+                        alignment: WrapAlignment.start,
                         children: items,
                       )
                     ],
@@ -88,6 +92,38 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
               ]),
         )),
       );
+
+  CodeBoard addCodeBoard() {
+    return CodeBoard(
+      times: times,
+      count: _engine.balls,
+      borderColor: Colors.blue,
+      borderWidth: 3,
+      borderRadius: 25,
+      finished: (value) {
+        if (!value.contains(0)) {
+          var result = _engine.check(value);
+          results.add(result);
+          if (result.allCorrect == _engine.balls) {
+            finished = true;
+            answerText = _engine.answer.join(" ");
+          } else {
+            items.removeLast();
+            items.add(addResultBoard(result, value));
+          }
+        }
+      },
+    );
+  }
+
+  ResultBoard addResultBoard(HitAndBlowResult result, List<int> match) {
+    return ResultBoard(
+      times: times,
+      borderColor: Colors.grey,
+      result: result,
+      match: match,
+    );
+  }
 }
 
 class HitAndBlowEngine {
@@ -144,33 +180,4 @@ class HitAndBlowResult {
   int halfCorrect = 0;
 
   HitAndBlowResult(this.allCorrect, this.halfCorrect);
-}
-
-class _HitAndBlowItemWidget extends StatefulWidget {
-  final int balls;
-  final int times;
-
-  const _HitAndBlowItemWidget(
-      {Key? key, required this.balls, required this.times})
-      : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _HitAndBlowItemState();
-}
-
-class _HitAndBlowItemState extends State<_HitAndBlowItemWidget> {
-  @override
-  Widget build(BuildContext context) => Row(
-        children: [
-          CodeBoard(
-            times: widget.times,
-            count: widget.balls,
-            borderColor: Colors.grey,
-            focusBorderColor: Colors.blue,
-            borderWidth: 3,
-            borderRadius: 25,
-            finished: (value) => {},
-          )
-        ],
-      );
 }
