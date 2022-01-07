@@ -28,4 +28,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: minigames-linux-release-x64.tar
+          files: minigames-linux-release-x64.tar.bz2
