@@ -69,21 +69,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => const HitAndBlowHome()));
               },
             ),
-            margin,
-            GestureDetector(
-              child: Column(
-                children: [
-                  Text(
-                    S.of(context).minesweeper_title,
-                    style: titleTextStyle,
-                  ),
-                  Text(
-                    S.of(context).minesweeper_desc,
-                    style: docTextStyle,
-                  )
-                ],
-              ),
-            )
+            // margin,
+            // GestureDetector(
+            //   child: Column(
+            //     children: [
+            //       Text(
+            //         S.of(context).minesweeper_title,
+            //         style: titleTextStyle,
+            //       ),
+            //       Text(
+            //         S.of(context).minesweeper_desc,
+            //         style: docTextStyle,
+            //       )
+            //     ],
+            //   ),
+            // )
           ],
         ),
       )),

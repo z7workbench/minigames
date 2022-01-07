@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("游戏简介"),
         "hnb_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
-            "这是描述内容。今天更新设计网络，怎么开发的是要求网上业务发生，出现如何下载如何表示本站记者。以及得到操作作为企业联系很多，自己当然研究过程，支持介绍为了发布我们成功认为。"),
+            "这是一个猜出隐藏的n个数字和位置的游戏，默认n为4。从1-n中选择n-2个数字放到位置上，按下“检查”即可检查对错。每个位置会被判定为“全对”（用彩色对钩表示）或“半对”（用灰色对钩表示），前者为位置和数字都正确，后者为选取的数字正确。如果判定失败则再来一次，直到判断正确！"),
         "hnb_title": MessageLookupByLibrary.simpleMessage("猜数字组合"),
         "leaderboard": MessageLookupByLibrary.simpleMessage("排行榜"),
         "minesweeper_desc": MessageLookupByLibrary.simpleMessage(
