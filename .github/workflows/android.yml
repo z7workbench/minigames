@@ -21,3 +21,9 @@ jobs:
         with:
           name: android-release
           path: build/app/outputs/flutter-apk/app-release.apk
+      - run: cp build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/minigames-android-release.apk
+      - name: release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: build/app/outputs/flutter-apk/minigames-android-release.apk

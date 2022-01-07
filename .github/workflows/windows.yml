@@ -22,3 +22,11 @@ jobs:
         with:
           name: windows-release
           path: build/windows/runner/Release
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r minigames-windows-release-x64.zip build/windows/runner/Release
+      - name: release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: minigames-windows-release-x64.zip
