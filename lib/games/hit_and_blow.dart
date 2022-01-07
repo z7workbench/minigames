@@ -19,6 +19,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   bool notShowGame = true;
   bool finished = true;
   String answerText = "x x x x";
+  int times = 1;
 
   List<_HitAndBlowItemWidget> items = List.empty(growable: true);
 
@@ -38,7 +39,8 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                   ),
                 ], title: S.of(context).description),
                 margin,
-                DropdownWidget(children: const [], title: S.of(context).leaderboard),
+                DropdownWidget(
+                    children: const [], title: S.of(context).leaderboard),
                 margin,
                 MaterialButton(
                   onPressed: () => {
@@ -46,12 +48,16 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                       if (notShowGame) notShowGame = false;
                       _engine = HitAndBlowEngine(4, allowDuplicate);
                       finished = false;
+                      times = 1;
                       items.add(_HitAndBlowItemWidget(
+                        times: times,
                         balls: _engine.balls,
                       ));
                     })
                   },
-                  child: Text(S.of(context).start_game),
+                  child: Text(finished
+                      ? S.of(context).start_game
+                      : S.of(context).restart_game),
                 ),
                 margin,
                 Offstage(
@@ -142,8 +148,10 @@ class HitAndBlowResult {
 
 class _HitAndBlowItemWidget extends StatefulWidget {
   final int balls;
+  final int times;
 
-  const _HitAndBlowItemWidget({Key? key, required this.balls})
+  const _HitAndBlowItemWidget(
+      {Key? key, required this.balls, required this.times})
       : super(key: key);
 
   @override
@@ -155,14 +163,13 @@ class _HitAndBlowItemState extends State<_HitAndBlowItemWidget> {
   Widget build(BuildContext context) => Row(
         children: [
           CodeBoard(
+            times: widget.times,
             count: widget.balls,
             borderColor: Colors.grey,
             focusBorderColor: Colors.blue,
             borderWidth: 3,
-            borderRadius: 50,
-            finished: (value) => {
-              
-            },
+            borderRadius: 25,
+            finished: (value) => {},
           )
         ],
       );

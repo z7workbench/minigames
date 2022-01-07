@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app": MessageLookupByLibrary.simpleMessage("Mini Games"),
+        "check": MessageLookupByLibrary.simpleMessage("Check"),
         "description": MessageLookupByLibrary.simpleMessage("Game info"),
         "hnb_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
@@ -33,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Get ask reduce skin. Child never forget less herself reveal. City example similar service billion store large. Book term although believe. Religious out opportunity upon note."),
         "minesweeper_title":
             MessageLookupByLibrary.simpleMessage("Minesweeper"),
+        "restart_game": MessageLookupByLibrary.simpleMessage("Restart Game"),
         "start_game": MessageLookupByLibrary.simpleMessage("Start Game")
       };
 }

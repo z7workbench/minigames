@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Check`
+  String get check {
+    return Intl.message(
+      'Check',
+      name: 'check',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Minesweeper`
   String get minesweeper_title {
     return Intl.message(
@@ -105,6 +115,16 @@ class S {
     return Intl.message(
       'Start Game',
       name: 'start_game',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restart Game`
+  String get restart_game {
+    return Intl.message(
+      'Restart Game',
+      name: 'restart_game',
       desc: '',
       args: [],
     );
