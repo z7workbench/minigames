@@ -21,7 +21,7 @@ jobs:
         with:
           name: web-release
           path: build/web
-      - run: tar cvf minigames-web-release.tar -C build web
+      - run: tar jcvf minigames-web-release.tar.bz2 -C build web
       - name: release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
