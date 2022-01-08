@@ -17,7 +17,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   late HitAndBlowEngine _engine;
   bool notShowGame = true;
   bool finished = true;
-  String answerText = "x x x x";
+  String answerText = hnbPlaceholder;
   int times = 1;
   List results = [];
 
@@ -89,6 +89,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   VoidCallback onPressed() => () {
         setState(() {
           if (notShowGame) notShowGame = false;
+          answerText = hnbPlaceholder;
           _engine = HitAndBlowEngine(4, allowDuplicate);
           finished = false;
           times = 1;
