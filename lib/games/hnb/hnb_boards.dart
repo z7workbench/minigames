@@ -60,7 +60,7 @@ class _CheckBoardState extends State<CheckBoard> {
               children: [
                 Text("Try: ${widget.times}"),
                 margin,
-                MaterialButton(
+                ElevatedButton(
                   onPressed: () => {widget.finished(_contentList)},
                   child: Text(S.of(context).check),
                 )
