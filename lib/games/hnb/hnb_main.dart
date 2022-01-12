@@ -76,6 +76,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                         ],
                       ),
                     )),
+                bottomBlank
               ]),
         )),
         floatingActionButton: FloatingActionButton.extended(
