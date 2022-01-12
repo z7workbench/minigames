@@ -159,6 +159,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Up Coming Next...`
+  String get up_coming {
+    return Intl.message(
+      'Up Coming Next...',
+      name: 'up_coming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More mini games will be released in this app, click here to see the version update logs and future version roadmap!`
+  String get up_coming_desc {
+    return Intl.message(
+      'More mini games will be released in this app, click here to see the version update logs and future version roadmap!',
+      name: 'up_coming_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Roadmap`
+  String get roadmap {
+    return Intl.message(
+      'Roadmap',
+      name: 'roadmap',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -35,6 +35,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "minesweeper_title":
             MessageLookupByLibrary.simpleMessage("Minesweeper"),
         "restart_game": MessageLookupByLibrary.simpleMessage("Restart Game"),
-        "start_game": MessageLookupByLibrary.simpleMessage("Start Game")
+        "roadmap": MessageLookupByLibrary.simpleMessage("Roadmap"),
+        "start_game": MessageLookupByLibrary.simpleMessage("Start Game"),
+        "up_coming": MessageLookupByLibrary.simpleMessage("Up Coming Next..."),
+        "up_coming_desc": MessageLookupByLibrary.simpleMessage(
+            "More mini games will be released in this app, click here to see the version update logs and future version roadmap!")
       };
 }

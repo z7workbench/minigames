@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/games/hnb/hnb_main.dart';
+import 'package:minigames/roadmap.dart';
 import 'package:minigames/styles.dart';
+import 'package:minigames/widgets/description_card.dart';
+import 'package:package_info/package_info.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,53 +43,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context).app),
-      ),
-      body: Center(
-          child: Padding(
-        padding: containerPadding,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            GestureDetector(
-              child: Column(
-                children: [
-                  Text(
-                    S.of(context).hnb_title,
-                    style: titleTextStyle,
-                  ),
-                  Text(
-                    S.of(context).hnb_desc,
-                    style: docTextStyle,
-                  )
-                ],
-              ),
-              onTapUp: (_) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HitAndBlowHome()));
-              },
-            ),
-            // margin,
-            // GestureDetector(
-            //   child: Column(
-            //     children: [
-            //       Text(
-            //         S.of(context).minesweeper_title,
-            //         style: titleTextStyle,
-            //       ),
-            //       Text(
-            //         S.of(context).minesweeper_desc,
-            //         style: docTextStyle,
-            //       )
-            //     ],
-            //   ),
-            // )
-          ],
+        appBar: AppBar(
+          title: Text(S.of(context).app),
         ),
-      )),
-    );
+        body: SingleChildScrollView(
+          child: Center(
+              child: Padding(
+            padding: containerPadding,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                DescriptionCard(
+                    title: S.of(context).hnb_title,
+                    desc: S.of(context).hnb_desc,
+                    goto: const HitAndBlowHome()),
+                margin,
+                DescriptionCard(
+                    title: S.of(context).up_coming,
+                    desc: S.of(context).up_coming_desc,
+                    goto: const Roadmap())
+              ],
+            ),
+          )),
+        ));
   }
 }

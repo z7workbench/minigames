@@ -10,5 +10,8 @@
   "restart_game": "重开游戏",
   "leaderboard": "排行榜",
   "description": "游戏简介",
-  "app": "迷你游戏合集"
+  "app": "迷你游戏合集",
+  "up_coming": "即将推出...",
+  "up_coming_desc": "迷你小游戏合集将会推出更多的小游戏，点击这里可以看到版本更新日志以及未来版本路线图规划！",
+  "roadmap": "版本更新规划"
 }

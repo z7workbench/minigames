@@ -34,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "网上或者看到软件查看，新闻我们发生主题包括工具其实，为什您的新闻看到只是都是下载。任何语言这里更多，帮助人民不能工程经济操作。欢迎新闻具有游戏，发布之间其实一个。"),
         "minesweeper_title": MessageLookupByLibrary.simpleMessage("扫雷"),
         "restart_game": MessageLookupByLibrary.simpleMessage("重开游戏"),
-        "start_game": MessageLookupByLibrary.simpleMessage("开始游戏")
+        "roadmap": MessageLookupByLibrary.simpleMessage("版本更新规划"),
+        "start_game": MessageLookupByLibrary.simpleMessage("开始游戏"),
+        "up_coming": MessageLookupByLibrary.simpleMessage("即将推出..."),
+        "up_coming_desc": MessageLookupByLibrary.simpleMessage(
+            "迷你小游戏合集将会推出更多的小游戏，点击这里可以看到版本更新日志以及未来版本路线图规划！")
       };
 }

@@ -10,5 +10,8 @@
   "restart_game": "Restart Game",
   "leaderboard": "Leaderboard",
   "description": "Game info",
-  "app": "Mini Games"
+  "app": "Mini Games",
+  "up_coming": "Up Coming Next...",
+  "up_coming_desc": "More mini games will be released in this app, click here to see the version update logs and future version roadmap!",
+  "roadmap": "Roadmap"
 }
