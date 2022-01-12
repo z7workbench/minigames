@@ -12,6 +12,8 @@ class PokerCard extends StatefulWidget {
       this.normalColor = Colors.blue,
       this.textColor = Colors.black,
       this.borderSize = 3.0,
+      this.orientation = Orientation.landscape,
+      this.radius = 1.5,
       required this.poker})
       : super(key: key);
 
@@ -20,6 +22,8 @@ class PokerCard extends StatefulWidget {
   Color normalColor;
   Color textColor;
   double borderSize;
+  double radius;
+  Orientation orientation;
   Poker poker;
 
   @override
@@ -35,12 +39,30 @@ class _PokerCardState extends State<PokerCard> {
           decoration: BoxDecoration(
             color: selected ? widget.selectedColor : widget.normalColor,
             border: Border.all(width: widget.borderSize),
+            borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
           ),
-          child: Text(
-            widget.poker,
-            style: TextStyle(
-                color: widget.textColor, fontSize: widget.size * 2 - 5),
-          ),
+          child: widget.orientation == Orientation.landscape
+              ? Text(
+                  widget.poker,
+                  style: TextStyle(
+                      color: widget.textColor, fontSize: widget.size * 2 - 5),
+                )
+              : Column(
+                  children: [
+                    Text(
+                      widget.poker[0],
+                      style: TextStyle(
+                          color: widget.textColor,
+                          fontSize: widget.size * 2 - 5),
+                    ),
+                    Text(
+                      widget.poker[1],
+                      style: TextStyle(
+                          color: widget.textColor,
+                          fontSize: widget.size * 2 - 5),
+                    )
+                  ],
+                ),
         ),
         onTap: () => {
           setState(() {
