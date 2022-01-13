@@ -39,6 +39,8 @@ dependencies:
   shared_preferences: ^2.0.11
   intl: ^0.17.0
   package_info: ^2.0.2
+  provider: ^6.0.2
+  flustars: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -81,8 +83,8 @@ flutter:
   fonts:
     - family: MiSans
       fonts:
-#        - asset: fonts/MiSans-Thin.ttf
-#          weight: 100
+        - asset: fonts/MiSans-Thin.ttf
+          weight: 100
 #        - asset: fonts/MiSans-ExtraLight.ttf
 #          weight: 200
 #        - asset: fonts/MiSans-Light.ttf

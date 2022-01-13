@@ -54,12 +54,12 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                               Text(
                                 S.of(context).hnb_answer,
                                 textAlign: TextAlign.start,
-                                style: subtitleTextStyleRed,
+                                style: boldStyle,
                               ),
                               margin,
                               Text(
                                 answerText,
-                                style: subtitleTextStyleBlack,
+                                style: subtitleTextStyle,
                               ),
                             ],
                             mainAxisAlignment: MainAxisAlignment.center,

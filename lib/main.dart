@@ -1,35 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:minigames/app_provider.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/games/hnb/hnb_main.dart';
 import 'package:minigames/roadmap.dart';
 import 'package:minigames/styles.dart';
 import 'package:minigames/widgets/description_card.dart';
-import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  late ThemeData lightTheme;
+  late ThemeData darkTheme;
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mini Games',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "MiSans"),
-      home: const MyHomePage(),
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-    );
-  }
+  Widget build(BuildContext context) => MultiProvider(
+        providers: [ChangeNotifierProvider.value(value: AppInfoProvider())],
+        child: Consumer<AppInfoProvider>(
+          builder: (context, appInfo, _) {
+            var colorKey = appInfo.themeColor;
+            if (lights[colorKey] != null) {
+              lightTheme = lights[colorKey]!;
+              darkTheme = darks[colorKey]!;
+            } else {
+              lightTheme = lights['ZeroGo_purple']!;
+              darkTheme = darks['ZeroGo_purple']!;
+            }
+            return MaterialApp(
+              title: 'Mini Games',
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              home: const MyHomePage(),
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+            );
+          },
+        ),
+      );
 }
 
 class MyHomePage extends StatefulWidget {

@@ -49,7 +49,7 @@ class _CheckBoardState extends State<CheckBoard> {
               Border.all(color: widget.borderColor, width: widget.borderWidth),
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius))),
       child: Padding(
-        padding: containerPadding,
+        padding: containerSmallPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -127,7 +127,7 @@ class _ResultBoardState extends State<ResultBoard> {
               Border.all(color: widget.borderColor, width: widget.borderWidth),
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius))),
       child: Padding(
-        padding: containerLargePadding,
+        padding: containerPadding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
