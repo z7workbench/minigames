@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-const titleTextStyle = TextStyle(fontSize: 24.0);
-const boldStyle = TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700);
-const subtitleTextStyle = TextStyle(fontSize: 20.0);
+const largeTextStyle = TextStyle(fontSize: 24.0);
+const regularBoldStyle = TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700);
+const regularTextStyle = TextStyle(fontSize: 20.0);
 const docTextStyle = TextStyle(fontSize: 16.0);
 
 const containerSmallPadding = EdgeInsets.all(8.0);

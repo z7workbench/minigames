@@ -16,7 +16,7 @@ class DescriptionCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: titleTextStyle,
+              style: largeTextStyle,
               textAlign: TextAlign.center,
             ),
             Text(

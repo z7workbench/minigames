@@ -23,7 +23,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                 Expanded(
                   child: Text(
                     widget.title,
-                    style: titleTextStyle,
+                    style: largeTextStyle,
                   ),
                 ),
                 Offstage(

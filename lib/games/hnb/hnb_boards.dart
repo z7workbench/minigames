@@ -73,7 +73,7 @@ class _CheckBoardState extends State<CheckBoard> {
               children: List.generate(
                   widget.count,
                   (index) => Padding(
-                        padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: GestureDetector(
                           child: DropdownButton<int>(
                             icon: const Visibility(
@@ -88,7 +88,10 @@ class _CheckBoardState extends State<CheckBoard> {
                             items: _candidates
                                 .map((e) => DropdownMenuItem<int>(
                                       value: e,
-                                      child: Text(e.toString()),
+                                      child: Text(
+                                        e.toString(),
+                                        style: regularTextStyle,
+                                      ),
                                     ))
                                 .toList(),
                           ),
