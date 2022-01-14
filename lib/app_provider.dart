@@ -23,7 +23,7 @@ final Map<String, ThemeData> darks = {
           onError: Color.fromARGB(0xff, 0xB9, 0x20, 0x20),
           background: Color.fromARGB(0xff, 0x64, 0x47, 0xbc),
           onBackground: Colors.white,
-          surface: Color.fromARGB(0xff, 0xCB, 0x74, 0x2C),
+          surface: Color.fromARGB(0xff, 0x64, 0x47, 0xbc),
           onSurface: Colors.white),
       fontFamily: "MiSans",
       useMaterial3: true),
@@ -42,7 +42,7 @@ final Map<String, ThemeData> lights = {
           background: Colors.white,
           onBackground: Colors.black,
           surface: Color.fromARGB(0xff, 0xBD, 0x63, 0x1A),
-          onSurface: Color.fromARGB(0xff, 0xff, 0xcd, 0x00)),
+          onSurface: Colors.white,),
       fontFamily: "MiSans",
       textTheme: TextTheme(
 
