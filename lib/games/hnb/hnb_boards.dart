@@ -30,6 +30,7 @@ class _CheckBoardState extends State<CheckBoard> {
 
   List get content => _contentList;
   final List<int> _candidates = [];
+  double dragDelta = 0.0;
 
   @override
   void initState() {
@@ -91,26 +92,29 @@ class _CheckBoardState extends State<CheckBoard> {
                                     ))
                                 .toList(),
                           ),
+                          onVerticalDragEnd: (_) {
+                            setState(() {
+                              dragDelta = 0.0;
+                            });
+                          },
                           onVerticalDragUpdate: (details) {
-                            print(details.delta.dy);
-                            if (details.delta.dy > 0) {
-                              setState(() {
+                            setState(() {
+                              dragDelta += details.delta.dy;
+                              if (dragDelta >= 12.0) {
                                 _contentList[index] =
                                     _contentList[index] + 1 <= widget.count + 2
                                         ? _contentList[index] + 1
                                         : widget.count + 2;
-                              });
-                              return;
-                            }
-                            if (details.delta.dy < 0) {
-                              setState(() {
+                                dragDelta = 0.0;
+                              }
+                              if (dragDelta < -12.0) {
                                 _contentList[index] =
                                     _contentList[index] - 1 >= 0
                                         ? _contentList[index] - 1
                                         : 0;
-                              });
-                              return;
-                            }
+                                dragDelta = 0.0;
+                              }
+                            });
                           },
                         ),
                       )),
