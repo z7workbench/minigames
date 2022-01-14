@@ -73,22 +73,45 @@ class _CheckBoardState extends State<CheckBoard> {
                   widget.count,
                   (index) => Padding(
                         padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                        child: DropdownButton<int>(
-                          icon: const Visibility(
-                              visible: false,
-                              child: Icon(Icons.arrow_downward)),
-                          onChanged: (value) {
-                            setState(() {
-                              _contentList[index] = value ?? 0;
-                            });
+                        child: GestureDetector(
+                          child: DropdownButton<int>(
+                            icon: const Visibility(
+                                visible: false,
+                                child: Icon(Icons.arrow_downward)),
+                            onChanged: (value) {
+                              setState(() {
+                                _contentList[index] = value ?? 0;
+                              });
+                            },
+                            value: _contentList[index],
+                            items: _candidates
+                                .map((e) => DropdownMenuItem<int>(
+                                      value: e,
+                                      child: Text(e.toString()),
+                                    ))
+                                .toList(),
+                          ),
+                          onVerticalDragUpdate: (details) {
+                            print(details.delta.dy);
+                            if (details.delta.dy > 0) {
+                              setState(() {
+                                _contentList[index] =
+                                    _contentList[index] + 1 <= widget.count + 2
+                                        ? _contentList[index] + 1
+                                        : widget.count + 2;
+                              });
+                              return;
+                            }
+                            if (details.delta.dy < 0) {
+                              setState(() {
+                                _contentList[index] =
+                                    _contentList[index] - 1 >= 0
+                                        ? _contentList[index] - 1
+                                        : 0;
+                              });
+                              return;
+                            }
                           },
-                          value: _contentList[index],
-                          items: _candidates
-                              .map((e) => DropdownMenuItem<int>(
-                                    value: e,
-                                    child: Text(e.toString()),
-                                  ))
-                              .toList(),
                         ),
                       )),
             )
