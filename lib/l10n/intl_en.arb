@@ -3,6 +3,8 @@
   "hnb_title": "Hit and Blow",
   "hnb_desc": "This is a game of guessing the hidden n numbers and positions, with the default n being 4. Select n-2 numbers from 1 to n and place them in the positions, then press \"Check\" to check for correctness. Each position will be judged as \"all correct\" (indicated by colored check marks) or \"half correct\" (indicated by grey check marks), the number of former is the number of correct positions and numbers, the number of latter is the number of correct numbers. If it fails, you can try again until you get it right! ",
   "hnb_answer": "Correct answer",
+  "dice_game_title": "Dice Game",
+  "dice_game_desc": "1232132132132132132",
   "check": "Check",
   "minesweeper_title": "Minesweeper",
   "minesweeper_desc": "Get ask reduce skin. Child never forget less herself reveal. City example similar service billion store large. Book term although believe. Religious out opportunity upon note.",

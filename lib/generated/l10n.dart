@@ -80,6 +80,26 @@ class S {
     );
   }
 
+  /// `Dice Game`
+  String get dice_game_title {
+    return Intl.message(
+      'Dice Game',
+      name: 'dice_game_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1232132132132132132`
+  String get dice_game_desc {
+    return Intl.message(
+      '1232132132132132132',
+      name: 'dice_game_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Check`
   String get check {
     return Intl.message(
