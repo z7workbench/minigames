@@ -4,6 +4,35 @@ const suits = ["♠", "♣", "♥", "♦", "🃏"];
 
 typedef Poker = String;
 
+class PairPokers {
+  PairPokers({required this.card, required this.count});
+  Poker card;
+  int count;
+}
+
+class StraightPokers {
+  StraightPokers({required this.start, required this.end, required this.count});
+  Poker start;
+  Poker end;
+  int count;
+}
+
+class SimplePokerRule {
+  const SimplePokerRule({required this.ruleList});
+
+  final List<String> ruleList;
+
+  bool compare([Poker pre, Poker now]) {
+    int index1 = ruleList.indexOf(pre[1]);
+    int index2 = ruleList.indexOf(now[1]);
+    return index1 < index2 ? true : false;
+  }
+
+  bool compare([StraightPokers pre, StraightPokers now]) {
+    return compare(pre.end, now.end);
+  }
+}
+
 class PokerCard extends StatefulWidget {
   PokerCard(
       {Key? key,
