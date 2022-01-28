@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
 
 typedef DiceCount = int;
@@ -25,7 +28,9 @@ class _DiceWidgetState extends State<DiceWidget> {
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,
-          border: Border.all(width: widget.borderSize, color: Theme.of(context).colorScheme.secondary),
+          border: Border.all(
+              width: widget.borderSize,
+              color: Theme.of(context).colorScheme.secondary),
           borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
         ),
         child: CustomPaint(
@@ -41,10 +46,7 @@ class _DicePainter extends CustomPainter {
   DiceCount count;
   Color diceColor;
 
-  _DicePainter(
-      {required this.count,
-      required this.diceColor})
-      : super();
+  _DicePainter({required this.count, required this.diceColor}) : super();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -56,54 +58,77 @@ class _DicePainter extends CustomPainter {
     switch (count) {
       case 1:
         {
-          canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.height / 6, dicePainter);
+          canvas.drawCircle(Offset(size.width / 2, size.height / 2),
+              size.height / 6, dicePainter);
         }
         break;
       case 2:
-      {
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height *3 / 4), size.height / 8, dicePainter);
-      }
-      break;
+        {
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height * 3 / 4),
+              size.height / 8, dicePainter);
+        }
+        break;
       case 3:
-      {
-          canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height *3 / 4), size.height / 8, dicePainter);
-      }
-      break;
+        {
+          canvas.drawCircle(Offset(size.width / 2, size.height / 2),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height * 3 / 4),
+              size.height / 8, dicePainter);
+        }
+        break;
       case 4:
-      {
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height *3 / 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height *3/ 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height  / 4), size.height / 8, dicePainter);
-      }
-      break;
+        {
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height * 3 / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height * 3 / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height / 4),
+              size.height / 8, dicePainter);
+        }
+        break;
       case 5:
-      {
-          canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height *3 / 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height *3/ 4), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height  / 4), size.height / 8, dicePainter);
-      }
-      break;
+        {
+          canvas.drawCircle(Offset(size.width / 2, size.height / 2),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height * 3 / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height * 3 / 4),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height / 4),
+              size.height / 8, dicePainter);
+        }
+        break;
       case 6:
-      {
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 2), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height / 2), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height * 3 / 16), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height *13 / 16), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width * 3 / 4, size.height *13/ 16), size.height / 8, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height  * 3 / 16), size.height / 8, dicePainter);
-      }
-      break;
+        {
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height / 2),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height / 2),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height * 3 / 16),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height * 13 / 16),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width * 3 / 4, size.height * 13 / 16),
+              size.height / 8, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height * 3 / 16),
+              size.height / 8, dicePainter);
+        }
+        break;
       default:
-      {
-        canvas.drawCircle(Offset(size.width / 4, size.height / 2), size.height / 6, dicePainter);
-        canvas.drawCircle(Offset(size.width / 4, size.height / 2), size.height / 6, dicePainter);
-      }
+        {
+          canvas.drawCircle(Offset(size.width / 4, size.height / 2),
+              size.height / 6, dicePainter);
+          canvas.drawCircle(Offset(size.width / 4, size.height / 2),
+              size.height / 6, dicePainter);
+        }
     }
   }
 
