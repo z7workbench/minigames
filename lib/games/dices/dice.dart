@@ -11,12 +11,14 @@ class DiceWidget extends StatefulWidget {
       this.size = 10.0,
       this.borderSize = 3.0,
       this.radius = 1.5,
+      this.padding = const EdgeInsets.all(4.0),
       required this.count})
       : super(key: key);
 
   double size;
   double borderSize;
   double radius;
+  EdgeInsets padding;
   DiceCount count;
 
   @override
@@ -25,19 +27,22 @@ class DiceWidget extends StatefulWidget {
 
 class _DiceWidgetState extends State<DiceWidget> {
   @override
-  Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          border: Border.all(
-              width: widget.borderSize,
-              color: Theme.of(context).colorScheme.secondary),
-          borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
-        ),
-        child: CustomPaint(
-          size: const Size(48.0, 48.0),
-          painter: _DicePainter(
-              diceColor: Theme.of(context).colorScheme.background,
-              count: widget.count),
+  Widget build(BuildContext context) => Padding(
+        padding: widget.padding,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            border: Border.all(
+                width: widget.borderSize,
+                color: Theme.of(context).colorScheme.secondary),
+            borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+          ),
+          child: CustomPaint(
+            size: const Size(48.0, 48.0),
+            painter: _DicePainter(
+                diceColor: Theme.of(context).colorScheme.background,
+                count: widget.count),
+          ),
         ),
       );
 }
@@ -50,7 +55,6 @@ class _DicePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    print(count);
     var dicePainter = Paint()
       ..color = diceColor
       ..strokeWidth = 0.0
@@ -123,12 +127,7 @@ class _DicePainter extends CustomPainter {
         }
         break;
       default:
-        {
-          canvas.drawCircle(Offset(size.width / 4, size.height / 2),
-              size.height / 6, dicePainter);
-          canvas.drawCircle(Offset(size.width / 4, size.height / 2),
-              size.height / 6, dicePainter);
-        }
+        {}
     }
   }
 
