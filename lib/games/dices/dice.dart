@@ -4,6 +4,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
 
 typedef DiceCount = int;
+typedef MoveAccordingIndex = void Function(GesturedDiceWidget);
 
 class DiceWidget extends StatefulWidget {
   DiceWidget(
@@ -135,4 +136,41 @@ class _DicePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
+}
+
+class GesturedDiceWidget extends StatelessWidget {
+  GesturedDiceWidget(
+      {Key? key,
+      required this.count,
+      required this.keepAction,
+      required this.discardAction,
+      this.size = 10.0,
+      this.reserve = false})
+      : super(key: key);
+
+  DiceCount count;
+  double size;
+  MoveAccordingIndex keepAction;
+  MoveAccordingIndex discardAction;
+  bool reserve;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: GestureDetector(
+          child: DiceWidget(
+            count: count,
+            padding: EdgeInsets.zero,
+            size: size,
+          ),
+          onTap: () {
+            if (reserve) {
+              discardAction(this);
+            } else {
+              keepAction(this);
+            }
+            reserve = !reserve;
+          },
+        ),
+      );
 }

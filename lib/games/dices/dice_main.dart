@@ -20,7 +20,8 @@ class _DiceGameState extends State<DiceGamePage> {
   bool notShowGame = true;
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider<DiceNotifier>(
+  Widget build(BuildContext buildContext) =>
+      ChangeNotifierProvider<DiceNotifier>(
         create: (_) => DiceNotifier(),
         builder: (context, _) => Scaffold(
           appBar: AppBar(title: Text(S.of(context).dice_game_title)),
@@ -43,13 +44,16 @@ class _DiceGameState extends State<DiceGamePage> {
                       child: Offstage(
                         offstage: notShowGame,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text("deck"),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:
                                     Provider.of<DiceNotifier>(context).roll),
+                            Text("reserve"),
                             Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children:
                                     Provider.of<DiceNotifier>(context).locked),
                           ],
@@ -77,8 +81,8 @@ class _DiceGameState extends State<DiceGamePage> {
 }
 
 class DiceNotifier with ChangeNotifier {
-  late List<DiceWidget> locked;
-  late List<DiceWidget> roll;
+  late List<GesturedDiceWidget> locked;
+  late List<GesturedDiceWidget> roll;
   late DiceEngine engine;
   late int size;
 
@@ -87,15 +91,34 @@ class DiceNotifier with ChangeNotifier {
   }
 
   reset(int size) {
-    roll = List.generate(5, (index) => DiceWidget(count: 0));
+    roll = List.generate(
+        5,
+        (index) => GesturedDiceWidget(
+              count: index,
+              keepAction: (i) => keep(i),
+              discardAction: (i) => discard(i),
+            ));
     locked = [];
     engine = DiceEngine(size: size);
   }
 
   rollingDice() {
     var random = Random();
-    for (DiceWidget widget in roll) {
+    for (GesturedDiceWidget widget in roll) {
       widget.count = random.nextInt(6) + 1;
     }
+    notifyListeners();
+  }
+
+  keep(GesturedDiceWidget dice) {
+    roll.remove(dice);
+    locked.add(dice);
+    notifyListeners();
+  }
+
+  discard(GesturedDiceWidget dice) {
+    locked.remove(dice);
+    roll.add(dice);
+    notifyListeners();
   }
 }
