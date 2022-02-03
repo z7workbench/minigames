@@ -46,6 +46,19 @@ class _DiceGameState extends State<DiceGamePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            MaterialButton(
+                              onPressed: () {
+                                // This is likely caused by an event handler (like a button's onPressed) that called
+                                // Provider.of without passing `listen: false`.
+                                Provider.of<DiceNotifier>(context,
+                                        listen: false)
+                                    .rollingDice();
+                              },
+                              child: Text("Roll " +
+                                  Provider.of<DiceNotifier>(context)
+                                      .times
+                                      .toString()),
+                            ),
                             Text("deck"),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -84,9 +97,10 @@ class DiceNotifier with ChangeNotifier {
   late List<GesturedDiceWidget> locked;
   late List<GesturedDiceWidget> roll;
   late DiceEngine engine;
-  late int size;
+  int size;
+  int times;
 
-  DiceNotifier({this.size = 2}) {
+  DiceNotifier({this.size = 2, this.times = 3}) {
     reset(size);
   }
 
@@ -100,14 +114,19 @@ class DiceNotifier with ChangeNotifier {
             ));
     locked = [];
     engine = DiceEngine(size: size);
+    times = 3;
   }
 
   rollingDice() {
-    var random = Random();
-    for (GesturedDiceWidget widget in roll) {
-      widget.count = random.nextInt(6) + 1;
+    if (times > 0) {
+      var random = Random();
+      for (GesturedDiceWidget widget in roll) {
+        widget.count = random.nextInt(6) + 1;
+      }
+      times--;
+      print(times);
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   keep(GesturedDiceWidget dice) {
