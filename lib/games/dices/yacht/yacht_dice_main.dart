@@ -365,7 +365,7 @@ class DiceNotifier with ChangeNotifier {
   }
 
   rollingDice() {
-    if (times > 0) {
+    if (times > 0 && roll.isNotEmpty) {
       var random = Random();
       int length = roll.length;
       roll.clear();
@@ -380,8 +380,8 @@ class DiceNotifier with ChangeNotifier {
           List.generate(locked.length, (index) => locked[index].count);
       engine.updatePredict(dices);
       times--;
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   keep(GesturedDiceWidget dice) {
