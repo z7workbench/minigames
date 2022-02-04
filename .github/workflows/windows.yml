@@ -14,7 +14,7 @@ jobs:
           distribution: microsoft
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'dev'
+          channel: 'stable'
       - run: flutter config --enable-windows-desktop
       - run: flutter pub get
       - run: flutter build windows
