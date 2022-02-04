@@ -18,6 +18,87 @@ class _DiceGameState extends State<DiceGamePage> {
   bool finished = true;
   bool notShowGame = true;
 
+  List<Widget> diceTitle(BuildContext context) => [
+        shell(
+            context,
+            Text(
+              "",
+              style: regularBoldStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "1",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "2",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "3",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "4",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "5",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "6",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "quan",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "si",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "hu",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "xiao",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "da",
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              "kuai",
+              style: regularTextStyle,
+            ))
+      ];
+
   @override
   Widget build(BuildContext buildContext) =>
       ChangeNotifierProvider<DiceNotifier>(
@@ -83,7 +164,38 @@ class _DiceGameState extends State<DiceGamePage> {
                                       Provider.of<DiceNotifier>(context).locked,
                                 )
                               ],
-                            )
+                            ),
+                            // result sheet
+                            SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                        Column(
+                                          children: diceTitle(context),
+                                        )
+                                      ] +
+                                      List.generate(
+                                          Provider.of<DiceNotifier>(context)
+                                              .size,
+                                          (player) => Column(
+                                                children: [
+                                                      shell(
+                                                          context,
+                                                          Text(
+                                                            "P${player + 1}",
+                                                            style:
+                                                                regularBoldStyle,
+                                                          ))
+                                                    ] +
+                                                    List.generate(
+                                                        12,
+                                                        (index) =>
+                                                            generateSheetCell(
+                                                                context,
+                                                                player,
+                                                                index)),
+                                              )),
+                                ))
                           ],
                         ),
                       ))
@@ -106,12 +218,57 @@ class _DiceGameState extends State<DiceGamePage> {
           if (notShowGame) notShowGame = false;
         });
       };
+
+  Widget shell(BuildContext context, Text child,
+          {GestureTapCallback? onTap, GestureTapCallback? onDoubleTap}) =>
+      GestureDetector(
+        onTap: onTap,
+        onDoubleTap: onDoubleTap,
+        child: Container(
+          padding: containerXSPadding,
+          // decoration: BoxDecoration(
+          //   border: Border.all(
+          //       width: 2.0, color: Theme.of(context).colorScheme.onBackground),
+          // ),
+          child: child,
+        ),
+      );
+
+  Widget generateSheetCell(BuildContext context, int player, int index) {
+    int board = Provider.of<DiceNotifier>(context).engine.board[player][index];
+    int predict = Provider.of<DiceNotifier>(context).engine.predict[index];
+    int currentPlayer = Provider.of<DiceNotifier>(context).engine.currentPlayer;
+
+    if (board >= 0) {
+      return shell(
+          context,
+          Text(
+            "$board",
+            style: regularTextStyle,
+          ));
+    } else if (predict >= 0 && player == currentPlayer) {
+      return shell(
+          context,
+          Text(
+            "$predict",
+            style: regularHintTextStyle,
+          ));
+    } else {
+      return shell(
+          context,
+          const Text(
+            "  ",
+            style: regularTextStyle,
+          ));
+    }
+  }
 }
 
 class DiceNotifier with ChangeNotifier {
   late List<GesturedDiceWidget> locked;
   late List<GesturedDiceWidget> roll;
   late DiceEngine engine;
+  late Dices dices;
   int size;
   int times;
 
@@ -135,6 +292,7 @@ class DiceNotifier with ChangeNotifier {
             ));
     locked = [];
     times = 3;
+    dices = List.empty();
     notifyListeners();
   }
 
@@ -150,6 +308,9 @@ class DiceNotifier with ChangeNotifier {
                 keepAction: (i) => keep(i),
                 discardAction: (i) => discard(i),
               ));
+      dices = List.generate(roll.length, (index) => roll[index].count) +
+          List.generate(locked.length, (index) => locked[index].count);
+      engine.updatePredict(dices);
       times--;
     }
     notifyListeners();

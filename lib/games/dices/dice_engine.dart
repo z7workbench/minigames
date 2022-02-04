@@ -24,7 +24,7 @@ class DiceEngine {
     var stats = List.generate(6, (index) => 0);
 
     for (DiceCount dice in dices) {
-      stats[dice] += 1;
+      stats[dice - 1] += 1;
     }
 
     for (int i = 0; i < 12; i++) {
@@ -100,7 +100,7 @@ class DiceEngine {
           }
           break;
         default:
-          predict[i] = stats[i];
+          predict[i] = stats[i] * (i + 1);
       }
     }
   }
