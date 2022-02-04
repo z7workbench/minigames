@@ -9,7 +9,7 @@ typedef MoveAccordingIndex = void Function(GesturedDiceWidget);
 class DiceWidget extends StatefulWidget {
   DiceWidget(
       {Key? key,
-      this.size = 10.0,
+      this.size = 50.0,
       this.borderSize = 3.0,
       this.radius = 1.5,
       this.padding = const EdgeInsets.all(4.0),
@@ -39,7 +39,7 @@ class _DiceWidgetState extends State<DiceWidget> {
             borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
           ),
           child: CustomPaint(
-            size: const Size(48.0, 48.0),
+            size: Size(widget.size, widget.size),
             painter: _DicePainter(
                 diceColor: Theme.of(context).colorScheme.background,
                 count: widget.count),
@@ -144,7 +144,7 @@ class GesturedDiceWidget extends StatelessWidget {
       required this.count,
       required this.keepAction,
       required this.discardAction,
-      this.size = 10.0,
+      this.size = 50.0,
       this.reserve = false})
       : super(key: key);
 
@@ -169,7 +169,7 @@ class GesturedDiceWidget extends StatelessWidget {
             } else {
               keepAction(this);
             }
-            reserve = !reserve;
+            //reserve = !reserve; // (maybe) it moves to reserve
           },
         ),
       );

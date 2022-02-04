@@ -25,9 +25,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "app": MessageLookupByLibrary.simpleMessage("迷你游戏合集"),
         "check": MessageLookupByLibrary.simpleMessage("检查"),
         "description": MessageLookupByLibrary.simpleMessage("游戏简介"),
+        "dice_deck": MessageLookupByLibrary.simpleMessage("投掷区"),
         "dice_game_desc":
             MessageLookupByLibrary.simpleMessage("1232132132132132132"),
         "dice_game_title": MessageLookupByLibrary.simpleMessage("掷骰子"),
+        "dice_reserve": MessageLookupByLibrary.simpleMessage("保留区"),
         "hnb_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
             "这是一个猜出隐藏的n个数字和位置的游戏，默认n为4。从1-n中选择n-2个数字放到位置上，按下“检查”即可检查对错。每个位置会被判定为“全对”（用彩色对钩表示）或“半对”（用灰色对钩表示），前者为位置和数字都正确，后者为选取的数字正确。如果判定失败则再来一次，直到判断正确！"),

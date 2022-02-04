@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:minigames/games/dices/dice.dart';
 import 'package:minigames/games/dices/dice_engine.dart';
@@ -59,16 +58,32 @@ class _DiceGameState extends State<DiceGamePage> {
                                       .times
                                       .toString()),
                             ),
-                            Text("deck"),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children:
-                                    Provider.of<DiceNotifier>(context).roll),
-                            Text("reserve"),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children:
-                                    Provider.of<DiceNotifier>(context).locked),
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    S.of(context).dice_deck,
+                                    style: regularTextStyle,
+                                  ),
+                                  Row(
+                                      children:
+                                          Provider.of<DiceNotifier>(context)
+                                              .roll),
+                                ]),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  S.of(context).dice_reserve,
+                                  style: regularTextStyle,
+                                ),
+                                Row(
+                                  children:
+                                      Provider.of<DiceNotifier>(context).locked,
+                                )
+                              ],
+                            )
                           ],
                         ),
                       ))
@@ -105,6 +120,12 @@ class DiceNotifier with ChangeNotifier {
   }
 
   reset(int size) {
+    softReset();
+    engine = DiceEngine(size: size);
+    notifyListeners();
+  }
+
+  softReset() {
     roll = List.generate(
         5,
         (index) => GesturedDiceWidget(
@@ -113,31 +134,48 @@ class DiceNotifier with ChangeNotifier {
               discardAction: (i) => discard(i),
             ));
     locked = [];
-    engine = DiceEngine(size: size);
     times = 3;
+    notifyListeners();
   }
 
   rollingDice() {
     if (times > 0) {
       var random = Random();
-      for (GesturedDiceWidget widget in roll) {
-        widget.count = random.nextInt(6) + 1;
-      }
+      int length = roll.length;
+      roll.clear();
+      roll = List.generate(
+          length,
+          (index) => GesturedDiceWidget(
+                count: random.nextInt(6) + 1,
+                keepAction: (i) => keep(i),
+                discardAction: (i) => discard(i),
+              ));
       times--;
-      print(times);
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   keep(GesturedDiceWidget dice) {
     roll.remove(dice);
-    locked.add(dice);
+    GesturedDiceWidget widget = GesturedDiceWidget(
+      count: dice.count,
+      keepAction: dice.keepAction,
+      discardAction: dice.discardAction,
+      reserve: true,
+      size: 30.0,
+    );
+    locked.add(widget);
     notifyListeners();
   }
 
   discard(GesturedDiceWidget dice) {
     locked.remove(dice);
-    roll.add(dice);
+    GesturedDiceWidget widget = GesturedDiceWidget(
+      count: dice.count,
+      keepAction: dice.keepAction,
+      discardAction: dice.discardAction,
+    );
+    roll.add(widget);
     notifyListeners();
   }
 }

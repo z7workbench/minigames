@@ -100,6 +100,26 @@ class S {
     );
   }
 
+  /// `Reserve`
+  String get dice_reserve {
+    return Intl.message(
+      'Reserve',
+      name: 'dice_reserve',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deck`
+  String get dice_deck {
+    return Intl.message(
+      'Deck',
+      name: 'dice_deck',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Check`
   String get check {
     return Intl.message(

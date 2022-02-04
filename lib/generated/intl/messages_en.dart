@@ -25,9 +25,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "app": MessageLookupByLibrary.simpleMessage("Mini Games"),
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "description": MessageLookupByLibrary.simpleMessage("Game info"),
+        "dice_deck": MessageLookupByLibrary.simpleMessage("Deck"),
         "dice_game_desc":
             MessageLookupByLibrary.simpleMessage("1232132132132132132"),
         "dice_game_title": MessageLookupByLibrary.simpleMessage("Dice Game"),
+        "dice_reserve": MessageLookupByLibrary.simpleMessage("Reserve"),
         "hnb_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
             "This is a game of guessing the hidden n numbers and positions, with the default n being 4. Select n-2 numbers from 1 to n and place them in the positions, then press \"Check\" to check for correctness. Each position will be judged as \"all correct\" (indicated by colored check marks) or \"half correct\" (indicated by grey check marks), the number of former is the number of correct positions and numbers, the number of latter is the number of correct numbers. If it fails, you can try again until you get it right! "),
