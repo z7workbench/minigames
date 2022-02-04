@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minigames/app_provider.dart';
-import 'package:minigames/games/dices/dice_main.dart';
+import 'package:minigames/games/dices/yacht/yacht_dice_main.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/games/hnb/hnb_main.dart';
 import 'package:minigames/roadmap.dart';

@@ -8,21 +8,53 @@ class DiceEngine {
   // each element in `board` is a 12-size int List initialized with -1
   late List<List<int>> board;
   late List predict;
+  late List totals;
+  late List bonus;
+  late List<int> stats;
+
   int currentPlayer = 0;
 
   DiceEngine({required this.size}) {
     board = List.generate(size, (_) => List.generate(12, (_) => -1));
     predict = List.generate(12, (_) => -1);
+    totals = List.generate(size, (index) => 0);
+    bonus = List.generate(size, (index) => false);
+    stats = List.generate(6, (index) => 0);
   }
 
-  changePlayer(int index) {
-    predict = List.generate(12, (i) => board[index][i]);
-    currentPlayer = index;
+  confirmPredict(int index) {
+    board[currentPlayer][index] = predict[index];
+    int sum = 0;
+    for (int i = 0; i < 12; i++) {
+      if (board[currentPlayer][i] > 0) {
+        sum += board[currentPlayer][i];
+      }
+    }
+    bonus[currentPlayer] = checkBonus();
+    if (bonus[currentPlayer]) {
+      sum += 35;
+    }
+    totals[currentPlayer] = sum;
+    if (++currentPlayer >= board.length) {
+      currentPlayer = 0;
+    }
+    predict = List.generate(12, (i) => board[currentPlayer][i]);
+  }
+
+  bool checkBonus() {
+    int sum = 0;
+    for (int i = 0; i < 6; i++) {
+      sum += stats[i] * (i + 1);
+    }
+    if (sum >= 63) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   updatePredict(Dices dices) {
-    var stats = List.generate(6, (index) => 0);
-
+    stats = List.generate(6, (index) => 0);
     for (DiceCount dice in dices) {
       stats[dice - 1] += 1;
     }

@@ -80,20 +80,20 @@ class S {
     );
   }
 
-  /// `Dice Game`
+  /// `Simple Dice Game`
   String get dice_game_title {
     return Intl.message(
-      'Dice Game',
+      'Simple Dice Game',
       name: 'dice_game_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `1232132132132132132`
+  /// `It's a game of throwing dice at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet's cell must be filled in, even if there are no permutations. The one with the highest score wins!`
   String get dice_game_desc {
     return Intl.message(
-      '1232132132132132132',
+      'It\'s a game of throwing dice at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet\'s cell must be filled in, even if there are no permutations. The one with the highest score wins!',
       name: 'dice_game_desc',
       desc: '',
       args: [],
@@ -115,6 +115,146 @@ class S {
     return Intl.message(
       'Deck',
       name: 'dice_deck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aces`
+  String get dice_aces {
+    return Intl.message(
+      'Aces',
+      name: 'dice_aces',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deuces`
+  String get dice_deuces {
+    return Intl.message(
+      'Deuces',
+      name: 'dice_deuces',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Threes`
+  String get dice_threes {
+    return Intl.message(
+      'Threes',
+      name: 'dice_threes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fours`
+  String get dice_fours {
+    return Intl.message(
+      'Fours',
+      name: 'dice_fours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fives`
+  String get dice_fives {
+    return Intl.message(
+      'Fives',
+      name: 'dice_fives',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sixes`
+  String get dice_sixes {
+    return Intl.message(
+      'Sixes',
+      name: 'dice_sixes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choices`
+  String get dice_choice {
+    return Intl.message(
+      'Choices',
+      name: 'dice_choice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4 of Kind`
+  String get dice_4_of_kind {
+    return Intl.message(
+      '4 of Kind',
+      name: 'dice_4_of_kind',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full House`
+  String get dice_full_house {
+    return Intl.message(
+      'Full House',
+      name: 'dice_full_house',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `S. Straight`
+  String get dice_s_straight {
+    return Intl.message(
+      'S. Straight',
+      name: 'dice_s_straight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `L. Straight`
+  String get dice_l_straight {
+    return Intl.message(
+      'L. Straight',
+      name: 'dice_l_straight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yacht`
+  String get dice_yacht {
+    return Intl.message(
+      'Yacht',
+      name: 'dice_yacht',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bonus`
+  String get dice_bonus {
+    return Intl.message(
+      'Bonus',
+      name: 'dice_bonus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total`
+  String get dice_total {
+    return Intl.message(
+      'Total',
+      name: 'dice_total',
       desc: '',
       args: [],
     );

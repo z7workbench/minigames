@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:minigames/games/dices/dice.dart';
-import 'package:minigames/games/dices/dice_engine.dart';
+import 'package:minigames/games/dices/yacht/yacht_dice_engine.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/styles.dart';
 import 'package:minigames/widgets/dropdown.dart';
@@ -21,80 +21,92 @@ class _DiceGameState extends State<DiceGamePage> {
   List<Widget> diceTitle(BuildContext context) => [
         shell(
             context,
-            Text(
+            const Text(
               "",
               style: regularBoldStyle,
             )),
         shell(
             context,
             Text(
-              "1",
+              S.of(context).dice_aces,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "2",
+              S.of(context).dice_deuces,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "3",
+              S.of(context).dice_threes,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "4",
+              S.of(context).dice_fours,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "5",
+              S.of(context).dice_fives,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "6",
+              S.of(context).dice_sixes,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "quan",
+              S.of(context).dice_choice,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "si",
+              S.of(context).dice_4_of_kind,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "hu",
+              S.of(context).dice_full_house,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "xiao",
+              S.of(context).dice_s_straight,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "da",
+              S.of(context).dice_l_straight,
               style: regularTextStyle,
             )),
         shell(
             context,
             Text(
-              "kuai",
+              S.of(context).dice_yacht,
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              S.of(context).dice_bonus,
+              style: regularTextStyle,
+            )),
+        shell(
+            context,
+            Text(
+              S.of(context).dice_total,
               style: regularTextStyle,
             ))
       ];
@@ -124,7 +136,7 @@ class _DiceGameState extends State<DiceGamePage> {
                       child: Offstage(
                         offstage: notShowGame,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             MaterialButton(
                               onPressed: () {
@@ -140,7 +152,7 @@ class _DiceGameState extends State<DiceGamePage> {
                                       .toString()),
                             ),
                             Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -167,38 +179,42 @@ class _DiceGameState extends State<DiceGamePage> {
                             ),
                             // result sheet
                             SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
                                   children: [
                                         Column(
                                           children: diceTitle(context),
                                         )
                                       ] +
                                       List.generate(
-                                          Provider.of<DiceNotifier>(context)
-                                              .size,
-                                          (player) => Column(
-                                                children: [
-                                                      shell(
-                                                          context,
-                                                          Text(
-                                                            "P${player + 1}",
-                                                            style:
-                                                                regularBoldStyle,
-                                                          ))
-                                                    ] +
-                                                    List.generate(
-                                                        12,
-                                                        (index) =>
-                                                            generateSheetCell(
-                                                                context,
-                                                                player,
-                                                                index)),
-                                              )),
-                                ))
+                                        Provider.of<DiceNotifier>(context).size,
+                                        (player) => Column(
+                                            children: [
+                                                  playerTitle(
+                                                      player,
+                                                      Provider.of<DiceNotifier>(
+                                                              context)
+                                                          .engine
+                                                          .currentPlayer)
+                                                ] +
+                                                List.generate(
+                                                    12,
+                                                    (index) =>
+                                                        generateSheetCell(
+                                                            context,
+                                                            player,
+                                                            index)) +
+                                                [
+                                                  generateBonus(
+                                                      context, player),
+                                                  generateTotal(context, player)
+                                                ]),
+                                      )),
+                            ),
                           ],
                         ),
-                      ))
+                      )),
+                  bottomBlank
                 ],
               ),
             ),
@@ -219,7 +235,7 @@ class _DiceGameState extends State<DiceGamePage> {
         });
       };
 
-  Widget shell(BuildContext context, Text child,
+  Widget shell(BuildContext context, Widget child,
           {GestureTapCallback? onTap, GestureTapCallback? onDoubleTap}) =>
       GestureDetector(
         onTap: onTap,
@@ -233,6 +249,56 @@ class _DiceGameState extends State<DiceGamePage> {
           child: child,
         ),
       );
+
+  Widget playerTitle(int player, int currentPlayer) {
+    if (currentPlayer != player) {
+      return shell(
+          context,
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Text(
+              "P${player + 1}",
+              style: regularBoldStyle,
+            ),
+          ));
+    } else {
+      return shell(
+          context,
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Text(
+              "P${player + 1}",
+              style: regularBoldStyleUnderline,
+            ),
+          ));
+    }
+  }
+
+  Widget generateBonus(BuildContext context, int player) {
+    bool bonus = Provider.of<DiceNotifier>(context).engine.bonus[player];
+    if (bonus) {
+      return shell(
+          context,
+          const Text(
+            "35",
+            style: regularTextStyle,
+          ));
+    } else {
+      return shell(
+          context,
+          const Text(
+            "0",
+            style: regularTextStyle,
+          ));
+    }
+  }
+
+  Widget generateTotal(BuildContext context, int player) => shell(
+      context,
+      Text(
+        Provider.of<DiceNotifier>(context).engine.totals[player].toString(),
+        style: regularTextStyle,
+      ));
 
   Widget generateSheetCell(BuildContext context, int player, int index) {
     int board = Provider.of<DiceNotifier>(context).engine.board[player][index];
@@ -252,7 +318,9 @@ class _DiceGameState extends State<DiceGamePage> {
           Text(
             "$predict",
             style: regularHintTextStyle,
-          ));
+          ), onDoubleTap: () {
+        Provider.of<DiceNotifier>(context, listen: false).result(index);
+      });
     } else {
       return shell(
           context,
@@ -286,7 +354,7 @@ class DiceNotifier with ChangeNotifier {
     roll = List.generate(
         5,
         (index) => GesturedDiceWidget(
-              count: index,
+              count: 0,
               keepAction: (i) => keep(i),
               discardAction: (i) => discard(i),
             ));
@@ -337,6 +405,12 @@ class DiceNotifier with ChangeNotifier {
       discardAction: dice.discardAction,
     );
     roll.add(widget);
+    notifyListeners();
+  }
+
+  result(int index) {
+    engine.confirmPredict(index);
+    softReset();
     notifyListeners();
   }
 }
