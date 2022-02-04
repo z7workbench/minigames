@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dice_fours": MessageLookupByLibrary.simpleMessage("Fours"),
         "dice_full_house": MessageLookupByLibrary.simpleMessage("Full House"),
         "dice_game_desc": MessageLookupByLibrary.simpleMessage(
-            "It\'s a game of throwing dice at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet\'s cell must be filled in, even if there are no permutations. The one with the highest score wins!"),
+            "It\'s a game of throwing dices at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet\'s cell must be filled in, even if there are no permutations. The one with the highest score wins!"),
         "dice_game_title":
             MessageLookupByLibrary.simpleMessage("Simple Dice Game"),
         "dice_l_straight": MessageLookupByLibrary.simpleMessage("L. Straight"),

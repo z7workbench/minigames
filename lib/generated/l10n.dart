@@ -90,10 +90,10 @@ class S {
     );
   }
 
-  /// `It's a game of throwing dice at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet's cell must be filled in, even if there are no permutations. The one with the highest score wins!`
+  /// `It's a game of throwing dices at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet's cell must be filled in, even if there are no permutations. The one with the highest score wins!`
   String get dice_game_desc {
     return Intl.message(
-      'It\'s a game of throwing dice at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet\'s cell must be filled in, even if there are no permutations. The one with the highest score wins!',
+      'It\'s a game of throwing dices at each other to make permutations and compete for points. If you make a good combination, double tap the corresponding score to confirm the score. The selected permutations cannot be selected again. You can tap on the dice once, save only the good ones and roll them again. The remaining dice can also be changed after a re-roll. Each sheet\'s cell must be filled in, even if there are no permutations. The one with the highest score wins!',
       name: 'dice_game_desc',
       desc: '',
       args: [],
