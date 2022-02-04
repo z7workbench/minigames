@@ -31,6 +31,11 @@ class DiceEngine {
       switch (i) {
         case 6:
           {
+            predict[i] = sumDices(dices);
+          }
+          break;
+        case 7:
+          {
             if (stats.indexOf(4) > 0 || stats.indexOf(5) > 0) {
               predict[i] = sumDices(dices);
             } else {
@@ -38,9 +43,60 @@ class DiceEngine {
             }
           }
           break;
-        case 7:
+        case 8:
           {
-
+            if (stats.indexOf(3) > 0 && stats.indexOf(2) > 0) {
+              predict[i] = sumDices(dices);
+            } else {
+              predict[i] = 0;
+            }
+          }
+          break;
+        case 9:
+          {
+            if (stats[0] > 0 && stats[1] > 0 && stats[2] > 0 && stats[3] > 0) {
+              predict[i] = 15;
+            } else if (stats[4] > 0 &&
+                stats[1] > 0 &&
+                stats[2] > 0 &&
+                stats[3] > 0) {
+              predict[i] = 15;
+            } else if (stats[4] > 0 &&
+                stats[5] > 0 &&
+                stats[2] > 0 &&
+                stats[3] > 0) {
+              predict[i] = 15;
+            } else {
+              predict[i] = 0;
+            }
+          }
+          break;
+        case 10:
+          {
+            if (stats[0] > 0 &&
+                stats[1] > 0 &&
+                stats[2] > 0 &&
+                stats[3] > 0 &&
+                stats[4] > 0) {
+              predict[i] = 30;
+            } else if (stats[5] > 0 &&
+                stats[1] > 0 &&
+                stats[2] > 0 &&
+                stats[3] > 0 &&
+                stats[4] > 0) {
+              predict[i] = 30;
+            } else {
+              predict[i] = 0;
+            }
+          }
+          break;
+        case 11:
+          {
+            if (stats.indexOf(5) > 0) {
+              predict[i] = 50;
+            } else {
+              predict[i] = 0;
+            }
           }
           break;
         default:
