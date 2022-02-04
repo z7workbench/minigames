@@ -385,6 +385,9 @@ class DiceNotifier with ChangeNotifier {
   }
 
   keep(GesturedDiceWidget dice) {
+    if (dice.count == 0) {
+      return;
+    }
     roll.remove(dice);
     GesturedDiceWidget widget = GesturedDiceWidget(
       count: dice.count,
