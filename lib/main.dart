@@ -18,6 +18,7 @@ void main() async {
 }
 
 Future<String> getTheme() async {
+  WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences sp = await SharedPreferences.getInstance();
   String? themeIndex = sp.getString("theme");
   if (themeIndex != null) {
