@@ -75,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "restart_game": MessageLookupByLibrary.simpleMessage("重开游戏"),
         "roadmap": MessageLookupByLibrary.simpleMessage("版本更新规划"),
         "start_game": MessageLookupByLibrary.simpleMessage("开始游戏"),
+        "start_new_game": MessageLookupByLibrary.simpleMessage("开始一场新游戏"),
         "up_coming": MessageLookupByLibrary.simpleMessage("即将推出..."),
         "up_coming_desc": MessageLookupByLibrary.simpleMessage(
             "迷你小游戏合集将会推出更多的小游戏，点击这里可以看到版本更新日志以及未来版本路线图规划！")

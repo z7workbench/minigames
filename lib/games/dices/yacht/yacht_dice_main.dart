@@ -15,7 +15,6 @@ class DiceGamePage extends StatefulWidget {
 }
 
 class _DiceGameState extends State<DiceGamePage> {
-  bool finished = true;
   bool notShowGame = true;
 
   List<Widget> diceTitle(BuildContext context) => [
@@ -247,9 +246,7 @@ class _DiceGameState extends State<DiceGamePage> {
           ),
           floatingActionButton: FloatingActionButton.extended(
               onPressed: onPressed(),
-              label: Text(finished
-                  ? S.of(context).start_game
-                  : S.of(context).restart_game)),
+              label: Text(S.of(context).star_new_game)),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
         ),

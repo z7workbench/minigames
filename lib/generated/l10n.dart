@@ -460,6 +460,16 @@ class S {
     );
   }
 
+  /// `Start a Brand New Game`
+  String get start_new_game {
+    return Intl.message(
+      'Start a Brand New Game',
+      name: 'start_new_game',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Leaderboard`
   String get leaderboard {
     return Intl.message(
