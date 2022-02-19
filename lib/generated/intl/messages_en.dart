@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_game": MessageLookupByLibrary.simpleMessage("Start Game"),
         "start_new_game":
             MessageLookupByLibrary.simpleMessage("Start a Brand New Game"),
+        "theme": MessageLookupByLibrary.simpleMessage("Themes"),
         "up_coming": MessageLookupByLibrary.simpleMessage("Up Coming Next..."),
         "up_coming_desc": MessageLookupByLibrary.simpleMessage(
             "More mini games will be released in this app, click here to see the version update logs and future version roadmap!")
