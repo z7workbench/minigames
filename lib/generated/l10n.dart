@@ -250,11 +250,151 @@ class S {
     );
   }
 
+  /// `Aces: Total of all 1s`
+  String get dice_aces_desc {
+    return Intl.message(
+      'Aces: Total of all 1s',
+      name: 'dice_aces_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deuces: Total of all 2s`
+  String get dice_deuces_desc {
+    return Intl.message(
+      'Deuces: Total of all 2s',
+      name: 'dice_deuces_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Threes: Total of all 3s`
+  String get dice_threes_desc {
+    return Intl.message(
+      'Threes: Total of all 3s',
+      name: 'dice_threes_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fours: Total of all 4s`
+  String get dice_fours_desc {
+    return Intl.message(
+      'Fours: Total of all 4s',
+      name: 'dice_fours_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fives: Total of all 5s`
+  String get dice_fives_desc {
+    return Intl.message(
+      'Fives: Total of all 5s',
+      name: 'dice_fives_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sixes: Total of all 6s`
+  String get dice_sixes_desc {
+    return Intl.message(
+      'Sixes: Total of all 6s',
+      name: 'dice_sixes_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choices: Total of all dices`
+  String get dice_choice_desc {
+    return Intl.message(
+      'Choices: Total of all dices',
+      name: 'dice_choice_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4 of Kind: 4 of the same number`
+  String get dice_4_of_kind_desc {
+    return Intl.message(
+      '4 of Kind: 4 of the same number',
+      name: 'dice_4_of_kind_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full House: 3 of a kind + 2 of the kind`
+  String get dice_full_house_desc {
+    return Intl.message(
+      'Full House: 3 of a kind + 2 of the kind',
+      name: 'dice_full_house_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `S. Straight: 4 numbers in ascending order`
+  String get dice_s_straight_desc {
+    return Intl.message(
+      'S. Straight: 4 numbers in ascending order',
+      name: 'dice_s_straight_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `L. Straight: 5 numbers in ascending order`
+  String get dice_l_straight_desc {
+    return Intl.message(
+      'L. Straight: 5 numbers in ascending order',
+      name: 'dice_l_straight_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yacht: 5 of the same number`
+  String get dice_yacht_desc {
+    return Intl.message(
+      'Yacht: 5 of the same number',
+      name: 'dice_yacht_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bonus: All score above 63 in the first six categories is awarded +35 bonus points`
+  String get dice_bonus_desc {
+    return Intl.message(
+      'Bonus: All score above 63 in the first six categories is awarded +35 bonus points',
+      name: 'dice_bonus_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Total`
   String get dice_total {
     return Intl.message(
       'Total',
       name: 'dice_total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dismiss`
+  String get dismiss {
+    return Intl.message(
+      'Dismiss',
+      name: 'dismiss',
       desc: '',
       args: [],
     );

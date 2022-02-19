@@ -30,79 +30,105 @@ class _DiceGameState extends State<DiceGamePage> {
             Text(
               S.of(context).dice_aces,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+              snack(context, S.of(context).dice_aces_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_deuces,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_deuces_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_threes,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_threes_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_fours,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_fours_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_fives,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_fives_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_sixes,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_sixes_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_choice,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_choice_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_4_of_kind,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_4_of_kind_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_full_house,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_full_house_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_s_straight,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_s_straight_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_l_straight,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_l_straight_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_yacht,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_yacht_desc);
+        }),
         shell(
             context,
             Text(
               S.of(context).dice_bonus,
               style: regularTextStyle,
-            )),
+            ), onTap: () {
+          snack(context, S.of(context).dice_bonus_desc);
+        }),
         shell(
             context,
             Text(
@@ -329,6 +355,17 @@ class _DiceGameState extends State<DiceGamePage> {
             style: regularTextStyle,
           ));
     }
+  }
+
+  snack(BuildContext context, String string) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(string),
+      action: SnackBarAction(
+        label: S.of(context).dismiss,
+        onPressed: () {},
+      ),
+      duration: const Duration(seconds: 1),
+    ));
   }
 }
 
