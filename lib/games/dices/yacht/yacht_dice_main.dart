@@ -246,7 +246,7 @@ class _DiceGameState extends State<DiceGamePage> {
           ),
           floatingActionButton: FloatingActionButton.extended(
               onPressed: onPressed(),
-              label: Text(S.of(context).star_new_game)),
+              label: Text(S.of(context).start_new_game)),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
         ),
