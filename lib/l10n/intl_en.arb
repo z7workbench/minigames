@@ -34,6 +34,7 @@
   "dice_yacht_desc": "Yacht: 5 of the same number",
   "dice_bonus_desc": "Bonus: All score above 63 in the first six categories is awarded +35 bonus points",
   "dice_total": "Total",
+  "dice_times": " roll(s) remained",
   "dismiss": "Dismiss",
   "check": "Check",
   "minesweeper_title": "Minesweeper",

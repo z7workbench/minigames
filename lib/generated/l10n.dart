@@ -390,6 +390,16 @@ class S {
     );
   }
 
+  /// ` roll(s) remained`
+  String get dice_times {
+    return Intl.message(
+      ' roll(s) remained',
+      name: 'dice_times',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Dismiss`
   String get dismiss {
     return Intl.message(

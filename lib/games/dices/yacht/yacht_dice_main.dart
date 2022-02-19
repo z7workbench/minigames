@@ -172,10 +172,10 @@ class _DiceGameState extends State<DiceGamePage> {
                                         listen: false)
                                     .rollingDice();
                               },
-                              child: Text("Roll " +
+                              child: Text(
                                   Provider.of<DiceNotifier>(context)
                                       .times
-                                      .toString()),
+                                      .toString() + S.of(context).dice_times),
                             ),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

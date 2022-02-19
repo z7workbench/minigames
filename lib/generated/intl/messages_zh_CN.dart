@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dice_sixes_desc": MessageLookupByLibrary.simpleMessage("六点：6点的总和"),
         "dice_threes": MessageLookupByLibrary.simpleMessage("三点"),
         "dice_threes_desc": MessageLookupByLibrary.simpleMessage("三点：3点的总和"),
+        "dice_times": MessageLookupByLibrary.simpleMessage(" 次剩余投掷次数"),
         "dice_total": MessageLookupByLibrary.simpleMessage("合计"),
         "dice_yacht": MessageLookupByLibrary.simpleMessage("快艇"),
         "dice_yacht_desc": MessageLookupByLibrary.simpleMessage("快艇：5个骰子的点数相同"),
