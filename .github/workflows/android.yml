@@ -15,6 +15,10 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
+      - run: openssl aes-256-cbc -d -iv $iv -k $key -in ./android/app/minigames.jks.enc -out ./android/app/minigames.jks -salt -pbkdf2
+        env:
+          key: ${{ secrets.android_key_k }}
+          iv: ${{ secrets.android_key_iv }}
       - run: flutter pub get
       - run: flutter build apk
       - uses: actions/upload-artifact@v2
