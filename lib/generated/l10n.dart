@@ -400,6 +400,26 @@ class S {
     );
   }
 
+  /// `Poker Pop`
+  String get pop_title {
+    return Intl.message(
+      'Poker Pop',
+      name: 'pop_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `12312122312`
+  String get pop_desc {
+    return Intl.message(
+      '12312122312',
+      name: 'pop_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Dismiss`
   String get dismiss {
     return Intl.message(

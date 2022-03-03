@@ -72,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "minesweeper_desc": MessageLookupByLibrary.simpleMessage(
             "网上或者看到软件查看，新闻我们发生主题包括工具其实，为什您的新闻看到只是都是下载。任何语言这里更多，帮助人民不能工程经济操作。欢迎新闻具有游戏，发布之间其实一个。"),
         "minesweeper_title": MessageLookupByLibrary.simpleMessage("扫雷"),
+        "pop_desc": MessageLookupByLibrary.simpleMessage("12312122312"),
+        "pop_title": MessageLookupByLibrary.simpleMessage("扑克消消乐"),
         "restart_game": MessageLookupByLibrary.simpleMessage("重开游戏"),
         "roadmap": MessageLookupByLibrary.simpleMessage("版本更新规划"),
         "start_game": MessageLookupByLibrary.simpleMessage("开始游戏"),

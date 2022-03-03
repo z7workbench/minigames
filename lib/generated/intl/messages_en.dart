@@ -82,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Get ask reduce skin. Child never forget less herself reveal. City example similar service billion store large. Book term although believe. Religious out opportunity upon note."),
         "minesweeper_title":
             MessageLookupByLibrary.simpleMessage("Minesweeper"),
+        "pop_desc": MessageLookupByLibrary.simpleMessage("12312122312"),
+        "pop_title": MessageLookupByLibrary.simpleMessage("Poker Pop"),
         "restart_game": MessageLookupByLibrary.simpleMessage("Restart Game"),
         "roadmap": MessageLookupByLibrary.simpleMessage("Roadmap"),
         "start_game": MessageLookupByLibrary.simpleMessage("Start Game"),
