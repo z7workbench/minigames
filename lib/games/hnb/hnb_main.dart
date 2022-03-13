@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:minigames/games/hnb/hnb_leaderboard.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/styles.dart';
+import 'package:minigames/utils/hive_utils.dart';
 import 'package:minigames/widgets/dropdown.dart';
 import 'package:minigames/games/hnb/hnb_boards.dart';
 import 'package:minigames/games/hnb/hnb_engine.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HitAndBlowHome extends StatefulWidget {
   const HitAndBlowHome({Key? key}) : super(key: key);
@@ -20,8 +23,16 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   String answerText = hnbPlaceholder;
   int times = 1;
   List results = [];
+  late HiveUtil hive;
 
   List<Widget> items = [];
+  int start = 0;
+
+  @override
+  void initState() {
+    hive = HiveUtil();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -40,7 +51,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                 ], title: S.of(context).description),
                 margin,
                 DropdownWidget(
-                    children: const [], title: S.of(context).leaderboard),
+                    children: [content], title: S.of(context).leaderboard,),
                 margin,
                 AnimatedOpacity(
                     opacity: notShowGame ? 0.0 : 1.0,
@@ -90,6 +101,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   VoidCallback onPressed() => () {
         setState(() {
           if (notShowGame) notShowGame = false;
+          start = DateTime.now().microsecondsSinceEpoch;
           answerText = hnbPlaceholder;
           _engine = HitAndBlowEngine(4, allowDuplicate);
           finished = false;
@@ -112,6 +124,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
           if (result.allCorrect == _engine.balls) {
             finished = true;
             answerText = _engine.answer.join(" ");
+            saveToHive();
             setState(() {
               items.removeLast();
               items.add(addResultBoard(result, value));
@@ -135,6 +148,37 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
       borderColor: Colors.grey,
       result: result,
       match: match,
+    );
+  }
+
+  saveToHive() {
+    var now = DateTime.now().microsecondsSinceEpoch;
+    hive.hnbLeaderboardBox
+        .add(HnbLeaderboardItem(now: now, usedTime: now - start, count: times));
+  }
+
+  Widget get content {
+    if (hive.hnbLeaderboardBox.isEmpty) {
+      return Container(
+        child: Text('Loading'),
+        alignment: Alignment.center,
+      );
+    }
+
+    return ValueListenableBuilder(
+      valueListenable: hive.hnbLeaderboardBox.listenable(),
+      builder: (context, Box leaderboard, _) {
+        if (leaderboard.keys.isEmpty) {
+          return Container(
+            child: Text('Loading'),
+            alignment: Alignment.center,
+          );
+        }
+        return Container(
+          child: Text('Loading2'),
+          alignment: Alignment.center,
+        );
+      },
     );
   }
 }

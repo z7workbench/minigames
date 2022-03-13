@@ -6,11 +6,14 @@ import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/games/hnb/hnb_main.dart';
 import 'package:minigames/roadmap.dart';
 import 'package:minigames/styles.dart';
+import 'package:minigames/utils/hive_utils.dart';
 import 'package:minigames/widgets/description_card.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HiveUtil();
   String theme = await getTheme();
   runApp(MyApp(
     theme: theme,
@@ -18,7 +21,6 @@ void main() async {
 }
 
 Future<String> getTheme() async {
-  WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences sp = await SharedPreferences.getInstance();
   String? themeIndex = sp.getString("theme");
   if (themeIndex != null) {
