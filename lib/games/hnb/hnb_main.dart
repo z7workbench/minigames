@@ -101,7 +101,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   VoidCallback onPressed() => () {
         setState(() {
           if (notShowGame) notShowGame = false;
-          start = DateTime.now().microsecondsSinceEpoch;
+          start = DateTime.now().millisecondsSinceEpoch;
           answerText = hnbPlaceholder;
           _engine = HitAndBlowEngine(4, allowDuplicate);
           finished = false;
@@ -152,7 +152,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   }
 
   saveToHive() {
-    var now = DateTime.now().microsecondsSinceEpoch;
+    var now = DateTime.now().millisecondsSinceEpoch;
     hive.hnbLeaderboardBox
         .add(HnbLeaderboardItem(now: now, usedTime: now - start, count: times));
   }
@@ -174,8 +174,14 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
             alignment: Alignment.center,
           );
         }
+
+        var items = leaderboard.values.toList();
         return Container(
-          child: Text('Loading2'),
+          child: Column(children: [
+            Text("When\t\tUsed\tCount\t")
+          ] + List.generate(leaderboard.length, (index) => 
+            Text("${DateTime.fromMillisecondsSinceEpoch(items[index].now)}\t${items[index].usedTime}\t${items[index].count}")
+          )),
           alignment: Alignment.center,
         );
       },
