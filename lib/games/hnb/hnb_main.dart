@@ -51,7 +51,9 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                 ], title: S.of(context).description),
                 margin,
                 DropdownWidget(
-                    children: [content], title: S.of(context).leaderboard,),
+                  children: [content],
+                  title: S.of(context).leaderboard,
+                ),
                 margin,
                 AnimatedOpacity(
                     opacity: notShowGame ? 0.0 : 1.0,
@@ -170,19 +172,31 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
       builder: (context, Box leaderboard, _) {
         if (leaderboard.keys.isEmpty) {
           return Container(
-            child: Text('Loading'),
+            child: Text('Empty!'),
             alignment: Alignment.center,
           );
         }
 
         var items = leaderboard.values.toList();
-        return Container(
-          child: Column(children: [
-            Text("When\t\tUsed\tCount\t")
-          ] + List.generate(leaderboard.length, (index) => 
-            Text("${DateTime.fromMillisecondsSinceEpoch(items[index].now)}\t${items[index].usedTime}\t${items[index].count}")
-          )),
-          alignment: Alignment.center,
+        return DataTable(
+          columns: [
+            DataColumn(label: Text("When")),
+            DataColumn(label: Text("Used")),
+            DataColumn(label: Text("Count"))
+          ],
+          rows: [
+            for (var item in items)
+              DataRow(
+                cells: [
+                  DataCell(Text(DateTime.fromMillisecondsSinceEpoch(item.now)
+                      .toString())),
+                  DataCell(Text(item.usedTime.toString())),
+                  DataCell(Text(item.count.toString())),
+                ],
+              )
+          ],
+          sortColumnIndex: 2,
+          sortAscending: false,
         );
       },
     );
