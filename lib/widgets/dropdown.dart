@@ -15,10 +15,10 @@ class _DropdownWidgetState extends State<DropdownWidget> {
   var visibility = false;
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        child: Column(
-          children: [
-            Row(
+  Widget build(BuildContext context) => Column(
+        children: [
+          GestureDetector(
+            child: Row(
               children: [
                 Expanded(
                   child: Text(
@@ -36,28 +36,28 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                 )
               ],
             ),
-            AnimatedOpacity(
-              opacity: visibility ? 0.0 : 1.0,
-              duration: const Duration(milliseconds: 500),
-              child: Offstage(
-                offstage: visibility,
-                child: Column(
-                  children: widget.children,
-                ),
+            onTapUp: (_) {
+              if (visibility) {
+                setState(() {
+                  visibility = false;
+                });
+              } else {
+                setState(() {
+                  visibility = true;
+                });
+              }
+            },
+          ),
+          AnimatedOpacity(
+            opacity: visibility ? 0.0 : 1.0,
+            duration: const Duration(milliseconds: 500),
+            child: Offstage(
+              offstage: visibility,
+              child: Column(
+                children: widget.children,
               ),
-            )
-          ],
-        ),
-        onTapUp: (_) {
-          if (visibility) {
-            setState(() {
-              visibility = false;
-            });
-          } else {
-            setState(() {
-              visibility = true;
-            });
-          }
-        },
+            ),
+          )
+        ],
       );
 }

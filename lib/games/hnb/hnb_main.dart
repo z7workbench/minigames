@@ -178,11 +178,12 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
         }
 
         var items = leaderboard.values.toList();
+        items.sort((a, b) => a.count.compareTo(b.count));
         return DataTable(
           columns: [
             DataColumn(label: Text("When")),
             DataColumn(label: Text("Used")),
-            DataColumn(label: Text("Count"))
+            DataColumn(label: Text("Count"), numeric: true)
           ],
           rows: [
             for (var item in items)
@@ -190,7 +191,9 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                 cells: [
                   DataCell(Text(DateTime.fromMillisecondsSinceEpoch(item.now)
                       .toString())),
-                  DataCell(Text(item.usedTime.toString())),
+                  DataCell(Text(Duration(milliseconds: item.usedTime)
+                      .toString())),
+                  // DataCell(Text(item.usedTime.toString())),
                   DataCell(Text(item.count.toString())),
                 ],
               )
