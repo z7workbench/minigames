@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app": MessageLookupByLibrary.simpleMessage("迷你游戏合集"),
         "check": MessageLookupByLibrary.simpleMessage("检查"),
+        "clean_leaderboard": MessageLookupByLibrary.simpleMessage("清除排行榜"),
         "description": MessageLookupByLibrary.simpleMessage("游戏简介"),
         "dice_4_of_kind": MessageLookupByLibrary.simpleMessage("四骰同花"),
         "dice_4_of_kind_desc":
@@ -65,10 +66,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "dice_yacht": MessageLookupByLibrary.simpleMessage("快艇"),
         "dice_yacht_desc": MessageLookupByLibrary.simpleMessage("快艇：5个骰子的点数相同"),
         "dismiss": MessageLookupByLibrary.simpleMessage("溜了"),
+        "empty_leaderboard": MessageLookupByLibrary.simpleMessage("暂无排行榜"),
         "hnb_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
             "这是一个猜出隐藏的n个数字和位置的游戏，默认n为4。从1-n中选择n-2个数字放到位置上，按下“检查”即可检查对错。每个位置会被判定为“全对”（用彩色对钩表示）或“半对”（用灰色对钩表示），前者为位置和数字都正确，后者为选取的数字正确。如果判定失败则再来一次，直到判断正确！"),
+        "hnb_hit": MessageLookupByLibrary.simpleMessage("猜的次数"),
         "hnb_title": MessageLookupByLibrary.simpleMessage("猜数字组合"),
+        "hnb_used_time": MessageLookupByLibrary.simpleMessage("用时"),
+        "hnb_when_finished": MessageLookupByLibrary.simpleMessage("完成时间"),
         "leaderboard": MessageLookupByLibrary.simpleMessage("排行榜"),
         "minesweeper_desc": MessageLookupByLibrary.simpleMessage(
             "网上或者看到软件查看，新闻我们发生主题包括工具其实，为什您的新闻看到只是都是下载。任何语言这里更多，帮助人民不能工程经济操作。欢迎新闻具有游戏，发布之间其实一个。"),

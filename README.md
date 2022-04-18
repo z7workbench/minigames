@@ -21,8 +21,16 @@ Hit & Blow is inspired by Nintendo Switch's Clubhouse Games: 51 Worldwide Classi
 ### Description
 This is a game of guessing the hidden `n` numbers and positions, with the default `n` being 4. Select `n-2` numbers from 1 to n and place them in the positions, then press "Check" to check for correctness. Each position will be judged as "all correct" (indicated by colored check marks) or "half correct" (indicated by grey check marks), the number of former is the number of correct positions and numbers, the number of latter is the number of correct numbers. If it fails, you can try again until you get it right! 
 
+### Leaderboard
+Currently Hit & Blow has a leaderboard powered by [Hive Flutter](https://docs.hivedb.dev/). It contains time when finished, playtime and count you tried, sorted by count you tried. 
+
+<p align="center">
+<img alt="Hit & Blow leaderboard" src="arts/hnb_leaderboard.webp">
+</p>
+
 ### Further Objects
-- Leaderboard
+- Minor UI changes
+- Bug fixes
 
 ## Simple Dice Game
 Simple Dice Game inspired by Nintendo Switch's Clubhouse Games: 51 Worldwide Classics' Yacht Dices.
@@ -38,3 +46,12 @@ It's a game of throwing dices at each other to make permutations and compete for
 - Leaderboard
 - Versus AI
 - More players
+
+# Used Libraries & Materials
+- [Flutter](https://flutter.dev)
+- [Dart](https://dart.dev)
+- [provider](https://pub.dev/packages/provider)
+- [shared_preferences](https://pub.dev/packages/shared_preferences)
+- [intl](https://pub.dev/packages/intl) & [Localizely extention](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl)
+- [Hive Flutter](https://docs.hivedb.dev/)
+- [flustars](https://pub.dev/packages/flustars) (Not used)

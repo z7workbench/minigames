@@ -80,6 +80,56 @@ class S {
     );
   }
 
+  /// `When you finished`
+  String get hnb_when_finished {
+    return Intl.message(
+      'When you finished',
+      name: 'hnb_when_finished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Playtime`
+  String get hnb_used_time {
+    return Intl.message(
+      'Playtime',
+      name: 'hnb_used_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Count you tried`
+  String get hnb_hit {
+    return Intl.message(
+      'Count you tried',
+      name: 'hnb_hit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Currently no data`
+  String get empty_leaderboard {
+    return Intl.message(
+      'Currently no data',
+      name: 'empty_leaderboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clean Leaderboard`
+  String get clean_leaderboard {
+    return Intl.message(
+      'Clean Leaderboard',
+      name: 'clean_leaderboard',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Simple Dice Game`
   String get dice_game_title {
     return Intl.message(

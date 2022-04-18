@@ -51,7 +51,18 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                 ], title: S.of(context).description),
                 margin,
                 DropdownWidget(
-                  children: [content],
+                  children: [
+                    Padding(
+                      child: MaterialButton(
+                        onPressed: () {
+                          hive.hnbLeaderboardBox.clear();
+                        },
+                        child: Text(S.of(context).clean_leaderboard),
+                      ),
+                      padding: containerXSPadding,
+                    ),
+                    content
+                  ],
                   title: S.of(context).leaderboard,
                 ),
                 margin,
@@ -162,7 +173,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   Widget get content {
     if (hive.hnbLeaderboardBox.isEmpty) {
       return Container(
-        child: Text('Loading'),
+        child: Text(S.of(context).empty_leaderboard, style: regularTextStyle),
         alignment: Alignment.center,
       );
     }
@@ -172,7 +183,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
       builder: (context, Box leaderboard, _) {
         if (leaderboard.keys.isEmpty) {
           return Container(
-            child: Text('Empty!'),
+            child: Text(S.of(context).empty_leaderboard, style: regularTextStyle,),
             alignment: Alignment.center,
           );
         }
@@ -181,9 +192,9 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
         items.sort((a, b) => a.count.compareTo(b.count));
         return DataTable(
           columns: [
-            DataColumn(label: Text("When")),
-            DataColumn(label: Text("Used")),
-            DataColumn(label: Text("Count"), numeric: true)
+            DataColumn(label: Text(S.of(context).hnb_when_finished)),
+            DataColumn(label: Text(S.of(context).hnb_used_time)),
+            DataColumn(label: Text(S.of(context).hnb_hit), numeric: true)
           ],
           rows: [
             for (var item in items)
@@ -191,8 +202,8 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                 cells: [
                   DataCell(Text(DateTime.fromMillisecondsSinceEpoch(item.now)
                       .toString())),
-                  DataCell(Text(Duration(milliseconds: item.usedTime)
-                      .toString())),
+                  DataCell(
+                      Text(Duration(milliseconds: item.usedTime).toString())),
                   // DataCell(Text(item.usedTime.toString())),
                   DataCell(Text(item.count.toString())),
                 ],

@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app": MessageLookupByLibrary.simpleMessage("Mini Games"),
         "check": MessageLookupByLibrary.simpleMessage("Check"),
+        "clean_leaderboard":
+            MessageLookupByLibrary.simpleMessage("Clean Leaderboard"),
         "description": MessageLookupByLibrary.simpleMessage("Game info"),
         "dice_4_of_kind": MessageLookupByLibrary.simpleMessage("4 of Kind"),
         "dice_4_of_kind_desc": MessageLookupByLibrary.simpleMessage(
@@ -75,10 +77,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "dice_yacht_desc":
             MessageLookupByLibrary.simpleMessage("Yacht: 5 of the same number"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
+        "empty_leaderboard":
+            MessageLookupByLibrary.simpleMessage("Currently no data"),
         "hnb_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
         "hnb_desc": MessageLookupByLibrary.simpleMessage(
             "This is a game of guessing the hidden n numbers and positions, with the default n being 4. Select n-2 numbers from 1 to n and place them in the positions, then press \"Check\" to check for correctness. Each position will be judged as \"all correct\" (indicated by colored check marks) or \"half correct\" (indicated by grey check marks), the number of former is the number of correct positions and numbers, the number of latter is the number of correct numbers. If it fails, you can try again until you get it right! "),
+        "hnb_hit": MessageLookupByLibrary.simpleMessage("Count you tried"),
         "hnb_title": MessageLookupByLibrary.simpleMessage("Hit and Blow"),
+        "hnb_used_time": MessageLookupByLibrary.simpleMessage("Playtime"),
+        "hnb_when_finished":
+            MessageLookupByLibrary.simpleMessage("When you finished"),
         "leaderboard": MessageLookupByLibrary.simpleMessage("Leaderboard"),
         "minesweeper_desc": MessageLookupByLibrary.simpleMessage(
             "Get ask reduce skin. Child never forget less herself reveal. City example similar service billion store large. Book term although believe. Religious out opportunity upon note."),
