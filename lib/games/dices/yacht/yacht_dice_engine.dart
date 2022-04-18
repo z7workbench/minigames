@@ -44,7 +44,9 @@ class DiceEngine {
   bool checkBonus() {
     int sum = 0;
     for (int i = 0; i < 6; i++) {
-      sum += board[currentPlayer][i] * (i + 1);
+      if (board[currentPlayer][i] >= 0) {
+        sum += board[currentPlayer][i];
+      }
     }
     if (sum >= 63) {
       return true;

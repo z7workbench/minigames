@@ -390,6 +390,16 @@ class S {
     );
   }
 
+  /// `Total: The sum of all score`
+  String get dice_total_desc {
+    return Intl.message(
+      'Total: The sum of all score',
+      name: 'dice_total_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// ` roll(s) remained`
   String get dice_times {
     return Intl.message(

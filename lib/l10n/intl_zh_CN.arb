@@ -34,6 +34,7 @@
   "dice_yacht_desc": "快艇：5个骰子的点数相同",
   "dice_bonus_desc": "奖励分：前6项总和超过63分可以获得+35额外分",
   "dice_total": "合计",
+  "dice_total_desc": "合计：表格中分数总和",
   "dice_times": " 次剩余投掷次数",
   "pop_title": "扑克消消乐",
   "pop_desc": "12312122312",

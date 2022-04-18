@@ -17,125 +17,6 @@ class DiceGamePage extends StatefulWidget {
 class _DiceGameState extends State<DiceGamePage> {
   bool notShowGame = true;
 
-  List<Widget> diceTitle(BuildContext context) => [
-        shell(
-            context,
-            const Text(
-              "",
-              style: regularBoldStyle,
-            )),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_aces,
-              style: regularTextStyle,
-            ), onTap: () {
-              snack(context, S.of(context).dice_aces_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_deuces,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_deuces_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_threes,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_threes_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_fours,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_fours_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_fives,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_fives_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_sixes,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_sixes_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_choice,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_choice_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_4_of_kind,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_4_of_kind_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_full_house,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_full_house_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_s_straight,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_s_straight_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_l_straight,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_l_straight_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_yacht,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_yacht_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_bonus,
-              style: regularTextStyle,
-            ), onTap: () {
-          snack(context, S.of(context).dice_bonus_desc);
-        }),
-        shell(
-            context,
-            Text(
-              S.of(context).dice_total,
-              style: regularTextStyle,
-            ))
-      ];
-
   @override
   Widget build(BuildContext buildContext) =>
       ChangeNotifierProvider<DiceNotifier>(
@@ -171,10 +52,10 @@ class _DiceGameState extends State<DiceGamePage> {
                                         listen: false)
                                     .rollingDice();
                               },
-                              child: Text(
-                                  Provider.of<DiceNotifier>(context)
+                              child: Text(Provider.of<DiceNotifier>(context)
                                       .times
-                                      .toString() + S.of(context).dice_times),
+                                      .toString() +
+                                  S.of(context).dice_times),
                             ),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -205,36 +86,7 @@ class _DiceGameState extends State<DiceGamePage> {
                             // result sheet
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              child: Row(
-                                  children: [
-                                        Column(
-                                          children: diceTitle(context),
-                                        )
-                                      ] +
-                                      List.generate(
-                                        Provider.of<DiceNotifier>(context).size,
-                                        (player) => Column(
-                                            children: [
-                                                  playerTitle(
-                                                      player,
-                                                      Provider.of<DiceNotifier>(
-                                                              context)
-                                                          .engine
-                                                          .currentPlayer)
-                                                ] +
-                                                List.generate(
-                                                    12,
-                                                    (index) =>
-                                                        generateSheetCell(
-                                                            context,
-                                                            player,
-                                                            index)) +
-                                                [
-                                                  generateBonus(
-                                                      context, player),
-                                                  generateTotal(context, player)
-                                                ]),
-                                      )),
+                              child: resultSheet(context),
                             ),
                           ],
                         ),
@@ -252,107 +104,133 @@ class _DiceGameState extends State<DiceGamePage> {
         ),
       );
 
+  Widget resultSheet(BuildContext context) {
+    var styles = diceStyle(context);
+    var descs = diceStyleDesc(context);
+    var players = Provider.of<DiceNotifier>(context).size;
+
+    return DataTable(
+        columns: const [DataColumn(label: Text(""))] +
+            List.generate(players, (index) {
+              if (Provider.of<DiceNotifier>(context).engine.currentPlayer !=
+                  index) {
+                return DataColumn(
+                    label: Text(
+                  "P$index",
+                  style: regularTextStyle,
+                ));
+              } else {
+                return DataColumn(
+                    label: Text(
+                  "P$index",
+                  style: regularBoldStyleUnderline,
+                ));
+              }
+            }),
+        rows: List.generate(
+                12,
+                (index) => DataRow(
+                    cells: [
+                          DataCell(
+                            Text(styles[index]),
+                            onTap: () {
+                              snack(context, descs[index]);
+                            },
+                          )
+                        ] +
+                        List.generate(players, (player) {
+                          if (Provider.of<DiceNotifier>(context)
+                                  .engine
+                                  .currentPlayer !=
+                              player) {
+                            return DataCell(Text(
+                              showNaturalNumber(
+                                  Provider.of<DiceNotifier>(context)
+                                      .engine
+                                      .board[player][index]),
+                              style: regularTextStyle,
+                            ));
+                          } else {
+                            if (Provider.of<DiceNotifier>(context)
+                                    .engine
+                                    .board[player][index] >=
+                                0) {
+                              return DataCell(Text(
+                                showNaturalNumber(
+                                    Provider.of<DiceNotifier>(context)
+                                        .engine
+                                        .board[player][index]),
+                                style: regularTextStyle,
+                              ));
+                            } else {
+                              return DataCell(
+                                Text(
+                                    showNaturalNumber(
+                                        Provider.of<DiceNotifier>(context)
+                                            .engine
+                                            .predict[index]),
+                                    style: regularHintTextStyle),
+                                onDoubleTap: () {
+                                  if (Provider.of<DiceNotifier>(context,
+                                              listen: false)
+                                          .engine
+                                          .predict[index] >=
+                                      0) {
+                                    Provider.of<DiceNotifier>(context,
+                                            listen: false)
+                                        .result(index);
+                                  }
+                                },
+                              );
+                            }
+                          }
+                        }))) +
+            [
+              DataRow(
+                  cells: [
+                        DataCell(
+                          Text(styles[12]),
+                          onTap: () {
+                            snack(context, descs[12]);
+                          },
+                        )
+                      ] +
+                      List.generate(players, (player) {
+                        if (Provider.of<DiceNotifier>(context)
+                            .engine
+                            .bonus[player]) {
+                          return const DataCell(
+                              Text('+35', style: regularTextStyle));
+                        } else {
+                          return const DataCell(
+                              Text('+0', style: regularTextStyle));
+                        }
+                      })),
+              DataRow(
+                  cells: [
+                        DataCell(
+                          Text(styles[13]),
+                          onTap: () {
+                            snack(context, descs[13]);
+                          },
+                        )
+                      ] +
+                      List.generate(
+                          players,
+                          (player) => DataCell(Text(
+                              Provider.of<DiceNotifier>(context)
+                                  .engine
+                                  .totals[player]
+                                  .toString(),
+                              style: regularTextStyle)))),
+            ]);
+  }
+
   VoidCallback onPressed() => () {
         setState(() {
           if (notShowGame) notShowGame = false;
         });
       };
-
-  Widget shell(BuildContext context, Widget child,
-          {GestureTapCallback? onTap, GestureTapCallback? onDoubleTap}) =>
-      GestureDetector(
-        onTap: onTap,
-        onDoubleTap: onDoubleTap,
-        child: Container(
-          padding: containerXSPadding,
-          // decoration: BoxDecoration(
-          //   border: Border.all(
-          //       width: 2.0, color: Theme.of(context).colorScheme.onBackground),
-          // ),
-          child: child,
-        ),
-      );
-
-  Widget playerTitle(int player, int currentPlayer) {
-    if (currentPlayer != player) {
-      return shell(
-          context,
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Text(
-              "P${player + 1}",
-              style: regularBoldStyle,
-            ),
-          ));
-    } else {
-      return shell(
-          context,
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Text(
-              "P${player + 1}",
-              style: regularBoldStyleUnderline,
-            ),
-          ));
-    }
-  }
-
-  Widget generateBonus(BuildContext context, int player) {
-    bool bonus = Provider.of<DiceNotifier>(context).engine.bonus[player];
-    if (bonus) {
-      return shell(
-          context,
-          const Text(
-            "35",
-            style: regularTextStyle,
-          ));
-    } else {
-      return shell(
-          context,
-          const Text(
-            "0",
-            style: regularTextStyle,
-          ));
-    }
-  }
-
-  Widget generateTotal(BuildContext context, int player) => shell(
-      context,
-      Text(
-        Provider.of<DiceNotifier>(context).engine.totals[player].toString(),
-        style: regularTextStyle,
-      ));
-
-  Widget generateSheetCell(BuildContext context, int player, int index) {
-    int board = Provider.of<DiceNotifier>(context).engine.board[player][index];
-    int predict = Provider.of<DiceNotifier>(context).engine.predict[index];
-    int currentPlayer = Provider.of<DiceNotifier>(context).engine.currentPlayer;
-
-    if (board >= 0) {
-      return shell(
-          context,
-          Text(
-            "$board",
-            style: regularTextStyle,
-          ));
-    } else if (predict >= 0 && player == currentPlayer) {
-      return shell(
-          context,
-          Text(
-            "$predict",
-            style: regularHintTextStyle,
-          ), onDoubleTap: () {
-        Provider.of<DiceNotifier>(context, listen: false).result(index);
-      });
-    } else {
-      return shell(
-          context,
-          const Text(
-            "  ",
-            style: regularTextStyle,
-          ));
-    }
-  }
 
   snack(BuildContext context, String string) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -363,6 +241,48 @@ class _DiceGameState extends State<DiceGamePage> {
       ),
       duration: const Duration(seconds: 1),
     ));
+  }
+
+  List<String> diceStyle(BuildContext context) => [
+        S.of(context).dice_aces,
+        S.of(context).dice_deuces,
+        S.of(context).dice_threes,
+        S.of(context).dice_fours,
+        S.of(context).dice_fives,
+        S.of(context).dice_sixes,
+        S.of(context).dice_choice,
+        S.of(context).dice_4_of_kind,
+        S.of(context).dice_full_house,
+        S.of(context).dice_s_straight,
+        S.of(context).dice_l_straight,
+        S.of(context).dice_yacht,
+        S.of(context).dice_bonus,
+        S.of(context).dice_total,
+      ];
+
+  List<String> diceStyleDesc(BuildContext context) => [
+        S.of(context).dice_aces_desc,
+        S.of(context).dice_deuces_desc,
+        S.of(context).dice_threes_desc,
+        S.of(context).dice_fours_desc,
+        S.of(context).dice_fives_desc,
+        S.of(context).dice_sixes_desc,
+        S.of(context).dice_choice_desc,
+        S.of(context).dice_4_of_kind_desc,
+        S.of(context).dice_full_house_desc,
+        S.of(context).dice_s_straight_desc,
+        S.of(context).dice_l_straight_desc,
+        S.of(context).dice_yacht_desc,
+        S.of(context).dice_bonus_desc,
+        S.of(context).dice_total_desc,
+      ];
+
+  showNaturalNumber(int i) {
+    if (i >= 0) {
+      return i.toString();
+    } else {
+      return "";
+    }
   }
 }
 

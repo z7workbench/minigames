@@ -69,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Threes: Total of all 3s"),
         "dice_times": MessageLookupByLibrary.simpleMessage(" roll(s) remained"),
         "dice_total": MessageLookupByLibrary.simpleMessage("Total"),
+        "dice_total_desc":
+            MessageLookupByLibrary.simpleMessage("Total: The sum of all score"),
         "dice_yacht": MessageLookupByLibrary.simpleMessage("Yacht"),
         "dice_yacht_desc":
             MessageLookupByLibrary.simpleMessage("Yacht: 5 of the same number"),
