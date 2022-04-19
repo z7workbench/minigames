@@ -109,121 +109,123 @@ class _DiceGameState extends State<DiceGamePage> {
     var descs = diceStyleDesc(context);
     var players = Provider.of<DiceNotifier>(context).size;
 
-    return DataTable(
-        columns: const [DataColumn(label: Text(""))] +
-            List.generate(players, (index) {
-              if (Provider.of<DiceNotifier>(context).engine.currentPlayer !=
-                  index) {
-                return DataColumn(
-                    label: Text(
-                  "P$index",
-                  style: regularTextStyle,
-                ));
-              } else {
-                return DataColumn(
-                    label: Text(
-                  "P$index",
-                  style: regularBoldStyleUnderline,
-                ));
-              }
-            }),
-        rows: List.generate(
-                12,
-                (index) => DataRow(
-                    cells: [
-                          DataCell(
-                            Text(styles[index]),
-                            onTap: () {
-                              snack(context, descs[index]);
-                            },
-                          )
-                        ] +
-                        List.generate(players, (player) {
-                          if (Provider.of<DiceNotifier>(context)
-                                  .engine
-                                  .currentPlayer !=
-                              player) {
-                            return DataCell(Text(
-                              showNaturalNumber(
-                                  Provider.of<DiceNotifier>(context)
+    return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: DataTable(
+            columns: const [DataColumn(label: Text(""))] +
+                List.generate(players, (index) {
+                  if (Provider.of<DiceNotifier>(context).engine.currentPlayer !=
+                      index) {
+                    return DataColumn(
+                        label: Text(
+                      "P$index",
+                      style: regularTextStyle,
+                    ));
+                  } else {
+                    return DataColumn(
+                        label: Text(
+                      "P$index",
+                      style: regularBoldStyleUnderline,
+                    ));
+                  }
+                }),
+            rows: List.generate(
+                    12,
+                    (index) => DataRow(
+                        cells: [
+                              DataCell(
+                                Text(styles[index]),
+                                onTap: () {
+                                  snack(context, descs[index]);
+                                },
+                              )
+                            ] +
+                            List.generate(players, (player) {
+                              if (Provider.of<DiceNotifier>(context)
                                       .engine
-                                      .board[player][index]),
-                              style: regularTextStyle,
-                            ));
-                          } else {
-                            if (Provider.of<DiceNotifier>(context)
-                                    .engine
-                                    .board[player][index] >=
-                                0) {
-                              return DataCell(Text(
-                                showNaturalNumber(
-                                    Provider.of<DiceNotifier>(context)
+                                      .currentPlayer !=
+                                  player) {
+                                return DataCell(Text(
+                                  showNaturalNumber(
+                                      Provider.of<DiceNotifier>(context)
+                                          .engine
+                                          .board[player][index]),
+                                  style: regularTextStyle,
+                                ));
+                              } else {
+                                if (Provider.of<DiceNotifier>(context)
                                         .engine
-                                        .board[player][index]),
-                                style: regularTextStyle,
-                              ));
-                            } else {
-                              return DataCell(
-                                Text(
+                                        .board[player][index] >=
+                                    0) {
+                                  return DataCell(Text(
                                     showNaturalNumber(
                                         Provider.of<DiceNotifier>(context)
                                             .engine
-                                            .predict[index]),
-                                    style: regularHintTextStyle),
-                                onDoubleTap: () {
-                                  if (Provider.of<DiceNotifier>(context,
-                                              listen: false)
-                                          .engine
-                                          .predict[index] >=
-                                      0) {
-                                    Provider.of<DiceNotifier>(context,
-                                            listen: false)
-                                        .result(index);
-                                  }
-                                },
-                              );
+                                            .board[player][index]),
+                                    style: regularTextStyle,
+                                  ));
+                                } else {
+                                  return DataCell(
+                                    Text(
+                                        showNaturalNumber(
+                                            Provider.of<DiceNotifier>(context)
+                                                .engine
+                                                .predict[index]),
+                                        style: regularHintTextStyle),
+                                    onDoubleTap: () {
+                                      if (Provider.of<DiceNotifier>(context,
+                                                  listen: false)
+                                              .engine
+                                              .predict[index] >=
+                                          0) {
+                                        Provider.of<DiceNotifier>(context,
+                                                listen: false)
+                                            .result(index);
+                                      }
+                                    },
+                                  );
+                                }
+                              }
+                            }))) +
+                [
+                  DataRow(
+                      cells: [
+                            DataCell(
+                              Text(styles[12]),
+                              onTap: () {
+                                snack(context, descs[12]);
+                              },
+                            )
+                          ] +
+                          List.generate(players, (player) {
+                            if (Provider.of<DiceNotifier>(context)
+                                .engine
+                                .bonus[player]) {
+                              return const DataCell(
+                                  Text('+35', style: regularTextStyle));
+                            } else {
+                              return const DataCell(
+                                  Text('+0', style: regularTextStyle));
                             }
-                          }
-                        }))) +
-            [
-              DataRow(
-                  cells: [
-                        DataCell(
-                          Text(styles[12]),
-                          onTap: () {
-                            snack(context, descs[12]);
-                          },
-                        )
-                      ] +
-                      List.generate(players, (player) {
-                        if (Provider.of<DiceNotifier>(context)
-                            .engine
-                            .bonus[player]) {
-                          return const DataCell(
-                              Text('+35', style: regularTextStyle));
-                        } else {
-                          return const DataCell(
-                              Text('+0', style: regularTextStyle));
-                        }
-                      })),
-              DataRow(
-                  cells: [
-                        DataCell(
-                          Text(styles[13]),
-                          onTap: () {
-                            snack(context, descs[13]);
-                          },
-                        )
-                      ] +
-                      List.generate(
-                          players,
-                          (player) => DataCell(Text(
-                              Provider.of<DiceNotifier>(context)
-                                  .engine
-                                  .totals[player]
-                                  .toString(),
-                              style: regularTextStyle)))),
-            ]);
+                          })),
+                  DataRow(
+                      cells: [
+                            DataCell(
+                              Text(styles[13]),
+                              onTap: () {
+                                snack(context, descs[13]);
+                              },
+                            )
+                          ] +
+                          List.generate(
+                              players,
+                              (player) => DataCell(Text(
+                                  Provider.of<DiceNotifier>(context)
+                                      .engine
+                                      .totals[player]
+                                      .toString(),
+                                  style: regularTextStyle)))),
+                ]));
   }
 
   VoidCallback onPressed() => () {

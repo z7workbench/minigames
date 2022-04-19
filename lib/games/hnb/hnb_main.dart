@@ -183,35 +183,41 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
       builder: (context, Box leaderboard, _) {
         if (leaderboard.keys.isEmpty) {
           return Container(
-            child: Text(S.of(context).empty_leaderboard, style: regularTextStyle,),
+            child: Text(
+              S.of(context).empty_leaderboard,
+              style: regularTextStyle,
+            ),
             alignment: Alignment.center,
           );
         }
 
         var items = leaderboard.values.toList();
         items.sort((a, b) => a.count.compareTo(b.count));
-        return DataTable(
-          columns: [
-            DataColumn(label: Text(S.of(context).hnb_when_finished)),
-            DataColumn(label: Text(S.of(context).hnb_used_time)),
-            DataColumn(label: Text(S.of(context).hnb_hit), numeric: true)
-          ],
-          rows: [
-            for (var item in items)
-              DataRow(
-                cells: [
-                  DataCell(Text(DateTime.fromMillisecondsSinceEpoch(item.now)
-                      .toString())),
-                  DataCell(
-                      Text(Duration(milliseconds: item.usedTime).toString())),
-                  // DataCell(Text(item.usedTime.toString())),
-                  DataCell(Text(item.count.toString())),
-                ],
-              )
-          ],
-          sortColumnIndex: 2,
-          sortAscending: false,
-        );
+        return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              columns: [
+                DataColumn(label: Text(S.of(context).hnb_when_finished)),
+                DataColumn(label: Text(S.of(context).hnb_used_time)),
+                DataColumn(label: Text(S.of(context).hnb_hit), numeric: true)
+              ],
+              rows: [
+                for (var item in items)
+                  DataRow(
+                    cells: [
+                      DataCell(Text(
+                          DateTime.fromMillisecondsSinceEpoch(item.now)
+                              .toString())),
+                      DataCell(Text(
+                          Duration(milliseconds: item.usedTime).toString())),
+                      // DataCell(Text(item.usedTime.toString())),
+                      DataCell(Text(item.count.toString())),
+                    ],
+                  )
+              ],
+              sortColumnIndex: 2,
+              sortAscending: false,
+            ));
       },
     );
   }
