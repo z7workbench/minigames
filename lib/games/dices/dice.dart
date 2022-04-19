@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 typedef DiceCount = int;
 typedef MoveAccordingIndex = void Function(GesturedDiceWidget);
 
-class DiceWidget extends StatefulWidget {
+class DiceWidget extends StatelessWidget {
   DiceWidget(
       {Key? key,
       this.size = 50.0,
@@ -20,26 +20,21 @@ class DiceWidget extends StatefulWidget {
   DiceCount count;
 
   @override
-  State<StatefulWidget> createState() => _DiceWidgetState();
-}
-
-class _DiceWidgetState extends State<DiceWidget> {
-  @override
   Widget build(BuildContext context) => Padding(
-        padding: widget.padding,
+        padding: padding,
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondary,
             border: Border.all(
-                width: widget.borderSize,
+                width: borderSize,
                 color: Theme.of(context).colorScheme.secondary),
-            borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
           ),
           child: CustomPaint(
-            size: Size(widget.size, widget.size),
+            size: Size(size, size),
             painter: _DicePainter(
                 diceColor: Theme.of(context).colorScheme.background,
-                count: widget.count),
+                count: count),
           ),
         ),
       );

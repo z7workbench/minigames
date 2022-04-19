@@ -124,7 +124,7 @@ class _DiceGameState extends State<DiceGamePage> {
                   } else {
                     return DataColumn(
                         label: Text(
-                      "P$index",
+                      "P${index + 1}",
                       style: regularBoldStyleUnderline,
                     ));
                   }
