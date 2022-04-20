@@ -639,6 +639,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Current player:`
+  String get current_player {
+    return Intl.message(
+      'Current player:',
+      name: 'current_player',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

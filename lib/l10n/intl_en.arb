@@ -58,5 +58,6 @@
   "up_coming": "Up Coming Next...",
   "up_coming_desc": "More mini games will be released in this app, click here to see the version update logs and future version roadmap!",
   "roadmap": "Roadmap",
-  "theme": "Themes"
+  "theme": "Themes",
+  "current_player": "Current player:"
 }

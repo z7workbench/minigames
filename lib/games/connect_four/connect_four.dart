@@ -20,29 +20,53 @@ class _ConnectFourState extends State<ConnectFourPage> {
       ChangeNotifierProvider<ConnectFourNotifier>(
         create: (_) => ConnectFourNotifier(),
         builder: (context, _) => Scaffold(
-            appBar: AppBar(title: Text(S.of(context).connect_four_title)),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: containerPadding,
-                child: Column(children: [
-                  DropdownWidget(children: [
-                    Text(
-                      S.of(context).connect_four_desc,
-                      style: docTextStyle,
-                    ),
-                  ], title: S.of(context).description),
-                  margin,
-                  mainContent(context),
-                  margin,
-                  steps(context)
-                ]),
-              ),
+          appBar: AppBar(title: Text(S.of(context).connect_four_title)),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: containerPadding,
+              child: Column(children: [
+                DropdownWidget(children: [
+                  Text(
+                    S.of(context).connect_four_desc,
+                    style: docTextStyle,
+                  ),
+                ], title: S.of(context).description),
+                margin,
+                mode(context),
+                margin,
+                mainContent(context),
+                margin,
+                steps(context)
+              ]),
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {},
-              child: Icon(Icons.refresh),
-            )),
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+              onPressed: () {
+                Provider.of<ConnectFourNotifier>(context, listen: false).softReset();
+              },
+              // onPressed: () {},
+              label: Text(S.of(context).start_new_game)),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+        ),
       );
+
+  Widget mode(BuildContext context) {
+    var player = Provider.of<ConnectFourNotifier>(context).isFirstPlayer
+        ? const ConnectFourToken(type: ConnectFourTokenType.first)
+        : const ConnectFourToken(type: ConnectFourTokenType.last);
+
+    return Center(
+        child: Column(
+      children: [
+        Row(
+          children: [Text(S.of(context).current_player), player],
+        )
+      ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+    ));
+  }
 
   Widget mainContent(BuildContext context) => DataTable(
         columns: List.generate(
@@ -146,5 +170,6 @@ class ConnectFourNotifier with ChangeNotifier {
     isFirstPlayer = true;
     count = 0;
     finished = false;
+    notifyListeners();
   }
 }

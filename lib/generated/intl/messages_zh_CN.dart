@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "clean_leaderboard": MessageLookupByLibrary.simpleMessage("清除排行榜"),
         "connect_four_desc": MessageLookupByLibrary.simpleMessage("四子棋"),
         "connect_four_title": MessageLookupByLibrary.simpleMessage("四子棋"),
+        "current_player": MessageLookupByLibrary.simpleMessage("当前玩家："),
         "description": MessageLookupByLibrary.simpleMessage("游戏简介"),
         "dice_4_of_kind": MessageLookupByLibrary.simpleMessage("四骰同花"),
         "dice_4_of_kind_desc":
