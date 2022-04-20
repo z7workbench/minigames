@@ -43,6 +43,8 @@
   "dice_times": " roll(s) remained",
   "pop_title": "Poker Pop",
   "pop_desc": "12312122312",
+  "connect_four_title": "Connect Four",
+  "connect_four_desc": "Connect Four",
   "dismiss": "Dismiss",
   "check": "Check",
   "minesweeper_title": "Minesweeper",

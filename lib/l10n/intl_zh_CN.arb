@@ -43,6 +43,8 @@
   "dice_times": " 次剩余投掷次数",
   "pop_title": "扑克消消乐",
   "pop_desc": "12312122312",
+  "connect_four_title": "四子棋",
+  "connect_four_desc": "四子棋",
   "check": "检查",
   "dismiss": "溜了",
   "minesweeper_title": "扫雷",

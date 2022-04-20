@@ -26,6 +26,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "clean_leaderboard":
             MessageLookupByLibrary.simpleMessage("Clean Leaderboard"),
+        "connect_four_desc":
+            MessageLookupByLibrary.simpleMessage("Connect Four"),
+        "connect_four_title":
+            MessageLookupByLibrary.simpleMessage("Connect Four"),
         "description": MessageLookupByLibrary.simpleMessage("Game info"),
         "dice_4_of_kind": MessageLookupByLibrary.simpleMessage("4 of Kind"),
         "dice_4_of_kind_desc": MessageLookupByLibrary.simpleMessage(

@@ -480,6 +480,26 @@ class S {
     );
   }
 
+  /// `Connect Four`
+  String get connect_four_title {
+    return Intl.message(
+      'Connect Four',
+      name: 'connect_four_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connect Four`
+  String get connect_four_desc {
+    return Intl.message(
+      'Connect Four',
+      name: 'connect_four_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Dismiss`
   String get dismiss {
     return Intl.message(

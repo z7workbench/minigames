@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:minigames/app_provider.dart';
+import 'package:minigames/games/connect_four/connect_four.dart';
 import 'package:minigames/games/dices/yacht/yacht_dice_main.dart';
 import 'package:minigames/generated/l10n.dart';
 import 'package:minigames/games/hnb/hnb_main.dart';
@@ -111,6 +112,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     title: S.of(context).dice_game_title,
                     desc: S.of(context).dice_game_desc,
                     goto: const DiceGamePage()),
+                margin,
+                DescriptionCard(
+                    title: S.of(context).connect_four_title,
+                    desc: S.of(context).connect_four_desc,
+                    goto: const ConnectFourPage()),
                 margin,
                 DescriptionCard(
                     title: S.of(context).up_coming,
