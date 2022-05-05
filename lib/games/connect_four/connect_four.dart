@@ -24,25 +24,29 @@ class _ConnectFourState extends State<ConnectFourPage> {
           body: SingleChildScrollView(
             child: Padding(
               padding: containerPadding,
-              child: Column(children: [
-                DropdownWidget(children: [
-                  Text(
-                    S.of(context).connect_four_desc,
-                    style: docTextStyle,
-                  ),
-                ], title: S.of(context).description),
-                margin,
-                mode(context),
-                margin,
-                mainContent(context),
-                margin,
-                steps(context)
-              ]),
+              child: Column(
+                children: [
+                  DropdownWidget(children: [
+                    Text(
+                      S.of(context).connect_four_desc,
+                      style: docTextStyle,
+                    ),
+                  ], title: S.of(context).description),
+                  margin,
+                  mode(context),
+                  margin,
+                  mainContent(context),
+                  margin,
+                  steps(context)
+                ],
+                crossAxisAlignment: CrossAxisAlignment.center,
+              ),
             ),
           ),
           floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
-                Provider.of<ConnectFourNotifier>(context, listen: false).softReset();
+                Provider.of<ConnectFourNotifier>(context, listen: false)
+                    .softReset();
               },
               // onPressed: () {},
               label: Text(S.of(context).start_new_game)),
@@ -56,11 +60,20 @@ class _ConnectFourState extends State<ConnectFourPage> {
         ? const ConnectFourToken(type: ConnectFourTokenType.first)
         : const ConnectFourToken(type: ConnectFourTokenType.last);
 
+    var winner = ConnectFourToken(
+        type: Provider.of<ConnectFourNotifier>(context).winner);
+
     return Center(
         child: Column(
       children: [
         Row(
-          children: [Text(S.of(context).current_player), player],
+          children: [
+            Text(S.of(context).current_player),
+            player,
+            margin,
+            Text(S.of(context).winner),
+            winner
+          ],
         )
       ],
       mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +86,7 @@ class _ConnectFourState extends State<ConnectFourPage> {
             7,
             (index) => DataColumn(
                 label: Text("${index + 1}"),
-                onSort: (a, b) => {
+                onSort: (_, __) => {
                       Provider.of<ConnectFourNotifier>(context, listen: false)
                           .step(index)
                     })),
@@ -96,6 +109,7 @@ class ConnectFourNotifier with ChangeNotifier {
   late bool isFirstPlayer;
   late int count;
   late bool finished;
+  late ConnectFourTokenType winner;
 
   bool step(int where) {
     if (finished) return false;
@@ -108,6 +122,7 @@ class ConnectFourNotifier with ChangeNotifier {
         }
         isFirstPlayer = !isFirstPlayer;
         count++;
+        detectGameOver();
         notifyListeners();
         return true;
       }
@@ -115,8 +130,59 @@ class ConnectFourNotifier with ChangeNotifier {
     return false;
   }
 
-  bool detectGameOver() {
-    return false;
+  detectGameOver() {
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < 6; j++) {
+        if (board[i][j] != ConnectFourTokenType.none &&
+            board[i][j] == board[i + 1][j] &&
+            board[i][j] == board[i + 2][j] &&
+            board[i][j] == board[i + 3][j]) {
+          finished = true;
+          winner = board[i][j];
+          notifyListeners();
+          return;
+        }
+      }
+    }
+    for (var i = 0; i < 7; i++) {
+      for (var j = 0; j < 3; j++) {
+        if (board[i][j] != ConnectFourTokenType.none &&
+            board[i][j] == board[i][j + 1] &&
+            board[i][j] == board[i][j + 2] &&
+            board[i][j] == board[i][j + 3]) {
+          finished = true;
+          winner = board[i][j];
+          notifyListeners();
+          return;
+        }
+      }
+    }
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < 3; j++) {
+        if (board[i][j] != ConnectFourTokenType.none &&
+            board[i][j] == board[i + 1][j + 1] &&
+            board[i][j] == board[i + 2][j + 2] &&
+            board[i][j] == board[i + 3][j + 3]) {
+          finished = true;
+          winner = board[i][j];
+          notifyListeners();
+          return;
+        }
+      }
+    }
+    for (var i = 0; i < 4; i++) {
+      for (var j = 3; j < 6; j++) {
+        if (board[i][j] != ConnectFourTokenType.none &&
+            board[i][j] == board[i + 1][j - 1] &&
+            board[i][j] == board[i + 2][j - 2] &&
+            board[i][j] == board[i + 3][j - 3]) {
+          finished = true;
+          winner = board[i][j];
+          notifyListeners();
+          return;
+        }
+      }
+    }
   }
 
   String saveToString() {
@@ -170,6 +236,7 @@ class ConnectFourNotifier with ChangeNotifier {
     isFirstPlayer = true;
     count = 0;
     finished = false;
+    winner = ConnectFourTokenType.none;
     notifyListeners();
   }
 }

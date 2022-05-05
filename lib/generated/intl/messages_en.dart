@@ -108,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Themes"),
         "up_coming": MessageLookupByLibrary.simpleMessage("Up Coming Next..."),
         "up_coming_desc": MessageLookupByLibrary.simpleMessage(
-            "More mini games will be released in this app, click here to see the version update logs and future version roadmap!")
+            "More mini games will be released in this app, click here to see the version update logs and future version roadmap!"),
+        "winner": MessageLookupByLibrary.simpleMessage("Winner:")
       };
 }

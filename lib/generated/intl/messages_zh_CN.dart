@@ -90,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("主题"),
         "up_coming": MessageLookupByLibrary.simpleMessage("即将推出..."),
         "up_coming_desc": MessageLookupByLibrary.simpleMessage(
-            "迷你小游戏合集将会推出更多的小游戏，点击这里可以看到版本更新日志以及未来版本路线图规划！")
+            "迷你小游戏合集将会推出更多的小游戏，点击这里可以看到版本更新日志以及未来版本路线图规划！"),
+        "winner": MessageLookupByLibrary.simpleMessage("赢家：")
       };
 }

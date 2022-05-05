@@ -59,5 +59,6 @@
   "up_coming_desc": "迷你小游戏合集将会推出更多的小游戏，点击这里可以看到版本更新日志以及未来版本路线图规划！",
   "roadmap": "版本更新规划",
   "theme": "主题",
-  "current_player": "当前玩家："
+  "current_player": "当前玩家：",
+  "winner": "赢家："
 }
