@@ -26,8 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "clean_leaderboard":
             MessageLookupByLibrary.simpleMessage("Clean Leaderboard"),
-        "connect_four_desc":
-            MessageLookupByLibrary.simpleMessage("Connect Four"),
+        "connect_four_desc": MessageLookupByLibrary.simpleMessage(
+            "the first player starting Connect Four by dropping one of their discs into the center column of an empty game board. The two players then alternate turns dropping one of their discs at a time into an unfilled column, until one of them, with the discs, achieves a diagonal four in a row, and wins the game. If the board fills up before either player achieves four in a row, then the game is a draw."),
         "connect_four_title":
             MessageLookupByLibrary.simpleMessage("Connect Four"),
         "current_player":

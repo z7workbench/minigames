@@ -25,7 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "app": MessageLookupByLibrary.simpleMessage("迷你游戏合集"),
         "check": MessageLookupByLibrary.simpleMessage("检查"),
         "clean_leaderboard": MessageLookupByLibrary.simpleMessage("清除排行榜"),
-        "connect_four_desc": MessageLookupByLibrary.simpleMessage("四子棋"),
+        "connect_four_desc": MessageLookupByLibrary.simpleMessage(
+            "第一个玩家通过将其中一个圆盘放入空游戏板的中心列来启动连接四。然后两个玩家交替轮流将他们的一个圆盘一次放入一个未填充的列中，直到其中一个玩家拿着圆盘，连续获得对角线四个，并赢得比赛。如果棋盘在任一玩家连续四次之前填满，则游戏为平局。"),
         "connect_four_title": MessageLookupByLibrary.simpleMessage("四子棋"),
         "current_player": MessageLookupByLibrary.simpleMessage("当前玩家："),
         "description": MessageLookupByLibrary.simpleMessage("游戏简介"),
