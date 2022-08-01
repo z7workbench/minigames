@@ -118,7 +118,7 @@ class _DiceGameState extends State<DiceGamePage> {
                       index) {
                     return DataColumn(
                         label: Text(
-                      "P$index",
+                      "P${index + 1}",
                       style: regularTextStyle,
                     ));
                   } else {
