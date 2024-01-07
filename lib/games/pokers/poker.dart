@@ -73,14 +73,13 @@ class SimplePokerRule {
 
 class PokerCard extends StatefulWidget {
   PokerCard(
-      {Key? key,
+      {super.key,
       this.size = 16.0,
       this.borderSize = 1.0,
       this.orientation = Orientation.landscape,
       this.radius = 1.5,
       this.opened = false,
-      required this.poker})
-      : super(key: key);
+      required this.poker});
 
   double size;
   double borderSize;

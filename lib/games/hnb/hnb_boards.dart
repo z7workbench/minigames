@@ -5,14 +5,13 @@ import 'package:minigames/generated/l10n.dart';
 
 class CheckBoard extends StatefulWidget {
   const CheckBoard(
-      {Key? key,
+      {super.key,
       this.count = 4,
       this.borderWidth = 2.0,
       this.borderRadius = 25.0,
       required this.times,
       required this.borderColor,
-      required this.finished})
-      : super(key: key);
+      required this.finished});
 
   final int times;
   final int count;
@@ -129,14 +128,13 @@ class _CheckBoardState extends State<CheckBoard> {
 
 class ResultBoard extends StatefulWidget {
   const ResultBoard(
-      {Key? key,
+      {super.key,
       this.borderWidth = 2.0,
       this.borderRadius = 25.0,
       required this.times,
       required this.borderColor,
       required this.result,
-      required this.match})
-      : super(key: key);
+      required this.match});
 
   final List<int> match;
   final HitAndBlowResult result;

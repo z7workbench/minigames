@@ -5,13 +5,12 @@ typedef MoveAccordingIndex = void Function(GesturedDiceWidget);
 
 class DiceWidget extends StatelessWidget {
   DiceWidget(
-      {Key? key,
+      {super.key,
       this.size = 50.0,
       this.borderSize = 3.0,
       this.radius = 1.5,
       this.padding = const EdgeInsets.all(4.0),
-      required this.count})
-      : super(key: key);
+      required this.count});
 
   double size;
   double borderSize;
@@ -132,13 +131,12 @@ class _DicePainter extends CustomPainter {
 
 class GesturedDiceWidget extends StatelessWidget {
   GesturedDiceWidget(
-      {Key? key,
+      {super.key,
       required this.count,
       required this.keepAction,
       required this.discardAction,
       this.size = 50.0,
-      this.reserve = false})
-      : super(key: key);
+      this.reserve = false});
 
   DiceCount count;
   double size;

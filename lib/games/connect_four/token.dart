@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class ConnectFourToken extends StatelessWidget {
   const ConnectFourToken({
-    Key? key,
+    super.key,
     required this.type,
-  }) : super(key: key);
+  });
 
   final ConnectFourTokenType type;
 

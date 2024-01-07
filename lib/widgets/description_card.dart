@@ -3,8 +3,7 @@ import 'package:minigames/styles.dart';
 
 class DescriptionCard extends StatelessWidget {
   const DescriptionCard(
-      {Key? key, required this.title, required this.desc, required this.goto})
-      : super(key: key);
+      {super.key, required this.title, required this.desc, required this.goto});
 
   final String title;
   final String desc;
@@ -13,6 +12,8 @@ class DescriptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               title,
@@ -24,8 +25,6 @@ class DescriptionCard extends StatelessWidget {
               style: docTextStyle,
             )
           ],
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
         ),
         onTapUp: (_) {
           Navigator.push(

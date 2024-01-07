@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:minigames/generated/l10n.dart';
 
 class Roadmap extends StatefulWidget {
-  const Roadmap({Key? key}) : super(key: key);
+  const Roadmap({super.key});
 
   @override
   State<StatefulWidget> createState() => _RoadmapState();

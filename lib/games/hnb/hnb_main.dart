@@ -9,7 +9,7 @@ import 'package:minigames/games/hnb/hnb_engine.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HitAndBlowHome extends StatefulWidget {
-  const HitAndBlowHome({Key? key}) : super(key: key);
+  const HitAndBlowHome({super.key});
 
   @override
   State<HitAndBlowHome> createState() => _HitAndBlowState();
@@ -43,27 +43,27 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                DropdownWidget(children: [
+                DropdownWidget(title: S.of(context).description, children: [
                   Text(
                     S.of(context).hnb_desc,
                     style: docTextStyle,
                   ),
-                ], title: S.of(context).description),
+                ]),
                 margin,
                 DropdownWidget(
+                  title: S.of(context).leaderboard,
                   children: [
                     Padding(
+                      padding: containerXSPadding,
                       child: MaterialButton(
                         onPressed: () {
                           hive.hnbLeaderboardBox.clear();
                         },
                         child: Text(S.of(context).clean_leaderboard),
                       ),
-                      padding: containerXSPadding,
                     ),
                     content
                   ],
-                  title: S.of(context).leaderboard,
                 ),
                 margin,
                 AnimatedOpacity(
@@ -74,6 +74,7 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                       child: Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 S.of(context).hnb_answer,
@@ -86,7 +87,6 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
                                 style: regularTextStyle,
                               ),
                             ],
-                            mainAxisAlignment: MainAxisAlignment.center,
                           ),
                           margin,
                           Wrap(
@@ -173,8 +173,8 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
   Widget get content {
     if (hive.hnbLeaderboardBox.isEmpty) {
       return Container(
-        child: Text(S.of(context).empty_leaderboard, style: regularTextStyle),
         alignment: Alignment.center,
+        child: Text(S.of(context).empty_leaderboard, style: regularTextStyle),
       );
     }
 
@@ -183,11 +183,11 @@ class _HitAndBlowState extends State<HitAndBlowHome> {
       builder: (context, Box leaderboard, _) {
         if (leaderboard.keys.isEmpty) {
           return Container(
+            alignment: Alignment.center,
             child: Text(
               S.of(context).empty_leaderboard,
               style: regularTextStyle,
             ),
-            alignment: Alignment.center,
           );
         }
 

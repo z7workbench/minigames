@@ -3,7 +3,7 @@ import 'package:minigames/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
 class PokerPopPage extends StatefulWidget {
-  const PokerPopPage({Key? key}) : super(key: key);
+  const PokerPopPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _PokerPopState();

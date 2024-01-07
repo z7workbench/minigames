@@ -8,7 +8,7 @@ import 'package:minigames/widgets/dropdown.dart';
 import 'package:provider/provider.dart';
 
 class DiceGamePage extends StatefulWidget {
-  const DiceGamePage({Key? key}) : super(key: key);
+  const DiceGamePage({super.key});
 
   @override
   State<StatefulWidget> createState() => _DiceGameState();
@@ -29,12 +29,12 @@ class _DiceGameState extends State<DiceGamePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  DropdownWidget(children: [
+                  DropdownWidget(title: S.of(context).description, children: [
                     Text(
                       S.of(context).dice_game_desc,
                       style: docTextStyle,
                     ),
-                  ], title: S.of(context).description),
+                  ]),
                   margin,
                   AnimatedOpacity(
                       opacity: notShowGame ? 0.0 : 1.0,

@@ -31,7 +31,7 @@ Future<String> getTheme() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key, required this.theme}) : super(key: key);
+  MyApp({super.key, required this.theme});
   late ThemeData lightTheme;
   late ThemeData darkTheme;
   String theme = '';
@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -86,13 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(S.of(context).app),
           actions: [
             Container(
+              margin: containerPadding,
               child: GestureDetector(
                 child: const Icon(Icons.format_paint),
                 onTap: () {
                   showThemeDialog();
                 },
               ),
-              margin: containerPadding,
             )
           ],
         ),
@@ -138,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return AlertDialog(
           title: Text(S.of(context).theme),
           content: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.height * 0.6,
               child: ListView.builder(

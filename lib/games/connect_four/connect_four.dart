@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 
 class ConnectFourPage extends StatefulWidget {
   const ConnectFourPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _ConnectFourState createState() => _ConnectFourState();
@@ -25,13 +25,14 @@ class _ConnectFourState extends State<ConnectFourPage> {
             child: Padding(
               padding: containerPadding,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  DropdownWidget(children: [
+                  DropdownWidget(title: S.of(context).description, children: [
                     Text(
                       S.of(context).connect_four_desc,
                       style: docTextStyle,
                     ),
-                  ], title: S.of(context).description),
+                  ]),
                   margin,
                   mode(context),
                   margin,
@@ -39,7 +40,6 @@ class _ConnectFourState extends State<ConnectFourPage> {
                   margin,
                   steps(context)
                 ],
-                crossAxisAlignment: CrossAxisAlignment.center,
               ),
             ),
           ),
@@ -65,6 +65,8 @@ class _ConnectFourState extends State<ConnectFourPage> {
 
     return Center(
         child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           children: [
@@ -76,8 +78,6 @@ class _ConnectFourState extends State<ConnectFourPage> {
           ],
         )
       ],
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
     ));
   }
 

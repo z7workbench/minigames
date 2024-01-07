@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minigames/styles.dart';
 
 class DropdownWidget extends StatefulWidget {
-  const DropdownWidget({Key? key, required this.children, required this.title})
-      : super(key: key);
+  const DropdownWidget({super.key, required this.children, required this.title});
   final List<Widget> children;
   final String title;
 

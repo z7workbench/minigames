@@ -10,7 +10,7 @@ class HiveUtil {
   }
 
   factory HiveUtil() => _instance;
-  static late final HiveUtil _instance = HiveUtil._internal();
+  static final HiveUtil _instance = HiveUtil._internal();
 
   install() async {
     await Hive.initFlutter();
