@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "minigames" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "minigames" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 ZeroGo Yoosee. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 ZeroGo Yoosee. All rights reserved." "\0"
             VALUE "OriginalFilename", "minigames.exe" "\0"
             VALUE "ProductName", "minigames" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
