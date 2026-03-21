@@ -5,14 +5,14 @@ jobs:
     name: build Windows
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
         with:
-          java-version: '11.0.13'
+          java-version: '17'
           java-package: jdk
           architecture: x64
-          distribution: microsoft
-      - uses: subosito/flutter-action@v1
+          distribution: 'jetbrains'
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
       - run: flutter config --enable-windows-desktop
@@ -24,7 +24,7 @@ jobs:
           path: build/windows/runner/Release
       - run: tar -acf minigames-windows-release-x64.zip -C .\build\windows\runner Release
       - name: release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: minigames-windows-release-x64.zip
