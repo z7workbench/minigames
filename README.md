@@ -50,8 +50,31 @@ It's a game of throwing dices at each other to make permutations and compete for
 # Used Libraries & Materials
 - [Flutter](https://flutter.dev)
 - [Dart](https://dart.dev)
-- [provider](https://pub.dev/packages/provider)
-- [shared_preferences](https://pub.dev/packages/shared_preferences)
-- [intl](https://pub.dev/packages/intl) & [Localizely extention](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl)
-- [Hive Flutter](https://docs.hivedb.dev/)
-- [flustars](https://pub.dev/packages/flustars) (Not used)
+- [Flame](https://flame-engine.org)
+- [Riverpod](https://riverpod.dev)
+- [Drift](https://drift.simonbinder.eu)
+- [flutter_intl](https://pub.dev/packages/flutter_intl)
+
+# Technology Stack
+
+| Layer | Technology |
+|-------|------------|
+| UI/Game Engine | Flame 1.36+ |
+| State Management | Riverpod |
+| Database | Drift (SQLite) |
+| Localization | flutter_intl |
+| Framework | Flutter 3.27+ |
+| Language | Dart 3.6+ |
+
+# Platform Support
+
+| Platform | Status |
+|----------|--------|
+| Android | ✅ Supported |
+| iOS | ✅ Supported |
+| Web | ✅ Supported |
+| Windows | ✅ Supported |
+| Linux | ✅ Supported |
+| macOS | ✅ Supported |
+
+All games run offline with no network dependencies.

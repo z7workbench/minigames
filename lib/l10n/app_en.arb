@@ -1,0 +1,569 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Mini Games",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "appName": "Mini Games",
+  "@appName": {
+    "description": "Application name"
+  },
+
+  "home": "Home",
+  "@home": {
+    "description": "Home navigation label"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings navigation label"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Back button label"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Play button label"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Pause button label"
+  },
+  "restart": "Restart",
+  "@restart": {
+    "description": "Restart button label"
+  },
+  "quit": "Quit",
+  "@quit": {
+    "description": "Quit button label"
+  },
+  "newGame": "New Game",
+  "@newGame": {
+    "description": "New game button label"
+  },
+
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button label"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button label"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes button label"
+  },
+  "no": "No",
+  "@no": {
+    "description": "No button label"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button label"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error message title"
+  },
+  "success": "Success",
+  "@success": {
+    "description": "Success message title"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "time": "Time",
+  "@time": {
+    "description": "Time label"
+  },
+  "attempts": "Attempts",
+  "@attempts": {
+    "description": "Attempts label"
+  },
+  "score": "Score",
+  "@score": {
+    "description": "Score label"
+  },
+  "highScore": "High Score",
+  "@highScore": {
+    "description": "High score label"
+  },
+  "gameOver": "Game Over",
+  "@gameOver": {
+    "description": "Game over message"
+  },
+  "youWin": "You Win!",
+  "@youWin": {
+    "description": "Victory message"
+  },
+  "youLose": "You Lose",
+  "@youLose": {
+    "description": "Defeat message"
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "Duration label"
+  },
+  "seconds": "seconds",
+  "@seconds": {
+    "description": "Seconds unit label"
+  },
+
+  "game_hit_and_blow": "Hit & Blow",
+  "@game_hit_and_blow": {
+    "description": "Hit & Blow game title"
+  },
+  "hnb_gameDescription": "Guess the hidden numbers and their positions!",
+  "@hnb_gameDescription": {
+    "description": "Hit & Blow game description"
+  },
+  "hnb_instructions": "Select numbers and place them in positions, then press Check to see if they're correct. A Hit means correct number in correct position. A Blow means correct number in wrong position.",
+  "@hnb_instructions": {
+    "description": "Hit & Blow game instructions"
+  },
+  "hnb_enterGuess": "Enter your guess",
+  "@hnb_enterGuess": {
+    "description": "Hit & Blow enter guess placeholder"
+  },
+  "hnb_check": "Check",
+  "@hnb_check": {
+    "description": "Hit & Blow check button"
+  },
+  "hnb_attempt": "Attempt {n}",
+  "@hnb_attempt": {
+    "description": "Hit & Blow attempt number with placeholder",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "hnb_hit": "Hit",
+  "@hnb_hit": {
+    "description": "Hit & Blow Hit - correct position and number"
+  },
+  "hnb_blow": "Blow",
+  "@hnb_blow": {
+    "description": "Hit & Blow Blow - correct number wrong position"
+  },
+  "hnb_attemptsRemaining": "Attempts Remaining",
+  "@hnb_attemptsRemaining": {
+    "description": "Hit & Blow attempts remaining label"
+  },
+  "hnb_attemptsUsed": "Attempts Used",
+  "@hnb_attemptsUsed": {
+    "description": "Hit & Blow attempts used label"
+  },
+  "hnb_outOfAttempts": "Out of attempts!",
+  "@hnb_outOfAttempts": {
+    "description": "Hit & Blow out of attempts message"
+  },
+  "hnb_selectDifficulty": "Select Difficulty",
+  "@hnb_selectDifficulty": {
+    "description": "Hit & Blow select difficulty label"
+  },
+  "hnb_easyMode": "Easy Mode",
+  "@hnb_easyMode": {
+    "description": "Hit & Blow easy mode label"
+  },
+  "hnb_hardMode": "Hard Mode",
+  "@hnb_hardMode": {
+    "description": "Hit & Blow hard mode label"
+  },
+  "hnb_simpleDescription": "4 positions, digits 1-6",
+  "@hnb_simpleDescription": {
+    "description": "Hit & Blow simple mode description"
+  },
+  "hnb_hardDescription": "6 positions, digits 1-8",
+  "@hnb_hardDescription": {
+    "description": "Hit & Blow hard mode description"
+  },
+  "hnb_gameWon": "Congratulations! You guessed the number!",
+  "@hnb_gameWon": {
+    "description": "Hit & Blow game won message"
+  },
+  "hnb_gameLost": "Game Over! The correct number was: ",
+  "@hnb_gameLost": {
+    "description": "Hit & Blow game lost message"
+  },
+  "hnb_newRecord": "New Record!",
+  "@hnb_newRecord": {
+    "description": "Hit & Blow new record message"
+  },
+  "hnb_guessHistory": "Guess History",
+  "@hnb_guessHistory": {
+    "description": "Hit & Blow guess history label"
+  },
+  "hnb_targetNumber": "Target Number",
+  "@hnb_targetNumber": {
+    "description": "Hit & Blow target number label"
+  },
+  "hnb_clear": "Clear",
+  "@hnb_clear": {
+    "description": "Hit & Blow clear button text"
+  },
+  "hnb_attemptsFormat": "Attempts: {current} / {max}",
+  "@hnb_attemptsFormat": {
+    "description": "Hit & Blow attempts display format",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+
+  "game_yacht_dice": "Yacht Dice",
+  "@game_yacht_dice": {
+    "description": "Yacht Dice game title"
+  },
+  "yd_gameDescription": "Roll dice to make combinations and score points!",
+  "@yd_gameDescription": {
+    "description": "Yacht Dice game description"
+  },
+  "yd_instructions": "Roll the dice and select scoring categories. You can re-roll up to 2 times by keeping good dice. The player with the highest score wins!",
+  "@yd_instructions": {
+    "description": "Yacht Dice game instructions"
+  },
+  "yd_rollDice": "Roll Dice",
+  "@yd_rollDice": {
+    "description": "Yacht Dice roll dice button"
+  },
+  "yd_roll": "Roll {n}",
+  "@yd_roll": {
+    "description": "Yacht Dice roll number with placeholder",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "yd_keepDice": "Keep",
+  "@yd_keepDice": {
+    "description": "Yacht Dice keep dice button"
+  },
+  "yd_releaseDice": "Release",
+  "@yd_releaseDice": {
+    "description": "Yacht Dice release dice button"
+  },
+  "yd_rollsRemaining": "Rolls Remaining",
+  "@yd_rollsRemaining": {
+    "description": "Yacht Dice rolls remaining label"
+  },
+  "yd_rollsUsed": "Rolls Used",
+  "@yd_rollsUsed": {
+    "description": "Yacht Dice rolls used label"
+  },
+  "yd_selectCategory": "Select Category",
+  "@yd_selectCategory": {
+    "description": "Yacht Dice select category label"
+  },
+   "yd_confirmScore": "Confirm Score",
+   "@yd_confirmScore": {
+     "description": "Yacht Dice confirm score button"
+   },
+   "yd_confirmScoreMessage": "Select {category} for {score} points?",
+   "@yd_confirmScoreMessage": {
+     "description": "Yacht Dice confirm score dialog message with placeholders",
+"placeholders": {
+        "category": {
+          "type": "String"
+        },
+        "score": {
+          "type": "int"
+        }
+      }
+   },
+  "yd_categoryAlreadyUsed": "Category already used",
+  "@yd_categoryAlreadyUsed": {
+    "description": "Yacht Dice category already used message"
+  },
+  "yd_playerTurn": "Player's Turn",
+  "@yd_playerTurn": {
+    "description": "Yacht Dice player's turn label"
+  },
+  "yd_player": "Player {n}",
+  "@yd_player": {
+    "description": "Yacht Dice player number with placeholder",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "yd_ai": "Computer",
+  "@yd_ai": {
+    "description": "Yacht Dice AI player label"
+  },
+  "yd_selectPlayers": "Select Players",
+  "@yd_selectPlayers": {
+    "description": "Yacht Dice select players label"
+  },
+  "yd_onePlayer": "1 Player",
+  "@yd_onePlayer": {
+    "description": "Yacht Dice one player mode"
+  },
+  "yd_twoPlayers": "2 Players",
+  "@yd_twoPlayers": {
+    "description": "Yacht Dice two players mode"
+  },
+  "yd_vsAI": "VS Computer",
+  "@yd_vsAI": {
+    "description": "Yacht Dice versus AI mode"
+  },
+  "yd_aiDifficulty": "AI Difficulty",
+  "@yd_aiDifficulty": {
+    "description": "Yacht Dice AI difficulty label"
+  },
+  "yd_easyAI": "Easy",
+  "@yd_easyAI": {
+    "description": "Yacht Dice easy AI difficulty"
+  },
+  "yd_mediumAI": "Medium",
+  "@yd_mediumAI": {
+    "description": "Yacht Dice medium AI difficulty"
+  },
+  "yd_hardAI": "Hard",
+  "@yd_hardAI": {
+    "description": "Yacht Dice hard AI difficulty"
+  },
+  "yd_bonus": "Bonus",
+  "@yd_bonus": {
+    "description": "Yacht Dice bonus label"
+  },
+  "yd_bonusThreshold": "Bonus at 63 points",
+  "@yd_bonusThreshold": {
+    "description": "Yacht Dice bonus threshold description"
+  },
+  "yd_ones": "Ones",
+  "@yd_ones": {
+    "description": "Yacht Dice scoring category - Ones"
+  },
+  "yd_twos": "Twos",
+  "@yd_twos": {
+    "description": "Yacht Dice scoring category - Twos"
+  },
+  "yd_threes": "Threes",
+  "@yd_threes": {
+    "description": "Yacht Dice scoring category - Threes"
+  },
+  "yd_fours": "Fours",
+  "@yd_fours": {
+    "description": "Yacht Dice scoring category - Fours"
+  },
+  "yd_fives": "Fives",
+  "@yd_fives": {
+    "description": "Yacht Dice scoring category - Fives"
+  },
+  "yd_sixes": "Sixes",
+  "@yd_sixes": {
+    "description": "Yacht Dice scoring category - Sixes"
+  },
+  "yd_allSelect": "Chance",
+  "@yd_allSelect": {
+    "description": "Yacht Dice scoring category - Chance (sum of all dice)"
+  },
+  "yd_fullHouse": "Full House",
+  "@yd_fullHouse": {
+    "description": "Yacht Dice scoring category - Full House"
+  },
+  "yd_fourOfAKind": "Four of a Kind",
+  "@yd_fourOfAKind": {
+    "description": "Yacht Dice scoring category - Four of a Kind"
+  },
+  "yd_smallStraight": "Small Straight",
+  "@yd_smallStraight": {
+    "description": "Yacht Dice scoring category - Small Straight (1-2-3-4 or 2-3-4-5 or 3-4-5-6)"
+  },
+  "yd_largeStraight": "Large Straight",
+  "@yd_largeStraight": {
+    "description": "Yacht Dice scoring category - Large Straight (1-2-3-4-5 or 2-3-4-5-6)"
+  },
+  "yd_yacht": "Yacht",
+  "@yd_yacht": {
+    "description": "Yacht Dice scoring category - Yacht (five of a kind)"
+  },
+  "yd_onesDescription": "Sum of all ones",
+  "@yd_onesDescription": {
+    "description": "Yacht Dice Ones category description"
+  },
+  "yd_twosDescription": "Sum of all twos",
+  "@yd_twosDescription": {
+    "description": "Yacht Dice Twos category description"
+  },
+  "yd_threesDescription": "Sum of all threes",
+  "@yd_threesDescription": {
+    "description": "Yacht Dice Threes category description"
+  },
+  "yd_foursDescription": "Sum of all fours",
+  "@yd_foursDescription": {
+    "description": "Yacht Dice Fours category description"
+  },
+  "yd_fivesDescription": "Sum of all fives",
+  "@yd_fivesDescription": {
+    "description": "Yacht Dice Fives category description"
+  },
+  "yd_sixesDescription": "Sum of all sixes",
+  "@yd_sixesDescription": {
+    "description": "Yacht Dice Sixes category description"
+  },
+  "yd_allSelectDescription": "Sum of all dice",
+  "@yd_allSelectDescription": {
+    "description": "Yacht Dice Chance category description"
+  },
+  "yd_fullHouseDescription": "Three of a kind and a pair - 25 points",
+  "@yd_fullHouseDescription": {
+    "description": "Yacht Dice Full House category description"
+  },
+  "yd_fourOfAKindDescription": "Four dice showing the same face - sum of all dice",
+  "@yd_fourOfAKindDescription": {
+    "description": "Yacht Dice Four of a Kind category description"
+  },
+  "yd_smallStraightDescription": "Sequence of four - 15 points",
+  "@yd_smallStraightDescription": {
+    "description": "Yacht Dice Small Straight category description"
+  },
+  "yd_largeStraightDescription": "Sequence of five - 30 points",
+  "@yd_largeStraightDescription": {
+    "description": "Yacht Dice Large Straight category description"
+  },
+  "yd_yachtDescription": "Five of a kind - 50 points",
+  "@yd_yachtDescription": {
+    "description": "Yacht Dice Yacht category description"
+  },
+  "yd_wins": "wins!",
+  "@yd_wins": {
+    "description": "Yacht Dice winner message"
+  },
+  "yd_draw": "It's a draw!",
+  "@yd_draw": {
+    "description": "Yacht Dice draw message"
+  },
+
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Settings page title"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  "chinese": "Chinese",
+  "@chinese": {
+    "description": "Chinese language option"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "lightTheme": "Light",
+  "@lightTheme": {
+    "description": "Light theme option"
+  },
+  "darkTheme": "Dark",
+  "@darkTheme": {
+    "description": "Dark theme option"
+  },
+  "systemTheme": "System Default",
+  "@systemTheme": {
+    "description": "System default theme option"
+  },
+  "sound": "Sound",
+  "@sound": {
+    "description": "Sound setting label"
+  },
+  "soundEnabled": "Sound On",
+  "@soundEnabled": {
+    "description": "Sound enabled option"
+  },
+  "soundDisabled": "Sound Off",
+  "@soundDisabled": {
+    "description": "Sound disabled option"
+  },
+  "difficulty": "Difficulty",
+  "@difficulty": {
+    "description": "Difficulty setting label"
+  },
+  "easy": "Easy",
+  "@easy": {
+    "description": "Easy difficulty option"
+  },
+  "normal": "Normal",
+  "@normal": {
+    "description": "Normal difficulty option"
+  },
+  "hard": "Hard",
+  "@hard": {
+    "description": "Hard difficulty option"
+  },
+  "fullscreen": "Fullscreen",
+  "@fullscreen": {
+    "description": "Fullscreen setting label"
+  },
+  "fullscreenEnabled": "Fullscreen On",
+  "@fullscreenEnabled": {
+    "description": "Fullscreen enabled option"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section label"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+
+  "yd_exitTitle": "Exit Game",
+  "@yd_exitTitle": {
+    "description": "Yacht Dice exit confirmation dialog title"
+  },
+  "yd_exitMessage": "Do you want to save your progress before exiting?",
+  "@yd_exitMessage": {
+    "description": "Yacht Dice exit confirmation dialog message"
+  },
+  "yd_exitWithoutSaving": "Exit Without Saving",
+  "@yd_exitWithoutSaving": {
+    "description": "Yacht Dice button to exit without saving"
+  },
+  "yd_saveAndExit": "Save & Exit",
+  "@yd_saveAndExit": {
+    "description": "Yacht Dice button to save and exit"
+  },
+  "yd_resumeTitle": "Resume Game?",
+  "@yd_resumeTitle": {
+    "description": "Yacht Dice resume game dialog title"
+  },
+  "yd_resumeMessage": "You have a saved game. Would you like to resume or start a new game?",
+  "@yd_resumeMessage": {
+    "description": "Yacht Dice resume game dialog message"
+  },
+  "yd_resumeGame": "Resume Game",
+  "@yd_resumeGame": {
+    "description": "Yacht Dice button to resume saved game"
+  },
+  "yd_startNewGame": "Start New Game",
+  "@yd_startNewGame": {
+    "description": "Yacht Dice button to start new game (delete save)"
+  },
+  "yd_tapToKeep": "Tap dice to keep/release",
+  "@yd_tapToKeep": {
+    "description": "Yacht Dice hint text for keeping dice"
+  }
+}

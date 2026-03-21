@@ -1,0 +1,569 @@
+{
+  "@@locale": "zh",
+
+  "appTitle": "小游戏合集",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "appName": "小游戏合集",
+  "@appName": {
+    "description": "Application name"
+  },
+
+  "home": "首页",
+  "@home": {
+    "description": "Home navigation label"
+  },
+  "settings": "设置",
+  "@settings": {
+    "description": "Settings navigation label"
+  },
+  "back": "返回",
+  "@back": {
+    "description": "Back button label"
+  },
+  "play": "开始",
+  "@play": {
+    "description": "Play button label"
+  },
+  "pause": "暂停",
+  "@pause": {
+    "description": "Pause button label"
+  },
+  "restart": "重新开始",
+  "@restart": {
+    "description": "Restart button label"
+  },
+  "quit": "退出",
+  "@quit": {
+    "description": "Quit button label"
+  },
+  "newGame": "新游戏",
+  "@newGame": {
+    "description": "New game button label"
+  },
+
+  "cancel": "取消",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "confirm": "确认",
+  "@confirm": {
+    "description": "Confirm button label"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "Save button label"
+  },
+  "delete": "删除",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "yes": "是",
+  "@yes": {
+    "description": "Yes button label"
+  },
+  "no": "否",
+  "@no": {
+    "description": "No button label"
+  },
+  "ok": "确定",
+  "@ok": {
+    "description": "OK button label"
+  },
+  "error": "错误",
+  "@error": {
+    "description": "Error message title"
+  },
+  "success": "成功",
+  "@success": {
+    "description": "Success message title"
+  },
+  "loading": "加载中...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "time": "时间",
+  "@time": {
+    "description": "Time label"
+  },
+  "attempts": "尝试次数",
+  "@attempts": {
+    "description": "Attempts label"
+  },
+  "score": "得分",
+  "@score": {
+    "description": "Score label"
+  },
+  "highScore": "最高分",
+  "@highScore": {
+    "description": "High score label"
+  },
+  "gameOver": "游戏结束",
+  "@gameOver": {
+    "description": "Game over message"
+  },
+  "youWin": "你赢了！",
+  "@youWin": {
+    "description": "Victory message"
+  },
+  "youLose": "你输了",
+  "@youLose": {
+    "description": "Defeat message"
+  },
+  "duration": "用时",
+  "@duration": {
+    "description": "Duration label"
+  },
+  "seconds": "秒",
+  "@seconds": {
+    "description": "Seconds unit label"
+  },
+
+  "game_hit_and_blow": "猜数字",
+  "@game_hit_and_blow": {
+    "description": "Hit & Blow game title"
+  },
+  "hnb_gameDescription": "猜出隐藏的数字和它们的位置！",
+  "@hnb_gameDescription": {
+    "description": "Hit & Blow game description"
+  },
+  "hnb_instructions": "选择数字并放入位置，然后点击检查。命中表示数字和位置都正确，擦伤表示数字正确但位置错误。",
+  "@hnb_instructions": {
+    "description": "Hit & Blow game instructions"
+  },
+  "hnb_enterGuess": "输入你的猜测",
+  "@hnb_enterGuess": {
+    "description": "Hit & Blow enter guess placeholder"
+  },
+  "hnb_check": "检查",
+  "@hnb_check": {
+    "description": "Hit & Blow check button"
+  },
+  "hnb_attempt": "第{n}次尝试",
+  "@hnb_attempt": {
+    "description": "Hit & Blow attempt number with placeholder",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "hnb_hit": "命中",
+  "@hnb_hit": {
+    "description": "Hit & Blow Hit - correct position and number"
+  },
+  "hnb_blow": "擦伤",
+  "@hnb_blow": {
+    "description": "Hit & Blow Blow - correct number wrong position"
+  },
+  "hnb_attemptsRemaining": "剩余尝试次数",
+  "@hnb_attemptsRemaining": {
+    "description": "Hit & Blow attempts remaining label"
+  },
+  "hnb_attemptsUsed": "已用尝试次数",
+  "@hnb_attemptsUsed": {
+    "description": "Hit & Blow attempts used label"
+  },
+  "hnb_outOfAttempts": "尝试次数已用尽！",
+  "@hnb_outOfAttempts": {
+    "description": "Hit & Blow out of attempts message"
+  },
+  "hnb_selectDifficulty": "选择难度",
+  "@hnb_selectDifficulty": {
+    "description": "Hit & Blow select difficulty label"
+  },
+  "hnb_easyMode": "简单模式",
+  "@hnb_easyMode": {
+    "description": "Hit & Blow easy mode label"
+  },
+  "hnb_hardMode": "困难模式",
+  "@hnb_hardMode": {
+    "description": "Hit & Blow hard mode label"
+  },
+  "hnb_simpleDescription": "4个位置，数字1-6",
+  "@hnb_simpleDescription": {
+    "description": "Hit & Blow simple mode description"
+  },
+  "hnb_hardDescription": "6个位置，数字1-8",
+  "@hnb_hardDescription": {
+    "description": "Hit & Blow hard mode description"
+  },
+  "hnb_gameWon": "恭喜！你猜对了！",
+  "@hnb_gameWon": {
+    "description": "Hit & Blow game won message"
+  },
+  "hnb_gameLost": "游戏结束！正确答案是：",
+  "@hnb_gameLost": {
+    "description": "Hit & Blow game lost message"
+  },
+  "hnb_newRecord": "新纪录！",
+  "@hnb_newRecord": {
+    "description": "Hit & Blow new record message"
+  },
+  "hnb_guessHistory": "猜测历史",
+  "@hnb_guessHistory": {
+    "description": "Hit & Blow guess history label"
+  },
+  "hnb_targetNumber": "目标数字",
+  "@hnb_targetNumber": {
+    "description": "Hit & Blow target number label"
+  },
+  "hnb_clear": "清除",
+  "@hnb_clear": {
+    "description": "Hit & Blow clear button text"
+  },
+  "hnb_attemptsFormat": "尝试次数：{current} / {max}",
+  "@hnb_attemptsFormat": {
+    "description": "Hit & Blow attempts display format",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+
+  "game_yacht_dice": "游艇骰子",
+  "@game_yacht_dice": {
+    "description": "Yacht Dice game title"
+  },
+  "yd_gameDescription": "掷骰子组合得分！",
+  "@yd_gameDescription": {
+    "description": "Yacht Dice game description"
+  },
+  "yd_instructions": "掷骰子并选择计分类别。你可以保留好骰子并重新掷剩余的骰子，最多重掷3次。得分最高的玩家获胜！",
+  "@yd_instructions": {
+    "description": "Yacht Dice game instructions"
+  },
+  "yd_rollDice": "掷骰子",
+  "@yd_rollDice": {
+    "description": "Yacht Dice roll dice button"
+  },
+  "yd_roll": "第{n}次掷骰",
+  "@yd_roll": {
+    "description": "Yacht Dice roll number with placeholder",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "yd_keepDice": "保留",
+  "@yd_keepDice": {
+    "description": "Yacht Dice keep dice button"
+  },
+  "yd_releaseDice": "释放",
+  "@yd_releaseDice": {
+    "description": "Yacht Dice release dice button"
+  },
+  "yd_rollsRemaining": "剩余掷骰次数",
+  "@yd_rollsRemaining": {
+    "description": "Yacht Dice rolls remaining label"
+  },
+  "yd_rollsUsed": "已用掷骰次数",
+  "@yd_rollsUsed": {
+    "description": "Yacht Dice rolls used label"
+  },
+  "yd_selectCategory": "选择类别",
+  "@yd_selectCategory": {
+    "description": "Yacht Dice select category label"
+  },
+   "yd_confirmScore": "确认得分",
+   "@yd_confirmScore": {
+     "description": "Yacht Dice confirm score button"
+   },
+   "yd_confirmScoreMessage": "选择{category}获取{score}分？",
+   "@yd_confirmScoreMessage": {
+     "description": "Yacht Dice confirm score dialog message with placeholders",
+"placeholders": {
+        "category": {
+          "type": "String"
+        },
+        "score": {
+          "type": "int"
+        }
+      }
+   },
+  "yd_categoryAlreadyUsed": "该类别已使用",
+  "@yd_categoryAlreadyUsed": {
+    "description": "Yacht Dice category already used message"
+  },
+  "yd_playerTurn": "玩家回合",
+  "@yd_playerTurn": {
+    "description": "Yacht Dice player's turn label"
+  },
+  "yd_player": "玩家{n}",
+  "@yd_player": {
+    "description": "Yacht Dice player number with placeholder",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "yd_ai": "电脑",
+  "@yd_ai": {
+    "description": "Yacht Dice AI player label"
+  },
+  "yd_selectPlayers": "选择玩家",
+  "@yd_selectPlayers": {
+    "description": "Yacht Dice select players label"
+  },
+  "yd_onePlayer": "1人游戏",
+  "@yd_onePlayer": {
+    "description": "Yacht Dice one player mode"
+  },
+  "yd_twoPlayers": "2人对战",
+  "@yd_twoPlayers": {
+    "description": "Yacht Dice two players mode"
+  },
+  "yd_vsAI": "人机对战",
+  "@yd_vsAI": {
+    "description": "Yacht Dice versus AI mode"
+  },
+  "yd_aiDifficulty": "电脑难度",
+  "@yd_aiDifficulty": {
+    "description": "Yacht Dice AI difficulty label"
+  },
+  "yd_easyAI": "简单",
+  "@yd_easyAI": {
+    "description": "Yacht Dice easy AI difficulty"
+  },
+  "yd_mediumAI": "中等",
+  "@yd_mediumAI": {
+    "description": "Yacht Dice medium AI difficulty"
+  },
+  "yd_hardAI": "困难",
+  "@yd_hardAI": {
+    "description": "Yacht Dice hard AI difficulty"
+  },
+  "yd_bonus": "奖励分",
+  "@yd_bonus": {
+    "description": "Yacht Dice bonus label"
+  },
+  "yd_bonusThreshold": "63分获得奖励",
+  "@yd_bonusThreshold": {
+    "description": "Yacht Dice bonus threshold description"
+  },
+  "yd_ones": "一点",
+  "@yd_ones": {
+    "description": "Yacht Dice scoring category - Ones"
+  },
+  "yd_twos": "二点",
+  "@yd_twos": {
+    "description": "Yacht Dice scoring category - Twos"
+  },
+  "yd_threes": "三点",
+  "@yd_threes": {
+    "description": "Yacht Dice scoring category - Threes"
+  },
+  "yd_fours": "四点",
+  "@yd_fours": {
+    "description": "Yacht Dice scoring category - Fours"
+  },
+  "yd_fives": "五点",
+  "@yd_fives": {
+    "description": "Yacht Dice scoring category - Fives"
+  },
+  "yd_sixes": "六点",
+  "@yd_sixes": {
+    "description": "Yacht Dice scoring category - Sixes"
+  },
+  "yd_allSelect": "全选",
+  "@yd_allSelect": {
+    "description": "Yacht Dice scoring category - Chance (sum of all dice)"
+  },
+  "yd_fullHouse": "葫芦",
+  "@yd_fullHouse": {
+    "description": "Yacht Dice scoring category - Full House"
+  },
+  "yd_fourOfAKind": "四同",
+  "@yd_fourOfAKind": {
+    "description": "Yacht Dice scoring category - Four of a Kind"
+  },
+  "yd_smallStraight": "小顺",
+  "@yd_smallStraight": {
+    "description": "Yacht Dice scoring category - Small Straight (1-2-3-4 or 2-3-4-5 or 3-4-5-6)"
+  },
+  "yd_largeStraight": "大顺",
+  "@yd_largeStraight": {
+    "description": "Yacht Dice scoring category - Large Straight (1-2-3-4-5 or 2-3-4-5-6)"
+  },
+  "yd_yacht": "游艇",
+  "@yd_yacht": {
+    "description": "Yacht Dice scoring category - Yacht (five of a kind)"
+  },
+  "yd_onesDescription": "所有一点之和",
+  "@yd_onesDescription": {
+    "description": "Yacht Dice Ones category description"
+  },
+  "yd_twosDescription": "所有二点之和",
+  "@yd_twosDescription": {
+    "description": "Yacht Dice Twos category description"
+  },
+  "yd_threesDescription": "所有三点之和",
+  "@yd_threesDescription": {
+    "description": "Yacht Dice Threes category description"
+  },
+  "yd_foursDescription": "所有四点之和",
+  "@yd_foursDescription": {
+    "description": "Yacht Dice Fours category description"
+  },
+  "yd_fivesDescription": "所有五点之和",
+  "@yd_fivesDescription": {
+    "description": "Yacht Dice Fives category description"
+  },
+  "yd_sixesDescription": "所有六点之和",
+  "@yd_sixesDescription": {
+    "description": "Yacht Dice Sixes category description"
+  },
+  "yd_allSelectDescription": "所有骰子点数之和",
+  "@yd_allSelectDescription": {
+    "description": "Yacht Dice Chance category description"
+  },
+  "yd_fullHouseDescription": "三条加一对 - 25分",
+  "@yd_fullHouseDescription": {
+    "description": "Yacht Dice Full House category description"
+  },
+  "yd_fourOfAKindDescription": "四个骰子相同 - 所有骰子之和",
+  "@yd_fourOfAKindDescription": {
+    "description": "Yacht Dice Four of a Kind category description"
+  },
+  "yd_smallStraightDescription": "连续四个数字 - 15分",
+  "@yd_smallStraightDescription": {
+    "description": "Yacht Dice Small Straight category description"
+  },
+  "yd_largeStraightDescription": "连续五个数字 - 30分",
+  "@yd_largeStraightDescription": {
+    "description": "Yacht Dice Large Straight category description"
+  },
+  "yd_yachtDescription": "五个骰子相同 - 50分",
+  "@yd_yachtDescription": {
+    "description": "Yacht Dice Yacht category description"
+  },
+  "yd_wins": "获胜！",
+  "@yd_wins": {
+    "description": "Yacht Dice winner message"
+  },
+  "yd_draw": "平局！",
+  "@yd_draw": {
+    "description": "Yacht Dice draw message"
+  },
+
+  "settingsTitle": "设置",
+  "@settingsTitle": {
+    "description": "Settings page title"
+  },
+  "language": "语言",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "english": "英文",
+  "@english": {
+    "description": "English language option"
+  },
+  "chinese": "中文",
+  "@chinese": {
+    "description": "Chinese language option"
+  },
+  "theme": "主题",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "lightTheme": "浅色",
+  "@lightTheme": {
+    "description": "Light theme option"
+  },
+  "darkTheme": "深色",
+  "@darkTheme": {
+    "description": "Dark theme option"
+  },
+  "systemTheme": "跟随系统",
+  "@systemTheme": {
+    "description": "System default theme option"
+  },
+  "sound": "声音",
+  "@sound": {
+    "description": "Sound setting label"
+  },
+  "soundEnabled": "开启",
+  "@soundEnabled": {
+    "description": "Sound enabled option"
+  },
+  "soundDisabled": "关闭",
+  "@soundDisabled": {
+    "description": "Sound disabled option"
+  },
+  "difficulty": "难度",
+  "@difficulty": {
+    "description": "Difficulty setting label"
+  },
+  "easy": "简单",
+  "@easy": {
+    "description": "Easy difficulty option"
+  },
+  "normal": "普通",
+  "@normal": {
+    "description": "Normal difficulty option"
+  },
+  "hard": "困难",
+  "@hard": {
+    "description": "Hard difficulty option"
+  },
+  "fullscreen": "全屏",
+  "@fullscreen": {
+    "description": "Fullscreen setting label"
+  },
+  "fullscreenEnabled": "全屏开启",
+  "@fullscreenEnabled": {
+    "description": "Fullscreen enabled option"
+  },
+  "about": "关于",
+  "@about": {
+    "description": "About section label"
+  },
+  "version": "版本",
+  "@version": {
+    "description": "Version label"
+  },
+
+  "yd_exitTitle": "退出游戏",
+  "@yd_exitTitle": {
+    "description": "Yacht Dice exit confirmation dialog title"
+  },
+  "yd_exitMessage": "退出前是否保存游戏进度？",
+  "@yd_exitMessage": {
+    "description": "Yacht Dice exit confirmation dialog message"
+  },
+  "yd_exitWithoutSaving": "不保存退出",
+  "@yd_exitWithoutSaving": {
+    "description": "Yacht Dice button to exit without saving"
+  },
+  "yd_saveAndExit": "保存并退出",
+  "@yd_saveAndExit": {
+    "description": "Yacht Dice button to save and exit"
+  },
+  "yd_resumeTitle": "继续游戏？",
+  "@yd_resumeTitle": {
+    "description": "Yacht Dice resume game dialog title"
+  },
+  "yd_resumeMessage": "您有未完成的游戏。是否继续游戏或开始新游戏？",
+  "@yd_resumeMessage": {
+    "description": "Yacht Dice resume game dialog message"
+  },
+  "yd_resumeGame": "继续游戏",
+  "@yd_resumeGame": {
+    "description": "Yacht Dice button to resume saved game"
+  },
+  "yd_startNewGame": "开始新游戏",
+  "@yd_startNewGame": {
+    "description": "Yacht Dice button to start new game (delete save)"
+  },
+  "yd_tapToKeep": "点击骰子保留/释放",
+  "@yd_tapToKeep": {
+    "description": "Yacht Dice hint text for keeping dice"
+  }
+}

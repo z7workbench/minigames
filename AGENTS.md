@@ -1,0 +1,375 @@
+# AGENTS.md - MiniGames 项目协作指南
+
+## 项目概述
+
+**小游戏合集 (MiniGames)** 是一个基于 Flutter + Flame 的多游戏合集应用，类似于《世界游戏大全51》。
+
+### 应用信息
+- **包名**: `top.z7workbench.minigames`
+- **应用名称**: 小游戏合集 (minigames)
+- **目标平台**: iOS, Android, Windows, macOS, Linux, Web
+
+## 技术栈
+
+| 层级 | 技术 | 版本 | 用途 |
+|------|------|------|------|
+| **底层** | Drift | ^2.32.0 | 跨平台数据库 |
+| **底层** | path_provider | ^2.1.5 | 跨平台文件路径 |
+| **底层** | shared_preferences | ^2.2.3 | 轻量配置存储 |
+| **中层** | Flame | ^1.19.0 | 游戏引擎 |
+| **中层** | flame_audio | ^2.10.0 | 游戏音效 |
+| **上层** | Flutter | Latest | UI框架 |
+| **上层** | flutter_riverpod | ^2.5.1 | 状态管理 |
+| **上层** | riverpod_annotation | ^2.3.5 | 代码生成 |
+| **上层** | flutter_localizations | SDK | 多语言支持 |
+
+### Dev Dependencies
+- `build_runner` - 代码生成
+- `riverpod_generator` - Riverpod代码生成
+- `riverpod_lint` - Riverpod代码检查
+- `drift_dev` - Drift代码生成
+- `custom_lint` - 自定义lint规则
+
+## 项目架构
+
+### 三层架构
+
+```
+lib/
+├── data/                      # 底层：数据层
+│   ├── database.dart          # Drift数据库主类
+│   ├── tables/                # 表定义
+│   │   ├── game_records.dart
+│   │   ├── game_settings.dart
+│   │   └── user_progress.dart
+│   ├── daos/                  # DAO层
+│   │   ├── game_records_dao.dart
+│   │   ├── game_settings_dao.dart
+│   │   └── user_progress_dao.dart
+│   └── providers/             # 数据层Providers
+│       └── database_provider.dart
+│
+├── games/                     # 中层：游戏逻辑层
+│   ├── base/                  # 游戏基类
+│   │   ├── base_game.dart     # FlameGame基类
+│   │   ├── base_world.dart    # World基类
+│   │   ├── base_scene.dart    # Scene基类
+│   │   └── game_router.dart   # 游戏路由
+│   ├── components/            # 共享组件
+│   │   ├── wooden_button.dart
+│   │   ├── game_dialog.dart
+│   │   ├── dice_component.dart
+│   │   └── number_selector.dart
+│   ├── hit_and_blow/          # 猜数字游戏
+│   │   ├── hit_and_blow_game.dart
+│   │   ├── components/
+│   │   └── models/
+│   └── yacht_dice/            # 游艇骰子游戏
+│       ├── yacht_dice_game.dart
+│       ├── ai/                # AI系统
+│       ├── components/
+│       └── models/
+│
+├── ui/                        # 上层：UI层
+│   ├── screens/               # 页面
+│   │   ├── home_screen.dart
+│   │   ├── settings_screen.dart
+│   │   └── game_screen.dart
+│   ├── widgets/               # 共享Widget
+│   │   ├── game_card.dart
+│   │   ├── wooden_app_bar.dart
+│   │   └── theme_toggle.dart
+│   └── theme/                 # 主题系统
+│       ├── app_theme.dart
+│       ├── wooden_colors.dart
+│       └── theme_provider.dart
+│
+├── providers/                 # 全局Providers
+│   ├── app_providers.dart     # 统一导出
+│   ├── settings_provider.dart
+│   └── locale_provider.dart
+│
+├── l10n/                      # 国际化
+│   ├── app_en.arb
+│   └── app_zh.arb
+│
+├── models/                    # 共享模型
+│   ├── game_type.dart
+│   └── player.dart
+│
+├── utils/                     # 工具类
+│   ├── extensions.dart
+│   └── constants.dart
+│
+├── app.dart                   # 应用根Widget
+└── main.dart                  # 应用入口
+```
+
+## 代码规范
+
+### 命名规范
+- **文件**: snake_case (e.g., `game_records_dao.dart`)
+- **类**: PascalCase (e.g., `GameRecordsDao`)
+- **方法/变量**: camelCase (e.g., `getHighScore`)
+- **常量**: ALL_CAPS_WITH_UNDERSCORES (e.g., `MAX_ATTEMPTS`)
+- **私有成员**: _prefix (e.g., `_database`)
+
+### Riverpod代码生成
+
+使用`@riverpod`注解，类必须继承`_$ClassName`:
+
+```dart
+@riverpod
+class GameState extends _$GameState {
+  @override
+  GameStateModel build() {
+    return GameStateModel.initial();
+  }
+
+  void startGame() {
+    state = state.copyWith(status: GameStatus.playing);
+  }
+}
+```
+
+### Drift表定义
+
+```dart
+@DataClassName('GameRecord')
+class GameRecords extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get gameType => text().withLength(min: 1, max: 50)();
+  IntColumn get score => integer().withDefault(const Constant(0))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+}
+```
+
+### Flame组件
+
+```dart
+class MyComponent extends PositionComponent 
+    with RiverpodComponentMixin, HasGameReference<MyGame> {
+  
+  @override
+  void onMount() {
+    addToGameWidgetBuild(() {
+      ref.listen(gameStateProvider, (prev, next) {
+        // 响应状态变化
+      });
+    });
+    super.onMount();
+  }
+}
+```
+
+## 提交规范
+
+使用[Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<type>(<scope>): <description>
+
+Types:
+- feat: 新功能
+- fix: Bug修复
+- chore: 构建/配置更改
+- docs: 文档更新
+- test: 添加测试
+- refactor: 代码重构
+
+Scopes:
+- data: 数据库/数据层
+- game: 游戏引擎/游戏
+- ui: Flutter UI组件
+- i18n: 国际化
+- theme: 主题/样式
+- deps: 依赖项
+```
+
+示例:
+- `feat(game): add Hit & Blow game logic`
+- `fix(data): correct high score calculation`
+- `chore(deps): add Flame, Riverpod, Drift dependencies`
+
+## 构建命令
+
+```bash
+# 代码生成（必须运行）
+flutter pub run build_runner build --delete-conflicting-outputs
+
+# 持续监听生成（开发时）
+flutter pub run build_runner watch --delete-conflicting-outputs
+
+# 运行应用
+flutter run
+
+# 代码检查
+flutter analyze
+
+# 运行测试
+flutter test
+```
+
+## 多语言支持
+
+### ARB文件位置
+- `lib/l10n/app_en.arb` - 英文
+- `lib/l10n/app_zh.arb` - 简体中文
+
+### 添加新字符串
+
+```json
+// app_en.arb
+{
+  "@@locale": "en",
+  "appTitle": "Mini Games",
+  "@appTitle": {
+    "description": "应用标题"
+  }
+}
+```
+
+```json
+// app_zh.arb
+{
+  "@@locale": "zh",
+  "appTitle": "小游戏合集"
+}
+```
+
+### 在代码中使用
+
+```dart
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+Text(AppLocalizations.of(context)!.appTitle)
+```
+
+## 主题系统
+
+### 木质桌游风格
+
+使用`WoodenColors`定义木质调色板:
+
+```dart
+class WoodenColors {
+  // 浅色模式 - 暖木色调
+  static const lightWoodPrimary = Color(0xFFD2691E);
+  static const lightWoodSecondary = Color(0xFF8B4513);
+  static const lightWoodBackground = Color(0xFFF5DEB3);
+  
+  // 深色模式 - 深胡桃/乌木色
+  static const darkWoodPrimary = Color(0xFF3D2817);
+  static const darkWoodSecondary = Color(0xFF5D4037);
+  static const darkWoodBackground = Color(0xFF1A1A1A);
+}
+```
+
+### 切换主题
+
+```dart
+ref.read(themeNotifierProvider.notifier).toggleTheme();
+```
+
+## 游戏实现指南
+
+### 1. 创建新游戏
+
+1. 在`lib/games/`下创建新文件夹
+2. 继承`BaseMiniGame`创建游戏类
+3. 实现必需的方法: `onLoad`, `onGameStart`, `onGameEnd`
+4. 在`GameType`枚举中添加新游戏类型
+5. 更新`HomeScreen`中的游戏列表
+
+### 2. 游戏状态管理
+
+使用`flame_riverpod`集成:
+
+```dart
+class MyGame extends FlameGame with RiverpodGameMixin {
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    add(MyComponent());
+  }
+}
+
+class MyComponent extends Component with RiverpodComponentMixin {
+  @override
+  void onMount() {
+    addToGameWidgetBuild(() {
+      ref.listen(myProvider, (prev, next) {
+        // 响应Provider变化
+      });
+    });
+    super.onMount();
+  }
+}
+```
+
+### 3. 游戏数据持久化
+
+```dart
+// 保存记录
+final dao = ref.read(gameRecordsDaoProvider);
+await dao.insertRecord(
+  GameRecordsCompanion.insert(
+    gameType: 'hit_and_blow',
+    score: Value(score),
+    durationSeconds: duration.inSeconds,
+  ),
+);
+```
+
+## AI实现指南
+
+### 游艇骰子AI
+
+AI位于`lib/games/yacht_dice/ai/`:
+- `yacht_ai.dart` - AI基类
+- `easy_ai.dart` - 简单难度
+- `hard_ai.dart` - 困难难度（Expectimax算法）
+
+AI决策流程:
+1. 分析当前骰子状态
+2. 计算每个可能动作的期望值
+3. 选择最优动作
+4. 返回保留哪些骰子 + 选择哪个计分类别
+
+## 常见问题
+
+### Q: 如何添加新平台支持？
+**A**: 更新`pubspec.yaml`中的平台配置，确保Drift和path_provider支持目标平台。
+
+### Q: 如何调试游戏？
+**A**: 使用Flutter DevTools，Flame提供了游戏叠加层显示调试信息。
+
+### Q: 如何添加音效？
+**A**: 使用`flame_audio`包，预加载音频资源，在游戏中调用`AudioPlayer.play()`。
+
+### Q: 如何优化性能？
+**A**: 
+- 使用`select`监听Provider的特定字段
+- 避免在`update`中创建新对象
+- 使用`Query`系统高效查找组件
+- 在`onRemove`中清理资源
+
+## 参考资源
+
+- [Flame官方文档](https://docs.flame-engine.org/latest/)
+- [Drift官方文档](https://drift.simonbinder.eu/)
+- [Riverpod官方文档](https://riverpod.dev/)
+- [Flutter国际化](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization)
+
+## 贡献指南
+
+1. Fork项目
+2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m 'feat(game): add amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 创建Pull Request
+
+---
+
+**最后更新**: 2024年
+**项目状态**: 活跃开发中

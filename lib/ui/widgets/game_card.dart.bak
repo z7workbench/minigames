@@ -1,0 +1,109 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/game_type.dart';
+
+/// A card widget displaying game information
+class GameCard extends ConsumerWidget {
+  /// Creates a game card.
+  const GameCard({
+    super.key,
+    required this.gameType,
+    required this.title,
+    required this.description,
+    this.isPlaceholder = false,
+    this.comingSoonText = 'Coming Soon',
+    this.onTap,
+  });
+
+  /// The type of game this card represents
+  final GameType gameType;
+
+  /// The title to display
+  final String title;
+
+  /// The description to display
+  final String description;
+
+  /// Whether this is a placeholder game
+  final bool isPlaceholder;
+
+  /// The text to show for placeholder games
+  final String comingSoonText;
+
+  /// Callback when the card is tapped
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor = isDark
+        ? Colors.amber
+        : const Color(0xFFD2691E);
+
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: primaryColor.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                _getIconForGame(),
+                color: primaryColor,
+                size: 24,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            if (isPlaceholder) ...[
+              const SizedBox(height: 4),
+              Text(
+                comingSoonText,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey[600],
+                    ),
+              ),
+            ] else ...[
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  IconData _getIconForGame() {
+    switch (gameType) {
+      case GameType.hitAndBlow:
+        return Icons.numbers;
+      case GameType.yachtDice:
+        return Icons.sports_score;
+      default:
+        return Icons.games;
+    }
+  }
+}
