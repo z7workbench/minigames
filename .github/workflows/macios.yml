@@ -1,8 +1,8 @@
-name: macOS & iOS build
+name: macOS build
 on: [push, pull_request]
 jobs:
   web:
-    name: build macOS & iOS
+    name: build macOS
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -17,9 +17,9 @@ jobs:
           channel: 'stable'
       - run: flutter config --enable-macos-desktop
       - run: flutter pub get
-      - run: flutter build ios --release --no-codesign
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
       - run: flutter build macos
       - uses: actions/upload-artifact@v4
         with:
-          name: ios-release
-          path: build/ios/iphoneos/Runner.app
+          name: macOS-release
+          path: build/macos/Build/Release/minigames.app

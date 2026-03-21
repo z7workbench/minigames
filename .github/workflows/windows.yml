@@ -17,6 +17,7 @@ jobs:
           channel: 'stable'
       - run: flutter config --enable-windows-desktop
       - run: flutter pub get
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
       - run: flutter build windows
       - uses: actions/upload-artifact@v4
         with:

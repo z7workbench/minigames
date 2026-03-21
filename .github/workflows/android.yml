@@ -20,6 +20,7 @@ jobs:
           key: ${{ secrets.android_key_k }}
           iv: ${{ secrets.android_key_iv }}
       - run: flutter pub get
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
       - run: flutter build apk
       - uses: actions/upload-artifact@v4
         with:
