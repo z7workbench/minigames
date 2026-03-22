@@ -41,11 +41,15 @@ lib/
 │   ├── tables/                # 表定义
 │   │   ├── game_records.dart
 │   │   ├── game_settings.dart
-│   │   └── user_progress.dart
+│   │   ├── user_progress.dart
+│   │   ├── yacht_dice_saves.dart
+│   │   └── twenty48_saves.dart
 │   ├── daos/                  # DAO层
 │   │   ├── game_records_dao.dart
 │   │   ├── game_settings_dao.dart
-│   │   └── user_progress_dao.dart
+│   │   ├── user_progress_dao.dart
+│   │   ├── yacht_dice_saves_dao.dart
+│   │   └── twenty48_saves_dao.dart
 │   └── providers/             # 数据层Providers
 │       └── database_provider.dart
 │
@@ -86,6 +90,19 @@ lib/
 │       │   └── start_screen.dart      # 开始页面
 │       ├── guess_arrangement_provider.dart  # Riverpod Provider
 │       └── guess_arrangement_screen.dart    # 主游戏界面
+│
+│   └── twenty48/              # 2048游戏
+│       ├── models/            # 数据模型
+│       │   ├── twenty48_tile.dart     # 方块模型
+│       │   └── twenty48_state.dart    # 游戏状态
+│       ├── components/        # UI组件
+│       │   ├── tile_widget.dart       # 方块组件(带动画)
+│       │   └── grid_widget.dart       # 4x4网格容器
+│       ├── screens/           # 游戏页面
+│       │   ├── twenty48_start_screen.dart  # 开始页面
+│       │   └── twenty48_load_screen.dart   # 存档页面
+│       ├── twenty48_provider.dart     # Riverpod Provider
+│       └── twenty48_screen.dart       # 主游戏界面
 │
 ├── ui/                        # 上层：UI层
 │   ├── screens/               # 页面
@@ -407,5 +424,5 @@ AI决策流程:
 
 ---
 
-**最后更新**: 2025年
+**最后更新**: 2026年3月
 **项目状态**: 活跃开发中

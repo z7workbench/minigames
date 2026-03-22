@@ -467,4 +467,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ga_exit => 'Exit';
+
+  @override
+  String get game_2048 => '2048';
+
+  @override
+  String get t48_gameDescription => 'Combine tiles to reach 2048!';
+
+  @override
+  String get t48_instructions =>
+      'Swipe to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!';
+
+  @override
+  String get t48_newGame => 'New Game';
+
+  @override
+  String get t48_continue => 'Continue';
+
+  @override
+  String get t48_loadGame => 'Load Game';
+
+  @override
+  String get t48_saveGame => 'Save Game';
+
+  @override
+  String t48_saveSlot(int n) {
+    return 'Save Slot $n';
+  }
+
+  @override
+  String get t48_emptySlot => 'Empty Slot';
+
+  @override
+  String get t48_maxTile => 'Max Tile';
+
+  @override
+  String get t48_elapsedTime => 'Time';
+
+  @override
+  String get t48_exitTitle => 'Exit Game';
+
+  @override
+  String get t48_exitMessage =>
+      'Do you want to save your progress before exiting?';
+
+  @override
+  String get t48_exitWithoutSaving => 'Exit Without Saving';
+
+  @override
+  String get t48_saveAndExit => 'Save & Exit';
+
+  @override
+  String get t48_gameOver => 'Game Over!';
+
+  @override
+  String get t48_youWon => 'You Won!';
+
+  @override
+  String get t48_playAgain => 'Play Again';
+
+  @override
+  String t48_savedAt(String time) {
+    return 'Saved: $time';
+  }
+
+  @override
+  String get t48_selectSlot => 'Select a save slot';
+
+  @override
+  String get t48_noSaves => 'No saved games';
+
+  @override
+  String get t48_delete => 'Delete';
+
+  @override
+  String get t48_overwrite => 'Overwrite';
 }

@@ -5,6 +5,7 @@ import '../daos/game_records_dao.dart';
 import '../daos/game_settings_dao.dart';
 import '../daos/user_progress_dao.dart';
 import '../daos/yacht_dice_saves_dao.dart';
+import '../daos/twenty48_saves_dao.dart';
 
 part 'database_provider.g.dart';
 
@@ -49,4 +50,11 @@ UserProgressDao userProgressDao(UserProgressDaoRef ref) {
 YachtDiceSavesDao yachtDiceSavesDao(YachtDiceSavesDaoRef ref) {
   final database = ref.watch(appDatabaseProvider);
   return database.yachtDiceSavesDao;
+}
+
+/// Provides the Twenty48SavesDao instance.
+@riverpod
+Twenty48SavesDao twenty48SavesDao(Twenty48SavesDaoRef ref) {
+  final database = ref.watch(appDatabaseProvider);
+  return database.twenty48SavesDao;
 }

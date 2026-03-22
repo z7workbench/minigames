@@ -10,6 +10,7 @@ import 'settings_screen.dart';
 import '../../games/hit_and_blow/hit_and_blow_screen.dart';
 import '../../games/yacht_dice/screens/yacht_dice_start_screen.dart';
 import '../../games/guess_arrangement/screens/start_screen.dart';
+import '../../games/twenty48/screens/twenty48_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -46,6 +47,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         );
         break;
+      case GameType.twenty48:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Twenty48StartScreen()),
+        );
+        break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -73,6 +80,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.game_yacht_dice;
       case GameType.guessArrangement:
         return '猜排列';
+      case GameType.twenty48:
+        return l10n.game_2048;
       default:
         return gameType.displayName;
     }
@@ -87,6 +96,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.yd_gameDescription;
       case GameType.guessArrangement:
         return '猜测对手隐藏的牌面！';
+      case GameType.twenty48:
+        return l10n.t48_gameDescription;
       default:
         return '更多游戏即将推出！';
     }
@@ -94,7 +105,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   /// Check if a game is a placeholder
   bool _isPlaceholder(GameType gameType) {
-    return gameType.index >= 3; // First 3 games are real, rest are placeholders
+    return gameType.index >= 4; // First 4 games are real, rest are placeholders
   }
 
   @override

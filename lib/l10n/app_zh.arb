@@ -626,5 +626,108 @@
   "ga_exit": "退出",
   "@ga_exit": {
     "description": "Exit button"
+  },
+
+  "game_2048": "2048",
+  "@game_2048": {
+    "description": "2048 game title"
+  },
+  "t48_gameDescription": "合并方块，达到2048！",
+  "@t48_gameDescription": {
+    "description": "2048 game description"
+  },
+  "t48_instructions": "滑动移动方块。相同数字的方块相撞时会合并。尝试达到2048！",
+  "@t48_instructions": {
+    "description": "2048 game instructions"
+  },
+  "t48_newGame": "新游戏",
+  "@t48_newGame": {
+    "description": "2048 new game button"
+  },
+  "t48_continue": "继续游戏",
+  "@t48_continue": {
+    "description": "2048 continue button"
+  },
+  "t48_loadGame": "读取游戏",
+  "@t48_loadGame": {
+    "description": "2048 load game button"
+  },
+  "t48_saveGame": "保存游戏",
+  "@t48_saveGame": {
+    "description": "2048 save game button"
+  },
+  "t48_saveSlot": "存档 {n}",
+  "@t48_saveSlot": {
+    "description": "2048 save slot label with placeholder",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "t48_emptySlot": "空存档",
+  "@t48_emptySlot": {
+    "description": "2048 empty save slot"
+  },
+  "t48_maxTile": "最大方块",
+  "@t48_maxTile": {
+    "description": "2048 max tile label"
+  },
+  "t48_elapsedTime": "用时",
+  "@t48_elapsedTime": {
+    "description": "2048 elapsed time label"
+  },
+  "t48_exitTitle": "退出游戏",
+  "@t48_exitTitle": {
+    "description": "2048 exit confirmation dialog title"
+  },
+  "t48_exitMessage": "退出前是否保存游戏进度？",
+  "@t48_exitMessage": {
+    "description": "2048 exit confirmation dialog message"
+  },
+  "t48_exitWithoutSaving": "不保存退出",
+  "@t48_exitWithoutSaving": {
+    "description": "2048 button to exit without saving"
+  },
+  "t48_saveAndExit": "保存并退出",
+  "@t48_saveAndExit": {
+    "description": "2048 button to save and exit"
+  },
+  "t48_gameOver": "游戏结束！",
+  "@t48_gameOver": {
+    "description": "2048 game over message"
+  },
+  "t48_youWon": "你赢了！",
+  "@t48_youWon": {
+    "description": "2048 win message"
+  },
+  "t48_playAgain": "再玩一次",
+  "@t48_playAgain": {
+    "description": "2048 play again button"
+  },
+  "t48_savedAt": "保存时间：{time}",
+  "@t48_savedAt": {
+    "description": "2048 saved time label",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "t48_selectSlot": "选择存档位置",
+  "@t48_selectSlot": {
+    "description": "2048 select save slot message"
+  },
+  "t48_noSaves": "没有存档",
+  "@t48_noSaves": {
+    "description": "2048 no saves message"
+  },
+  "t48_delete": "删除",
+  "@t48_delete": {
+    "description": "2048 delete save button"
+  },
+  "t48_overwrite": "覆盖",
+  "@t48_overwrite": {
+    "description": "2048 overwrite save button"
   }
 }

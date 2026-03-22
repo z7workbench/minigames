@@ -459,4 +459,77 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ga_exit => '退出';
+
+  @override
+  String get game_2048 => '2048';
+
+  @override
+  String get t48_gameDescription => '合并方块，达到2048！';
+
+  @override
+  String get t48_instructions => '滑动移动方块。相同数字的方块相撞时会合并。尝试达到2048！';
+
+  @override
+  String get t48_newGame => '新游戏';
+
+  @override
+  String get t48_continue => '继续游戏';
+
+  @override
+  String get t48_loadGame => '读取游戏';
+
+  @override
+  String get t48_saveGame => '保存游戏';
+
+  @override
+  String t48_saveSlot(int n) {
+    return '存档 $n';
+  }
+
+  @override
+  String get t48_emptySlot => '空存档';
+
+  @override
+  String get t48_maxTile => '最大方块';
+
+  @override
+  String get t48_elapsedTime => '用时';
+
+  @override
+  String get t48_exitTitle => '退出游戏';
+
+  @override
+  String get t48_exitMessage => '退出前是否保存游戏进度？';
+
+  @override
+  String get t48_exitWithoutSaving => '不保存退出';
+
+  @override
+  String get t48_saveAndExit => '保存并退出';
+
+  @override
+  String get t48_gameOver => '游戏结束！';
+
+  @override
+  String get t48_youWon => '你赢了！';
+
+  @override
+  String get t48_playAgain => '再玩一次';
+
+  @override
+  String t48_savedAt(String time) {
+    return '保存时间：$time';
+  }
+
+  @override
+  String get t48_selectSlot => '选择存档位置';
+
+  @override
+  String get t48_noSaves => '没有存档';
+
+  @override
+  String get t48_delete => '删除';
+
+  @override
+  String get t48_overwrite => '覆盖';
 }

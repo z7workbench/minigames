@@ -71,6 +71,30 @@ It's a game of throwing dices at each other to make permutations and compete for
 - Versus AI
 - More players
 
+## 2048
+Classic tile-sliding puzzle game.
+
+### Description
+Slide tiles in four directions to merge tiles with the same number. When two tiles with the same number collide, they merge into one tile with double the value. Try to reach the 2048 tile!
+
+**Gameplay:**
+- Swipe up, down, left, or right to move all tiles
+- Tiles with the same number merge when they collide
+- Each move spawns a new tile (90% chance of 2, 10% chance of 4)
+- Game ends when no more moves are possible
+
+**Scoring System:**
+- Base points = merged tile value (e.g., merging two 4s gives 8 points)
+- Multiple merges in one swipe: ×1.5 bonus
+- Consecutive merge swipes: ×2 bonus
+
+**Features:**
+- Animated tile sliding and spawning effects
+- Up to 5 save slots
+- Best score tracking
+- Game timer
+- Light/Dark theme support
+
 # Used Libraries & Materials
 - [Flutter](https://flutter.dev)
 - [Dart](https://dart.dev)

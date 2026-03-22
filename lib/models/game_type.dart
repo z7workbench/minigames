@@ -6,7 +6,7 @@ enum GameType {
   hitAndBlow,
   yachtDice,
   guessArrangement,
-  placeholder2,
+  twenty48,
   placeholder3,
   placeholder4,
 }
@@ -21,8 +21,8 @@ extension GameTypeExtension on GameType {
         return 'Yacht Dice';
       case GameType.guessArrangement:
         return 'Guess Arrangement';
-      case GameType.placeholder2:
-        return 'Game 2';
+      case GameType.twenty48:
+        return '2048';
       case GameType.placeholder3:
         return 'Game 3';
       case GameType.placeholder4:
@@ -39,8 +39,8 @@ extension GameTypeExtension on GameType {
         return Icons.casino;
       case GameType.guessArrangement:
         return Icons.style;
-      case GameType.placeholder2:
-        return Icons.extension;
+      case GameType.twenty48:
+        return Icons.grid_4x4;
       case GameType.placeholder3:
         return Icons.sports_esports;
       case GameType.placeholder4:
@@ -57,8 +57,8 @@ extension GameTypeExtension on GameType {
         return '/yacht-dice';
       case GameType.guessArrangement:
         return '/guess-arrangement';
-      case GameType.placeholder2:
-        return '/game-2';
+      case GameType.twenty48:
+        return '/2048';
       case GameType.placeholder3:
         return '/game-3';
       case GameType.placeholder4:

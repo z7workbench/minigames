@@ -979,6 +979,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exit'**
   String get ga_exit;
+
+  /// 2048 game title
+  ///
+  /// In en, this message translates to:
+  /// **'2048'**
+  String get game_2048;
+
+  /// 2048 game description
+  ///
+  /// In en, this message translates to:
+  /// **'Combine tiles to reach 2048!'**
+  String get t48_gameDescription;
+
+  /// 2048 game instructions
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!'**
+  String get t48_instructions;
+
+  /// 2048 new game button
+  ///
+  /// In en, this message translates to:
+  /// **'New Game'**
+  String get t48_newGame;
+
+  /// 2048 continue button
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get t48_continue;
+
+  /// 2048 load game button
+  ///
+  /// In en, this message translates to:
+  /// **'Load Game'**
+  String get t48_loadGame;
+
+  /// 2048 save game button
+  ///
+  /// In en, this message translates to:
+  /// **'Save Game'**
+  String get t48_saveGame;
+
+  /// 2048 save slot label with placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Save Slot {n}'**
+  String t48_saveSlot(int n);
+
+  /// 2048 empty save slot
+  ///
+  /// In en, this message translates to:
+  /// **'Empty Slot'**
+  String get t48_emptySlot;
+
+  /// 2048 max tile label
+  ///
+  /// In en, this message translates to:
+  /// **'Max Tile'**
+  String get t48_maxTile;
+
+  /// 2048 elapsed time label
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get t48_elapsedTime;
+
+  /// 2048 exit confirmation dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Exit Game'**
+  String get t48_exitTitle;
+
+  /// 2048 exit confirmation dialog message
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to save your progress before exiting?'**
+  String get t48_exitMessage;
+
+  /// 2048 button to exit without saving
+  ///
+  /// In en, this message translates to:
+  /// **'Exit Without Saving'**
+  String get t48_exitWithoutSaving;
+
+  /// 2048 button to save and exit
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Exit'**
+  String get t48_saveAndExit;
+
+  /// 2048 game over message
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over!'**
+  String get t48_gameOver;
+
+  /// 2048 win message
+  ///
+  /// In en, this message translates to:
+  /// **'You Won!'**
+  String get t48_youWon;
+
+  /// 2048 play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get t48_playAgain;
+
+  /// 2048 saved time label
+  ///
+  /// In en, this message translates to:
+  /// **'Saved: {time}'**
+  String t48_savedAt(String time);
+
+  /// 2048 select save slot message
+  ///
+  /// In en, this message translates to:
+  /// **'Select a save slot'**
+  String get t48_selectSlot;
+
+  /// 2048 no saves message
+  ///
+  /// In en, this message translates to:
+  /// **'No saved games'**
+  String get t48_noSaves;
+
+  /// 2048 delete save button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get t48_delete;
+
+  /// 2048 overwrite save button
+  ///
+  /// In en, this message translates to:
+  /// **'Overwrite'**
+  String get t48_overwrite;
 }
 
 class _AppLocalizationsDelegate
