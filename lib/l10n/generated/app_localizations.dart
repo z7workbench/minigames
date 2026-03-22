@@ -889,6 +889,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tap dice to keep/release'**
   String get yd_tapToKeep;
+
+  /// Guess Arrangement game title
+  ///
+  /// In en, this message translates to:
+  /// **'Guess Arrangement'**
+  String get game_guess_arrangement;
+
+  /// Guess Arrangement game description
+  ///
+  /// In en, this message translates to:
+  /// **'Guess your opponent\'s hidden cards in this card guessing game!'**
+  String get ga_gameDescription;
+
+  /// 2 player mode button
+  ///
+  /// In en, this message translates to:
+  /// **'2 Players'**
+  String get ga_twoPlayers;
+
+  /// Easy AI mode button
+  ///
+  /// In en, this message translates to:
+  /// **'Easy AI'**
+  String get ga_easyAI;
+
+  /// Medium AI mode button
+  ///
+  /// In en, this message translates to:
+  /// **'Medium AI'**
+  String get ga_mediumAI;
+
+  /// Hard AI mode button
+  ///
+  /// In en, this message translates to:
+  /// **'Hard AI'**
+  String get ga_hardAI;
+
+  /// How to play button
+  ///
+  /// In en, this message translates to:
+  /// **'How to Play'**
+  String get ga_howToPlay;
+
+  /// Correct guess message
+  ///
+  /// In en, this message translates to:
+  /// **'CORRECT!'**
+  String get ga_correct;
+
+  /// Wrong guess message
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong Guess'**
+  String get ga_wrongGuess;
+
+  /// Switch turns dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Turns'**
+  String get ga_switchTurns;
+
+  /// Ready to play button after turn switch
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to Play'**
+  String get ga_readyToPlay;
+
+  /// Win message
+  ///
+  /// In en, this message translates to:
+  /// **'You Win!'**
+  String get ga_youWin;
+
+  /// AI wins message
+  ///
+  /// In en, this message translates to:
+  /// **'AI Wins!'**
+  String get ga_aiWins;
+
+  /// Play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get ga_playAgain;
+
+  /// Exit button
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get ga_exit;
 }
 
 class _AppLocalizationsDelegate

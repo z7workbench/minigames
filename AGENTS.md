@@ -64,11 +64,28 @@ lib/
 │   │   ├── hit_and_blow_game.dart
 │   │   ├── components/
 │   │   └── models/
-│   └── yacht_dice/            # 游艇骰子游戏
-│       ├── yacht_dice_game.dart
+│   ├── yacht_dice/            # 游艇骰子游戏
+│   │   ├── yacht_dice_game.dart
+│   │   ├── ai/                # AI系统
+│   │   ├── components/
+│   │   └── models/
+│   └── guess_arrangement/     # 猜排列游戏
+│       ├── models/            # 数据模型
+│       │   ├── playing_card.dart      # 扑克牌模型
+│       │   └── guess_arrangement_state.dart  # 游戏状态
+│       ├── components/        # UI组件
+│       │   ├── card_display.dart      # 卡牌显示(带翻牌动画)
+│       │   ├── card_slot.dart         # 卡牌位置槽
+│       │   └── result_dialog.dart     # 结果对话框
 │       ├── ai/                # AI系统
-│       ├── components/
-│       └── models/
+│       │   ├── guess_ai.dart          # AI基类
+│       │   ├── easy_ai.dart           # 随机猜测
+│       │   ├── medium_ai.dart         # 规则匹配
+│       │   └── hard_ai.dart           # 启发式搜索
+│       ├── screens/           # 游戏页面
+│       │   └── start_screen.dart      # 开始页面
+│       ├── guess_arrangement_provider.dart  # Riverpod Provider
+│       └── guess_arrangement_screen.dart    # 主游戏界面
 │
 ├── ui/                        # 上层：UI层
 │   ├── screens/               # 页面
@@ -336,6 +353,25 @@ AI决策流程:
 3. 选择最优动作
 4. 返回保留哪些骰子 + 选择哪个计分类别
 
+### 猜排列AI
+
+AI位于`lib/games/guess_arrangement/ai/`:
+- `guess_ai.dart` - AI基类 + AiDecision数据类
+- `easy_ai.dart` - 随机猜测
+- `medium_ai.dart` - 规则匹配（基于位置推断）
+- `hard_ai.dart` - 启发式搜索（概率分析）
+
+AI决策流程:
+1. 分析对手已翻开的牌和猜测历史
+2. 根据位置推断可能的牌面（牌按大小排序）
+3. 计算每个猜测的期望收益
+4. 返回猜测位置 + 猜测点数
+
+**AI难度差异:**
+- **Easy**: 完全随机选择位置和点数
+- **Medium**: 基于位置上下文推断（相邻已翻开牌提供边界）
+- **Hard**: 完整概率分布计算 + 剩余牌统计 + 位置邻接分析
+
 ## 常见问题
 
 ### Q: 如何添加新平台支持？
@@ -371,5 +407,5 @@ AI决策流程:
 
 ---
 
-**最后更新**: 2024年
+**最后更新**: 2025年
 **项目状态**: 活跃开发中

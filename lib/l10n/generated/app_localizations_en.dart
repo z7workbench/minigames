@@ -421,4 +421,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yd_tapToKeep => 'Tap dice to keep/release';
+
+  @override
+  String get game_guess_arrangement => 'Guess Arrangement';
+
+  @override
+  String get ga_gameDescription =>
+      'Guess your opponent\'s hidden cards in this card guessing game!';
+
+  @override
+  String get ga_twoPlayers => '2 Players';
+
+  @override
+  String get ga_easyAI => 'Easy AI';
+
+  @override
+  String get ga_mediumAI => 'Medium AI';
+
+  @override
+  String get ga_hardAI => 'Hard AI';
+
+  @override
+  String get ga_howToPlay => 'How to Play';
+
+  @override
+  String get ga_correct => 'CORRECT!';
+
+  @override
+  String get ga_wrongGuess => 'Wrong Guess';
+
+  @override
+  String get ga_switchTurns => 'Switch Turns';
+
+  @override
+  String get ga_readyToPlay => 'Ready to Play';
+
+  @override
+  String get ga_youWin => 'You Win!';
+
+  @override
+  String get ga_aiWins => 'AI Wins!';
+
+  @override
+  String get ga_playAgain => 'Play Again';
+
+  @override
+  String get ga_exit => 'Exit';
 }

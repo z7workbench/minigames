@@ -565,5 +565,66 @@
   "yd_tapToKeep": "点击骰子保留/释放",
   "@yd_tapToKeep": {
     "description": "Yacht Dice hint text for keeping dice"
+  },
+
+  "game_guess_arrangement": "猜排列",
+  "@game_guess_arrangement": {
+    "description": "Guess Arrangement game title"
+  },
+  "ga_gameDescription": "猜测对手隐藏的牌面，考验你的推理能力！",
+  "@ga_gameDescription": {
+    "description": "Guess Arrangement game description"
+  },
+  "ga_twoPlayers": "双人对战",
+  "@ga_twoPlayers": {
+    "description": "2 player mode button"
+  },
+  "ga_easyAI": "简单AI",
+  "@ga_easyAI": {
+    "description": "Easy AI mode button"
+  },
+  "ga_mediumAI": "中等AI",
+  "@ga_mediumAI": {
+    "description": "Medium AI mode button"
+  },
+  "ga_hardAI": "困难AI",
+  "@ga_hardAI": {
+    "description": "Hard AI mode button"
+  },
+  "ga_howToPlay": "游戏规则",
+  "@ga_howToPlay": {
+    "description": "How to play button"
+  },
+  "ga_correct": "猜对了！",
+  "@ga_correct": {
+    "description": "Correct guess message"
+  },
+  "ga_wrongGuess": "猜错了",
+  "@ga_wrongGuess": {
+    "description": "Wrong guess message"
+  },
+  "ga_switchTurns": "交换回合",
+  "@ga_switchTurns": {
+    "description": "Switch turns dialog title"
+  },
+  "ga_readyToPlay": "准备好了",
+  "@ga_readyToPlay": {
+    "description": "Ready to play button after turn switch"
+  },
+  "ga_youWin": "你赢了！",
+  "@ga_youWin": {
+    "description": "Win message"
+  },
+  "ga_aiWins": "AI赢了！",
+  "@ga_aiWins": {
+    "description": "AI wins message"
+  },
+  "ga_playAgain": "再玩一次",
+  "@ga_playAgain": {
+    "description": "Play again button"
+  },
+  "ga_exit": "退出",
+  "@ga_exit": {
+    "description": "Exit button"
   }
 }

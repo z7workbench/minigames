@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 enum GameType {
   hitAndBlow,
   yachtDice,
-  placeholder1,
+  guessArrangement,
   placeholder2,
   placeholder3,
   placeholder4,
@@ -19,8 +19,8 @@ extension GameTypeExtension on GameType {
         return 'Hit & Blow';
       case GameType.yachtDice:
         return 'Yacht Dice';
-      case GameType.placeholder1:
-        return 'Game 1';
+      case GameType.guessArrangement:
+        return 'Guess Arrangement';
       case GameType.placeholder2:
         return 'Game 2';
       case GameType.placeholder3:
@@ -37,8 +37,8 @@ extension GameTypeExtension on GameType {
         return Icons.numbers;
       case GameType.yachtDice:
         return Icons.casino;
-      case GameType.placeholder1:
-        return Icons.videogame_asset;
+      case GameType.guessArrangement:
+        return Icons.style;
       case GameType.placeholder2:
         return Icons.extension;
       case GameType.placeholder3:
@@ -55,8 +55,8 @@ extension GameTypeExtension on GameType {
         return '/hit-and-blow';
       case GameType.yachtDice:
         return '/yacht-dice';
-      case GameType.placeholder1:
-        return '/game-1';
+      case GameType.guessArrangement:
+        return '/guess-arrangement';
       case GameType.placeholder2:
         return '/game-2';
       case GameType.placeholder3:

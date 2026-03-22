@@ -32,7 +32,31 @@ Currently Hit & Blow has a leaderboard powered by [Hive Flutter](https://docs.hi
 - Minor UI changes
 - Bug fixes
 
-## Simple Dice Game
+## Guess Arrangement (猜排列)
+A card guessing game inspired by deduction-style board games.
+
+### Description
+Two players each draw 8 cards from a standard 52-card deck and arrange them face-down from low to high (A=1, K=13). Players take turns guessing their opponent's cards by position and rank. 
+
+**Gameplay:**
+- Guess a card: "Position 3 is a 7" (only guess the rank, not the suit)
+- Correct guess: The card is revealed, you continue guessing and build your combo
+- Wrong guess: Turn passes to opponent, your combo resets
+- Win condition: First player to reveal all opponent's cards wins
+
+**Game Modes:**
+- **2 Players**: Local multiplayer with turn switching and card hiding
+- **Easy AI**: Random guessing strategy
+- **Medium AI**: Rule-based deduction with position awareness
+- **Hard AI**: Heuristic search with probability analysis
+
+### Features
+- Animated card flip effects
+- Combo tracking system
+- Round summary for AI turns
+- Persistent game records
+
+## Yacht Dice
 Simple Dice Game inspired by Nintendo Switch's Clubhouse Games: 51 Worldwide Classics' Yacht Dices.
 
 <p align="center">

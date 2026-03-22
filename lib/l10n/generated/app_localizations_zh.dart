@@ -414,4 +414,49 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get yd_tapToKeep => '点击骰子保留/释放';
+
+  @override
+  String get game_guess_arrangement => '猜排列';
+
+  @override
+  String get ga_gameDescription => '猜测对手隐藏的牌面，考验你的推理能力！';
+
+  @override
+  String get ga_twoPlayers => '双人对战';
+
+  @override
+  String get ga_easyAI => '简单AI';
+
+  @override
+  String get ga_mediumAI => '中等AI';
+
+  @override
+  String get ga_hardAI => '困难AI';
+
+  @override
+  String get ga_howToPlay => '游戏规则';
+
+  @override
+  String get ga_correct => '猜对了！';
+
+  @override
+  String get ga_wrongGuess => '猜错了';
+
+  @override
+  String get ga_switchTurns => '交换回合';
+
+  @override
+  String get ga_readyToPlay => '准备好了';
+
+  @override
+  String get ga_youWin => '你赢了！';
+
+  @override
+  String get ga_aiWins => 'AI赢了！';
+
+  @override
+  String get ga_playAgain => '再玩一次';
+
+  @override
+  String get ga_exit => '退出';
 }
