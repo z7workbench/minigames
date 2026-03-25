@@ -95,6 +95,35 @@ Slide tiles in four directions to merge tiles with the same number. When two til
 - Game timer
 - Light/Dark theme support
 
+## Mancala
+Ancient seed-sowing strategy game.
+
+### Description
+Capture more seeds than your opponent in this classic board game! Each player has 6 pits and a store. Pick up all seeds from one of your pits and sow them counter-clockwise around the board.
+
+**Gameplay:**
+- Pick up all seeds from one of your pits on your side
+- Sow them one by one counter-clockwise, skipping opponent's store
+- Land in your own store: Extra turn!
+- Land in your empty pit with seeds in opposite pit: Capture all those seeds!
+- Game ends when one side is empty - remaining seeds go to their owner's store
+- Player with more seeds wins
+
+**Game Modes:**
+- **2 Players**: Local multiplayer
+- **Easy AI**: Random pit selection
+- **Medium AI**: Basic heuristics
+- **Hard AI**: Minimax with alpha-beta pruning
+
+**Features:**
+- Animated seed sowing
+- Turn indicator
+- Score tracking
+- Game timer
+
+## Dice Battle 🚧 (WIP)
+Dice battle game - coming soon!
+
 # Used Libraries & Materials
 - [Flutter](https://flutter.dev)
 - [Dart](https://dart.dev)

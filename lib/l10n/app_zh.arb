@@ -729,5 +729,102 @@
   "t48_overwrite": "覆盖",
   "@t48_overwrite": {
     "description": "2048 overwrite save button"
+  },
+  "db_battleLog": "战斗日志",
+  "@db_battleLog": {
+    "description": "Battle log header"
+  },
+  "db_battleStarted": "战斗开始...",
+  "@db_battleStarted": {
+    "description": "Battle started message"
+  },
+
+  "game_mancala": "播棋",
+  "@game_mancala": {
+    "description": "Mancala game title"
+  },
+  "mc_gameDescription": "在这个古老的策略游戏中收集比对手更多的种子！",
+  "@mc_gameDescription": {
+    "description": "Mancala game description"
+  },
+  "mc_instructions": "从你的一个坑中取出所有种子，逆时针播撒。落入你的大坑可再玩一次。落入你的空坑可捕获对面坑中的种子！",
+  "@mc_instructions": {
+    "description": "Mancala game instructions"
+  },
+  "mc_twoPlayers": "双人对战",
+  "@mc_twoPlayers": {
+    "description": "2 player mode button"
+  },
+  "mc_easyAI": "简单AI",
+  "@mc_easyAI": {
+    "description": "Easy AI mode button"
+  },
+  "mc_mediumAI": "中等AI",
+  "@mc_mediumAI": {
+    "description": "Medium AI mode button"
+  },
+  "mc_hardAI": "困难AI",
+  "@mc_hardAI": {
+    "description": "Hard AI mode button"
+  },
+  "mc_howToPlay": "游戏规则",
+  "@mc_howToPlay": {
+    "description": "How to play button"
+  },
+  "mc_yourTurn": "你的回合",
+  "@mc_yourTurn": {
+    "description": "Your turn label"
+  },
+  "mc_opponentTurn": "对手回合",
+  "@mc_opponentTurn": {
+    "description": "Opponent's turn label"
+  },
+  "mc_playerStore": "你的大坑",
+  "@mc_playerStore": {
+    "description": "Player's store label"
+  },
+  "mc_opponentStore": "对手大坑",
+  "@mc_opponentStore": {
+    "description": "Opponent's store label"
+  },
+  "mc_youWin": "你赢了！",
+  "@mc_youWin": {
+    "description": "Win message"
+  },
+  "mc_youLose": "你输了！",
+  "@mc_youLose": {
+    "description": "Lose message"
+  },
+  "mc_aiWins": "AI赢了！",
+  "@mc_aiWins": {
+    "description": "AI wins message"
+  },
+  "mc_draw": "平局！",
+  "@mc_draw": {
+    "description": "Draw message"
+  },
+  "mc_playAgain": "再玩一次",
+  "@mc_playAgain": {
+    "description": "Play again button"
+  },
+  "mc_exit": "退出",
+  "@mc_exit": {
+    "description": "Exit button"
+  },
+  "mc_selectPit": "点击坑位播种",
+  "@mc_selectPit": {
+    "description": "Hint to select a pit"
+  },
+  "mc_gameSaved": "游戏已保存",
+  "@mc_gameSaved": {
+    "description": "Game saved message"
+  },
+  "mc_extraTurn": "再来一次！",
+  "@mc_extraTurn": {
+    "description": "Extra turn message"
+  },
+  "mc_captured": "捕获！",
+  "@mc_captured": {
+    "description": "Capture message"
   }
 }

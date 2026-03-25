@@ -729,5 +729,102 @@
   "t48_overwrite": "Overwrite",
   "@t48_overwrite": {
     "description": "2048 overwrite save button"
+  },
+  "db_battleLog": "Battle Log",
+  "@db_battleLog": {
+    "description": "Battle log header"
+  },
+  "db_battleStarted": "Battle started...",
+  "@db_battleStarted": {
+    "description": "Battle started message"
+  },
+
+  "game_mancala": "Mancala",
+  "@game_mancala": {
+    "description": "Mancala game title"
+  },
+  "mc_gameDescription": "Capture more seeds than your opponent in this ancient strategy game!",
+  "@mc_gameDescription": {
+    "description": "Mancala game description"
+  },
+  "mc_instructions": "Pick up all seeds from one of your pits and sow them counter-clockwise. Land in your store for an extra turn. Land in your empty pit to capture seeds from the opposite pit!",
+  "@mc_instructions": {
+    "description": "Mancala game instructions"
+  },
+  "mc_twoPlayers": "2 Players",
+  "@mc_twoPlayers": {
+    "description": "2 player mode button"
+  },
+  "mc_easyAI": "Easy AI",
+  "@mc_easyAI": {
+    "description": "Easy AI mode button"
+  },
+  "mc_mediumAI": "Medium AI",
+  "@mc_mediumAI": {
+    "description": "Medium AI mode button"
+  },
+  "mc_hardAI": "Hard AI",
+  "@mc_hardAI": {
+    "description": "Hard AI mode button"
+  },
+  "mc_howToPlay": "How to Play",
+  "@mc_howToPlay": {
+    "description": "How to play button"
+  },
+  "mc_yourTurn": "Your Turn",
+  "@mc_yourTurn": {
+    "description": "Your turn label"
+  },
+  "mc_opponentTurn": "Opponent's Turn",
+  "@mc_opponentTurn": {
+    "description": "Opponent's turn label"
+  },
+  "mc_playerStore": "Your Store",
+  "@mc_playerStore": {
+    "description": "Player's store label"
+  },
+  "mc_opponentStore": "Opponent's Store",
+  "@mc_opponentStore": {
+    "description": "Opponent's store label"
+  },
+  "mc_youWin": "You Win!",
+  "@mc_youWin": {
+    "description": "Win message"
+  },
+  "mc_youLose": "You Lose!",
+  "@mc_youLose": {
+    "description": "Lose message"
+  },
+  "mc_aiWins": "AI Wins!",
+  "@mc_aiWins": {
+    "description": "AI wins message"
+  },
+  "mc_draw": "It's a Draw!",
+  "@mc_draw": {
+    "description": "Draw message"
+  },
+  "mc_playAgain": "Play Again",
+  "@mc_playAgain": {
+    "description": "Play again button"
+  },
+  "mc_exit": "Exit",
+  "@mc_exit": {
+    "description": "Exit button"
+  },
+  "mc_selectPit": "Tap a pit to sow seeds",
+  "@mc_selectPit": {
+    "description": "Hint to select a pit"
+  },
+  "mc_gameSaved": "Game Saved",
+  "@mc_gameSaved": {
+    "description": "Game saved message"
+  },
+  "mc_extraTurn": "Extra Turn!",
+  "@mc_extraTurn": {
+    "description": "Extra turn message"
+  },
+  "mc_captured": "Captured!",
+  "@mc_captured": {
+    "description": "Capture message"
   }
 }

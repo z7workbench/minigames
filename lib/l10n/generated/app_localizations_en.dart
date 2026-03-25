@@ -542,4 +542,78 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get t48_overwrite => 'Overwrite';
+
+  @override
+  String get db_battleLog => 'Battle Log';
+
+  @override
+  String get db_battleStarted => 'Battle started...';
+
+  @override
+  String get game_mancala => 'Mancala';
+
+  @override
+  String get mc_gameDescription =>
+      'Capture more seeds than your opponent in this ancient strategy game!';
+
+  @override
+  String get mc_instructions =>
+      'Pick up all seeds from one of your pits and sow them counter-clockwise. Land in your store for an extra turn. Land in your empty pit to capture seeds from the opposite pit!';
+
+  @override
+  String get mc_twoPlayers => '2 Players';
+
+  @override
+  String get mc_easyAI => 'Easy AI';
+
+  @override
+  String get mc_mediumAI => 'Medium AI';
+
+  @override
+  String get mc_hardAI => 'Hard AI';
+
+  @override
+  String get mc_howToPlay => 'How to Play';
+
+  @override
+  String get mc_yourTurn => 'Your Turn';
+
+  @override
+  String get mc_opponentTurn => 'Opponent\'s Turn';
+
+  @override
+  String get mc_playerStore => 'Your Store';
+
+  @override
+  String get mc_opponentStore => 'Opponent\'s Store';
+
+  @override
+  String get mc_youWin => 'You Win!';
+
+  @override
+  String get mc_youLose => 'You Lose!';
+
+  @override
+  String get mc_aiWins => 'AI Wins!';
+
+  @override
+  String get mc_draw => 'It\'s a Draw!';
+
+  @override
+  String get mc_playAgain => 'Play Again';
+
+  @override
+  String get mc_exit => 'Exit';
+
+  @override
+  String get mc_selectPit => 'Tap a pit to sow seeds';
+
+  @override
+  String get mc_gameSaved => 'Game Saved';
+
+  @override
+  String get mc_extraTurn => 'Extra Turn!';
+
+  @override
+  String get mc_captured => 'Captured!';
 }

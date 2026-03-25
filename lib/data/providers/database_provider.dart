@@ -6,6 +6,7 @@ import '../daos/game_settings_dao.dart';
 import '../daos/user_progress_dao.dart';
 import '../daos/yacht_dice_saves_dao.dart';
 import '../daos/twenty48_saves_dao.dart';
+import '../daos/mancala_saves_dao.dart';
 
 part 'database_provider.g.dart';
 
@@ -57,4 +58,11 @@ YachtDiceSavesDao yachtDiceSavesDao(YachtDiceSavesDaoRef ref) {
 Twenty48SavesDao twenty48SavesDao(Twenty48SavesDaoRef ref) {
   final database = ref.watch(appDatabaseProvider);
   return database.twenty48SavesDao;
+}
+
+/// Provides the MancalaSavesDao instance.
+@riverpod
+MancalaSavesDao mancalaSavesDao(MancalaSavesDaoRef ref) {
+  final database = ref.watch(appDatabaseProvider);
+  return database.mancalaSavesDao;
 }

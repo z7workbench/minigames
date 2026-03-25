@@ -532,4 +532,77 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get t48_overwrite => '覆盖';
+
+  @override
+  String get db_battleLog => '战斗日志';
+
+  @override
+  String get db_battleStarted => '战斗开始...';
+
+  @override
+  String get game_mancala => '播棋';
+
+  @override
+  String get mc_gameDescription => '在这个古老的策略游戏中收集比对手更多的种子！';
+
+  @override
+  String get mc_instructions =>
+      '从你的一个坑中取出所有种子，逆时针播撒。落入你的大坑可再玩一次。落入你的空坑可捕获对面坑中的种子！';
+
+  @override
+  String get mc_twoPlayers => '双人对战';
+
+  @override
+  String get mc_easyAI => '简单AI';
+
+  @override
+  String get mc_mediumAI => '中等AI';
+
+  @override
+  String get mc_hardAI => '困难AI';
+
+  @override
+  String get mc_howToPlay => '游戏规则';
+
+  @override
+  String get mc_yourTurn => '你的回合';
+
+  @override
+  String get mc_opponentTurn => '对手回合';
+
+  @override
+  String get mc_playerStore => '你的大坑';
+
+  @override
+  String get mc_opponentStore => '对手大坑';
+
+  @override
+  String get mc_youWin => '你赢了！';
+
+  @override
+  String get mc_youLose => '你输了！';
+
+  @override
+  String get mc_aiWins => 'AI赢了！';
+
+  @override
+  String get mc_draw => '平局！';
+
+  @override
+  String get mc_playAgain => '再玩一次';
+
+  @override
+  String get mc_exit => '退出';
+
+  @override
+  String get mc_selectPit => '点击坑位播种';
+
+  @override
+  String get mc_gameSaved => '游戏已保存';
+
+  @override
+  String get mc_extraTurn => '再来一次！';
+
+  @override
+  String get mc_captured => '捕获！';
 }

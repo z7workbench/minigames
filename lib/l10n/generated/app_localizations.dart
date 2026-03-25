@@ -1117,6 +1117,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Overwrite'**
   String get t48_overwrite;
+
+  /// Battle log header
+  ///
+  /// In en, this message translates to:
+  /// **'Battle Log'**
+  String get db_battleLog;
+
+  /// Battle started message
+  ///
+  /// In en, this message translates to:
+  /// **'Battle started...'**
+  String get db_battleStarted;
+
+  /// Mancala game title
+  ///
+  /// In en, this message translates to:
+  /// **'Mancala'**
+  String get game_mancala;
+
+  /// Mancala game description
+  ///
+  /// In en, this message translates to:
+  /// **'Capture more seeds than your opponent in this ancient strategy game!'**
+  String get mc_gameDescription;
+
+  /// Mancala game instructions
+  ///
+  /// In en, this message translates to:
+  /// **'Pick up all seeds from one of your pits and sow them counter-clockwise. Land in your store for an extra turn. Land in your empty pit to capture seeds from the opposite pit!'**
+  String get mc_instructions;
+
+  /// 2 player mode button
+  ///
+  /// In en, this message translates to:
+  /// **'2 Players'**
+  String get mc_twoPlayers;
+
+  /// Easy AI mode button
+  ///
+  /// In en, this message translates to:
+  /// **'Easy AI'**
+  String get mc_easyAI;
+
+  /// Medium AI mode button
+  ///
+  /// In en, this message translates to:
+  /// **'Medium AI'**
+  String get mc_mediumAI;
+
+  /// Hard AI mode button
+  ///
+  /// In en, this message translates to:
+  /// **'Hard AI'**
+  String get mc_hardAI;
+
+  /// How to play button
+  ///
+  /// In en, this message translates to:
+  /// **'How to Play'**
+  String get mc_howToPlay;
+
+  /// Your turn label
+  ///
+  /// In en, this message translates to:
+  /// **'Your Turn'**
+  String get mc_yourTurn;
+
+  /// Opponent's turn label
+  ///
+  /// In en, this message translates to:
+  /// **'Opponent\'s Turn'**
+  String get mc_opponentTurn;
+
+  /// Player's store label
+  ///
+  /// In en, this message translates to:
+  /// **'Your Store'**
+  String get mc_playerStore;
+
+  /// Opponent's store label
+  ///
+  /// In en, this message translates to:
+  /// **'Opponent\'s Store'**
+  String get mc_opponentStore;
+
+  /// Win message
+  ///
+  /// In en, this message translates to:
+  /// **'You Win!'**
+  String get mc_youWin;
+
+  /// Lose message
+  ///
+  /// In en, this message translates to:
+  /// **'You Lose!'**
+  String get mc_youLose;
+
+  /// AI wins message
+  ///
+  /// In en, this message translates to:
+  /// **'AI Wins!'**
+  String get mc_aiWins;
+
+  /// Draw message
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s a Draw!'**
+  String get mc_draw;
+
+  /// Play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get mc_playAgain;
+
+  /// Exit button
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get mc_exit;
+
+  /// Hint to select a pit
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a pit to sow seeds'**
+  String get mc_selectPit;
+
+  /// Game saved message
+  ///
+  /// In en, this message translates to:
+  /// **'Game Saved'**
+  String get mc_gameSaved;
+
+  /// Extra turn message
+  ///
+  /// In en, this message translates to:
+  /// **'Extra Turn!'**
+  String get mc_extraTurn;
+
+  /// Capture message
+  ///
+  /// In en, this message translates to:
+  /// **'Captured!'**
+  String get mc_captured;
 }
 
 class _AppLocalizationsDelegate

@@ -11,6 +11,8 @@ import '../../games/hit_and_blow/hit_and_blow_screen.dart';
 import '../../games/yacht_dice/screens/yacht_dice_start_screen.dart';
 import '../../games/guess_arrangement/screens/start_screen.dart';
 import '../../games/twenty48/screens/twenty48_start_screen.dart';
+import '../../games/dice_battle/screens/start_screen.dart' as dice_battle;
+import '../../games/mancala/screens/mancala_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -53,6 +55,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           MaterialPageRoute(builder: (context) => const Twenty48StartScreen()),
         );
         break;
+      case GameType.diceBattle:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const dice_battle.DiceBattleStartScreen(),
+          ),
+        );
+        break;
+      case GameType.mancala:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MancalaStartScreen()),
+        );
+        break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -82,6 +98,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return '猜排列';
       case GameType.twenty48:
         return l10n.game_2048;
+      case GameType.diceBattle:
+        return 'Dice Battle';
+      case GameType.mancala:
+        return l10n.game_mancala;
       default:
         return gameType.displayName;
     }
@@ -98,6 +118,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return '猜测对手隐藏的牌面！';
       case GameType.twenty48:
         return l10n.t48_gameDescription;
+      case GameType.diceBattle:
+        return 'Roll dice and battle your opponent!';
+      case GameType.mancala:
+        return l10n.mc_gameDescription;
       default:
         return '更多游戏即将推出！';
     }
@@ -105,7 +129,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   /// Check if a game is a placeholder
   bool _isPlaceholder(GameType gameType) {
-    return gameType.index >= 4; // First 4 games are real, rest are placeholders
+    return gameType.index >= 6; // First 6 games are real, rest are placeholders
   }
 
   @override

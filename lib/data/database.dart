@@ -6,11 +6,13 @@ import 'daos/game_settings_dao.dart';
 import 'daos/user_progress_dao.dart';
 import 'daos/yacht_dice_saves_dao.dart';
 import 'daos/twenty48_saves_dao.dart';
+import 'daos/mancala_saves_dao.dart';
 import 'tables/game_records.dart';
 import 'tables/game_settings.dart';
 import 'tables/user_progress.dart';
 import 'tables/yacht_dice_saves.dart';
 import 'tables/twenty48_saves.dart';
+import 'tables/mancala_saves.dart';
 
 part 'database.g.dart';
 
@@ -23,6 +25,7 @@ part 'database.g.dart';
     UserProgress,
     YachtDiceSaves,
     Twenty48Saves,
+    MancalaSaves,
   ],
   daos: [
     GameRecordsDao,
@@ -30,6 +33,7 @@ part 'database.g.dart';
     UserProgressDao,
     YachtDiceSavesDao,
     Twenty48SavesDao,
+    MancalaSavesDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -40,7 +44,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.memory() : super(createMemoryConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration {
@@ -57,6 +61,10 @@ class AppDatabase extends _$AppDatabase {
         if (from < 3) {
           // Add twenty48_saves table for 2048 game state persistence
           await m.createTable(twenty48Saves);
+        }
+        if (from < 4) {
+          // Add mancala_saves table for Mancala game state persistence
+          await m.createTable(mancalaSaves);
         }
       },
     );
