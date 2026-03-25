@@ -31,8 +31,33 @@ class App extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('en'), Locale('zh')],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('zh'),
+        Locale('zh', 'CN'),
+        Locale('zh', 'TW'),
+        Locale('zh', 'HK'),
+      ],
       locale: settings.locale,
+      localeResolutionCallback: (locale, supportedLocales) {
+        // If user explicitly selected a locale, use it
+        if (settings.locale != null) {
+          return settings.locale;
+        }
+
+        // System Default: resolve based on device locale
+        if (locale == null) return const Locale('en');
+
+        // Match by language code
+        for (final supported in supportedLocales) {
+          if (supported.languageCode == locale.languageCode) {
+            return supported;
+          }
+        }
+
+        // Fallback to English
+        return const Locale('en');
+      },
       home: const HomeScreen(),
     );
   }

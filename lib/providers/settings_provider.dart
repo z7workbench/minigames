@@ -19,9 +19,9 @@ class Settings extends _$Settings {
     );
   }
 
-  Future<SettingsModel> load() async {
+  Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
-    return SettingsModel(
+    state = SettingsModel(
       locale: _getLocale(prefs),
       themeMode: _getThemeMode(prefs),
       soundEnabled: _getSoundEnabled(prefs),
@@ -122,15 +122,18 @@ class SettingsModel {
     required this.fullscreen,
   });
 
+  /// Sentinel value to distinguish "not provided" from "null"
+  static const _unset = Object();
+
   SettingsModel copyWith({
-    Locale? locale,
+    Object? locale = _unset,
     ThemeMode? themeMode,
     bool? soundEnabled,
     String? difficulty,
     bool? fullscreen,
   }) {
     return SettingsModel(
-      locale: locale ?? this.locale,
+      locale: locale == _unset ? this.locale : locale as Locale?,
       themeMode: themeMode ?? this.themeMode,
       soundEnabled: soundEnabled ?? this.soundEnabled,
       difficulty: difficulty ?? this.difficulty,
