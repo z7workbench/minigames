@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'wooden_colors.dart';
+import 'starlight_colors.dart';
+import 'theme_provider.dart';
 
 /// Application theme configuration with wooden board game aesthetic.
 class AppTheme {
@@ -17,92 +19,99 @@ class AppTheme {
   static const double _letterSpacing = 0.5;
 
   /// Returns the light theme configuration.
-  static ThemeData lightTheme() {
-    final colorScheme = _lightColorScheme;
+  static ThemeData lightTheme([
+    ColorSchemeType colorScheme = ColorSchemeType.wooden,
+  ]) {
+    final colors = _getColorScheme(colorScheme, Brightness.light);
 
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      colorScheme: colorScheme,
-      scaffoldBackgroundColor: WoodenColors.lightBackground,
-      canvasColor: WoodenColors.lightSurface,
+      colorScheme: colors,
+      scaffoldBackgroundColor: colors.background,
+      canvasColor: colors.surface,
       // Typography with wooden aesthetic - using system fonts
-      textTheme: _buildTextTheme(colorScheme),
+      textTheme: _buildTextTheme(colors),
       // AppBar theme with wooden styling
-      appBarTheme: _buildLightAppBarTheme(colorScheme),
+      appBarTheme: _buildLightAppBarTheme(colors, colorScheme),
       // Card theme with wooden texture effect
-      cardTheme: _buildLightCardThemeData(),
+      cardTheme: _buildLightCardThemeData(colors, colorScheme),
       // Button themes
-      elevatedButtonTheme: _buildLightElevatedButtonTheme(colorScheme),
-      textButtonTheme: _buildLightTextButtonTheme(colorScheme),
-      outlinedButtonTheme: _buildLightOutlinedButtonTheme(colorScheme),
+      elevatedButtonTheme: _buildLightElevatedButtonTheme(colors, colorScheme),
+      textButtonTheme: _buildLightTextButtonTheme(colors, colorScheme),
+      outlinedButtonTheme: _buildLightOutlinedButtonTheme(colors, colorScheme),
       // Input decoration theme
-      inputDecorationTheme: _buildLightInputDecorationTheme(colorScheme),
+      inputDecorationTheme: _buildLightInputDecorationTheme(
+        colors,
+        colorScheme,
+      ),
       // Floating action button theme
-      floatingActionButtonTheme: _buildLightFabTheme(colorScheme),
+      floatingActionButtonTheme: _buildLightFabTheme(colors, colorScheme),
       // Icon theme
-      iconTheme: _buildLightIconTheme(colorScheme),
+      iconTheme: _buildLightIconTheme(colors),
       // Divider theme
-      dividerTheme: _buildLightDividerTheme(),
+      dividerTheme: _buildLightDividerTheme(colorScheme),
       // Dialog theme
-      dialogTheme: _buildLightDialogThemeData(),
+      dialogTheme: _buildLightDialogThemeData(colors, colorScheme),
       // Snackbar theme
-      snackBarTheme: _buildLightSnackbarTheme(colorScheme),
+      snackBarTheme: _buildLightSnackbarTheme(colors, colorScheme),
       // Bottom sheet theme
-      bottomSheetTheme: _buildLightBottomSheetTheme(),
+      bottomSheetTheme: _buildLightBottomSheetTheme(colors, colorScheme),
       // Chip theme
-      chipTheme: _buildLightChipTheme(colorScheme),
+      chipTheme: _buildLightChipTheme(colors, colorScheme),
       // Switch theme
-      switchTheme: _buildLightSwitchTheme(colorScheme),
+      switchTheme: _buildLightSwitchTheme(colors, colorScheme),
       // Slider theme
-      sliderTheme: _buildLightSliderTheme(colorScheme),
+      sliderTheme: _buildLightSliderTheme(colors, colorScheme),
       // Tooltip theme
-      tooltipTheme: _buildLightTooltipTheme(),
+      tooltipTheme: _buildLightTooltipTheme(colors, colorScheme),
     );
   }
 
   /// Returns the dark theme configuration.
-  static ThemeData darkTheme() {
-    final colorScheme = _darkColorScheme;
+  static ThemeData darkTheme([
+    ColorSchemeType colorScheme = ColorSchemeType.wooden,
+  ]) {
+    final colors = _getColorScheme(colorScheme, Brightness.dark);
 
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorScheme: colorScheme,
-      scaffoldBackgroundColor: WoodenColors.darkBackground,
-      canvasColor: WoodenColors.darkSurface,
+      colorScheme: colors,
+      scaffoldBackgroundColor: colors.background,
+      canvasColor: colors.surface,
       // Typography with wooden aesthetic
-      textTheme: _buildTextTheme(colorScheme),
+      textTheme: _buildTextTheme(colors),
       // AppBar theme with wooden styling
-      appBarTheme: _buildDarkAppBarTheme(colorScheme),
+      appBarTheme: _buildDarkAppBarTheme(colors, colorScheme),
       // Card theme with wooden texture effect
-      cardTheme: _buildDarkCardThemeData(),
+      cardTheme: _buildDarkCardThemeData(colors, colorScheme),
       // Button themes
-      elevatedButtonTheme: _buildDarkElevatedButtonTheme(colorScheme),
-      textButtonTheme: _buildDarkTextButtonTheme(colorScheme),
-      outlinedButtonTheme: _buildDarkOutlinedButtonTheme(colorScheme),
+      elevatedButtonTheme: _buildDarkElevatedButtonTheme(colors, colorScheme),
+      textButtonTheme: _buildDarkTextButtonTheme(colors, colorScheme),
+      outlinedButtonTheme: _buildDarkOutlinedButtonTheme(colors, colorScheme),
       // Input decoration theme
-      inputDecorationTheme: _buildDarkInputDecorationTheme(colorScheme),
+      inputDecorationTheme: _buildDarkInputDecorationTheme(colors, colorScheme),
       // Floating action button theme
-      floatingActionButtonTheme: _buildDarkFabTheme(colorScheme),
+      floatingActionButtonTheme: _buildDarkFabTheme(colors, colorScheme),
       // Icon theme
-      iconTheme: _buildDarkIconTheme(colorScheme),
+      iconTheme: _buildDarkIconTheme(colors),
       // Divider theme
-      dividerTheme: _buildDarkDividerTheme(),
+      dividerTheme: _buildDarkDividerTheme(colorScheme),
       // Dialog theme
-      dialogTheme: _buildDarkDialogThemeData(),
+      dialogTheme: _buildDarkDialogThemeData(colors, colorScheme),
       // Snackbar theme
-      snackBarTheme: _buildDarkSnackbarTheme(colorScheme),
+      snackBarTheme: _buildDarkSnackbarTheme(colors, colorScheme),
       // Bottom sheet theme
-      bottomSheetTheme: _buildDarkBottomSheetTheme(),
+      bottomSheetTheme: _buildDarkBottomSheetTheme(colors, colorScheme),
       // Chip theme
-      chipTheme: _buildDarkChipTheme(colorScheme),
+      chipTheme: _buildDarkChipTheme(colors, colorScheme),
       // Switch theme
-      switchTheme: _buildDarkSwitchTheme(colorScheme),
+      switchTheme: _buildDarkSwitchTheme(colors, colorScheme),
       // Slider theme
-      sliderTheme: _buildDarkSliderTheme(colorScheme),
+      sliderTheme: _buildDarkSliderTheme(colors, colorScheme),
       // Tooltip theme
-      tooltipTheme: _buildDarkTooltipTheme(),
+      tooltipTheme: _buildDarkTooltipTheme(colors, colorScheme),
     );
   }
 
@@ -110,7 +119,24 @@ class AppTheme {
   // COLOR SCHEMES
   // ===========================================================================
 
-  static ColorScheme get _lightColorScheme => const ColorScheme(
+  static ColorScheme _getColorScheme(
+    ColorSchemeType type,
+    Brightness brightness,
+  ) {
+    switch (type) {
+      case ColorSchemeType.starlight:
+        return brightness == Brightness.light
+            ? _starlightLightColorScheme
+            : _starlightDarkColorScheme;
+      case ColorSchemeType.wooden:
+      default:
+        return brightness == Brightness.light
+            ? _woodenLightColorScheme
+            : _woodenDarkColorScheme;
+    }
+  }
+
+  static ColorScheme get _woodenLightColorScheme => const ColorScheme(
     brightness: Brightness.light,
     primary: WoodenColors.lightPrimary,
     onPrimary: WoodenColors.lightOnPrimary,
@@ -143,7 +169,7 @@ class AppTheme {
     inversePrimary: WoodenColors.darkPrimary,
   );
 
-  static ColorScheme get _darkColorScheme => const ColorScheme(
+  static ColorScheme get _woodenDarkColorScheme => const ColorScheme(
     brightness: Brightness.dark,
     primary: WoodenColors.darkPrimary,
     onPrimary: WoodenColors.darkOnPrimary,
@@ -174,6 +200,72 @@ class AppTheme {
     inverseSurface: WoodenColors.lightSurface,
     onInverseSurface: WoodenColors.lightTextPrimary,
     inversePrimary: WoodenColors.lightPrimary,
+  );
+
+  static ColorScheme get _starlightLightColorScheme => const ColorScheme(
+    brightness: Brightness.light,
+    primary: StarlightColors.lightPrimary,
+    onPrimary: StarlightColors.lightOnPrimary,
+    primaryContainer: StarlightColors.lightSecondary,
+    onPrimaryContainer: StarlightColors.lightOnPrimary,
+    secondary: StarlightColors.lightSecondary,
+    onSecondary: StarlightColors.lightOnSecondary,
+    secondaryContainer: StarlightColors.lightCard,
+    onSecondaryContainer: StarlightColors.lightTextPrimary,
+    tertiary: StarlightColors.accentStar,
+    onTertiary: Colors.white,
+    tertiaryContainer: StarlightColors.accentCosmos,
+    onTertiaryContainer: Colors.white,
+    surface: StarlightColors.lightSurface,
+    onSurface: StarlightColors.lightOnSurface,
+    surfaceContainerHighest: StarlightColors.lightCard,
+    onSurfaceVariant: StarlightColors.lightTextSecondary,
+    background: StarlightColors.lightBackground,
+    onBackground: StarlightColors.lightOnBackground,
+    error: StarlightColors.lightError,
+    onError: StarlightColors.lightOnError,
+    errorContainer: Color(0xFFFFCDD2),
+    onErrorContainer: Color(0xFFC62828),
+    outline: StarlightColors.lightBorder,
+    outlineVariant: StarlightColors.lightDivider,
+    shadow: StarlightColors.lightShadow,
+    scrim: Color(0xFF000000),
+    inverseSurface: StarlightColors.darkSurface,
+    onInverseSurface: StarlightColors.darkTextPrimary,
+    inversePrimary: StarlightColors.darkPrimary,
+  );
+
+  static ColorScheme get _starlightDarkColorScheme => const ColorScheme(
+    brightness: Brightness.dark,
+    primary: StarlightColors.darkPrimary,
+    onPrimary: StarlightColors.darkOnPrimary,
+    primaryContainer: StarlightColors.darkSecondary,
+    onPrimaryContainer: StarlightColors.darkOnPrimary,
+    secondary: StarlightColors.darkSecondary,
+    onSecondary: StarlightColors.darkOnSecondary,
+    secondaryContainer: StarlightColors.darkCard,
+    onSecondaryContainer: StarlightColors.darkTextPrimary,
+    tertiary: StarlightColors.accentStar,
+    onTertiary: Colors.white,
+    tertiaryContainer: StarlightColors.accentNebula,
+    onTertiaryContainer: Colors.white,
+    surface: StarlightColors.darkSurface,
+    onSurface: StarlightColors.darkOnSurface,
+    surfaceContainerHighest: StarlightColors.darkCard,
+    onSurfaceVariant: StarlightColors.darkTextSecondary,
+    background: StarlightColors.darkBackground,
+    onBackground: StarlightColors.darkOnBackground,
+    error: StarlightColors.darkError,
+    onError: StarlightColors.darkOnError,
+    errorContainer: Color(0xFFB71C1C),
+    onErrorContainer: Color(0xFFFFCDD2),
+    outline: StarlightColors.darkBorder,
+    outlineVariant: StarlightColors.darkDivider,
+    shadow: StarlightColors.darkShadow,
+    scrim: Color(0xFF000000),
+    inverseSurface: StarlightColors.lightSurface,
+    onInverseSurface: StarlightColors.lightTextPrimary,
+    inversePrimary: StarlightColors.lightPrimary,
   );
 
   // ===========================================================================
@@ -299,41 +391,71 @@ class AppTheme {
   // APP BAR THEME
   // ===========================================================================
 
-  static AppBarTheme _buildLightAppBarTheme(ColorScheme colorScheme) {
+  static AppBarTheme _buildLightAppBarTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (primary, onPrimary, shadow) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightPrimary,
+            StarlightColors.lightOnPrimary,
+            StarlightColors.lightShadow,
+          )
+        : (
+            WoodenColors.lightPrimary,
+            WoodenColors.lightOnPrimary,
+            WoodenColors.lightShadow,
+          );
+
     return AppBarTheme(
-      backgroundColor: WoodenColors.lightPrimary,
-      foregroundColor: WoodenColors.lightOnPrimary,
+      backgroundColor: primary,
+      foregroundColor: onPrimary,
       elevation: _elevationMedium,
       centerTitle: true,
-      shadowColor: WoodenColors.lightShadow,
+      shadowColor: shadow,
       scrolledUnderElevation: _elevationHigh,
       titleTextStyle: TextStyle(
-        color: WoodenColors.lightOnPrimary,
+        color: onPrimary,
         fontSize: 20,
         fontWeight: FontWeight.w500,
         letterSpacing: _letterSpacing,
         fontFamily: 'Roboto',
       ),
-      iconTheme: IconThemeData(color: WoodenColors.lightOnPrimary, size: 24),
+      iconTheme: IconThemeData(color: onPrimary, size: 24),
     );
   }
 
-  static AppBarTheme _buildDarkAppBarTheme(ColorScheme colorScheme) {
+  static AppBarTheme _buildDarkAppBarTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (primary, onPrimary, shadow) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkPrimary,
+            StarlightColors.darkOnPrimary,
+            StarlightColors.darkShadow,
+          )
+        : (
+            WoodenColors.darkPrimary,
+            WoodenColors.darkOnPrimary,
+            WoodenColors.darkShadow,
+          );
+
     return AppBarTheme(
-      backgroundColor: WoodenColors.darkPrimary,
-      foregroundColor: WoodenColors.darkOnPrimary,
+      backgroundColor: primary,
+      foregroundColor: onPrimary,
       elevation: _elevationMedium,
       centerTitle: true,
-      shadowColor: WoodenColors.darkShadow,
+      shadowColor: shadow,
       scrolledUnderElevation: _elevationHigh,
       titleTextStyle: TextStyle(
-        color: WoodenColors.darkOnPrimary,
+        color: onPrimary,
         fontSize: 20,
         fontWeight: FontWeight.w500,
         letterSpacing: _letterSpacing,
         fontFamily: 'Roboto',
       ),
-      iconTheme: IconThemeData(color: WoodenColors.darkOnPrimary, size: 24),
+      iconTheme: IconThemeData(color: onPrimary, size: 24),
     );
   }
 
@@ -341,27 +463,57 @@ class AppTheme {
   // CARD THEME
   // ===========================================================================
 
-  static CardThemeData _buildLightCardThemeData() {
+  static CardThemeData _buildLightCardThemeData(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (card, shadow, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightCard,
+            StarlightColors.lightShadow,
+            StarlightColors.lightBorder,
+          )
+        : (
+            WoodenColors.lightCard,
+            WoodenColors.lightShadow,
+            WoodenColors.lightBorder,
+          );
+
     return CardThemeData(
-      color: WoodenColors.lightCard,
+      color: card,
       elevation: _elevationLow,
-      shadowColor: WoodenColors.lightShadow,
+      shadowColor: shadow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusMedium),
-        side: const BorderSide(color: WoodenColors.lightBorder, width: 1.5),
+        side: BorderSide(color: border, width: 1.5),
       ),
       margin: const EdgeInsets.all(8.0),
     );
   }
 
-  static CardThemeData _buildDarkCardThemeData() {
+  static CardThemeData _buildDarkCardThemeData(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (card, shadow, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkCard,
+            StarlightColors.darkShadow,
+            StarlightColors.darkBorder,
+          )
+        : (
+            WoodenColors.darkCard,
+            WoodenColors.darkShadow,
+            WoodenColors.darkBorder,
+          );
+
     return CardThemeData(
-      color: WoodenColors.darkCard,
+      color: card,
       elevation: _elevationLow,
-      shadowColor: WoodenColors.darkShadow,
+      shadowColor: shadow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusMedium),
-        side: const BorderSide(color: WoodenColors.darkBorder, width: 1.5),
+        side: BorderSide(color: border, width: 1.5),
       ),
       margin: const EdgeInsets.all(8.0),
     );
@@ -373,19 +525,45 @@ class AppTheme {
 
   static ElevatedButtonThemeData _buildLightElevatedButtonTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (
+      primary,
+      onPrimary,
+      disabled,
+      disabledFg,
+      shadow,
+      border,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightPrimary,
+            StarlightColors.lightOnPrimary,
+            StarlightColors.lightDisabled,
+            StarlightColors.lightTextSecondary,
+            StarlightColors.lightShadow,
+            StarlightColors.lightBorder,
+          )
+        : (
+            WoodenColors.lightPrimary,
+            WoodenColors.lightOnPrimary,
+            WoodenColors.lightDisabled,
+            WoodenColors.lightTextSecondary,
+            WoodenColors.lightShadow,
+            WoodenColors.lightBorder,
+          );
+
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: WoodenColors.lightPrimary,
-        foregroundColor: WoodenColors.lightOnPrimary,
-        disabledBackgroundColor: WoodenColors.lightDisabled,
-        disabledForegroundColor: WoodenColors.lightTextSecondary,
+        backgroundColor: primary,
+        foregroundColor: onPrimary,
+        disabledBackgroundColor: disabled,
+        disabledForegroundColor: disabledFg,
         elevation: _elevationMedium,
-        shadowColor: WoodenColors.lightShadow,
+        shadowColor: shadow,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_borderRadiusSmall),
-          side: const BorderSide(color: WoodenColors.lightBorder, width: 1),
+          side: BorderSide(color: border, width: 1),
         ),
         textStyle: const TextStyle(
           fontSize: 14,
@@ -398,19 +576,45 @@ class AppTheme {
 
   static ElevatedButtonThemeData _buildDarkElevatedButtonTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (
+      primary,
+      onPrimary,
+      disabled,
+      disabledFg,
+      shadow,
+      border,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkPrimary,
+            StarlightColors.darkOnPrimary,
+            StarlightColors.darkDisabled,
+            StarlightColors.darkTextSecondary,
+            StarlightColors.darkShadow,
+            StarlightColors.darkBorder,
+          )
+        : (
+            WoodenColors.darkPrimary,
+            WoodenColors.darkOnPrimary,
+            WoodenColors.darkDisabled,
+            WoodenColors.darkTextSecondary,
+            WoodenColors.darkShadow,
+            WoodenColors.darkBorder,
+          );
+
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: WoodenColors.darkPrimary,
-        foregroundColor: WoodenColors.darkOnPrimary,
-        disabledBackgroundColor: WoodenColors.darkDisabled,
-        disabledForegroundColor: WoodenColors.darkTextSecondary,
+        backgroundColor: primary,
+        foregroundColor: onPrimary,
+        disabledBackgroundColor: disabled,
+        disabledForegroundColor: disabledFg,
         elevation: _elevationMedium,
-        shadowColor: WoodenColors.darkShadow,
+        shadowColor: shadow,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_borderRadiusSmall),
-          side: const BorderSide(color: WoodenColors.darkBorder, width: 1),
+          side: BorderSide(color: border, width: 1),
         ),
         textStyle: const TextStyle(
           fontSize: 14,
@@ -427,11 +631,16 @@ class AppTheme {
 
   static TextButtonThemeData _buildLightTextButtonTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (primary, disabled) = type == ColorSchemeType.starlight
+        ? (StarlightColors.lightPrimary, StarlightColors.lightDisabled)
+        : (WoodenColors.lightPrimary, WoodenColors.lightDisabled);
+
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: WoodenColors.lightPrimary,
-        disabledForegroundColor: WoodenColors.lightDisabled,
+        foregroundColor: primary,
+        disabledForegroundColor: disabled,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_borderRadiusSmall),
@@ -447,11 +656,18 @@ class AppTheme {
 
   static TextButtonThemeData _buildDarkTextButtonTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final accent = type == ColorSchemeType.starlight
+        ? StarlightColors.accentStar
+        : WoodenColors.accentAmber;
+
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: WoodenColors.accentAmber,
-        disabledForegroundColor: WoodenColors.darkDisabled,
+        foregroundColor: accent,
+        disabledForegroundColor: type == ColorSchemeType.starlight
+            ? StarlightColors.darkDisabled
+            : WoodenColors.darkDisabled,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_borderRadiusSmall),
@@ -471,12 +687,25 @@ class AppTheme {
 
   static OutlinedButtonThemeData _buildLightOutlinedButtonTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (primary, disabled, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightPrimary,
+            StarlightColors.lightDisabled,
+            StarlightColors.lightBorder,
+          )
+        : (
+            WoodenColors.lightPrimary,
+            WoodenColors.lightDisabled,
+            WoodenColors.lightBorder,
+          );
+
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: WoodenColors.lightPrimary,
-        disabledForegroundColor: WoodenColors.lightDisabled,
-        side: const BorderSide(color: WoodenColors.lightBorder, width: 1.5),
+        foregroundColor: primary,
+        disabledForegroundColor: disabled,
+        side: BorderSide(color: border, width: 1.5),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_borderRadiusSmall),
@@ -492,12 +721,25 @@ class AppTheme {
 
   static OutlinedButtonThemeData _buildDarkOutlinedButtonTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (accent, disabled, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.accentStar,
+            StarlightColors.darkDisabled,
+            StarlightColors.darkBorder,
+          )
+        : (
+            WoodenColors.accentAmber,
+            WoodenColors.darkDisabled,
+            WoodenColors.darkBorder,
+          );
+
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: WoodenColors.accentAmber,
-        disabledForegroundColor: WoodenColors.darkDisabled,
-        side: const BorderSide(color: WoodenColors.darkBorder, width: 1.5),
+        foregroundColor: accent,
+        disabledForegroundColor: disabled,
+        side: BorderSide(color: border, width: 1.5),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_borderRadiusSmall),
@@ -517,105 +759,127 @@ class AppTheme {
 
   static InputDecorationTheme _buildLightInputDecorationTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (
+      surface,
+      border,
+      primary,
+      error,
+      disabled,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightSurface,
+            StarlightColors.lightBorder,
+            StarlightColors.lightPrimary,
+            StarlightColors.lightError,
+            StarlightColors.lightDisabled,
+          )
+        : (
+            WoodenColors.lightSurface,
+            WoodenColors.lightBorder,
+            WoodenColors.lightPrimary,
+            WoodenColors.lightError,
+            WoodenColors.lightDisabled,
+          );
+
     return InputDecorationTheme(
       filled: true,
-      fillColor: WoodenColors.lightSurface,
+      fillColor: surface,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.lightBorder,
-          width: 1.5,
-        ),
+        borderSide: BorderSide(color: border, width: 1.5),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.lightBorder,
-          width: 1.5,
-        ),
+        borderSide: BorderSide(color: border, width: 1.5),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.lightPrimary,
-          width: 2,
-        ),
+        borderSide: BorderSide(color: primary, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.lightError,
-          width: 1.5,
-        ),
+        borderSide: BorderSide(color: error, width: 1.5),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(color: WoodenColors.lightError, width: 2),
+        borderSide: BorderSide(color: error, width: 2),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.lightDisabled,
-          width: 1,
-        ),
+        borderSide: BorderSide(color: disabled, width: 1),
       ),
       labelStyle: TextStyle(color: colorScheme.onSurfaceVariant, fontSize: 14),
       hintStyle: TextStyle(
         color: colorScheme.onSurfaceVariant.withAlpha(153),
         fontSize: 14,
       ),
-      errorStyle: const TextStyle(color: WoodenColors.lightError, fontSize: 12),
+      errorStyle: TextStyle(color: error, fontSize: 12),
     );
   }
 
   static InputDecorationTheme _buildDarkInputDecorationTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (
+      surface,
+      border,
+      accent,
+      error,
+      disabled,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkSurface,
+            StarlightColors.darkBorder,
+            StarlightColors.accentStar,
+            StarlightColors.darkError,
+            StarlightColors.darkDisabled,
+          )
+        : (
+            WoodenColors.darkSurface,
+            WoodenColors.darkBorder,
+            WoodenColors.accentAmber,
+            WoodenColors.darkError,
+            WoodenColors.darkDisabled,
+          );
+
     return InputDecorationTheme(
       filled: true,
-      fillColor: WoodenColors.darkSurface,
+      fillColor: surface,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.darkBorder,
-          width: 1.5,
-        ),
+        borderSide: BorderSide(color: border, width: 1.5),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.darkBorder,
-          width: 1.5,
-        ),
+        borderSide: BorderSide(color: border, width: 1.5),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(color: WoodenColors.accentAmber, width: 2),
+        borderSide: BorderSide(color: accent, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(color: WoodenColors.darkError, width: 1.5),
+        borderSide: BorderSide(color: error, width: 1.5),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(color: WoodenColors.darkError, width: 2),
+        borderSide: BorderSide(color: error, width: 2),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        borderSide: const BorderSide(
-          color: WoodenColors.darkDisabled,
-          width: 1,
-        ),
+        borderSide: BorderSide(color: disabled, width: 1),
       ),
       labelStyle: TextStyle(color: colorScheme.onSurfaceVariant, fontSize: 14),
       hintStyle: TextStyle(
         color: colorScheme.onSurfaceVariant.withAlpha(153),
         fontSize: 14,
       ),
-      errorStyle: const TextStyle(color: WoodenColors.darkError, fontSize: 12),
+      errorStyle: TextStyle(color: error, fontSize: 12),
     );
   }
 
@@ -625,10 +889,23 @@ class AppTheme {
 
   static FloatingActionButtonThemeData _buildLightFabTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (accent, textPrimary, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.accentStar,
+            StarlightColors.lightTextPrimary,
+            StarlightColors.lightBorder,
+          )
+        : (
+            WoodenColors.accentAmber,
+            WoodenColors.lightTextPrimary,
+            WoodenColors.lightBorder,
+          );
+
     return FloatingActionButtonThemeData(
-      backgroundColor: WoodenColors.accentAmber,
-      foregroundColor: WoodenColors.lightTextPrimary,
+      backgroundColor: accent,
+      foregroundColor: textPrimary,
       elevation: _elevationHigh,
       focusElevation: _elevationHigh,
       hoverElevation: _elevationHigh + 2,
@@ -636,17 +913,30 @@ class AppTheme {
       highlightElevation: _elevationHigh + 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusLarge),
-        side: const BorderSide(color: WoodenColors.lightBorder, width: 1.5),
+        side: BorderSide(color: border, width: 1.5),
       ),
     );
   }
 
   static FloatingActionButtonThemeData _buildDarkFabTheme(
     ColorScheme colorScheme,
+    ColorSchemeType type,
   ) {
+    final (accent, textPrimary, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.accentStar,
+            StarlightColors.darkTextPrimary,
+            StarlightColors.darkBorder,
+          )
+        : (
+            WoodenColors.accentAmber,
+            WoodenColors.darkTextPrimary,
+            WoodenColors.darkBorder,
+          );
+
     return FloatingActionButtonThemeData(
-      backgroundColor: WoodenColors.accentAmber,
-      foregroundColor: WoodenColors.darkTextPrimary,
+      backgroundColor: accent,
+      foregroundColor: textPrimary,
       elevation: _elevationHigh,
       focusElevation: _elevationHigh,
       hoverElevation: _elevationHigh + 2,
@@ -654,7 +944,7 @@ class AppTheme {
       highlightElevation: _elevationHigh + 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusLarge),
-        side: const BorderSide(color: WoodenColors.darkBorder, width: 1.5),
+        side: BorderSide(color: border, width: 1.5),
       ),
     );
   }
@@ -675,18 +965,26 @@ class AppTheme {
   // DIVIDER THEME
   // ===========================================================================
 
-  static DividerThemeData _buildLightDividerTheme() {
+  static DividerThemeData _buildLightDividerTheme(ColorSchemeType type) {
+    final divider = type == ColorSchemeType.starlight
+        ? StarlightColors.lightDivider
+        : WoodenColors.lightDivider;
+
     return DividerThemeData(
-      color: WoodenColors.lightDivider,
+      color: divider,
       thickness: 1,
       indent: 16,
       endIndent: 16,
     );
   }
 
-  static DividerThemeData _buildDarkDividerTheme() {
+  static DividerThemeData _buildDarkDividerTheme(ColorSchemeType type) {
+    final divider = type == ColorSchemeType.starlight
+        ? StarlightColors.darkDivider
+        : WoodenColors.darkDivider;
+
     return DividerThemeData(
-      color: WoodenColors.darkDivider,
+      color: divider,
       thickness: 1,
       indent: 16,
       endIndent: 16,
@@ -697,45 +995,83 @@ class AppTheme {
   // DIALOG THEME
   // ===========================================================================
 
-  static DialogThemeData _buildLightDialogThemeData() {
+  static DialogThemeData _buildLightDialogThemeData(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      card,
+      shadow,
+      border,
+      textPrimary,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightCard,
+            StarlightColors.lightShadow,
+            StarlightColors.lightBorder,
+            StarlightColors.lightTextPrimary,
+          )
+        : (
+            WoodenColors.lightCard,
+            WoodenColors.lightShadow,
+            WoodenColors.lightBorder,
+            WoodenColors.lightTextPrimary,
+          );
+
     return DialogThemeData(
-      backgroundColor: WoodenColors.lightCard,
+      backgroundColor: card,
       elevation: _elevationHigh,
-      shadowColor: WoodenColors.lightShadow,
+      shadowColor: shadow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusLarge),
-        side: const BorderSide(color: WoodenColors.lightBorder, width: 2),
+        side: BorderSide(color: border, width: 2),
       ),
-      titleTextStyle: const TextStyle(
-        color: WoodenColors.lightTextPrimary,
+      titleTextStyle: TextStyle(
+        color: textPrimary,
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
-      contentTextStyle: const TextStyle(
-        color: WoodenColors.lightTextPrimary,
-        fontSize: 16,
-      ),
+      contentTextStyle: TextStyle(color: textPrimary, fontSize: 16),
     );
   }
 
-  static DialogThemeData _buildDarkDialogThemeData() {
+  static DialogThemeData _buildDarkDialogThemeData(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      card,
+      shadow,
+      border,
+      textPrimary,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkCard,
+            StarlightColors.darkShadow,
+            StarlightColors.darkBorder,
+            StarlightColors.darkTextPrimary,
+          )
+        : (
+            WoodenColors.darkCard,
+            WoodenColors.darkShadow,
+            WoodenColors.darkBorder,
+            WoodenColors.darkTextPrimary,
+          );
+
     return DialogThemeData(
-      backgroundColor: WoodenColors.darkCard,
+      backgroundColor: card,
       elevation: _elevationHigh,
-      shadowColor: WoodenColors.darkShadow,
+      shadowColor: shadow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusLarge),
-        side: const BorderSide(color: WoodenColors.darkBorder, width: 2),
+        side: BorderSide(color: border, width: 2),
       ),
-      titleTextStyle: const TextStyle(
-        color: WoodenColors.darkTextPrimary,
+      titleTextStyle: TextStyle(
+        color: textPrimary,
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
-      contentTextStyle: const TextStyle(
-        color: WoodenColors.darkTextPrimary,
-        fontSize: 16,
-      ),
+      contentTextStyle: TextStyle(color: textPrimary, fontSize: 16),
     );
   }
 
@@ -743,31 +1079,75 @@ class AppTheme {
   // SNACKBAR THEME
   // ===========================================================================
 
-  static SnackBarThemeData _buildLightSnackbarTheme(ColorScheme colorScheme) {
+  static SnackBarThemeData _buildLightSnackbarTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      surface,
+      primary,
+      disabled,
+      border,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightSurface,
+            StarlightColors.lightPrimary,
+            StarlightColors.lightDisabled,
+            StarlightColors.lightBorder,
+          )
+        : (
+            WoodenColors.lightSurface,
+            WoodenColors.lightPrimary,
+            WoodenColors.lightDisabled,
+            WoodenColors.lightBorder,
+          );
+
     return SnackBarThemeData(
-      backgroundColor: WoodenColors.lightSurface,
+      backgroundColor: surface,
       contentTextStyle: TextStyle(color: colorScheme.onSurface, fontSize: 14),
-      actionTextColor: WoodenColors.lightPrimary,
-      disabledActionTextColor: WoodenColors.lightDisabled,
+      actionTextColor: primary,
+      disabledActionTextColor: disabled,
       elevation: _elevationMedium,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        side: const BorderSide(color: WoodenColors.lightBorder, width: 1),
+        side: BorderSide(color: border, width: 1),
       ),
       behavior: SnackBarBehavior.floating,
     );
   }
 
-  static SnackBarThemeData _buildDarkSnackbarTheme(ColorScheme colorScheme) {
+  static SnackBarThemeData _buildDarkSnackbarTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      surface,
+      accent,
+      disabled,
+      border,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkSurface,
+            StarlightColors.accentStar,
+            StarlightColors.darkDisabled,
+            StarlightColors.darkBorder,
+          )
+        : (
+            WoodenColors.darkSurface,
+            WoodenColors.accentAmber,
+            WoodenColors.darkDisabled,
+            WoodenColors.darkBorder,
+          );
+
     return SnackBarThemeData(
-      backgroundColor: WoodenColors.darkSurface,
+      backgroundColor: surface,
       contentTextStyle: TextStyle(color: colorScheme.onSurface, fontSize: 14),
-      actionTextColor: WoodenColors.accentAmber,
-      disabledActionTextColor: WoodenColors.darkDisabled,
+      actionTextColor: accent,
+      disabledActionTextColor: disabled,
       elevation: _elevationMedium,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        side: const BorderSide(color: WoodenColors.darkBorder, width: 1),
+        side: BorderSide(color: border, width: 1),
       ),
       behavior: SnackBarBehavior.floating,
     );
@@ -777,30 +1157,60 @@ class AppTheme {
   // BOTTOM SHEET THEME
   // ===========================================================================
 
-  static BottomSheetThemeData _buildLightBottomSheetTheme() {
+  static BottomSheetThemeData _buildLightBottomSheetTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (card, shadow, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightCard,
+            StarlightColors.lightShadow,
+            StarlightColors.lightBorder,
+          )
+        : (
+            WoodenColors.lightCard,
+            WoodenColors.lightShadow,
+            WoodenColors.lightBorder,
+          );
+
     return BottomSheetThemeData(
-      backgroundColor: WoodenColors.lightCard,
+      backgroundColor: card,
       elevation: _elevationHigh,
-      shadowColor: WoodenColors.lightShadow,
+      shadowColor: shadow,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(_borderRadiusLarge),
         ),
-        side: const BorderSide(color: WoodenColors.lightBorder, width: 1.5),
+        side: BorderSide(color: border, width: 1.5),
       ),
     );
   }
 
-  static BottomSheetThemeData _buildDarkBottomSheetTheme() {
+  static BottomSheetThemeData _buildDarkBottomSheetTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (card, shadow, border) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkCard,
+            StarlightColors.darkShadow,
+            StarlightColors.darkBorder,
+          )
+        : (
+            WoodenColors.darkCard,
+            WoodenColors.darkShadow,
+            WoodenColors.darkBorder,
+          );
+
     return BottomSheetThemeData(
-      backgroundColor: WoodenColors.darkCard,
+      backgroundColor: card,
       elevation: _elevationHigh,
-      shadowColor: WoodenColors.darkShadow,
+      shadowColor: shadow,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(_borderRadiusLarge),
         ),
-        side: const BorderSide(color: WoodenColors.darkBorder, width: 1.5),
+        side: BorderSide(color: border, width: 1.5),
       ),
     );
   }
@@ -809,12 +1219,37 @@ class AppTheme {
   // CHIP THEME
   // ===========================================================================
 
-  static ChipThemeData _buildLightChipTheme(ColorScheme colorScheme) {
+  static ChipThemeData _buildLightChipTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      surface,
+      disabled,
+      primary,
+      secondary,
+      border,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightSurface,
+            StarlightColors.lightDisabled,
+            StarlightColors.lightPrimary,
+            StarlightColors.lightSecondary,
+            StarlightColors.lightBorder,
+          )
+        : (
+            WoodenColors.lightSurface,
+            WoodenColors.lightDisabled,
+            WoodenColors.lightPrimary,
+            WoodenColors.lightSecondary,
+            WoodenColors.lightBorder,
+          );
+
     return ChipThemeData(
-      backgroundColor: WoodenColors.lightSurface,
-      disabledColor: WoodenColors.lightDisabled,
-      selectedColor: WoodenColors.lightPrimary.withAlpha(51),
-      secondarySelectedColor: WoodenColors.lightSecondary.withAlpha(51),
+      backgroundColor: surface,
+      disabledColor: disabled,
+      selectedColor: primary.withAlpha(51),
+      secondarySelectedColor: secondary.withAlpha(51),
       labelStyle: TextStyle(color: colorScheme.onSurface, fontSize: 14),
       secondaryLabelStyle: TextStyle(
         color: colorScheme.onSurface,
@@ -823,17 +1258,41 @@ class AppTheme {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        side: const BorderSide(color: WoodenColors.lightBorder, width: 1),
+        side: BorderSide(color: border, width: 1),
       ),
     );
   }
 
-  static ChipThemeData _buildDarkChipTheme(ColorScheme colorScheme) {
+  static ChipThemeData _buildDarkChipTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      surface,
+      disabled,
+      accent,
+      border,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkSurface,
+            StarlightColors.darkDisabled,
+            StarlightColors.accentStar,
+            StarlightColors.darkBorder,
+          )
+        : (
+            WoodenColors.darkSurface,
+            WoodenColors.darkDisabled,
+            WoodenColors.accentAmber,
+            WoodenColors.darkBorder,
+          );
+
     return ChipThemeData(
-      backgroundColor: WoodenColors.darkSurface,
-      disabledColor: WoodenColors.darkDisabled,
-      selectedColor: WoodenColors.accentAmber.withAlpha(51),
-      secondarySelectedColor: WoodenColors.accentCopper.withAlpha(51),
+      backgroundColor: surface,
+      disabledColor: disabled,
+      selectedColor: accent.withAlpha(51),
+      secondarySelectedColor: type == ColorSchemeType.starlight
+          ? StarlightColors.accentNebula.withAlpha(51)
+          : WoodenColors.accentCopper.withAlpha(51),
       labelStyle: TextStyle(color: colorScheme.onSurface, fontSize: 14),
       secondaryLabelStyle: TextStyle(
         color: colorScheme.onSurface,
@@ -842,7 +1301,7 @@ class AppTheme {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        side: const BorderSide(color: WoodenColors.darkBorder, width: 1),
+        side: BorderSide(color: border, width: 1),
       ),
     );
   }
@@ -851,48 +1310,77 @@ class AppTheme {
   // SWITCH THEME
   // ===========================================================================
 
-  static SwitchThemeData _buildLightSwitchTheme(ColorScheme colorScheme) {
+  static SwitchThemeData _buildLightSwitchTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (primary, textSecondary, divider) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightPrimary,
+            StarlightColors.lightTextSecondary,
+            StarlightColors.lightDivider,
+          )
+        : (
+            WoodenColors.lightPrimary,
+            WoodenColors.lightTextSecondary,
+            WoodenColors.lightDivider,
+          );
+
     return SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return WoodenColors.lightPrimary;
+          return primary;
         }
-        return WoodenColors.lightTextSecondary;
+        return textSecondary;
       }),
       trackColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return WoodenColors.lightPrimary.withAlpha(128);
+          return primary.withAlpha(128);
         }
-        return WoodenColors.lightDivider;
+        return divider;
       }),
       overlayColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return WoodenColors.lightPrimary.withAlpha(51);
+          return primary.withAlpha(51);
         }
-        return WoodenColors.lightTextSecondary.withAlpha(51);
+        return textSecondary.withAlpha(51);
       }),
     );
   }
 
-  static SwitchThemeData _buildDarkSwitchTheme(ColorScheme colorScheme) {
+  static SwitchThemeData _buildDarkSwitchTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final accent = type == ColorSchemeType.starlight
+        ? StarlightColors.accentStar
+        : WoodenColors.accentAmber;
+
     return SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return WoodenColors.accentAmber;
+          return accent;
         }
-        return WoodenColors.darkTextSecondary;
+        return type == ColorSchemeType.starlight
+            ? StarlightColors.darkTextSecondary
+            : WoodenColors.darkTextSecondary;
       }),
       trackColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return WoodenColors.accentAmber.withAlpha(128);
+          return accent.withAlpha(128);
         }
-        return WoodenColors.darkDivider;
+        return type == ColorSchemeType.starlight
+            ? StarlightColors.darkDivider
+            : WoodenColors.darkDivider;
       }),
       overlayColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return WoodenColors.accentAmber.withAlpha(51);
+          return accent.withAlpha(51);
         }
-        return WoodenColors.darkTextSecondary.withAlpha(51);
+        return (type == ColorSchemeType.starlight
+                ? StarlightColors.darkTextSecondary
+                : WoodenColors.darkTextSecondary)
+            .withAlpha(51);
       }),
     );
   }
@@ -901,13 +1389,28 @@ class AppTheme {
   // SLIDER THEME
   // ===========================================================================
 
-  static SliderThemeData _buildLightSliderTheme(ColorScheme colorScheme) {
+  static SliderThemeData _buildLightSliderTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (primary, divider, accent) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightPrimary,
+            StarlightColors.lightDivider,
+            StarlightColors.accentStar,
+          )
+        : (
+            WoodenColors.lightPrimary,
+            WoodenColors.lightDivider,
+            WoodenColors.accentAmber,
+          );
+
     return SliderThemeData(
-      activeTrackColor: WoodenColors.lightPrimary,
-      inactiveTrackColor: WoodenColors.lightDivider,
-      thumbColor: WoodenColors.accentAmber,
-      overlayColor: WoodenColors.accentAmber.withAlpha(51),
-      valueIndicatorColor: WoodenColors.lightSurface,
+      activeTrackColor: primary,
+      inactiveTrackColor: divider,
+      thumbColor: accent,
+      overlayColor: accent.withAlpha(51),
+      valueIndicatorColor: colorScheme.surface,
       valueIndicatorTextStyle: TextStyle(
         color: colorScheme.onSurface,
         fontSize: 14,
@@ -918,13 +1421,28 @@ class AppTheme {
     );
   }
 
-  static SliderThemeData _buildDarkSliderTheme(ColorScheme colorScheme) {
+  static SliderThemeData _buildDarkSliderTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final accent = type == ColorSchemeType.starlight
+        ? StarlightColors.accentStar
+        : WoodenColors.accentAmber;
+
     return SliderThemeData(
-      activeTrackColor: WoodenColors.accentAmber,
-      inactiveTrackColor: WoodenColors.darkDivider,
-      thumbColor: WoodenColors.accentCopper,
-      overlayColor: WoodenColors.accentCopper.withAlpha(51),
-      valueIndicatorColor: WoodenColors.darkSurface,
+      activeTrackColor: accent,
+      inactiveTrackColor: type == ColorSchemeType.starlight
+          ? StarlightColors.darkDivider
+          : WoodenColors.darkDivider,
+      thumbColor: type == ColorSchemeType.starlight
+          ? StarlightColors.accentNebula
+          : WoodenColors.accentCopper,
+      overlayColor:
+          (type == ColorSchemeType.starlight
+                  ? StarlightColors.accentNebula
+                  : WoodenColors.accentCopper)
+              .withAlpha(51),
+      valueIndicatorColor: colorScheme.surface,
       valueIndicatorTextStyle: TextStyle(
         color: colorScheme.onSurface,
         fontSize: 14,
@@ -939,47 +1457,85 @@ class AppTheme {
   // TOOLTIP THEME
   // ===========================================================================
 
-  static TooltipThemeData _buildLightTooltipTheme() {
+  static TooltipThemeData _buildLightTooltipTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      surface,
+      border,
+      shadow,
+      textPrimary,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.lightSurface,
+            StarlightColors.lightBorder,
+            StarlightColors.lightShadow,
+            StarlightColors.lightTextPrimary,
+          )
+        : (
+            WoodenColors.lightSurface,
+            WoodenColors.lightBorder,
+            WoodenColors.lightShadow,
+            WoodenColors.lightTextPrimary,
+          );
+
     return TooltipThemeData(
       decoration: BoxDecoration(
-        color: WoodenColors.lightSurface,
+        color: surface,
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        border: Border.all(color: WoodenColors.lightBorder, width: 1),
+        border: Border.all(color: border, width: 1),
         boxShadow: [
           BoxShadow(
-            color: WoodenColors.lightShadow.withAlpha(77),
+            color: shadow.withAlpha(77),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
         ],
       ),
-      textStyle: const TextStyle(
-        color: WoodenColors.lightTextPrimary,
-        fontSize: 12,
-      ),
+      textStyle: TextStyle(color: textPrimary, fontSize: 12),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       preferBelow: true,
     );
   }
 
-  static TooltipThemeData _buildDarkTooltipTheme() {
+  static TooltipThemeData _buildDarkTooltipTheme(
+    ColorScheme colorScheme,
+    ColorSchemeType type,
+  ) {
+    final (
+      surface,
+      border,
+      shadow,
+      textPrimary,
+    ) = type == ColorSchemeType.starlight
+        ? (
+            StarlightColors.darkSurface,
+            StarlightColors.darkBorder,
+            StarlightColors.darkShadow,
+            StarlightColors.darkTextPrimary,
+          )
+        : (
+            WoodenColors.darkSurface,
+            WoodenColors.darkBorder,
+            WoodenColors.darkShadow,
+            WoodenColors.darkTextPrimary,
+          );
+
     return TooltipThemeData(
       decoration: BoxDecoration(
-        color: WoodenColors.darkSurface,
+        color: surface,
         borderRadius: BorderRadius.circular(_borderRadiusSmall),
-        border: Border.all(color: WoodenColors.darkBorder, width: 1),
+        border: Border.all(color: border, width: 1),
         boxShadow: [
           BoxShadow(
-            color: WoodenColors.darkShadow.withAlpha(128),
+            color: shadow.withAlpha(128),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
         ],
       ),
-      textStyle: const TextStyle(
-        color: WoodenColors.darkTextPrimary,
-        fontSize: 12,
-      ),
+      textStyle: TextStyle(color: textPrimary, fontSize: 12),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       preferBelow: true,
     );

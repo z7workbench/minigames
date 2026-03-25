@@ -1267,6 +1267,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Captured!'**
   String get mc_captured;
+
+  /// Color scheme setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Color Scheme'**
+  String get colorScheme;
+
+  /// Wooden color scheme option
+  ///
+  /// In en, this message translates to:
+  /// **'Wooden'**
+  String get woodenScheme;
+
+  /// Starlight color scheme option
+  ///
+  /// In en, this message translates to:
+  /// **'Starlight'**
+  String get starlightScheme;
 }
 
 class _AppLocalizationsDelegate

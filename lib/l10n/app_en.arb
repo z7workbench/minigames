@@ -830,5 +830,17 @@
   "mc_captured": "Captured!",
   "@mc_captured": {
     "description": "Capture message"
+  },
+  "colorScheme": "Color Scheme",
+  "@colorScheme": {
+    "description": "Color scheme setting label"
+  },
+  "woodenScheme": "Wooden",
+  "@woodenScheme": {
+    "description": "Wooden color scheme option"
+  },
+  "starlightScheme": "Starlight",
+  "@starlightScheme": {
+    "description": "Starlight color scheme option"
   }
 }

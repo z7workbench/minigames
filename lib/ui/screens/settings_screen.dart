@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../providers/settings_provider.dart';
+import '../../ui/theme/starlight_colors.dart';
 import '../../ui/theme/theme_provider.dart';
 import '../../ui/theme/wooden_colors.dart';
 import '../widgets/theme_toggle.dart';
@@ -73,8 +74,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 _buildSectionCard(
                   context: context,
                   icon: isDark ? Icons.dark_mode : Icons.light_mode,
-                  title: l10n.darkMode,
+                  title: l10n.theme,
                   child: _ThemeSetting(),
+                ),
+
+                const SizedBox(height: 16),
+
+                // Color Scheme Section
+                _buildSectionCard(
+                  context: context,
+                  icon: Icons.palette,
+                  title: l10n.colorScheme,
+                  child: _ColorSchemeSetting(),
                 ),
 
                 const SizedBox(height: 16),
@@ -292,7 +303,7 @@ class _ThemeSetting extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Text(
-                    l10n.theme,
+                    l10n.darkMode,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: isDark
                           ? WoodenColors.darkTextSecondary
@@ -485,6 +496,125 @@ class _SoundSetting extends ConsumerWidget {
               : WoodenColors.lightPrimary,
         ),
       ],
+    );
+  }
+}
+
+/// Color scheme setting widget with segmented button selection.
+class _ColorSchemeSetting extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorSchemeAsync = ref.watch(colorSchemeNotifierProvider);
+    final theme = Theme.of(context);
+
+    return colorSchemeAsync.when(
+      data: (colorScheme) {
+        return Container(
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: theme.colorScheme.outline, width: 1.5),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: _ColorSchemeOption(
+                  label: l10n.woodenScheme,
+                  icon: Icons.forest,
+                  isSelected: colorScheme == ColorSchemeType.wooden,
+                  onTap: () => ref
+                      .read(colorSchemeNotifierProvider.notifier)
+                      .setColorScheme(ColorSchemeType.wooden),
+                  previewColors: const [
+                    WoodenColors.lightPrimary,
+                    WoodenColors.lightSecondary,
+                  ],
+                ),
+              ),
+              Container(
+                width: 1,
+                height: 40,
+                color: theme.colorScheme.outlineVariant,
+              ),
+              Expanded(
+                child: _ColorSchemeOption(
+                  label: l10n.starlightScheme,
+                  icon: Icons.auto_awesome,
+                  isSelected: colorScheme == ColorSchemeType.starlight,
+                  onTap: () => ref
+                      .read(colorSchemeNotifierProvider.notifier)
+                      .setColorScheme(ColorSchemeType.starlight),
+                  previewColors: const [
+                    StarlightColors.accentStar,
+                    StarlightColors.accentCosmos,
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, st) => Text(l10n.error),
+    );
+  }
+}
+
+/// Individual color scheme option button.
+class _ColorSchemeOption extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final bool isSelected;
+  final VoidCallback onTap;
+  final List<Color> previewColors;
+
+  const _ColorSchemeOption({
+    required this.label,
+    required this.icon,
+    required this.isSelected,
+    required this.onTap,
+    required this.previewColors,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(6),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? previewColors[0].withAlpha(40)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: isSelected
+                  ? previewColors[0]
+                  : theme.colorScheme.onSurface.withAlpha(128),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                color: isSelected
+                    ? previewColors[0]
+                    : theme.colorScheme.onSurface.withAlpha(128),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

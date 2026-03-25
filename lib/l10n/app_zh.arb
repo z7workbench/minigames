@@ -830,5 +830,17 @@
   "mc_captured": "捕获！",
   "@mc_captured": {
     "description": "Capture message"
+  },
+  "colorScheme": "配色方案",
+  "@colorScheme": {
+    "description": "Color scheme setting label"
+  },
+  "woodenScheme": "木质风格",
+  "@woodenScheme": {
+    "description": "Wooden color scheme option"
+  },
+  "starlightScheme": "星空风格",
+  "@starlightScheme": {
+    "description": "Starlight color scheme option"
   }
 }

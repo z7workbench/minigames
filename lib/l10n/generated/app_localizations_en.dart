@@ -619,4 +619,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mc_captured => 'Captured!';
+
+  @override
+  String get colorScheme => 'Color Scheme';
+
+  @override
+  String get woodenScheme => 'Wooden';
+
+  @override
+  String get starlightScheme => 'Starlight';
 }

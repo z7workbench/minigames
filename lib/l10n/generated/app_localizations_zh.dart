@@ -608,4 +608,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mc_captured => '捕获！';
+
+  @override
+  String get colorScheme => '配色方案';
+
+  @override
+  String get woodenScheme => '木质风格';
+
+  @override
+  String get starlightScheme => '星空风格';
 }
