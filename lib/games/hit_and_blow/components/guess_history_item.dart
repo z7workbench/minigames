@@ -17,13 +17,17 @@ class GuessHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: WoodenColors.lightBackground,
+        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightBackground,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: WoodenColors.lightSecondary),
+        border: Border.all(
+          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightSecondary,
+        ),
       ),
       child: Row(
         children: [
@@ -37,14 +41,18 @@ class GuessHistoryItem extends StatelessWidget {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: WoodenColors.lightPrimary,
+                    color: isDark
+                        ? WoodenColors.darkPrimary
+                        : WoodenColors.lightPrimary,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Center(
                     child: Text(
                       number > 0 ? number.toString() : '',
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: isDark
+                            ? WoodenColors.darkOnPrimary
+                            : Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -58,17 +66,17 @@ class GuessHistoryItem extends StatelessWidget {
             children: [
               ...List.generate(
                 hits,
-                (_) => const Icon(
+                (_) => Icon(
                   Icons.check_circle,
-                  color: Colors.green,
+                  color: isDark ? WoodenColors.darkSuccess : Colors.green,
                   size: 16,
                 ),
               ),
               ...List.generate(
                 blows,
-                (_) => const Icon(
+                (_) => Icon(
                   Icons.check_circle_outline,
-                  color: Colors.grey,
+                  color: isDark ? WoodenColors.darkTextSecondary : Colors.grey,
                   size: 16,
                 ),
               ),

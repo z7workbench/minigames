@@ -15,15 +15,19 @@ class NumberSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: isSelected
             ? WoodenColors.accentAmber
-            : WoodenColors.lightPrimary,
+            : (isDark ? WoodenColors.darkPrimary : WoodenColors.lightPrimary),
         shape: BoxShape.circle,
         border: Border.all(
-          color: isSelected ? WoodenColors.lightSecondary : Colors.transparent,
+          color: isSelected
+              ? WoodenColors.accentAmber
+              : (isDark ? WoodenColors.darkBorder : Colors.transparent),
           width: 2,
         ),
       ),
@@ -38,8 +42,10 @@ class NumberSelector extends StatelessWidget {
             child: Center(
               child: Text(
                 number.toString(),
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: isSelected
+                      ? Colors.black
+                      : (isDark ? WoodenColors.darkOnPrimary : Colors.white),
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                 ),

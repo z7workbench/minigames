@@ -102,6 +102,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
     final state = ref.watch(hitAndBlowStateProviderProvider);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     // Show result dialog when game ends
     if ((state.status == GameStatus.won || state.status == GameStatus.lost) &&
@@ -115,11 +116,17 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
     final maxDigit = currentDifficulty == Difficulty.easy ? 6 : 8;
 
     return Scaffold(
-      backgroundColor: WoodenColors.lightBackground,
+      backgroundColor: isDark
+          ? WoodenColors.darkBackground
+          : WoodenColors.lightBackground,
       appBar: AppBar(
         title: Text(localization.game_hit_and_blow),
-        backgroundColor: WoodenColors.lightPrimary,
-        foregroundColor: Colors.white,
+        backgroundColor: isDark
+            ? WoodenColors.darkPrimary
+            : WoodenColors.lightPrimary,
+        foregroundColor: isDark
+            ? WoodenColors.darkOnPrimary
+            : WoodenColors.lightOnPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -154,9 +161,15 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: WoodenColors.lightSurface,
+                  color: isDark
+                      ? WoodenColors.darkSurface
+                      : WoodenColors.lightSurface,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: WoodenColors.lightSecondary),
+                  border: Border.all(
+                    color: isDark
+                        ? WoodenColors.darkBorder
+                        : WoodenColors.lightSecondary,
+                  ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -169,16 +182,26 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
                       height: 50,
                       decoration: BoxDecoration(
                         color: hasValue
-                            ? WoodenColors.lightPrimary
-                            : WoodenColors.lightCard,
+                            ? (isDark
+                                  ? WoodenColors.darkPrimary
+                                  : WoodenColors.lightPrimary)
+                            : (isDark
+                                  ? WoodenColors.darkCard
+                                  : WoodenColors.lightCard),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: WoodenColors.lightSecondary),
+                        border: Border.all(
+                          color: isDark
+                              ? WoodenColors.darkBorder
+                              : WoodenColors.lightSecondary,
+                        ),
                       ),
                       child: Center(
                         child: Text(
                           hasValue ? value.toString() : '',
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: isDark
+                                ? WoodenColors.darkOnPrimary
+                                : Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
@@ -196,8 +219,12 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
                     ? _submitGuess
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: WoodenColors.lightPrimary,
-                  foregroundColor: Colors.white,
+                  backgroundColor: isDark
+                      ? WoodenColors.darkPrimary
+                      : WoodenColors.lightPrimary,
+                  foregroundColor: isDark
+                      ? WoodenColors.darkOnPrimary
+                      : Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
                     vertical: 12,
@@ -227,7 +254,9 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
               TextButton(
                 onPressed: currentGuess.isNotEmpty ? _clearLastNumber : null,
                 style: TextButton.styleFrom(
-                  foregroundColor: WoodenColors.lightSecondary,
+                  foregroundColor: isDark
+                      ? WoodenColors.darkTextSecondary
+                      : WoodenColors.lightSecondary,
                 ),
                 child: Text(localization.hnb_clear),
               ),
@@ -240,7 +269,9 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
                   state.maxAttempts,
                 ),
                 style: TextStyle(
-                  color: WoodenColors.lightTextPrimary,
+                  color: isDark
+                      ? WoodenColors.darkTextPrimary
+                      : WoodenColors.lightTextPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
