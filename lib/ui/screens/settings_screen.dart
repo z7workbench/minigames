@@ -11,9 +11,8 @@ import '../widgets/theme_toggle.dart';
 ///
 /// This screen provides a wooden-styled interface for configuring:
 /// - Language (English/Chinese)
-/// - Theme (Light/Dark/System)
+/// - Dark Mode (Light/Dark/System)
 /// - Sound (On/Off)
-/// - Difficulty (Easy/Normal/Hard)
 /// - Fullscreen (Desktop only)
 /// - About (App version and name)
 ///
@@ -74,7 +73,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 _buildSectionCard(
                   context: context,
                   icon: isDark ? Icons.dark_mode : Icons.light_mode,
-                  title: l10n.theme,
+                  title: l10n.darkMode,
                   child: _ThemeSetting(),
                 ),
 
@@ -86,16 +85,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   icon: Icons.volume_up,
                   title: l10n.sound,
                   child: _SoundSetting(),
-                ),
-
-                const SizedBox(height: 16),
-
-                // Difficulty Section
-                _buildSectionCard(
-                  context: context,
-                  icon: Icons.trending_up,
-                  title: l10n.difficulty,
-                  child: _DifficultySetting(),
                 ),
 
                 const SizedBox(height: 16),
@@ -413,30 +402,16 @@ class _ThemeOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(6),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+      child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         decoration: BoxDecoration(
-          gradient: isSelected
-              ? LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: isDark
-                      ? [
-                          WoodenColors.accentAmber.withAlpha(77),
-                          WoodenColors.accentCopper.withAlpha(51),
-                        ]
-                      : [
-                          WoodenColors.lightPrimary.withAlpha(77),
-                          WoodenColors.lightSecondary.withAlpha(51),
-                        ],
-                )
-              : null,
+          color: isSelected
+              ? WoodenColors.accentAmber.withAlpha(40)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(6),
         ),
         child: Row(
@@ -446,12 +421,8 @@ class _ThemeOption extends StatelessWidget {
               icon,
               size: 16,
               color: isSelected
-                  ? (isDark
-                        ? WoodenColors.accentAmber
-                        : WoodenColors.lightPrimary)
-                  : (isDark
-                        ? WoodenColors.darkTextSecondary
-                        : WoodenColors.lightTextSecondary),
+                  ? WoodenColors.accentAmber
+                  : theme.colorScheme.onSurface.withAlpha(128),
             ),
             const SizedBox(width: 4),
             Text(
@@ -460,12 +431,8 @@ class _ThemeOption extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 color: isSelected
-                    ? (isDark
-                          ? WoodenColors.accentAmber
-                          : WoodenColors.lightPrimary)
-                    : (isDark
-                          ? WoodenColors.darkTextSecondary
-                          : WoodenColors.lightTextSecondary),
+                    ? WoodenColors.accentAmber
+                    : theme.colorScheme.onSurface.withAlpha(128),
               ),
             ),
           ],
@@ -518,150 +485,6 @@ class _SoundSetting extends ConsumerWidget {
               : WoodenColors.lightPrimary,
         ),
       ],
-    );
-  }
-}
-
-/// Difficulty setting widget with segmented button selection.
-class _DifficultySetting extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-    final settings = ref.watch(settingsProvider);
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          l10n.difficulty,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            color: isDark
-                ? WoodenColors.darkSurface
-                : WoodenColors.lightSurface,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: isDark
-                  ? WoodenColors.darkBorder
-                  : WoodenColors.lightBorder,
-              width: 1.5,
-            ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: _DifficultyOption(
-                  label: l10n.easy,
-                  isSelected: settings.difficulty == 'easy',
-                  onTap: () =>
-                      ref.read(settingsProvider.notifier).setDifficulty('easy'),
-                ),
-              ),
-              Container(
-                width: 1,
-                height: 40,
-                color: isDark
-                    ? WoodenColors.darkDivider
-                    : WoodenColors.lightDivider,
-              ),
-              Expanded(
-                child: _DifficultyOption(
-                  label: l10n.normal,
-                  isSelected: settings.difficulty == 'normal',
-                  onTap: () => ref
-                      .read(settingsProvider.notifier)
-                      .setDifficulty('normal'),
-                ),
-              ),
-              Container(
-                width: 1,
-                height: 40,
-                color: isDark
-                    ? WoodenColors.darkDivider
-                    : WoodenColors.lightDivider,
-              ),
-              Expanded(
-                child: _DifficultyOption(
-                  label: l10n.hard,
-                  isSelected: settings.difficulty == 'hard',
-                  onTap: () =>
-                      ref.read(settingsProvider.notifier).setDifficulty('hard'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Individual difficulty option button.
-class _DifficultyOption extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _DifficultyOption({
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(6),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: isSelected
-              ? LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: isDark
-                      ? [
-                          WoodenColors.accentAmber.withAlpha(77),
-                          WoodenColors.accentCopper.withAlpha(51),
-                        ]
-                      : [
-                          WoodenColors.lightPrimary.withAlpha(77),
-                          WoodenColors.lightSecondary.withAlpha(51),
-                        ],
-                )
-              : null,
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-            color: isSelected
-                ? (isDark
-                      ? WoodenColors.accentAmber
-                      : WoodenColors.lightPrimary)
-                : (isDark
-                      ? WoodenColors.darkTextSecondary
-                      : WoodenColors.lightTextSecondary),
-          ),
-        ),
-      ),
     );
   }
 }

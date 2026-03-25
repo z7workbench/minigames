@@ -752,6 +752,12 @@ abstract class AppLocalizations {
   /// **'Theme'**
   String get theme;
 
+  /// Dark mode setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
   /// Light theme option
   ///
   /// In en, this message translates to:

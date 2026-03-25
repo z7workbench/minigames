@@ -473,6 +473,10 @@
   "@theme": {
     "description": "Theme setting label"
   },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode setting label"
+  },
   "lightTheme": "Light",
   "@lightTheme": {
     "description": "Light theme option"

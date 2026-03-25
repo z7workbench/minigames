@@ -473,6 +473,10 @@
   "@theme": {
     "description": "Theme setting label"
   },
+  "darkMode": "深色模式",
+  "@darkMode": {
+    "description": "Dark mode setting label"
+  },
   "lightTheme": "浅色",
   "@lightTheme": {
     "description": "Light theme option"
