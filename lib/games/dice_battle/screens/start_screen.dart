@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 import '../../../ui/theme/wooden_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
@@ -32,6 +33,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -39,7 +41,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
           ? WoodenColors.darkBackground
           : WoodenColors.lightBackground,
       appBar: AppBar(
-        title: const Text('Dice Battle'),
+        title: Text(l10n.game_dice_battle),
         backgroundColor: isDark
             ? WoodenColors.darkPrimary
             : WoodenColors.lightPrimary,
@@ -72,11 +74,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                 const SizedBox(height: 32),
 
                 // Game title and description
-                _buildTitleSection(isDark),
+                _buildTitleSection(isDark, l10n),
                 const SizedBox(height: 48),
 
                 // Current step content
-                _buildCurrentStep(context, isDark),
+                _buildCurrentStep(context, isDark, l10n),
               ],
             ),
           ),
@@ -85,14 +87,18 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     );
   }
 
-  Widget _buildCurrentStep(BuildContext context, bool isDark) {
+  Widget _buildCurrentStep(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     switch (_currentStep) {
       case _SelectionStep.modeSelect:
-        return _buildModeSelection(context, isDark);
+        return _buildModeSelection(context, isDark, l10n);
       case _SelectionStep.player1Select:
-        return _buildPlayer1Selection(context, isDark);
+        return _buildPlayer1Selection(context, isDark, l10n);
       case _SelectionStep.player2Select:
-        return _buildPlayer2Selection(context, isDark);
+        return _buildPlayer2Selection(context, isDark, l10n);
     }
   }
 
@@ -129,11 +135,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     );
   }
 
-  Widget _buildTitleSection(bool isDark) {
+  Widget _buildTitleSection(bool isDark, AppLocalizations l10n) {
     return Column(
       children: [
         Text(
-          '骰子对战',
+          l10n.game_dice_battle,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 28,
@@ -144,20 +150,9 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             letterSpacing: 1,
           ),
         ),
-        const SizedBox(height: 12),
-        Text(
-          'Dice Battle',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18,
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
-          ),
-        ),
         const SizedBox(height: 16),
         Text(
-          '投掷骰子，制定策略，击败对手！',
+          l10n.db_gameDescription,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14,
@@ -171,7 +166,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
   }
 
   /// 模式选择步骤
-  Widget _buildModeSelection(BuildContext context, bool isDark) {
+  Widget _buildModeSelection(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -194,7 +193,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '选择游戏模式',
+            l10n.yd_selectPlayers,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
@@ -208,7 +207,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
 
           // 双人对战模式
           WoodenButton(
-            text: '双人对战',
+            text: l10n.db_twoPlayers,
             icon: Icons.people,
             size: WoodenButtonSize.large,
             variant: WoodenButtonVariant.primary,
@@ -224,7 +223,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
 
           // AI模式
           WoodenButton(
-            text: '简单AI',
+            text: l10n.db_easyAI,
             icon: Icons.computer,
             size: WoodenButtonSize.medium,
             variant: WoodenButtonVariant.secondary,
@@ -238,7 +237,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
           ),
           const SizedBox(height: 8),
           WoodenButton(
-            text: '中等AI',
+            text: l10n.db_mediumAI,
             icon: Icons.psychology,
             size: WoodenButtonSize.medium,
             variant: WoodenButtonVariant.secondary,
@@ -252,7 +251,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
           ),
           const SizedBox(height: 8),
           WoodenButton(
-            text: '困难AI',
+            text: l10n.db_hardAI,
             icon: Icons.smart_toy,
             size: WoodenButtonSize.medium,
             variant: WoodenButtonVariant.accent,
@@ -268,17 +267,17 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
 
           // 规则按钮
           WoodenButton(
-            text: '游戏规则',
+            text: l10n.db_gameRules,
             icon: Icons.help_outline,
             variant: WoodenButtonVariant.outlined,
             expandWidth: true,
-            onPressed: () => _showRulesDialog(context, isDark),
+            onPressed: () => _showRulesDialog(context, isDark, l10n),
           ),
           const SizedBox(height: 16),
 
           // 返回按钮
           WoodenButton(
-            text: '返回',
+            text: l10n.back,
             icon: Icons.arrow_back,
             variant: WoodenButtonVariant.ghost,
             expandWidth: true,
@@ -290,7 +289,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
   }
 
   /// 玩家1选择组合
-  Widget _buildPlayer1Selection(BuildContext context, bool isDark) {
+  Widget _buildPlayer1Selection(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -304,7 +307,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '玩家1选择组合',
+            l10n.db_player1Select,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
@@ -315,10 +318,12 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          ...DiceSets.all.map((set) => _buildDiceSetCard(set, isDark, true)),
+          ...DiceSets.all.map(
+            (set) => _buildDiceSetCard(set, isDark, true, l10n),
+          ),
           const SizedBox(height: 16),
           WoodenButton(
-            text: '返回',
+            text: l10n.back,
             icon: Icons.arrow_back,
             variant: WoodenButtonVariant.ghost,
             expandWidth: true,
@@ -332,7 +337,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
   }
 
   /// 玩家2选择组合（仅双人对战）
-  Widget _buildPlayer2Selection(BuildContext context, bool isDark) {
+  Widget _buildPlayer2Selection(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -346,7 +355,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '玩家2选择组合',
+            l10n.db_player2Select,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
@@ -358,7 +367,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            '玩家1已选择: ${_player1Set?.name ?? ""}',
+            '${l10n.db_player1Select}: ${_getLocalizedName(_player1Set?.id ?? '', l10n)}',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -368,10 +377,12 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          ...DiceSets.all.map((set) => _buildDiceSetCard(set, isDark, false)),
+          ...DiceSets.all.map(
+            (set) => _buildDiceSetCard(set, isDark, false, l10n),
+          ),
           const SizedBox(height: 16),
           WoodenButton(
-            text: '返回',
+            text: l10n.back,
             icon: Icons.arrow_back,
             variant: WoodenButtonVariant.ghost,
             expandWidth: true,
@@ -384,7 +395,29 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     );
   }
 
-  Widget _buildDiceSetCard(DiceSet set, bool isDark, bool isPlayer1) {
+  String _getLocalizedName(String setId, AppLocalizations l10n) {
+    switch (setId) {
+      case 'set1':
+        return l10n.db_set1Name;
+      case 'set2':
+        return l10n.db_set2Name;
+      case 'set3':
+        return l10n.db_set3Name;
+      case 'set4':
+        return l10n.db_set4Name;
+      case 'set5':
+        return l10n.db_set5Name;
+      default:
+        return '';
+    }
+  }
+
+  Widget _buildDiceSetCard(
+    DiceSet set,
+    bool isDark,
+    bool isPlayer1,
+    AppLocalizations l10n,
+  ) {
     final isSelected = isPlayer1
         ? _player1Set?.id == set.id
         : _player2Set?.id == set.id;
@@ -435,7 +468,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    set.name,
+                    _getLocalizedName(set.id, l10n),
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -446,7 +479,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '进攻: ${set.attackPoints} | 防守: ${set.defensePoints}',
+                    '${l10n.db_attackPoints}: ${set.attackPoints} | ${l10n.db_defensePoints}: ${set.defensePoints}',
                     style: TextStyle(
                       fontSize: 12,
                       color: isDark
@@ -456,7 +489,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    set.diceTypes.map((t) => t.displayName).join(', '),
+                    '${l10n.db_diceConfig}: ${set.diceTypes.map((t) => t.displayName).join(', ')}',
                     style: TextStyle(
                       fontSize: 11,
                       color: isDark
@@ -491,7 +524,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     );
   }
 
-  void _showRulesDialog(BuildContext context, bool isDark) {
+  void _showRulesDialog(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -507,7 +544,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '游戏规则',
+                    l10n.db_gameRules,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -523,33 +560,41 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                 ],
               ),
               const SizedBox(height: 16),
-              _buildRuleItem('1. 游戏目标', '将对手的生命值降为0即可获胜！', isDark),
-              const SizedBox(height: 12),
               _buildRuleItem(
-                '2. 骰子组合',
-                '选择不同的组合，每种组合有特定的进攻/防守点数和骰子配置。',
+                '1. ${l10n.db_gameRules}',
+                l10n.db_gameDescription,
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
-                '3. 进攻阶段',
-                '投掷所有骰子，选择不超过进攻点数的骰子作为进攻筹码。可以重新投掷2次！',
+                '2. ${l10n.db_selectDiceSet}',
+                '${l10n.db_attackPoints}: ${l10n.db_defensePoints}',
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
-                '4. 防守阶段',
-                '投掷所有骰子，选择不超过防守点数的骰子作为防守筹码。不能重新投掷！',
+                '3. ${l10n.db_attacking}',
+                '${l10n.db_rollDice} (2 ${l10n.db_reroll})',
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
-                '5. 伤害计算',
-                '进攻点数 - 防守点数 = 造成的伤害。效果可能会改变这个数值！',
+                '4. ${l10n.db_defending}',
+                l10n.db_finishDefense,
                 isDark,
               ),
               const SizedBox(height: 12),
-              _buildRuleItem('6. 战斗效果', '每2个回合会随机激活一个效果，请仔细阅读效果说明！', isDark),
+              _buildRuleItem(
+                '5. ${l10n.db_damageDealt}',
+                '${l10n.db_attack} - ${l10n.db_defense} = ${l10n.db_damageDealt}',
+                isDark,
+              ),
+              const SizedBox(height: 12),
+              _buildRuleItem(
+                '6. ${l10n.db_fieldEffect}',
+                l10n.db_noActiveEffect,
+                isDark,
+              ),
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
@@ -558,7 +603,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                     backgroundColor: WoodenColors.accentAmber,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('明白了！'),
+                  child: Text(l10n.ok),
                 ),
               ),
             ],

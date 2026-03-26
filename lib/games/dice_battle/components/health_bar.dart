@@ -75,33 +75,45 @@ class HealthBar extends StatelessWidget {
           const SizedBox(height: 6),
           ClipRRect(
             borderRadius: BorderRadius.circular(height / 2),
-            child: Container(
-              height: height - 16,
-              decoration: BoxDecoration(
-                color: isDark ? WoodenColors.darkCard : WoodenColors.lightCard,
-              ),
-              child: Stack(
-                children: [
-                  // Background
-                  Container(
-                    width: double.infinity,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final barWidth = constraints.maxWidth;
+                return Container(
+                  height: height - 16,
+                  decoration: BoxDecoration(
                     color: isDark
-                        ? WoodenColors.darkDisabled.withAlpha(50)
-                        : WoodenColors.lightDisabled.withAlpha(50),
+                        ? WoodenColors.darkCard
+                        : WoodenColors.lightCard,
+                    borderRadius: BorderRadius.circular(height / 2),
                   ),
-                  // Health fill
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                    width: healthPercentage * 100,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: _getHealthColors(healthPercentage),
+                  child: Stack(
+                    children: [
+                      // Background
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? WoodenColors.darkDisabled.withAlpha(50)
+                              : WoodenColors.lightDisabled.withAlpha(50),
+                          borderRadius: BorderRadius.circular(height / 2),
+                        ),
                       ),
-                    ),
+                      // Health fill
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                        width: barWidth * healthPercentage,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: _getHealthColors(healthPercentage),
+                          ),
+                          borderRadius: BorderRadius.circular(height / 2),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ],

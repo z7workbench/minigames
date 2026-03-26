@@ -60,13 +60,13 @@ class DiceSets {
     ],
   );
 
-  /// Set 2: Attack 4, Defense 1
+  /// Set 2: Attack 4, Defense 3
   /// 4 D4 + 1 D6
   static final set2 = DiceSet(
     id: 'set2',
     name: 'Aggressive Set',
     attackPoints: 4,
-    defensePoints: 1,
+    defensePoints: 3,
     diceTypes: [
       DiceType.d4,
       DiceType.d4,
@@ -102,8 +102,24 @@ class DiceSets {
     ],
   );
 
+  /// Set 5: Attack 3, Defense 3
+  /// 3 D4 + 1 D6 + 1 D8
+  static final set5 = DiceSet(
+    id: 'set5',
+    name: 'Mixed Set',
+    attackPoints: 3,
+    defensePoints: 3,
+    diceTypes: [
+      DiceType.d4,
+      DiceType.d4,
+      DiceType.d4,
+      DiceType.d6,
+      DiceType.d8,
+    ],
+  );
+
   /// All available dice sets.
-  static List<DiceSet> get all => [set1, set2, set3, set4];
+  static List<DiceSet> get all => [set1, set2, set3, set4, set5];
 
   /// Get a dice set by ID.
   static DiceSet? getById(String id) {

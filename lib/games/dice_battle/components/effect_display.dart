@@ -108,10 +108,19 @@ class EffectDisplay extends StatelessWidget {
         return Icons.exposure_plus_1;
       case BattleEffect.evenBonus:
         return Icons.shield;
-      case BattleEffect.doubleDamage:
+      case BattleEffect.comboOnLowDamage:
         return Icons.flash_on;
       case BattleEffect.diceUpgrade:
         return Icons.upgrade;
+      case BattleEffect.perfectBlockInstant:
+        return Icons.shield_moon;
+      case BattleEffect.comboOnHighAttack:
+        return Icons.bolt;
+      case BattleEffect.lifeSyncBonus:
+        return Icons.favorite;
+      // Legacy effects
+      case BattleEffect.doubleDamage:
+        return Icons.flash_on;
       case BattleEffect.diceSwap:
         return Icons.swap_horiz;
     }
@@ -205,10 +214,19 @@ class EffectNotification extends StatelessWidget {
         return Icons.exposure_plus_1;
       case BattleEffect.evenBonus:
         return Icons.shield;
-      case BattleEffect.doubleDamage:
+      case BattleEffect.comboOnLowDamage:
         return Icons.flash_on;
       case BattleEffect.diceUpgrade:
         return Icons.upgrade;
+      case BattleEffect.perfectBlockInstant:
+        return Icons.shield_moon;
+      case BattleEffect.comboOnHighAttack:
+        return Icons.bolt;
+      case BattleEffect.lifeSyncBonus:
+        return Icons.favorite;
+      // Legacy effects
+      case BattleEffect.doubleDamage:
+        return Icons.flash_on;
       case BattleEffect.diceSwap:
         return Icons.swap_horiz;
     }

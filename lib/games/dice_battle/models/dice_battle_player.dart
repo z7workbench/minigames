@@ -67,6 +67,29 @@ class DiceBattlePlayer {
   /// Get number of selected dice.
   int get selectedDiceCount => selectedDice.length;
 
+  /// Get attack dice (highest values up to attackPoints limit).
+  /// Used when calculating final attack value after rerolls.
+  List<BattleDice> getAttackDice() {
+    final maxDice = diceSet.attackPoints;
+    final sortedDice = List<BattleDice>.from(dice)
+      ..sort((a, b) => b.value.compareTo(a.value));
+    return sortedDice.take(maxDice).toList();
+  }
+
+  /// Get defense dice (highest values up to defensePoints limit).
+  List<BattleDice> getDefenseDice() {
+    final maxDice = diceSet.defensePoints;
+    final sortedDice = List<BattleDice>.from(dice)
+      ..sort((a, b) => b.value.compareTo(a.value));
+    return sortedDice.take(maxDice).toList();
+  }
+
+  /// Get attack value (sum of highest attack dice).
+  int get attackValue => getAttackDice().fold(0, (sum, d) => sum + d.value);
+
+  /// Get defense value (sum of highest defense dice).
+  int get defenseValue => getDefenseDice().fold(0, (sum, d) => sum + d.value);
+
   /// Take damage and return new player state.
   DiceBattlePlayer takeDamage(int damage) {
     final newHealth = (health - damage).clamp(0, maxHealth);

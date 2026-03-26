@@ -6,6 +6,7 @@ import '../../../data/providers/database_provider.dart';
 import 'models/dice_battle_state.dart';
 import 'models/dice_battle_player.dart';
 import 'models/dice_set.dart';
+import 'models/battle_effect.dart';
 import 'ai/dice_battle_ai.dart';
 import 'ai/easy_ai.dart';
 import 'ai/medium_ai.dart';
@@ -39,7 +40,7 @@ class DiceBattleGame extends _$DiceBattleGame {
       _ai = _createAi(aiDifficulty);
     }
 
-    // Perform coin flip to decide first player
+    // Perform coin flip to decide first player after 1 second
     Future.delayed(const Duration(seconds: 1), () {
       if (state.status == GameStatus.coinFlip) {
         flipCoin();
@@ -51,84 +52,89 @@ class DiceBattleGame extends _$DiceBattleGame {
   void flipCoin() {
     state = state.flipCoin();
 
-    // If AI goes first, trigger AI turn
-    if (state.isAiTurn && state.status == GameStatus.attacking) {
+    // If AI should act, trigger AI turn
+    if (state.shouldAiAct()) {
       _performAiTurn();
     }
   }
 
   /// Roll dice for current player.
   void rollDice() {
-    if (state.status != GameStatus.attacking &&
-        state.status != GameStatus.defending) {
+    if (state.status != GameStatus.attackRolling &&
+        state.status != GameStatus.defenseRolling) {
       return;
     }
 
     state = state.rollDice();
 
-    // If AI's turn, let it select dice
-    if (state.isAiTurn) {
+    // If AI should act, let it select dice
+    if (state.shouldAiAct()) {
       _performAiSelection();
     }
   }
 
   /// Toggle dice selection.
   void toggleDiceSelection(int diceIndex) {
-    if (state.phase != GamePhase.selectingDice) return;
+    if (state.status != GameStatus.attackSelecting &&
+        state.status != GameStatus.defenseSelecting) {
+      return;
+    }
 
     state = state.toggleDiceSelection(diceIndex);
   }
 
-  /// Confirm dice selection and move to next phase.
-  void confirmDiceSelection() {
-    if (state.phase != GamePhase.selectingDice) return;
-
-    state = state.confirmDiceSelection();
-
-    // If AI's turn in attack phase, decide on re-roll
-    if (state.isAiTurn &&
-        state.status == GameStatus.attacking &&
-        state.canReroll) {
-      _performAiReroll();
-    }
-  }
-
-  /// Re-roll selected dice.
+  /// Re-roll selected dice (attack phase only).
   void rerollSelected() {
     if (!state.canReroll) return;
+    if (state.currentPlayer.selectedDiceCount == 0) return;
 
-    state = state.rerollSelected();
+    state = state.performReroll();
   }
 
   /// Finish attack phase and move to defense.
-  void finishAttack() {
-    if (state.status != GameStatus.attacking) return;
+  void finishAttackPhase() {
+    if (state.status != GameStatus.attackSelecting) return;
 
-    state = state.finishAttack();
+    state = state.finishAttackPhase();
 
-    // Switch to AI if playing against AI
-    if (state.isAiTurn) {
+    // Apply dice upgrade effect if active
+    if (state.currentEffect == BattleEffect.diceUpgrade) {
+      _applyDiceUpgrade();
+    }
+
+    // If AI should defend, trigger AI turn
+    if (state.shouldAiAct()) {
       _performAiTurn();
     }
   }
 
-  /// Finish defense phase and calculate damage.
-  void finishDefense() {
-    if (state.status != GameStatus.defending) return;
+  /// Confirm defense selection and move to damage calculation.
+  void confirmDefenseSelection() {
+    if (state.status != GameStatus.defenseSelecting) return;
 
-    state = state.finishDefense();
+    state = state.confirmDefenseSelection();
+
+    // Handle defense effect apply
+    _handleDefenseEffectApply();
+  }
+
+  /// Finish defense phase and calculate damage.
+  /// Legacy method for backward compatibility.
+  void finishDefense() {
+    confirmDefenseSelection();
+  }
+
+  /// Handle defense effect application and damage calculation.
+  void _handleDefenseEffectApply() {
+    if (state.status != GameStatus.defenseEffectApply) return;
 
     // Apply dice swap effect if active
-    if (state.currentEffect != null &&
-        state.currentEffect.toString() == 'BattleEffect.diceSwap') {
+    if (state.currentEffect == BattleEffect.diceSwap) {
       _applyDiceSwap();
     }
 
-    // Apply dice upgrade effect if active
-    if (state.currentEffect != null &&
-        state.currentEffect.toString() == 'BattleEffect.diceUpgrade') {
-      _applyDiceUpgrade();
-    }
+    // Move to damage calculation
+    state = state.finishDefensePhase();
 
     // Calculate damage after a short delay
     Future.delayed(const Duration(milliseconds: 500), () {
@@ -136,72 +142,115 @@ class DiceBattleGame extends _$DiceBattleGame {
     });
   }
 
+  /// Calculate and apply damage.
+  void _calculateDamage() {
+    state = state.calculateDamage();
+
+    // Show damage animation for 1 second
+    Future.delayed(const Duration(seconds: 1), () {
+      _finishDamageAnimation();
+    });
+  }
+
+  /// Finish damage animation and apply final effects.
+  void _finishDamageAnimation() {
+    if (state.status != GameStatus.damageAnimation) return;
+
+    state = state.finishDamageAnimation();
+    state = state.applyFinalEffects();
+
+    // Check if game is over
+    if (state.isGameOver) {
+      _saveGameRecord();
+    } else if (state.status == GameStatus.turnEnd) {
+      // End turn and start next round
+      Future.delayed(const Duration(milliseconds: 500), () {
+        _endTurn();
+      });
+    }
+  }
+
+  /// End turn and start next round.
+  void _endTurn() {
+    state = state.endTurn();
+
+    // If AI should act, trigger AI turn
+    if (state.shouldAiAct()) {
+      _performAiTurn();
+    }
+  }
+
+  // ============================================================
+  // AI Logic
+  // ============================================================
+
   /// AI Turn Logic
   Future<void> _performAiTurn() async {
-    if (_ai == null || !state.isAiTurn) return;
+    if (_ai == null || !state.shouldAiAct()) return;
 
-    // Wait a bit for natural feel
-    await Future.delayed(const Duration(milliseconds: 800));
+    // Wait for natural feel (1.5 seconds)
+    await Future.delayed(const Duration(milliseconds: 1500));
 
-    // Roll dice
-    if (state.phase == GamePhase.rolling) {
+    // Roll dice if in rolling phase
+    if (state.status == GameStatus.attackRolling ||
+        state.status == GameStatus.defenseRolling) {
       rollDice();
     }
   }
 
   /// AI Selection Logic
   Future<void> _performAiSelection() async {
-    if (_ai == null || !state.isAiTurn) return;
+    if (_ai == null || !state.shouldAiAct()) return;
 
     final decision = await _ai!.decideSelection(state);
 
-    // Apply dice selections
+    // Apply dice selections with delays
     for (final index in decision.selectedDiceIndices) {
       toggleDiceSelection(index);
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 300));
     }
 
-    // Confirm selection
-    await Future.delayed(const Duration(milliseconds: 500));
-    confirmDiceSelection();
-  }
-
-  /// AI Reroll Logic
-  Future<void> _performAiReroll() async {
-    if (_ai == null || !state.isAiTurn) return;
-
-    final rerollIndices = await _ai!.decideReroll(state);
-
-    if (rerollIndices.isEmpty) {
-      // AI decides not to re-roll
-      finishAttack();
-      return;
-    }
-
-    // Select dice to re-roll
-    for (final index in rerollIndices) {
-      toggleDiceSelection(index);
-    }
-
-    await Future.delayed(const Duration(milliseconds: 500));
-    rerollSelected();
-
+    // Wait before confirming (1.5 seconds total feel)
     await Future.delayed(const Duration(milliseconds: 800));
-    finishAttack();
-  }
 
-  /// Calculate and apply damage.
-  void _calculateDamage() {
-    state = state.calculateDamage();
-
-    // Save game record if game is over
-    if (state.isGameOver) {
-      _saveGameRecord();
-    } else if (state.isAiTurn) {
-      // AI's turn next
-      _performAiTurn();
+    // For attack, AI might want to reroll first
+    if (state.status == GameStatus.attackSelecting) {
+      await _performAiAttackTurn();
+    } else if (state.status == GameStatus.defenseSelecting) {
+      confirmDefenseSelection();
     }
   }
+
+  /// AI Attack Turn - handles selection and optional rerolls
+  Future<void> _performAiAttackTurn() async {
+    if (_ai == null || !state.shouldAiAct()) return;
+    if (state.status != GameStatus.attackSelecting) return;
+
+    // Check if AI wants to reroll
+    if (state.canReroll) {
+      final rerollIndices = await _ai!.decideReroll(state);
+
+      if (rerollIndices.isNotEmpty) {
+        // Select dice to reroll
+        for (final index in rerollIndices) {
+          toggleDiceSelection(index);
+        }
+
+        await Future.delayed(const Duration(milliseconds: 800));
+        rerollSelected();
+
+        // After reroll, wait then finish
+        await Future.delayed(const Duration(milliseconds: 1000));
+      }
+    }
+
+    // Finish attack phase
+    finishAttackPhase();
+  }
+
+  // ============================================================
+  // Effect Application
+  // ============================================================
 
   /// Apply dice swap effect.
   void _applyDiceSwap() {
@@ -214,10 +263,12 @@ class DiceBattleGame extends _$DiceBattleGame {
     state = state.applyDiceUpgrade();
   }
 
-  /// Skip re-roll and finish attack.
-  void skipReroll() {
-    finishAttack();
-  }
+  // ============================================================
+  // Utility Methods
+  // ============================================================
+
+  /// Legacy finish attack method for backward compatibility.
+  void finishAttack() => finishAttackPhase();
 
   /// Reset game to idle state.
   void resetGame() {

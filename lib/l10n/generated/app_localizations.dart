@@ -1285,6 +1285,432 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Starlight'**
   String get starlightScheme;
+
+  /// Dice Battle game title
+  ///
+  /// In en, this message translates to:
+  /// **'Dice Battle'**
+  String get game_dice_battle;
+
+  /// Dice Battle game description
+  ///
+  /// In en, this message translates to:
+  /// **'Roll the dice, devise strategies, and defeat your opponent!'**
+  String get db_gameDescription;
+
+  /// Dice set 1 name
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced Set'**
+  String get db_set1Name;
+
+  /// Dice set 2 name
+  ///
+  /// In en, this message translates to:
+  /// **'Offensive Set'**
+  String get db_set2Name;
+
+  /// Dice set 3 name
+  ///
+  /// In en, this message translates to:
+  /// **'Defensive Set'**
+  String get db_set3Name;
+
+  /// Dice set 4 name
+  ///
+  /// In en, this message translates to:
+  /// **'All-Rounder Set'**
+  String get db_set4Name;
+
+  /// Dice set 5 name
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed Set'**
+  String get db_set5Name;
+
+  /// Attack label
+  ///
+  /// In en, this message translates to:
+  /// **'Attack'**
+  String get db_attack;
+
+  /// Defense label
+  ///
+  /// In en, this message translates to:
+  /// **'Defense'**
+  String get db_defense;
+
+  /// Roll dice button
+  ///
+  /// In en, this message translates to:
+  /// **'Roll Dice'**
+  String get db_rollDice;
+
+  /// Reroll button
+  ///
+  /// In en, this message translates to:
+  /// **'Reroll'**
+  String get db_reroll;
+
+  /// Confirm button
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get db_confirm;
+
+  /// Finish attack button
+  ///
+  /// In en, this message translates to:
+  /// **'Finish Attack'**
+  String get db_finishAttack;
+
+  /// Finish defense button
+  ///
+  /// In en, this message translates to:
+  /// **'Finish Defense'**
+  String get db_finishDefense;
+
+  /// Rerolls remaining
+  ///
+  /// In en, this message translates to:
+  /// **'Rerolls Remaining: {n}'**
+  String db_rerollsRemaining(int n);
+
+  /// Select attack dice hint
+  ///
+  /// In en, this message translates to:
+  /// **'Select Attack Dice (up to {n})'**
+  String db_selectAttackDice(int n);
+
+  /// Select defense dice hint
+  ///
+  /// In en, this message translates to:
+  /// **'Select Defense Dice (up to {n})'**
+  String db_selectDefenseDice(int n);
+
+  /// Total points display
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points: {n}'**
+  String db_totalPoints(int n);
+
+  /// Damage dealt message
+  ///
+  /// In en, this message translates to:
+  /// **'Dealt {n} damage!'**
+  String db_damageDealt(int n);
+
+  /// Perfect block message
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect Block!'**
+  String get db_perfectBlock;
+
+  /// Combo hit message
+  ///
+  /// In en, this message translates to:
+  /// **'Combo! Dealt {n} bonus damage!'**
+  String db_comboHit(int n);
+
+  /// Keyword: Upgrade
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade'**
+  String get db_keywordUpgrade;
+
+  /// Keyword: Instant
+  ///
+  /// In en, this message translates to:
+  /// **'Instant'**
+  String get db_keywordInstant;
+
+  /// Keyword: Perfect Block
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect Block'**
+  String get db_keywordPerfectBlock;
+
+  /// Keyword: Disrupt
+  ///
+  /// In en, this message translates to:
+  /// **'Disrupt'**
+  String get db_keywordDisrupt;
+
+  /// Keyword: Combo
+  ///
+  /// In en, this message translates to:
+  /// **'Combo'**
+  String get db_keywordCombo;
+
+  /// Keyword: Upgrade description
+  ///
+  /// In en, this message translates to:
+  /// **'Replace a die with a higher-tier die. Example: Upgrading a d4 changes it to a d6'**
+  String get db_keywordUpgradeDesc;
+
+  /// Keyword: Instant description
+  ///
+  /// In en, this message translates to:
+  /// **'Deal x damage to the enemy when triggered. Example: Instant(3) = Deal 3 damage immediately'**
+  String get db_keywordInstantDesc;
+
+  /// Keyword: Perfect Block description
+  ///
+  /// In en, this message translates to:
+  /// **'Defense points rolled are greater than or equal to attack points'**
+  String get db_keywordPerfectBlockDesc;
+
+  /// Keyword: Disrupt description
+  ///
+  /// In en, this message translates to:
+  /// **'When triggered, reduce one of the opponent\'s dice higher than 2 to 2. If the opponent has no dice higher than 2, nothing happens.'**
+  String get db_keywordDisruptDesc;
+
+  /// Keyword: Combo description
+  ///
+  /// In en, this message translates to:
+  /// **'If damage was dealt, deal half the previous damage again. Combo damage rounds up.'**
+  String get db_keywordComboDesc;
+
+  /// Effect: Odd Bonus
+  ///
+  /// In en, this message translates to:
+  /// **'Odd Power'**
+  String get db_effectOddBonus;
+
+  /// Effect: Odd Bonus description
+  ///
+  /// In en, this message translates to:
+  /// **'If all attack dice show odd numbers, +5 points'**
+  String get db_effectOddBonusDesc;
+
+  /// Effect: Even Bonus
+  ///
+  /// In en, this message translates to:
+  /// **'Even Shield'**
+  String get db_effectEvenBonus;
+
+  /// Effect: Even Bonus description
+  ///
+  /// In en, this message translates to:
+  /// **'If all defense dice show even numbers, +4 points'**
+  String get db_effectEvenBonusDesc;
+
+  /// Effect: Combo on Low Damage
+  ///
+  /// In en, this message translates to:
+  /// **'Low Damage Combo'**
+  String get db_effectComboLow;
+
+  /// Effect: Combo on Low Damage description
+  ///
+  /// In en, this message translates to:
+  /// **'If total damage dealt is less than 10, **Combo**'**
+  String get db_effectComboLowDesc;
+
+  /// Effect: Dice Upgrade
+  ///
+  /// In en, this message translates to:
+  /// **'Dice Upgrade'**
+  String get db_effectDiceUpgrade;
+
+  /// Effect: Dice Upgrade description
+  ///
+  /// In en, this message translates to:
+  /// **'At the start of the round, **Upgrade** one die for both players'**
+  String get db_effectDiceUpgradeDesc;
+
+  /// Effect: Perfect Block Instant
+  ///
+  /// In en, this message translates to:
+  /// **'Block Instant'**
+  String get db_effectPerfectInstant;
+
+  /// Effect: Perfect Block Instant description
+  ///
+  /// In en, this message translates to:
+  /// **'If **Perfect Block**, then **Instant**(5)'**
+  String get db_effectPerfectInstantDesc;
+
+  /// Effect: Combo on High Attack
+  ///
+  /// In en, this message translates to:
+  /// **'High Attack Combo'**
+  String get db_effectComboHigh;
+
+  /// Effect: Combo on High Attack description
+  ///
+  /// In en, this message translates to:
+  /// **'If attacker\'s total points exceed 20, attacker gains **Combo**'**
+  String get db_effectComboHighDesc;
+
+  /// Effect: Life Sync Bonus
+  ///
+  /// In en, this message translates to:
+  /// **'Life Sync'**
+  String get db_effectLifeSync;
+
+  /// Effect: Life Sync Bonus description
+  ///
+  /// In en, this message translates to:
+  /// **'At round end, if the sum of both players\' health equals 42, defender gains +10 health'**
+  String get db_effectLifeSyncDesc;
+
+  /// Round number display
+  ///
+  /// In en, this message translates to:
+  /// **'Round {n}'**
+  String db_roundNumber(int n);
+
+  /// Player's turn message
+  ///
+  /// In en, this message translates to:
+  /// **'{name}\'s Turn'**
+  String db_playerTurn(String name);
+
+  /// Attacking status
+  ///
+  /// In en, this message translates to:
+  /// **'Attacking'**
+  String get db_attacking;
+
+  /// Defending status
+  ///
+  /// In en, this message translates to:
+  /// **'Defending'**
+  String get db_defending;
+
+  /// Calculating damage status
+  ///
+  /// In en, this message translates to:
+  /// **'Calculating damage...'**
+  String get db_calculating;
+
+  /// Round start message
+  ///
+  /// In en, this message translates to:
+  /// **'Round Start'**
+  String get db_roundStart;
+
+  /// Round end message
+  ///
+  /// In en, this message translates to:
+  /// **'Round End'**
+  String get db_roundEnd;
+
+  /// Coin flip message
+  ///
+  /// In en, this message translates to:
+  /// **'Deciding first player...'**
+  String get db_coinFlip;
+
+  /// Player goes first message
+  ///
+  /// In en, this message translates to:
+  /// **'{name} goes first!'**
+  String db_goesFirst(String name);
+
+  /// Victory message
+  ///
+  /// In en, this message translates to:
+  /// **'{name} Wins!'**
+  String db_victory(String name);
+
+  /// Play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get db_playAgain;
+
+  /// Exit button
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get db_exit;
+
+  /// Two players mode
+  ///
+  /// In en, this message translates to:
+  /// **'Two Players'**
+  String get db_twoPlayers;
+
+  /// Easy AI mode
+  ///
+  /// In en, this message translates to:
+  /// **'Easy AI'**
+  String get db_easyAI;
+
+  /// Medium AI mode
+  ///
+  /// In en, this message translates to:
+  /// **'Medium AI'**
+  String get db_mediumAI;
+
+  /// Hard AI mode
+  ///
+  /// In en, this message translates to:
+  /// **'Hard AI'**
+  String get db_hardAI;
+
+  /// Select dice set label
+  ///
+  /// In en, this message translates to:
+  /// **'Select Dice Set'**
+  String get db_selectDiceSet;
+
+  /// Player 1 select dice set
+  ///
+  /// In en, this message translates to:
+  /// **'Player 1 Select Set'**
+  String get db_player1Select;
+
+  /// Player 2 select dice set
+  ///
+  /// In en, this message translates to:
+  /// **'Player 2 Select Set'**
+  String get db_player2Select;
+
+  /// Game rules button
+  ///
+  /// In en, this message translates to:
+  /// **'Game Rules'**
+  String get db_gameRules;
+
+  /// Attack points label
+  ///
+  /// In en, this message translates to:
+  /// **'Attack Points'**
+  String get db_attackPoints;
+
+  /// Defense points label
+  ///
+  /// In en, this message translates to:
+  /// **'Defense Points'**
+  String get db_defensePoints;
+
+  /// Dice configuration label
+  ///
+  /// In en, this message translates to:
+  /// **'Dice Configuration'**
+  String get db_diceConfig;
+
+  /// Health remaining display
+  ///
+  /// In en, this message translates to:
+  /// **'Health Remaining: {hp}'**
+  String db_healthRemaining(int hp);
+
+  /// Field effect label
+  ///
+  /// In en, this message translates to:
+  /// **'Field Effect'**
+  String get db_fieldEffect;
+
+  /// No active effect message
+  ///
+  /// In en, this message translates to:
+  /// **'No Active Effect'**
+  String get db_noActiveEffect;
 }
 
 class _AppLocalizationsDelegate
