@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/game_type.dart';
-import '../theme/wooden_colors.dart';
+import '../theme/theme_colors.dart';
 
 /// A card widget displaying a game with wooden styling.
 ///
@@ -40,28 +40,17 @@ class GameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final cardColor = isDark ? WoodenColors.darkCard : WoodenColors.lightCard;
-    final borderColor = isDark
-        ? WoodenColors.darkBorder
-        : WoodenColors.lightBorder;
-    final textColor = isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-    final secondaryTextColor = isDark
-        ? WoodenColors.darkTextSecondary
-        : WoodenColors.lightTextSecondary;
-    final disabledColor = isDark
-        ? WoodenColors.darkDisabled
-        : WoodenColors.lightDisabled;
-    final accentColor = isDark
-        ? WoodenColors.accentAmber
-        : WoodenColors.lightPrimary;
+    final cardColor = context.themeCard;
+    final borderColor = context.themeBorder;
+    final textColor = context.themeTextPrimary;
+    final secondaryTextColor = context.themeTextSecondary;
+    final disabledColor = context.themeDisabled;
+    final accentColor = context.themeAccent;
 
     return Card(
       color: cardColor,
       elevation: isPlaceholder ? 1.0 : 4.0,
-      shadowColor: isDark ? WoodenColors.darkShadow : WoodenColors.lightShadow,
+      shadowColor: context.themeShadow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
         side: BorderSide(

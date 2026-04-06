@@ -464,6 +464,195 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ga_exit => '退出';
 
   @override
+  String get ga_round => '回合';
+
+  @override
+  String get ga_turn => '轮次';
+
+  @override
+  String get ga_combo => '连击';
+
+  @override
+  String get ga_dealing => '发牌中...';
+
+  @override
+  String get ga_aiThinking => 'AI思考中...';
+
+  @override
+  String get ga_position => '位置';
+
+  @override
+  String get ga_yourTurn => '你的回合！';
+
+  @override
+  String get ga_opponentTurn => '对手回合';
+
+  @override
+  String get ga_cardsRemaining => '剩余牌数';
+
+  @override
+  String get ga_selectGameMode => '选择游戏模式';
+
+  @override
+  String get ga_gotIt => '明白了！';
+
+  @override
+  String ga_playerCards(String name) {
+    return '$name的牌';
+  }
+
+  @override
+  String get ga_yourCards => '你的牌';
+
+  @override
+  String get ga_tapToGuess => '点击牌来猜测';
+
+  @override
+  String ga_positionSelected(int position) {
+    return '已选择位置 $position - 请在下方选择数字';
+  }
+
+  @override
+  String get ga_selectNumber => '选择数字 (A-K)';
+
+  @override
+  String ga_guessCorrect(String card) {
+    return '猜对了！$card';
+  }
+
+  @override
+  String ga_guessCorrectCombo(String card, int combo) {
+    return '猜对了！$card 连击 x$combo';
+  }
+
+  @override
+  String ga_comboLabel(int n) {
+    return '连击 x$n';
+  }
+
+  @override
+  String get ga_clearSelection => '清除选择';
+
+  @override
+  String get ga_endTurn => '结束回合';
+
+  @override
+  String get ga_exitGameTitle => '退出游戏？';
+
+  @override
+  String get ga_exitGameMessage => '确定要退出吗？当前进度将丢失。';
+
+  @override
+  String get ga_restartGameTitle => '重新开始？';
+
+  @override
+  String get ga_restartGameMessage => '确定要重新开始游戏吗？';
+
+  @override
+  String get ga_restart => '重新开始';
+
+  @override
+  String ga_aiGuessing(int position, String rank) {
+    return 'AI猜测: 位置$position 是 $rank';
+  }
+
+  @override
+  String get ga_rule1Title => '1. 发牌';
+
+  @override
+  String get ga_rule1Desc => '每位玩家从52张牌中抽取8张，按从小到大（A=1最小，K=13最大）面朝下排列。';
+
+  @override
+  String get ga_rule2Title => '2. 猜测';
+
+  @override
+  String get ga_rule2Desc => '双方轮流猜对方的牌。例如：\"第3张是7\"。只需猜数字，不用猜花色。';
+
+  @override
+  String get ga_rule3Title => '3. 猜对';
+
+  @override
+  String get ga_rule3Desc => '翻开对方的牌！你可以继续猜测，连击数+1。';
+
+  @override
+  String get ga_rule4Title => '4. 猜错';
+
+  @override
+  String get ga_rule4Desc => '轮到对方猜测。你的连击数重置。';
+
+  @override
+  String get ga_rule5Title => '5. 胜负';
+
+  @override
+  String get ga_rule5Desc => '谁的牌先被全部翻开，谁就输了！';
+
+  @override
+  String get ga_winnerPlayer => '你';
+
+  @override
+  String get ga_winnerOpponent => '对手';
+
+  @override
+  String get ga_aiWrongGuess => 'AI猜错了！';
+
+  @override
+  String get ga_wrongGuessTitle => '猜错了！';
+
+  @override
+  String get ga_turnToYou => '轮到你了！';
+
+  @override
+  String get ga_turnToOpponent => '换对方回合了。';
+
+  @override
+  String get ga_continue => '继续';
+
+  @override
+  String get ga_aiRoundEnd => 'AI回合结束';
+
+  @override
+  String ga_aiCorrectCount(int correct, int total) {
+    return 'AI猜对了 $correct/$total 次';
+  }
+
+  @override
+  String ga_positionLabel(int n) {
+    return '位置$n';
+  }
+
+  @override
+  String ga_switchTurnHint(String name) {
+    return '请将设备交给$name。\n记得隐藏你的牌！';
+  }
+
+  @override
+  String ga_winnerWins(String name) {
+    return '$name赢了！';
+  }
+
+  @override
+  String ga_winnerLoses(String name) {
+    return '$name赢了...';
+  }
+
+  @override
+  String get ga_correctGuessesLabel => '正确猜测';
+
+  @override
+  String get ga_maxComboLabel => '最高连击';
+
+  @override
+  String get ga_playDurationLabel => '用时';
+
+  @override
+  String get ga_playAgainButton => '再来一局';
+
+  @override
+  String ga_durationFormat(int minutes, int seconds) {
+    return '$minutes分$seconds秒';
+  }
+
+  @override
   String get game_2048 => '2048';
 
   @override
@@ -853,4 +1042,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get db_noActiveEffect => '无场地效果';
+
+  @override
+  String get comingSoon => '即将推出';
 }

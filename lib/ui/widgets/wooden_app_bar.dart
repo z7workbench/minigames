@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/wooden_colors.dart';
+import '../theme/theme_colors.dart';
 
 /// A reusable wooden-styled app bar for the minigames app.
 ///
@@ -43,23 +43,16 @@ class WoodenAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDark
-        ? WoodenColors.darkPrimary
-        : WoodenColors.lightPrimary;
-    final foregroundColor = isDark
-        ? WoodenColors.darkOnPrimary
-        : WoodenColors.lightOnPrimary;
-    final shadowColor = isDark
-        ? WoodenColors.darkShadow
-        : WoodenColors.lightShadow;
+    // On Primary background, use onPrimary color for icons/text
+    final foregroundColor = context.themeOnPrimary;
+    final iconColor = context.themeOnPrimary;
 
     return AppBar(
-      backgroundColor: backgroundColor,
+      backgroundColor: context.themePrimary,
       foregroundColor: foregroundColor,
       elevation: elevation,
       centerTitle: true,
-      shadowColor: shadowColor,
+      shadowColor: context.themeShadow,
       automaticallyImplyLeading: automaticallyImplyLeading,
       leading: leading,
       title:
@@ -74,7 +67,7 @@ class WoodenAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
       actions: actions,
-      iconTheme: IconThemeData(color: foregroundColor, size: 24),
+      iconTheme: IconThemeData(color: iconColor, size: 24),
     );
   }
 }

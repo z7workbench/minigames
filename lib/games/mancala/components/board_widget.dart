@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../models/mancala_state.dart';
 import 'pit_widget.dart';
 import 'sowing_animation_widget.dart';
@@ -49,22 +49,13 @@ class BoardWidget extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: isDark
-                      ? [WoodenColors.darkSurface, WoodenColors.darkCard]
-                      : [WoodenColors.lightSurface, WoodenColors.lightCard],
+                  colors: [context.themeSurface, context.themeCard],
                 ),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: isDark
-                      ? WoodenColors.darkBorder
-                      : WoodenColors.lightBorder,
-                  width: 2,
-                ),
+                border: Border.all(color: context.themeBorder, width: 2),
                 boxShadow: [
                   BoxShadow(
-                    color: isDark
-                        ? WoodenColors.darkShadow.withAlpha(150)
-                        : WoodenColors.lightShadow.withAlpha(150),
+                    color: context.themeShadow.withAlpha(150),
                     blurRadius: 16,
                     offset: const Offset(0, 8),
                   ),
@@ -102,9 +93,7 @@ class BoardWidget extends StatelessWidget {
                                   horizontal: 16,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: isDark
-                                      ? WoodenColors.darkBorder
-                                      : WoodenColors.lightBorder,
+                                  color: context.themeBorder,
                                   borderRadius: BorderRadius.circular(1),
                                 ),
                               ),
@@ -130,7 +119,7 @@ class BoardWidget extends StatelessWidget {
                   ),
 
                   // Turn indicator
-                  _buildTurnIndicator(isDark),
+                  _buildTurnIndicator(context, isDark),
                 ],
               ),
             ),
@@ -159,21 +148,16 @@ class BoardWidget extends StatelessWidget {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: isDark
-                          ? WoodenColors.darkCard.withAlpha(230)
-                          : WoodenColors.lightCard.withAlpha(230),
+                      color: context.themeCard.withAlpha(230),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: WoodenColors.accentAmber,
-                        width: 2,
-                      ),
+                      border: Border.all(color: context.themeAccent, width: 2),
                     ),
                     child: Text(
                       state.animationMessage!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: WoodenColors.accentAmber,
+                        color: context.themeAccent,
                       ),
                     ),
                   ),
@@ -235,7 +219,7 @@ class BoardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTurnIndicator(bool isDark) {
+  Widget _buildTurnIndicator(BuildContext context, bool isDark) {
     String turnText;
     IconData turnIcon;
 
@@ -264,27 +248,21 @@ class BoardWidget extends StatelessWidget {
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: isDark
-            ? WoodenColors.darkCard.withAlpha(200)
-            : WoodenColors.lightCard.withAlpha(200),
+        color: context.themeCard.withAlpha(200),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-        ),
+        border: Border.all(color: context.themeBorder),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(turnIcon, size: 20, color: WoodenColors.accentAmber),
+          Icon(turnIcon, size: 20, color: context.themeAccent),
           const SizedBox(width: 8),
           Text(
             turnText,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
         ],

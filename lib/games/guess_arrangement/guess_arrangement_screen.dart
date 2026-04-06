@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../ui/theme/wooden_colors.dart';
 import '../../ui/widgets/wooden_button.dart';
 import 'models/guess_arrangement_state.dart';
@@ -46,19 +47,24 @@ class _GuessArrangementScreenState
   Widget build(BuildContext context) {
     final state = ref.watch(guessArrangementGameProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark
           ? WoodenColors.darkBackground
           : WoodenColors.lightBackground,
-      appBar: _buildAppBar(context, isDark),
-      body: _buildBody(context, state, isDark),
+      appBar: _buildAppBar(context, isDark, l10n),
+      body: _buildBody(context, state, isDark, l10n),
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context, bool isDark) {
+  PreferredSizeWidget _buildAppBar(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return AppBar(
-      title: const Text('猜排列'),
+      title: Text(l10n.game_guess_arrangement),
       backgroundColor: isDark
           ? WoodenColors.darkPrimary
           : WoodenColors.lightPrimary,
@@ -67,12 +73,12 @@ class _GuessArrangementScreenState
           : WoodenColors.lightOnPrimary,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
-        onPressed: () => _showExitConfirmation(context),
+        onPressed: () => _showExitConfirmation(context, l10n),
       ),
       actions: [
         IconButton(
           icon: const Icon(Icons.refresh),
-          onPressed: () => _showRestartConfirmation(context),
+          onPressed: () => _showRestartConfirmation(context, l10n),
         ),
       ],
     );
@@ -82,26 +88,27 @@ class _GuessArrangementScreenState
     BuildContext context,
     GuessArrangementState state,
     bool isDark,
+    AppLocalizations l10n,
   ) {
     if (state.status == GameStatus.idle) {
       return _buildLoadingState(isDark);
     }
 
     if (state.status == GameStatus.dealing) {
-      return _buildDealingState(isDark);
+      return _buildDealingState(isDark, l10n);
     }
 
     if (state.status == GameStatus.switching) {
-      return _buildSwitchingState(state, isDark);
+      return _buildSwitchingState(state, isDark, l10n);
     }
 
     if (state.isGameOver) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showGameOverDialog(state);
+        _showGameOverDialog(state, l10n);
       });
     }
 
-    return _buildPlayingState(context, state, isDark);
+    return _buildPlayingState(context, state, isDark, l10n);
   }
 
   Widget _buildLoadingState(bool isDark) {
@@ -110,7 +117,7 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildDealingState(bool isDark) {
+  Widget _buildDealingState(bool isDark, AppLocalizations l10n) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(milliseconds: 500), () {
         ref.read(guessArrangementGameProvider.notifier).finishDealing();
@@ -128,7 +135,7 @@ class _GuessArrangementScreenState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '发牌中...',
+            l10n.ga_dealing,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -144,11 +151,16 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildSwitchingState(GuessArrangementState state, bool isDark) {
+  Widget _buildSwitchingState(
+    GuessArrangementState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     final nextPlayer = state.opponentPlayer;
     return Center(
       child: TurnSwitchDialog(
         nextPlayerName: nextPlayer.name,
+        l10n: l10n,
         onConfirm: () {
           ref.read(guessArrangementGameProvider.notifier).confirmTurnSwitch();
         },
@@ -160,23 +172,28 @@ class _GuessArrangementScreenState
     BuildContext context,
     GuessArrangementState state,
     bool isDark,
+    AppLocalizations l10n,
   ) {
     return SafeArea(
       child: Column(
         children: [
-          _buildGameHeader(state, isDark),
-          Expanded(flex: 3, child: _buildOpponentHand(state, isDark)),
-          _buildCenterInfo(state, isDark),
+          _buildGameHeader(state, isDark, l10n),
+          Expanded(flex: 3, child: _buildOpponentHand(state, isDark, l10n)),
+          _buildCenterInfo(state, isDark, l10n),
           if (_showRankSelector && _selectedPosition != null)
-            _buildRankSelectorSheet(state, isDark),
-          _buildCurrentPlayerHand(state, isDark),
-          if (!state.isAiTurn) _buildActionButtons(state, isDark),
+            _buildRankSelectorSheet(state, isDark, l10n),
+          _buildCurrentPlayerHand(state, isDark, l10n),
+          if (!state.isAiTurn) _buildActionButtons(state, isDark, l10n),
         ],
       ),
     );
   }
 
-  Widget _buildGameHeader(GuessArrangementState state, bool isDark) {
+  Widget _buildGameHeader(
+    GuessArrangementState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       decoration: BoxDecoration(
@@ -192,19 +209,19 @@ class _GuessArrangementScreenState
         children: [
           _buildInfoItem(
             icon: Icons.person,
-            label: '回合',
+            label: l10n.ga_round,
             value: state.currentPlayer.name,
             isDark: isDark,
           ),
           _buildInfoItem(
             icon: Icons.format_list_numbered,
-            label: '轮次',
+            label: l10n.ga_turn,
             value: '${state.roundNumber}',
             isDark: isDark,
           ),
           _buildInfoItem(
             icon: Icons.local_fire_department,
-            label: '连击',
+            label: l10n.ga_combo,
             value: 'x${state.currentPlayer.maxCombo}',
             isDark: isDark,
             highlight: state.currentPlayer.maxCombo >= 3,
@@ -262,7 +279,11 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildOpponentHand(GuessArrangementState state, bool isDark) {
+  Widget _buildOpponentHand(
+    GuessArrangementState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     final opponent = state.opponentPlayer;
 
     return Container(
@@ -270,7 +291,7 @@ class _GuessArrangementScreenState
       child: Column(
         children: [
           Text(
-            "${opponent.name}的牌",
+            l10n.ga_playerCards(opponent.name),
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -281,7 +302,7 @@ class _GuessArrangementScreenState
           ),
           const SizedBox(height: 4),
           Text(
-            state.isAiTurn ? 'AI思考中...' : '点击牌来猜测',
+            state.isAiTurn ? l10n.ga_aiThinking : l10n.ga_tapToGuess,
             style: TextStyle(
               fontSize: 11,
               color: isDark
@@ -344,7 +365,7 @@ class _GuessArrangementScreenState
           ),
           if (_selectedPosition != null && !state.isAiTurn)
             Text(
-              '已选择位置 ${_selectedPosition! + 1} - 请在下方选择数字',
+              l10n.ga_positionSelected(_selectedPosition! + 1),
               style: TextStyle(
                 fontSize: 12,
                 color: WoodenColors.accentAmber,
@@ -356,7 +377,11 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildCenterInfo(GuessArrangementState state, bool isDark) {
+  Widget _buildCenterInfo(
+    GuessArrangementState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     // 显示AI当前猜测
     if (_isAiTurnInProgress &&
         _aiCurrentPosition != null &&
@@ -376,7 +401,7 @@ class _GuessArrangementScreenState
             const Icon(Icons.smart_toy, color: WoodenColors.accentAmber),
             const SizedBox(width: 8),
             Text(
-              'AI猜测: 位置${_aiCurrentPosition! + 1} 是 $rankSymbol',
+              l10n.ga_aiGuessing(_aiCurrentPosition! + 1, rankSymbol),
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -400,7 +425,7 @@ class _GuessArrangementScreenState
           ),
           const SizedBox(width: 8),
           Text(
-            state.isAiTurn ? 'AI思考中...' : '你的回合！',
+            state.isAiTurn ? l10n.ga_aiThinking : l10n.ga_yourTurn,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -414,7 +439,11 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildRankSelectorSheet(GuessArrangementState state, bool isDark) {
+  Widget _buildRankSelectorSheet(
+    GuessArrangementState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 220),
       padding: const EdgeInsets.all(12),
@@ -433,9 +462,12 @@ class _GuessArrangementScreenState
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                '选择数字 (A-K)',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              Text(
+                l10n.ga_selectNumber,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               IconButton(
                 icon: const Icon(Icons.close, size: 20),
@@ -463,7 +495,11 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildCurrentPlayerHand(GuessArrangementState state, bool isDark) {
+  Widget _buildCurrentPlayerHand(
+    GuessArrangementState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     final player = state.currentPlayer;
 
     return Container(
@@ -482,7 +518,7 @@ class _GuessArrangementScreenState
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "你的牌",
+            l10n.ga_yourCards,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -502,7 +538,7 @@ class _GuessArrangementScreenState
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2),
-                  child: CardDisplay(
+                  child: AnimatedCardDisplay(
                     card: card,
                     isRevealed: isRevealed,
                     isHidden: !isRevealed,
@@ -518,7 +554,11 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildActionButtons(GuessArrangementState state, bool isDark) {
+  Widget _buildActionButtons(
+    GuessArrangementState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: const EdgeInsets.all(12),
       child: Row(
@@ -526,7 +566,7 @@ class _GuessArrangementScreenState
           if (widget.aiDifficulty == null)
             Expanded(
               child: WoodenButton(
-                text: '结束回合',
+                text: l10n.ga_endTurn,
                 icon: Icons.swap_horiz,
                 size: WoodenButtonSize.small,
                 variant: WoodenButtonVariant.secondary,
@@ -537,7 +577,7 @@ class _GuessArrangementScreenState
           if (widget.aiDifficulty == null) const SizedBox(width: 12),
           Expanded(
             child: WoodenButton(
-              text: '清除选择',
+              text: l10n.ga_clearSelection,
               icon: Icons.clear,
               size: WoodenButtonSize.small,
               variant: WoodenButtonVariant.outlined,
@@ -571,6 +611,7 @@ class _GuessArrangementScreenState
 
     // 先保存position
     final position = _selectedPosition!;
+    final l10n = AppLocalizations.of(context)!;
 
     final opponent = ref.read(guessArrangementGameProvider).opponentPlayer;
     final actualCard = opponent.hand.cardAt(position);
@@ -590,20 +631,26 @@ class _GuessArrangementScreenState
     if (wasCorrect) {
       // 猜对：显示snackbar + combo
       final newCombo = state.currentPlayer.currentCombo;
-      _showCorrectSnackbar(newCombo, actualCard);
+      _showCorrectSnackbar(newCombo, actualCard, l10n);
 
       // 检查游戏是否结束
       if (state.isGameOver) return;
     } else {
       // 猜错：显示对话框
-      _showWrongGuessDialog(isAiGuess: false);
+      _showWrongGuessDialog(isAiGuess: false, l10n: l10n);
     }
   }
 
-  void _showCorrectSnackbar(int combo, PlayingCard? card) {
+  void _showCorrectSnackbar(
+    int combo,
+    PlayingCard? card,
+    AppLocalizations l10n,
+  ) {
     final message = card != null
-        ? '猜对了！${card.displayString} ${combo > 1 ? '连击 x$combo' : ''}'
-        : '猜对了！${combo > 1 ? '连击 x$combo' : ''}';
+        ? (combo > 1
+              ? l10n.ga_guessCorrectCombo(card.displayString, combo)
+              : l10n.ga_guessCorrect(card.displayString))
+        : (combo > 1 ? l10n.ga_comboLabel(combo) : l10n.ga_correct);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -624,12 +671,16 @@ class _GuessArrangementScreenState
     );
   }
 
-  void _showWrongGuessDialog({required bool isAiGuess}) {
+  void _showWrongGuessDialog({
+    required bool isAiGuess,
+    AppLocalizations? l10n,
+  }) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (dialogContext) => WrongGuessDialog(
         isAiGuess: isAiGuess,
+        l10n: l10n ?? AppLocalizations.of(dialogContext)!,
         onContinue: () {
           Navigator.pop(dialogContext);
 
@@ -716,7 +767,8 @@ class _GuessArrangementScreenState
           .read(guessArrangementGameProvider)
           .currentPlayer
           .currentCombo;
-      _showCorrectSnackbar(combo, actualCard);
+      final l10n = AppLocalizations.of(context)!;
+      _showCorrectSnackbar(combo, actualCard, l10n);
 
       // 检查游戏是否结束
       if (ref.read(guessArrangementGameProvider).isGameOver) {
@@ -730,7 +782,7 @@ class _GuessArrangementScreenState
     } else {
       // 猜错：显示汇总对话框
       _endAiTurn();
-      _showAiRoundSummary();
+      _showAiRoundSummary(l10n: AppLocalizations.of(context)!);
     }
   }
 
@@ -742,7 +794,7 @@ class _GuessArrangementScreenState
     });
   }
 
-  void _showAiRoundSummary() {
+  void _showAiRoundSummary({required AppLocalizations l10n}) {
     if (_aiRoundResults.isEmpty) return;
 
     showDialog(
@@ -750,6 +802,7 @@ class _GuessArrangementScreenState
       barrierDismissible: false,
       builder: (context) => AiRoundSummaryDialog(
         results: List.from(_aiRoundResults),
+        l10n: l10n,
         onContinue: () {
           Navigator.pop(context);
           _aiRoundResults = [];
@@ -762,7 +815,7 @@ class _GuessArrangementScreenState
     ref.read(guessArrangementGameProvider.notifier).handleWrongGuess();
   }
 
-  void _showGameOverDialog(GuessArrangementState state) {
+  void _showGameOverDialog(GuessArrangementState state, AppLocalizations l10n) {
     final isPlayerWinner = state.winnerIndex == 0;
 
     showDialog(
@@ -770,13 +823,14 @@ class _GuessArrangementScreenState
       barrierDismissible: false,
       builder: (context) => GameOverDialog(
         winnerName: isPlayerWinner
-            ? '你'
-            : (widget.aiDifficulty != null ? 'AI' : '对手'),
+            ? l10n.ga_winnerPlayer
+            : (widget.aiDifficulty != null ? 'AI' : l10n.ga_winnerOpponent),
         isPlayerWinner: isPlayerWinner,
         correctGuesses: state.players[0].correctGuesses,
         totalGuesses: state.players[0].totalGuesses,
         maxCombo: state.players[0].maxCombo,
         duration: state.duration ?? Duration.zero,
+        l10n: l10n,
         onPlayAgain: () {
           Navigator.pop(context);
           ref
@@ -791,16 +845,16 @@ class _GuessArrangementScreenState
     );
   }
 
-  void _showExitConfirmation(BuildContext context) {
+  void _showExitConfirmation(BuildContext context, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('退出游戏？'),
-        content: const Text('确定要退出吗？当前进度将丢失。'),
+        title: Text(l10n.ga_exitGameTitle),
+        content: Text(l10n.ga_exitGameMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('取消'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -808,23 +862,23 @@ class _GuessArrangementScreenState
               Navigator.pop(context);
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('退出'),
+            child: Text(l10n.quit),
           ),
         ],
       ),
     );
   }
 
-  void _showRestartConfirmation(BuildContext context) {
+  void _showRestartConfirmation(BuildContext context, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('重新开始？'),
-        content: const Text('确定要重新开始游戏吗？'),
+        title: Text(l10n.ga_restartGameTitle),
+        content: Text(l10n.ga_restartGameMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('取消'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -836,7 +890,7 @@ class _GuessArrangementScreenState
             style: ElevatedButton.styleFrom(
               backgroundColor: WoodenColors.accentAmber,
             ),
-            child: const Text('重新开始'),
+            child: Text(l10n.ga_restart),
           ),
         ],
       ),

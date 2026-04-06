@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/theme/wooden_colors.dart';
 import '../models/dice_battle_player.dart';
 import 'battle_dice_widget.dart';
@@ -46,12 +47,9 @@ class DiceSelector extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkCard : WoodenColors.lightCard,
+        color: context.themeCard,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-          width: 2,
-        ),
+        border: Border.all(color: context.themeBorder, width: 2),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -67,8 +65,8 @@ class DiceSelector extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: isDark
-                        ? WoodenColors.darkTextPrimary
-                        : WoodenColors.lightTextPrimary,
+                        ? context.themeTextPrimary
+                        : context.themeTextPrimary,
                   ),
                 ),
                 Container(
@@ -103,8 +101,8 @@ class DiceSelector extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 color: isDark
-                    ? WoodenColors.darkTextSecondary
-                    : WoodenColors.lightTextSecondary,
+                    ? context.themeTextSecondary
+                    : context.themeTextSecondary,
               ),
             ),
             const SizedBox(height: 12),
@@ -148,9 +146,9 @@ class DiceSelector extends StatelessWidget {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: WoodenColors.accentAmber.withAlpha(30),
+                  color: context.themeAccent.withAlpha(30),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: WoodenColors.accentAmber),
+                  border: Border.all(color: context.themeAccent),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -158,15 +156,15 @@ class DiceSelector extends StatelessWidget {
                     Icon(
                       isAttackPhase ? Icons.sports_mma : Icons.shield,
                       size: 20,
-                      color: WoodenColors.accentAmber,
+                      color: context.themeAccent,
                     ),
                     const SizedBox(width: 8),
                     Text(
                       'Total: $selectedSum',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: WoodenColors.accentAmber,
+                        color: context.themeAccent,
                       ),
                     ),
                   ],
@@ -189,9 +187,9 @@ class DiceSelector extends StatelessWidget {
       // Over limit - show red warning
       return Colors.red;
     } else if (selectedCount == limit) {
-      return Colors.green;
+      return context.themeAccent;
     } else {
-      return WoodenColors.accentAmber;
+      return context.themeAccent.withAlpha(150);
     }
   }
 }

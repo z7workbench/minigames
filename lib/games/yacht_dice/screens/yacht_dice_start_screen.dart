@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
 import '../models/yacht_dice_state.dart';
 import '../yacht_dice_provider.dart';
@@ -71,7 +71,7 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(
-              backgroundColor: WoodenColors.accentAmber,
+              backgroundColor: context.themeAccent,
               foregroundColor: Colors.white,
             ),
             child: Text(l10n.yd_resumeGame),
@@ -115,32 +115,18 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     // Theme-aware colors
-    final backgroundColor = isDark
-        ? WoodenColors.darkBackground
-        : WoodenColors.lightBackground;
-    final surfaceColor = isDark
-        ? WoodenColors.darkSurface
-        : WoodenColors.lightSurface;
-    final textPrimaryColor = isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-    final textSecondaryColor = isDark
-        ? WoodenColors.darkTextSecondary
-        : WoodenColors.lightTextSecondary;
+    final backgroundColor = context.themeBackground;
+    final surfaceColor = context.themeSurface;
+    final textPrimaryColor = context.themeTextPrimary;
+    final textSecondaryColor = context.themeTextSecondary;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text(l10n.game_yacht_dice),
-        backgroundColor: isDark
-            ? WoodenColors.darkPrimary
-            : WoodenColors.lightPrimary,
-        foregroundColor: isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary,
+        backgroundColor: context.themePrimary,
+        foregroundColor: context.themeOnPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -163,22 +149,13 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: isDark
-                          ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-                          : [WoodenColors.lightCard, WoodenColors.lightSurface],
+                      colors: [context.themeCard, context.themeSurface],
                     ),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: isDark
-                          ? WoodenColors.darkBorder
-                          : WoodenColors.lightBorder,
-                      width: 2,
-                    ),
+                    border: Border.all(color: context.themeBorder, width: 2),
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? WoodenColors.darkShadow
-                            : WoodenColors.lightShadow,
+                        color: context.themeShadow.withAlpha(80),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -187,9 +164,7 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
                   child: Icon(
                     Icons.casino,
                     size: 50,
-                    color: isDark
-                        ? WoodenColors.accentGold
-                        : WoodenColors.lightSecondary,
+                    color: context.themeAccent,
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -222,17 +197,10 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
                   decoration: BoxDecoration(
                     color: surfaceColor,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: isDark
-                          ? WoodenColors.darkBorder
-                          : WoodenColors.lightBorder,
-                      width: 1.5,
-                    ),
+                    border: Border.all(color: context.themeBorder, width: 1.5),
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? WoodenColors.darkShadow.withAlpha(128)
-                            : WoodenColors.lightShadow.withAlpha(128),
+                        color: context.themeShadow.withAlpha(128),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),

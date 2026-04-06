@@ -281,29 +281,124 @@ Text(AppLocalizations.of(context)!.appTitle)
 
 ## 主题系统
 
-### 木质桌游风格
+### ⚠️ 重要：多主题适配规范
 
-使用`WoodenColors`定义木质调色板:
+本项目支持 **2 种配色方案 × 2 种亮度模式 = 4 种主题组合**：
+
+| 配色方案 | 浅色模式 | 深色模式 |
+|---------|---------|---------|
+| **木质 (Wooden)** | 暖木色调（卡其色、棕色） | 深胡桃色（深棕、乌木） |
+| **星空 (Starlight)** | 柔和紫色、天蓝色 | 深紫色、深蓝色 |
+
+**🚨 组件开发必须适配所有 4 种主题组合！**
+
+### 主题感知颜色使用指南
+
+#### ✅ 正确做法：使用 `context.theme*` 扩展
 
 ```dart
-class WoodenColors {
-  // 浅色模式 - 暖木色调
-  static const lightWoodPrimary = Color(0xFFD2691E);
-  static const lightWoodSecondary = Color(0xFF8B4513);
-  static const lightWoodBackground = Color(0xFFF5DEB3);
-  
-  // 深色模式 - 深胡桃/乌木色
-  static const darkWoodPrimary = Color(0xFF3D2817);
-  static const darkWoodSecondary = Color(0xFF5D4037);
-  static const darkWoodBackground = Color(0xFF1A1A1A);
+import '../../ui/theme/theme_colors.dart';
+
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // ✅ 背景色 - 自动适配木质/星空 + 深色/浅色
+      color: context.themeBackground,
+      
+      // ✅ 主要文字颜色
+      child: Text(
+        'Hello',
+        style: TextStyle(color: context.themeTextPrimary),
+      ),
+    );
+  }
 }
 ```
+
+#### ❌ 错误做法：硬编码颜色
+
+```dart
+// ❌ 绝对禁止！这会导致星空主题下仍显示木质颜色
+Container(
+  color: isDark ? WoodenColors.darkBackground : WoodenColors.lightBackground,
+)
+
+// ❌ 绝对禁止！硬编码主题特定颜色
+Icon(Icons.settings, color: WoodenColors.accentAmber),
+```
+
+### 可用的主题感知颜色
+
+通过 `BuildContext` 扩展访问：
+
+| 扩展属性 | 用途 | 说明 |
+|---------|------|------|
+| `context.themePrimary` | 主色 | AppBar、主要按钮背景 |
+| `context.themeSecondary` | 次要色 | 次要元素 |
+| `context.themeBackground` | 背景色 | Scaffold 背景 |
+| `context.themeSurface` | 表面色 | 卡片、容器背景 |
+| `context.themeCard` | 卡片色 | 卡片背景 |
+| `context.themeAccent` | 强调色 | 图标、按钮、高亮（木质=琥珀色，星空=紫色） |
+| `context.themeAccentSecondary` | 次强调色 | 渐变、次要强调 |
+| `context.themeTextPrimary` | 主要文字 | 标题、重要文字 |
+| `context.themeTextSecondary` | 次要文字 | 描述、辅助文字 |
+| `context.themeBorder` | 边框色 | 边框、分隔线 |
+| `context.themeShadow` | 阴影色 | 阴影效果 |
+| `context.themeOnPrimary` | 主色上的文字 | AppBar 上的图标/文字 |
+| `context.themeOnAccent` | 强调色上的文字 | 强调按钮上的文字 |
+| `context.themeDisabled` | 禁用色 | 禁用状态 |
+| `context.themeDivider` | 分隔线色 | Divider |
+
+### 特殊场景颜色
+
+| 场景 | 推荐做法 |
+|------|---------|
+| **AppBar 上的图标** | `context.themeOnPrimary`（不是 `themeAccent`！） |
+| **AppBar 上的文字** | `context.themeOnPrimary` |
+| **游戏卡片的图标** | `context.themeAccent` |
+| **按钮渐变** | `[context.themeAccent, context.themeAccentSecondary]` |
+| **成功/错误/警告色** | `context.themeSuccess` / `context.themeError` / `context.themeWarning` |
+
+### 配色方案定义位置
+
+- **木质主题**: `lib/ui/theme/wooden_colors.dart`
+- **星空主题**: `lib/ui/theme/starlight_colors.dart`
+- **主题感知扩展**: `lib/ui/theme/theme_colors.dart`
+- **主题应用**: `lib/ui/theme/app_theme.dart`
+- **主题 Provider**: `lib/ui/theme/theme_provider.dart`
 
 ### 切换主题
 
 ```dart
-ref.read(themeNotifierProvider.notifier).toggleTheme();
+// 切换深色/浅色模式
+ref.read(themeModeNotifierProvider.notifier).toggleTheme();
+
+// 设置配色方案
+ref.read(colorSchemeNotifierProvider.notifier).setColorScheme(ColorSchemeType.starlight);
 ```
+
+### 组件开发检查清单
+
+开发新组件时，必须验证：
+
+- [ ] 使用 `context.theme*` 扩展，而非 `WoodenColors.*` 直接引用
+- [ ] 已导入 `theme_colors.dart`
+- [ ] 在 **深色+木质** 主题下测试
+- [ ] 在 **深色+星空** 主题下测试
+- [ ] 在 **浅色+木质** 主题下测试
+- [ ] 在 **浅色+星空** 主题下测试
+- [ ] AppBar 上的图标/文字使用 `themeOnPrimary`
+- [ ] 按钮使用 `WoodenButton` 组件（已适配主题）
+
+### 已适配主题的共享组件
+
+以下组件已正确适配多主题，可直接使用：
+
+- `WoodenButton` - 按钮（支持 primary, secondary, accent, ghost 变体）
+- `WoodenAppBar` - 应用栏
+- `GameCard` - 游戏卡片
+- `ThemeToggle` - 主题切换开关
 
 ## 游戏实现指南
 

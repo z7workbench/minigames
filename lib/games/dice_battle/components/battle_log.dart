@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 
 /// Displays the battle log with scrollable message history.
 class BattleLog extends StatelessWidget {
@@ -19,11 +19,9 @@ class BattleLog extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(maxHeight: maxHeight),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-        ),
+        border: Border.all(color: context.themeBorder),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +30,7 @@ class BattleLog extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: isDark ? WoodenColors.darkCard : WoodenColors.lightCard,
+              color: context.themeCard,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
@@ -43,9 +41,7 @@ class BattleLog extends StatelessWidget {
                 Icon(
                   Icons.history,
                   size: 16,
-                  color: isDark
-                      ? WoodenColors.darkTextSecondary
-                      : WoodenColors.lightTextSecondary,
+                  color: context.themeTextSecondary,
                 ),
                 const SizedBox(width: 8),
                 Text(
@@ -53,9 +49,7 @@ class BattleLog extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: isDark
-                        ? WoodenColors.darkTextSecondary
-                        : WoodenColors.lightTextSecondary,
+                    color: context.themeTextSecondary,
                   ),
                 ),
               ],
@@ -69,9 +63,7 @@ class BattleLog extends StatelessWidget {
                       '战斗开始...',
                       style: TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? WoodenColors.darkTextSecondary
-                            : WoodenColors.lightTextSecondary,
+                        color: context.themeTextSecondary,
                       ),
                     ),
                   )
@@ -107,7 +99,7 @@ class BattleLog extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: isLatest
-            ? WoodenColors.accentAmber.withAlpha(30)
+            ? context.themeAccent.withAlpha(30)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(4),
       ),
@@ -120,10 +112,8 @@ class BattleLog extends StatelessWidget {
             margin: const EdgeInsets.only(top: 5, right: 8),
             decoration: BoxDecoration(
               color: isLatest
-                  ? WoodenColors.accentAmber
-                  : (isDark
-                        ? WoodenColors.darkTextSecondary
-                        : WoodenColors.lightTextSecondary),
+                  ? context.themeAccent
+                  : context.themeTextSecondary,
               shape: BoxShape.circle,
             ),
           ),
@@ -133,12 +123,8 @@ class BattleLog extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 color: isLatest
-                    ? (isDark
-                          ? WoodenColors.darkTextPrimary
-                          : WoodenColors.lightTextPrimary)
-                    : (isDark
-                          ? WoodenColors.darkTextSecondary
-                          : WoodenColors.lightTextSecondary),
+                    ? context.themeTextPrimary
+                    : context.themeTextSecondary,
                 fontWeight: isLatest ? FontWeight.w500 : FontWeight.normal,
               ),
             ),

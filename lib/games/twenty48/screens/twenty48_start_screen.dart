@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
 import '../twenty48_provider.dart';
 import '../twenty48_screen.dart';
@@ -57,30 +57,18 @@ class _Twenty48StartScreenState extends ConsumerState<Twenty48StartScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final backgroundColor = isDark
-        ? WoodenColors.darkBackground
-        : WoodenColors.lightBackground;
-    final surfaceColor = isDark
-        ? WoodenColors.darkSurface
-        : WoodenColors.lightSurface;
-    final textPrimaryColor = isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-    final textSecondaryColor = isDark
-        ? WoodenColors.darkTextSecondary
-        : WoodenColors.lightTextSecondary;
+    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
+    final backgroundColor = themeColors.background;
+    final surfaceColor = themeColors.surface;
+    final textPrimaryColor = themeColors.textPrimary;
+    final textSecondaryColor = themeColors.textSecondary;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text(l10n.game_2048),
-        backgroundColor: isDark
-            ? WoodenColors.darkPrimary
-            : WoodenColors.lightPrimary,
-        foregroundColor: isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary,
+        backgroundColor: themeColors.primary,
+        foregroundColor: themeColors.onPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -104,21 +92,14 @@ class _Twenty48StartScreenState extends ConsumerState<Twenty48StartScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: isDark
-                          ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-                          : [WoodenColors.lightCard, WoodenColors.lightSurface],
+                          ? [themeColors.card, themeColors.surface]
+                          : [themeColors.card, themeColors.surface],
                     ),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: isDark
-                          ? WoodenColors.darkBorder
-                          : WoodenColors.lightBorder,
-                      width: 2,
-                    ),
+                    border: Border.all(color: themeColors.border, width: 2),
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? WoodenColors.darkShadow
-                            : WoodenColors.lightShadow,
+                        color: themeColors.shadow.withAlpha(128),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -127,9 +108,7 @@ class _Twenty48StartScreenState extends ConsumerState<Twenty48StartScreen> {
                   child: Icon(
                     Icons.grid_4x4,
                     size: 50,
-                    color: isDark
-                        ? WoodenColors.accentGold
-                        : WoodenColors.lightSecondary,
+                    color: isDark ? themeColors.accent : themeColors.secondary,
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -162,17 +141,10 @@ class _Twenty48StartScreenState extends ConsumerState<Twenty48StartScreen> {
                   decoration: BoxDecoration(
                     color: surfaceColor,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: isDark
-                          ? WoodenColors.darkBorder
-                          : WoodenColors.lightBorder,
-                      width: 1.5,
-                    ),
+                    border: Border.all(color: themeColors.border, width: 1.5),
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? WoodenColors.darkShadow.withAlpha(128)
-                            : WoodenColors.lightShadow.withAlpha(128),
+                        color: themeColors.shadow.withAlpha(128),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),

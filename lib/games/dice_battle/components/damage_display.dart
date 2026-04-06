@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 
 /// Displays damage dealt with animation.
 class DamageDisplay extends StatelessWidget {
@@ -41,12 +41,12 @@ class DamageDisplay extends StatelessWidget {
           gradient: LinearGradient(
             colors: isCritical
                 ? [Colors.red, Colors.red.shade700]
-                : [WoodenColors.accentAmber, WoodenColors.accentCopper],
+                : [context.themeAccent, context.themeAccentSecondary],
           ),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: (isCritical ? Colors.red : WoodenColors.accentAmber)
+              color: (isCritical ? Colors.red : context.themeAccent)
                   .withAlpha(150),
               blurRadius: 20,
               offset: const Offset(0, 10),

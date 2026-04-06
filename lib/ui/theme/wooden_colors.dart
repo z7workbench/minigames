@@ -58,4 +58,8 @@ class WoodenColors {
   static const accentCopper = Color(0xFFB87333);
   static const accentBronze = Color(0xFFCD7F32);
   static const accentGold = Color(0xFFFFD700);
+
+  // Theme-aware accent colors
+  static const lightAccent = accentAmber;
+  static const darkAccent = accentCopper;
 }

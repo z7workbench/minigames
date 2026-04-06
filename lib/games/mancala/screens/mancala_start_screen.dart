@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
 import '../models/mancala_state.dart';
 import '../mancala_screen.dart';
@@ -19,21 +19,14 @@ class MancalaStartScreen extends ConsumerStatefulWidget {
 class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? WoodenColors.darkBackground
-          : WoodenColors.lightBackground,
+      backgroundColor: context.themeBackground,
       appBar: AppBar(
         title: Text(l10n.game_mancala),
-        backgroundColor: isDark
-            ? WoodenColors.darkPrimary
-            : WoodenColors.lightPrimary,
-        foregroundColor: isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary,
+        backgroundColor: context.themePrimary,
+        foregroundColor: context.themeOnPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -48,15 +41,15 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Game icon
-                _buildGameIcon(isDark),
+                _buildGameIcon(context),
                 const SizedBox(height: 32),
 
                 // Game title and description
-                _buildTitleSection(isDark, l10n),
+                _buildTitleSection(context, l10n),
                 const SizedBox(height: 48),
 
                 // Mode selection
-                _buildModeSelection(context, isDark, l10n),
+                _buildModeSelection(context, l10n),
                 const SizedBox(height: 24),
 
                 // Rules button
@@ -65,7 +58,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
                   icon: Icons.help_outline,
                   variant: WoodenButtonVariant.outlined,
                   expandWidth: true,
-                  onPressed: () => _showRulesDialog(context, isDark, l10n),
+                  onPressed: () => _showRulesDialog(context, l10n),
                 ),
                 const SizedBox(height: 16),
 
@@ -85,7 +78,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
     );
   }
 
-  Widget _buildGameIcon(bool isDark) {
+  Widget _buildGameIcon(BuildContext context) {
     return Center(
       child: Container(
         width: 100,
@@ -94,20 +87,13 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: isDark
-                ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-                : [WoodenColors.lightCard, WoodenColors.lightSurface],
+            colors: [context.themeCard, context.themeSurface],
           ),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-            width: 2,
-          ),
+          border: Border.all(color: context.themeBorder, width: 2),
           boxShadow: [
             BoxShadow(
-              color: isDark
-                  ? WoodenColors.darkShadow
-                  : WoodenColors.lightShadow,
+              color: context.themeShadow,
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -118,7 +104,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
     );
   }
 
-  Widget _buildTitleSection(bool isDark, AppLocalizations l10n) {
+  Widget _buildTitleSection(BuildContext context, AppLocalizations l10n) {
     return Column(
       children: [
         Text(
@@ -127,9 +113,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: isDark
-                ? WoodenColors.darkTextPrimary
-                : WoodenColors.lightTextPrimary,
+            color: context.themeTextPrimary,
             letterSpacing: 1,
           ),
         ),
@@ -137,46 +121,28 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
         Text(
           'Mancala',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18,
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
-          ),
+          style: TextStyle(fontSize: 18, color: context.themeTextSecondary),
         ),
         const SizedBox(height: 16),
         Text(
           l10n.mc_gameDescription,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14,
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
-          ),
+          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
         ),
       ],
     );
   }
 
-  Widget _buildModeSelection(
-    BuildContext context,
-    bool isDark,
-    AppLocalizations l10n,
-  ) {
+  Widget _buildModeSelection(BuildContext context, AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-          width: 1.5,
-        ),
+        border: Border.all(color: context.themeBorder, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: (isDark ? WoodenColors.darkShadow : WoodenColors.lightShadow)
-                .withAlpha(128),
+            color: context.themeShadow.withAlpha(128),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -191,9 +157,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
@@ -250,16 +214,12 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
     );
   }
 
-  void _showRulesDialog(
-    BuildContext context,
-    bool isDark,
-    AppLocalizations l10n,
-  ) {
+  void _showRulesDialog(BuildContext context, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        backgroundColor: isDark ? WoodenColors.darkSurface : Colors.white,
+        backgroundColor: context.themeSurface,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -274,9 +234,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: isDark
-                          ? WoodenColors.darkTextPrimary
-                          : WoodenColors.lightTextPrimary,
+                      color: context.themeTextPrimary,
                     ),
                   ),
                   IconButton(
@@ -289,30 +247,30 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
               _buildRuleItem(
                 '1. 播种',
                 '从你的一个坑中取出所有种子，按逆时针方向逐个播撒到后面的坑中。',
-                isDark,
+                context,
               ),
               const SizedBox(height: 12),
-              _buildRuleItem('2. 跳过对手大坑', '播种时跳过对手的大坑，只播撒到小坑和自己的大坑中。', isDark),
+              _buildRuleItem('2. 跳过对手大坑', '播种时跳过对手的大坑，只播撒到小坑和自己的大坑中。', context),
               const SizedBox(height: 12),
-              _buildRuleItem('3. 额外回合', '如果最后一粒种子落入你的大坑，你可以再玩一次！', isDark),
+              _buildRuleItem('3. 额外回合', '如果最后一粒种子落入你的大坑，你可以再玩一次！', context),
               const SizedBox(height: 12),
               _buildRuleItem(
                 '4. 捕获',
                 '如果最后一粒种子落入你那边的空坑，你可以捕获该粒种子和对面坑中所有的种子！',
-                isDark,
+                context,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
                 '5. 游戏结束',
                 '当一方所有小坑都空了，游戏结束。剩余种子归对手所有。种子多者获胜！',
-                isDark,
+                context,
               ),
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: WoodenColors.accentAmber,
+                    backgroundColor: context.themeAccent,
                     foregroundColor: Colors.white,
                   ),
                   child: const Text('明白了！'),
@@ -325,27 +283,26 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
     );
   }
 
-  Widget _buildRuleItem(String title, String description, bool isDark) {
+  Widget _buildRuleItem(
+    String title,
+    String description,
+    BuildContext context,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
-            color: WoodenColors.accentAmber,
+            color: context.themeAccent,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           description,
-          style: TextStyle(
-            fontSize: 13,
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
-          ),
+          style: TextStyle(fontSize: 13, color: context.themeTextSecondary),
         ),
       ],
     );

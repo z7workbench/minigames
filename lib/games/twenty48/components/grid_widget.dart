@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../models/twenty48_tile.dart';
 import 'tile_widget.dart';
 
@@ -24,6 +24,7 @@ class GridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -37,21 +38,12 @@ class GridWidget extends StatelessWidget {
         return Container(
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
-            color: isDark
-                ? WoodenColors.darkSurface
-                : WoodenColors.lightSurface,
+            color: themeColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: isDark
-                  ? WoodenColors.darkBorder
-                  : WoodenColors.lightBorder,
-              width: 2,
-            ),
+            border: Border.all(color: themeColors.border, width: 2),
             boxShadow: [
               BoxShadow(
-                color: isDark
-                    ? WoodenColors.darkShadow.withAlpha(150)
-                    : WoodenColors.lightShadow.withAlpha(150),
+                color: themeColors.shadow.withAlpha(150),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -63,7 +55,7 @@ class GridWidget extends StatelessWidget {
               clipBehavior: Clip.hardEdge,
               children: [
                 // Background cells
-                ..._buildBackgroundCells(tileSize, isDark),
+                ..._buildBackgroundCells(tileSize, themeColors),
                 // Tiles
                 ..._buildTiles(tileSize),
               ],
@@ -74,7 +66,10 @@ class GridWidget extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildBackgroundCells(double tileSize, bool isDark) {
+  List<Widget> _buildBackgroundCells(
+    double tileSize,
+    ThemeColorSet themeColors,
+  ) {
     final cells = <Widget>[];
     for (int row = 0; row < 4; row++) {
       for (int col = 0; col < 4; col++) {
@@ -89,9 +84,7 @@ class GridWidget extends StatelessWidget {
               width: tileSize,
               height: tileSize,
               decoration: BoxDecoration(
-                color: isDark
-                    ? WoodenColors.darkCard.withAlpha(150)
-                    : WoodenColors.lightCard.withAlpha(150),
+                color: themeColors.card.withAlpha(150),
                 borderRadius: BorderRadius.circular(6),
               ),
             ),

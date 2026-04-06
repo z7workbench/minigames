@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../l10n/generated/app_localizations.dart';
-import '../../../../ui/theme/wooden_colors.dart';
+import '../../../../ui/theme/theme_colors.dart';
 
 /// A confirmation dialog for selecting a scoring category in Yacht Dice
 class CategoryConfirmationDialog extends StatelessWidget {
@@ -21,13 +21,10 @@ class CategoryConfirmationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: isDark
-          ? WoodenColors.darkSurface
-          : WoodenColors.lightSurface,
+      backgroundColor: context.themeSurface,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -55,7 +52,7 @@ class CategoryConfirmationDialog extends StatelessWidget {
                 ElevatedButton(
                   onPressed: onConfirm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: WoodenColors.accentAmber,
+                    backgroundColor: context.themeAccent,
                     foregroundColor: Colors.white,
                   ),
                   child: Text(l10n.confirm),

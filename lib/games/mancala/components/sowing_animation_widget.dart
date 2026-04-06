@@ -1,3 +1,4 @@
+import '../../../ui/theme/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../ui/theme/wooden_colors.dart';
@@ -199,10 +200,10 @@ class _SowingAnimationWidgetState extends State<SowingAnimationWidget>
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: WoodenColors.accentAmber.withAlpha(150),
+                color: context.themeAccent.withAlpha(150),
                 width: 3,
               ),
-              color: WoodenColors.accentAmber.withAlpha(30),
+              color: context.themeAccent.withAlpha(30),
             ),
           ),
         ),
@@ -225,9 +226,9 @@ class _SowingAnimationWidgetState extends State<SowingAnimationWidget>
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isDark
-            ? WoodenColors.darkCard.withAlpha(200)
-            : WoodenColors.lightCard.withAlpha(200),
-        border: Border.all(color: WoodenColors.accentAmber, width: 2),
+            ? context.themeCard.withAlpha(200)
+            : context.themeCard.withAlpha(200),
+        border: Border.all(color: context.themeAccent, width: 2),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(100),
@@ -241,14 +242,14 @@ class _SowingAnimationWidgetState extends State<SowingAnimationWidget>
         children: [
           // Seed icon
           if (_seedsInHand > 0)
-            Icon(Icons.grain, color: WoodenColors.accentAmber, size: 24),
+            Icon(Icons.grain, color: context.themeAccent, size: 24),
           // Seed count
           Positioned(
             bottom: 2,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
               decoration: BoxDecoration(
-                color: WoodenColors.accentAmber,
+                color: context.themeAccent,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -303,10 +304,10 @@ class SowingOverlayWidget extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: WoodenColors.accentAmber.withAlpha(180),
+                color: context.themeAccent.withAlpha(180),
                 width: 3,
               ),
-              color: WoodenColors.accentAmber.withAlpha(40),
+              color: context.themeAccent.withAlpha(40),
             ),
           ),
         ),
@@ -321,23 +322,23 @@ class SowingOverlayWidget extends StatelessWidget {
             builder: (context, scale, child) {
               return Transform.scale(scale: scale, child: child);
             },
-            child: _buildHandWidget(animation.seedsInHand, isDark),
+            child: _buildHandWidget(context, animation.seedsInHand, isDark),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildHandWidget(int seedsInHand, bool isDark) {
+  Widget _buildHandWidget(BuildContext context, int seedsInHand, bool isDark) {
     return Container(
       width: 40,
       height: 40,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isDark
-            ? WoodenColors.darkCard.withAlpha(220)
-            : WoodenColors.lightCard.withAlpha(220),
-        border: Border.all(color: WoodenColors.accentAmber, width: 2),
+            ? context.themeCard.withAlpha(220)
+            : context.themeCard.withAlpha(220),
+        border: Border.all(color: context.themeAccent, width: 2),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(120),
@@ -350,13 +351,13 @@ class SowingOverlayWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           if (seedsInHand > 0)
-            Icon(Icons.grain, color: WoodenColors.accentAmber, size: 22),
+            Icon(Icons.grain, color: context.themeAccent, size: 22),
           Positioned(
             bottom: 2,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
               decoration: BoxDecoration(
-                color: WoodenColors.accentAmber,
+                color: context.themeAccent,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(

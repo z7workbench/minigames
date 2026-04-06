@@ -631,6 +631,298 @@
   "@ga_exit": {
     "description": "Exit button"
   },
+  "ga_round": "回合",
+  "@ga_round": {
+    "description": "Round label"
+  },
+  "ga_turn": "轮次",
+  "@ga_turn": {
+    "description": "Turn label"
+  },
+  "ga_combo": "连击",
+  "@ga_combo": {
+    "description": "Combo label"
+  },
+  "ga_dealing": "发牌中...",
+  "@ga_dealing": {
+    "description": "Dealing cards message"
+  },
+  "ga_aiThinking": "AI思考中...",
+  "@ga_aiThinking": {
+    "description": "AI thinking message"
+  },
+  "ga_position": "位置",
+  "@ga_position": {
+    "description": "Position label"
+  },
+  "ga_yourTurn": "你的回合！",
+  "@ga_yourTurn": {
+    "description": "Your turn message"
+  },
+  "ga_opponentTurn": "对手回合",
+  "@ga_opponentTurn": {
+    "description": "Opponent's turn message"
+  },
+  "ga_cardsRemaining": "剩余牌数",
+  "@ga_cardsRemaining": {
+    "description": "Cards remaining label"
+  },
+  "ga_selectGameMode": "选择游戏模式",
+  "@ga_selectGameMode": {
+    "description": "Select game mode label"
+  },
+  "ga_gotIt": "明白了！",
+  "@ga_gotIt": {
+    "description": "Got it button"
+  },
+  "ga_playerCards": "{name}的牌",
+  "@ga_playerCards": {
+    "description": "Player's cards label with placeholder",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_yourCards": "你的牌",
+  "@ga_yourCards": {
+    "description": "Your cards label"
+  },
+  "ga_tapToGuess": "点击牌来猜测",
+  "@ga_tapToGuess": {
+    "description": "Hint to tap card"
+  },
+  "ga_positionSelected": "已选择位置 {position} - 请在下方选择数字",
+  "@ga_positionSelected": {
+    "description": "Position selected message with placeholder",
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_selectNumber": "选择数字 (A-K)",
+  "@ga_selectNumber": {
+    "description": "Select number label"
+  },
+  "ga_guessCorrect": "猜对了！{card}",
+  "@ga_guessCorrect": {
+    "description": "Correct guess message with card placeholder",
+    "placeholders": {
+      "card": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_guessCorrectCombo": "猜对了！{card} 连击 x{combo}",
+  "@ga_guessCorrectCombo": {
+    "description": "Correct guess message with combo",
+    "placeholders": {
+      "card": {
+        "type": "String"
+      },
+      "combo": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_comboLabel": "连击 x{n}",
+  "@ga_comboLabel": {
+    "description": "Combo label with number",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_clearSelection": "清除选择",
+  "@ga_clearSelection": {
+    "description": "Clear selection button"
+  },
+  "ga_endTurn": "结束回合",
+  "@ga_endTurn": {
+    "description": "End turn button"
+  },
+  "ga_exitGameTitle": "退出游戏？",
+  "@ga_exitGameTitle": {
+    "description": "Exit game dialog title"
+  },
+  "ga_exitGameMessage": "确定要退出吗？当前进度将丢失。",
+  "@ga_exitGameMessage": {
+    "description": "Exit game dialog message"
+  },
+  "ga_restartGameTitle": "重新开始？",
+  "@ga_restartGameTitle": {
+    "description": "Restart game dialog title"
+  },
+  "ga_restartGameMessage": "确定要重新开始游戏吗？",
+  "@ga_restartGameMessage": {
+    "description": "Restart game dialog message"
+  },
+  "ga_restart": "重新开始",
+  "@ga_restart": {
+    "description": "Restart button"
+  },
+  "ga_aiGuessing": "AI猜测: 位置{position} 是 {rank}",
+  "@ga_aiGuessing": {
+    "description": "AI guessing message with placeholders",
+    "placeholders": {
+      "position": {
+        "type": "int"
+      },
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_rule1Title": "1. 发牌",
+  "@ga_rule1Title": {
+    "description": "Rule 1 title"
+  },
+  "ga_rule1Desc": "每位玩家从52张牌中抽取8张，按从小到大（A=1最小，K=13最大）面朝下排列。",
+  "@ga_rule1Desc": {
+    "description": "Rule 1 description"
+  },
+  "ga_rule2Title": "2. 猜测",
+  "@ga_rule2Title": {
+    "description": "Rule 2 title"
+  },
+  "ga_rule2Desc": "双方轮流猜对方的牌。例如：\"第3张是7\"。只需猜数字，不用猜花色。",
+  "@ga_rule2Desc": {
+    "description": "Rule 2 description"
+  },
+  "ga_rule3Title": "3. 猜对",
+  "@ga_rule3Title": {
+    "description": "Rule 3 title"
+  },
+  "ga_rule3Desc": "翻开对方的牌！你可以继续猜测，连击数+1。",
+  "@ga_rule3Desc": {
+    "description": "Rule 3 description"
+  },
+  "ga_rule4Title": "4. 猜错",
+  "@ga_rule4Title": {
+    "description": "Rule 4 title"
+  },
+  "ga_rule4Desc": "轮到对方猜测。你的连击数重置。",
+  "@ga_rule4Desc": {
+    "description": "Rule 4 description"
+  },
+  "ga_rule5Title": "5. 胜负",
+  "@ga_rule5Title": {
+    "description": "Rule 5 title"
+  },
+  "ga_rule5Desc": "谁的牌先被全部翻开，谁就输了！",
+  "@ga_rule5Desc": {
+    "description": "Rule 5 description"
+  },
+  "ga_winnerPlayer": "你",
+  "@ga_winnerPlayer": {
+    "description": "Winner label for player"
+  },
+  "ga_winnerOpponent": "对手",
+  "@ga_winnerOpponent": {
+    "description": "Winner label for opponent"
+  },
+  "ga_aiWrongGuess": "AI猜错了！",
+  "@ga_aiWrongGuess": {
+    "description": "AI wrong guess message"
+  },
+  "ga_wrongGuessTitle": "猜错了！",
+  "@ga_wrongGuessTitle": {
+    "description": "Wrong guess title"
+  },
+  "ga_turnToYou": "轮到你了！",
+  "@ga_turnToYou": {
+    "description": "Turn to player message"
+  },
+  "ga_turnToOpponent": "换对方回合了。",
+  "@ga_turnToOpponent": {
+    "description": "Turn to opponent message"
+  },
+  "ga_continue": "继续",
+  "@ga_continue": {
+    "description": "Continue button"
+  },
+  "ga_aiRoundEnd": "AI回合结束",
+  "@ga_aiRoundEnd": {
+    "description": "AI round end title"
+  },
+  "ga_aiCorrectCount": "AI猜对了 {correct}/{total} 次",
+  "@ga_aiCorrectCount": {
+    "description": "AI correct guess count",
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_positionLabel": "位置{n}",
+  "@ga_positionLabel": {
+    "description": "Position label with number",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_switchTurnHint": "请将设备交给{name}。\n记得隐藏你的牌！",
+  "@ga_switchTurnHint": {
+    "description": "Switch turn hint message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_winnerWins": "{name}赢了！",
+  "@ga_winnerWins": {
+    "description": "Winner wins message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_winnerLoses": "{name}赢了...",
+  "@ga_winnerLoses": {
+    "description": "Opponent wins message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_correctGuessesLabel": "正确猜测",
+  "@ga_correctGuessesLabel": {
+    "description": "Correct guesses label"
+  },
+  "ga_maxComboLabel": "最高连击",
+  "@ga_maxComboLabel": {
+    "description": "Max combo label"
+  },
+  "ga_playDurationLabel": "用时",
+  "@ga_playDurationLabel": {
+    "description": "Play duration label"
+  },
+  "ga_playAgainButton": "再来一局",
+  "@ga_playAgainButton": {
+    "description": "Play again button in game over"
+  },
+  "ga_durationFormat": "{minutes}分{seconds}秒",
+  "@ga_durationFormat": {
+    "description": "Duration format",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
 
   "game_2048": "2048",
   "@game_2048": {
@@ -1021,5 +1313,7 @@
   "db_fieldEffect": "场地效果",
   "@db_fieldEffect": { "description": "Field effect label" },
   "db_noActiveEffect": "无场地效果",
-  "@db_noActiveEffect": { "description": "No active effect message" }
+  "@db_noActiveEffect": { "description": "No active effect message" },
+  "comingSoon": "即将推出",
+  "@comingSoon": { "description": "Coming soon text" }
 }

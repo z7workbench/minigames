@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 
 /// A health bar widget showing player HP with animated transitions.
 class HealthBar extends StatelessWidget {
@@ -30,18 +30,15 @@ class HealthBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final healthPercentage = currentHealth / maxHealth;
 
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isActive
-              ? WoodenColors.accentAmber
-              : (isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder),
+          color: isActive ? context.themeAccent : context.themeBorder,
           width: isActive ? 2 : 1,
         ),
       ),
@@ -56,18 +53,14 @@ class HealthBar extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: isDark
-                      ? WoodenColors.darkTextPrimary
-                      : WoodenColors.lightTextPrimary,
+                  color: context.themeTextPrimary,
                 ),
               ),
               Text(
                 '$currentHealth / $maxHealth HP',
                 style: TextStyle(
                   fontSize: 12,
-                  color: isDark
-                      ? WoodenColors.darkTextSecondary
-                      : WoodenColors.lightTextSecondary,
+                  color: context.themeTextSecondary,
                 ),
               ),
             ],
@@ -81,9 +74,7 @@ class HealthBar extends StatelessWidget {
                 return Container(
                   height: height - 16,
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? WoodenColors.darkCard
-                        : WoodenColors.lightCard,
+                    color: context.themeCard,
                     borderRadius: BorderRadius.circular(height / 2),
                   ),
                   child: Stack(
@@ -92,9 +83,7 @@ class HealthBar extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? WoodenColors.darkDisabled.withAlpha(50)
-                              : WoodenColors.lightDisabled.withAlpha(50),
+                          color: context.themeDisabled.withAlpha(50),
                           borderRadius: BorderRadius.circular(height / 2),
                         ),
                       ),

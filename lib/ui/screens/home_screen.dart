@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/generated/app_localizations.dart';
 import '../../models/game_type.dart';
-import '../theme/wooden_colors.dart';
+import '../theme/theme_colors.dart';
 import '../widgets/game_card.dart';
 import '../widgets/wooden_app_bar.dart';
 import 'settings_screen.dart';
@@ -95,11 +95,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       case GameType.yachtDice:
         return l10n.game_yacht_dice;
       case GameType.guessArrangement:
-        return '猜排列';
+        return l10n.game_guess_arrangement;
       case GameType.twenty48:
         return l10n.game_2048;
       case GameType.diceBattle:
-        return 'Dice Battle';
+        return l10n.game_dice_battle;
       case GameType.mancala:
         return l10n.game_mancala;
       default:
@@ -115,15 +115,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       case GameType.yachtDice:
         return l10n.yd_gameDescription;
       case GameType.guessArrangement:
-        return '猜测对手隐藏的牌面！';
+        return l10n.ga_gameDescription;
       case GameType.twenty48:
         return l10n.t48_gameDescription;
       case GameType.diceBattle:
-        return 'Roll dice and battle your opponent!';
+        return l10n.db_gameDescription;
       case GameType.mancala:
         return l10n.mc_gameDescription;
       default:
-        return '更多游戏即将推出！';
+        return '${gameType.displayName} - Coming Soon!';
     }
   }
 
@@ -135,10 +135,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDark
-        ? WoodenColors.darkBackground
-        : WoodenColors.lightBackground;
+    final backgroundColor = context.themeBackground;
 
     // Get all game types
     final allGames = GameType.values;
@@ -149,7 +146,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         titleText: l10n.appTitle,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: Icon(Icons.settings, color: context.themeOnPrimary),
             onPressed: () => _navigateToSettings(context),
             tooltip: l10n.settings,
           ),

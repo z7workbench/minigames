@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../ui/theme/wooden_colors.dart';
 import '../models/playing_card.dart';
+import '../../../ui/theme/theme_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 /// AI回合结果汇总
 class AiRoundResult {
@@ -37,11 +38,13 @@ class AiRoundResult {
 /// 猜错时显示的对话框
 class WrongGuessDialog extends StatelessWidget {
   final bool isAiGuess;
+  final AppLocalizations l10n;
   final VoidCallback onContinue;
 
   const WrongGuessDialog({
     super.key,
     this.isAiGuess = false,
+    required this.l10n,
     required this.onContinue,
   });
 
@@ -51,7 +54,7 @@ class WrongGuessDialog extends StatelessWidget {
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: isDark ? WoodenColors.darkSurface : Colors.white,
+      backgroundColor: context.themeSurface,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -69,30 +72,25 @@ class WrongGuessDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              isAiGuess ? 'AI猜错了！' : '猜错了！',
+              isAiGuess ? l10n.ga_aiWrongGuess : l10n.ga_wrongGuessTitle,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: isDark
-                    ? WoodenColors.darkTextPrimary
-                    : WoodenColors.lightTextPrimary,
+                    ? context.themeTextPrimary
+                    : context.themeTextPrimary,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              isAiGuess ? '轮到你了！' : '换对方回合了。',
-              style: TextStyle(
-                fontSize: 14,
-                color: isDark
-                    ? WoodenColors.darkTextSecondary
-                    : WoodenColors.lightTextSecondary,
-              ),
+              isAiGuess ? l10n.ga_turnToYou : l10n.ga_turnToOpponent,
+              style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: onContinue,
               style: ElevatedButton.styleFrom(
-                backgroundColor: WoodenColors.accentAmber,
+                backgroundColor: context.themeAccent,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 32,
@@ -102,7 +100,7 @@ class WrongGuessDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: Text(isAiGuess ? '继续' : '确定'),
+              child: Text(isAiGuess ? l10n.ga_continue : l10n.ok),
             ),
           ],
         ),
@@ -114,11 +112,13 @@ class WrongGuessDialog extends StatelessWidget {
 /// AI回合结束汇总对话框
 class AiRoundSummaryDialog extends StatelessWidget {
   final List<AiRoundResult> results;
+  final AppLocalizations l10n;
   final VoidCallback onContinue;
 
   const AiRoundSummaryDialog({
     super.key,
     required this.results,
+    required this.l10n,
     required this.onContinue,
   });
 
@@ -129,7 +129,7 @@ class AiRoundSummaryDialog extends StatelessWidget {
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: isDark ? WoodenColors.darkSurface : Colors.white,
+      backgroundColor: context.themeSurface,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -138,33 +138,22 @@ class AiRoundSummaryDialog extends StatelessWidget {
             // Header
             Row(
               children: [
-                Icon(
-                  Icons.smart_toy,
-                  color: WoodenColors.accentAmber,
-                  size: 28,
-                ),
+                Icon(Icons.smart_toy, color: context.themeAccent, size: 28),
                 const SizedBox(width: 8),
                 Text(
-                  'AI回合结束',
+                  l10n.ga_aiRoundEnd,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: isDark
-                        ? WoodenColors.darkTextPrimary
-                        : WoodenColors.lightTextPrimary,
+                    color: context.themeTextPrimary,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
             Text(
-              'AI猜对了 $correctCount/${results.length} 次',
-              style: TextStyle(
-                fontSize: 14,
-                color: isDark
-                    ? WoodenColors.darkTextSecondary
-                    : WoodenColors.lightTextSecondary,
-              ),
+              l10n.ga_aiCorrectCount(correctCount, results.length),
+              style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
             ),
             const SizedBox(height: 16),
             // Results list
@@ -173,7 +162,7 @@ class AiRoundSummaryDialog extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: results
-                      .map((result) => _buildResultRow(result, isDark))
+                      .map((result) => _buildResultRow(result, isDark, context))
                       .toList(),
                 ),
               ),
@@ -182,7 +171,7 @@ class AiRoundSummaryDialog extends StatelessWidget {
             ElevatedButton(
               onPressed: onContinue,
               style: ElevatedButton.styleFrom(
-                backgroundColor: WoodenColors.accentAmber,
+                backgroundColor: context.themeAccent,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 32,
@@ -192,7 +181,7 @@ class AiRoundSummaryDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Text('继续'),
+              child: Text(l10n.ga_continue),
             ),
           ],
         ),
@@ -200,7 +189,11 @@ class AiRoundSummaryDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildResultRow(AiRoundResult result, bool isDark) {
+  Widget _buildResultRow(
+    AiRoundResult result,
+    bool isDark,
+    BuildContext context,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -210,13 +203,11 @@ class AiRoundSummaryDialog extends StatelessWidget {
             width: 60,
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: isDark
-                  ? WoodenColors.darkBackground
-                  : WoodenColors.lightBackground,
+              color: context.themeBackground,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
-              '位置${result.position + 1}',
+              l10n.ga_positionLabel(result.position + 1),
               style: const TextStyle(fontSize: 12),
               textAlign: TextAlign.center,
             ),
@@ -227,7 +218,7 @@ class AiRoundSummaryDialog extends StatelessWidget {
             width: 40,
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: WoodenColors.accentAmber.withAlpha(30),
+              color: context.themeAccent.withAlpha(30),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
@@ -265,11 +256,13 @@ class AiRoundSummaryDialog extends StatelessWidget {
 /// 交换回合对话框（双人模式）
 class TurnSwitchDialog extends StatelessWidget {
   final String nextPlayerName;
+  final AppLocalizations l10n;
   final VoidCallback onConfirm;
 
   const TurnSwitchDialog({
     super.key,
     required this.nextPlayerName,
+    required this.l10n,
     required this.onConfirm,
   });
 
@@ -279,40 +272,35 @@ class TurnSwitchDialog extends StatelessWidget {
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: isDark ? WoodenColors.darkSurface : Colors.white,
+      backgroundColor: context.themeSurface,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.swap_horiz, size: 48, color: WoodenColors.accentAmber),
+            Icon(Icons.swap_horiz, size: 48, color: context.themeAccent),
             const SizedBox(height: 16),
             Text(
-              '交换回合',
+              l10n.ga_switchTurns,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: isDark
-                    ? WoodenColors.darkTextPrimary
-                    : WoodenColors.lightTextPrimary,
+                    ? context.themeTextPrimary
+                    : context.themeTextPrimary,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              '请将设备交给$nextPlayerName。\n记得隐藏你的牌！',
+              l10n.ga_switchTurnHint(nextPlayerName),
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: isDark
-                    ? WoodenColors.darkTextSecondary
-                    : WoodenColors.lightTextSecondary,
-              ),
+              style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: onConfirm,
               style: ElevatedButton.styleFrom(
-                backgroundColor: WoodenColors.accentAmber,
+                backgroundColor: context.themeAccent,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 32,
@@ -322,7 +310,7 @@ class TurnSwitchDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Text('准备好了'),
+              child: Text(l10n.ga_readyToPlay),
             ),
           ],
         ),
@@ -339,6 +327,7 @@ class GameOverDialog extends StatelessWidget {
   final int totalGuesses;
   final int maxCombo;
   final Duration duration;
+  final AppLocalizations l10n;
   final VoidCallback onPlayAgain;
   final VoidCallback onExit;
 
@@ -350,17 +339,16 @@ class GameOverDialog extends StatelessWidget {
     required this.totalGuesses,
     required this.maxCombo,
     required this.duration,
+    required this.l10n,
     required this.onPlayAgain,
     required this.onExit,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: isDark ? WoodenColors.darkSurface : Colors.white,
+      backgroundColor: context.themeSurface,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -370,9 +358,7 @@ class GameOverDialog extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: isPlayerWinner
-                    ? WoodenColors.accentAmber.withAlpha(50)
-                    : Colors.red.withAlpha(50),
+                color: context.themeAccent.withAlpha(50),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -380,22 +366,27 @@ class GameOverDialog extends StatelessWidget {
                     ? Icons.emoji_events
                     : Icons.sentiment_dissatisfied,
                 size: 48,
-                color: isPlayerWinner ? WoodenColors.accentGold : Colors.red,
+                color: isPlayerWinner ? context.themeAccent : Colors.red,
               ),
             ),
             const SizedBox(height: 16),
             Text(
-              isPlayerWinner ? '$winnerName赢了！' : '$winnerName赢了...',
+              isPlayerWinner
+                  ? l10n.ga_winnerWins(winnerName)
+                  : l10n.ga_winnerLoses(winnerName),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: isPlayerWinner ? WoodenColors.accentAmber : Colors.red,
+                color: isPlayerWinner ? context.themeAccent : Colors.red,
               ),
             ),
             const SizedBox(height: 24),
-            _buildStatRow('正确猜测', '$correctGuesses/$totalGuesses'),
-            _buildStatRow('最高连击', 'x$maxCombo'),
-            _buildStatRow('用时', _formatDuration(duration)),
+            _buildStatRow(
+              l10n.ga_correctGuessesLabel,
+              '$correctGuesses/$totalGuesses',
+            ),
+            _buildStatRow(l10n.ga_maxComboLabel, 'x$maxCombo'),
+            _buildStatRow(l10n.ga_playDurationLabel, _formatDuration(duration)),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -403,18 +394,14 @@ class GameOverDialog extends StatelessWidget {
                 TextButton(
                   onPressed: onExit,
                   child: Text(
-                    '退出',
-                    style: TextStyle(
-                      color: isDark
-                          ? WoodenColors.darkTextSecondary
-                          : WoodenColors.lightTextSecondary,
-                    ),
+                    l10n.ga_exit,
+                    style: TextStyle(color: context.themeTextSecondary),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: onPlayAgain,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: WoodenColors.accentAmber,
+                    backgroundColor: context.themeAccent,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -424,7 +411,7 @@ class GameOverDialog extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text('再来一局'),
+                  child: Text(l10n.ga_playAgainButton),
                 ),
               ],
             ),
@@ -453,6 +440,6 @@ class GameOverDialog extends StatelessWidget {
   String _formatDuration(Duration d) {
     final minutes = d.inMinutes;
     final seconds = d.inSeconds % 60;
-    return '${minutes}分${seconds}秒';
+    return l10n.ga_durationFormat(minutes, seconds);
   }
 }

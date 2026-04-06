@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../ui/theme/wooden_colors.dart';
 import '../models/playing_card.dart';
+import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/starlight_colors.dart';
+import '../../../ui/theme/theme_provider.dart';
 
 /// 带翻牌动画的卡牌显示组件
 class AnimatedCardDisplay extends StatefulWidget {
@@ -82,9 +84,59 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
     super.dispose();
   }
 
+  Color _getPrimaryColor(bool isDark, ColorSchemeType scheme) {
+    if (scheme == ColorSchemeType.starlight) {
+      return isDark
+          ? StarlightColors.darkPrimary
+          : StarlightColors.lightPrimary;
+    }
+    return isDark ? WoodenColors.darkPrimary : WoodenColors.lightPrimary;
+  }
+
+  Color _getSecondaryColor(bool isDark, ColorSchemeType scheme) {
+    if (scheme == ColorSchemeType.starlight) {
+      return isDark
+          ? StarlightColors.darkSecondary
+          : StarlightColors.lightSecondary;
+    }
+    return isDark ? WoodenColors.darkSecondary : WoodenColors.lightSecondary;
+  }
+
+  Color _getSurfaceColor(bool isDark, ColorSchemeType scheme) {
+    if (scheme == ColorSchemeType.starlight) {
+      return isDark
+          ? StarlightColors.darkSurface
+          : StarlightColors.lightSurface;
+    }
+    return isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface;
+  }
+
+  Color _getBorderColor(bool isDark, ColorSchemeType scheme) {
+    if (scheme == ColorSchemeType.starlight) {
+      return isDark ? StarlightColors.darkBorder : StarlightColors.lightBorder;
+    }
+    return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
+  }
+
+  Color _getAccentColor(ColorSchemeType scheme) {
+    if (scheme == ColorSchemeType.starlight) {
+      return StarlightColors.accentStar;
+    }
+    return WoodenColors.accentAmber;
+  }
+
+  ColorSchemeType _getColorSchemeType(Color primaryColor) {
+    if (primaryColor == StarlightColors.lightPrimary ||
+        primaryColor == StarlightColors.darkPrimary) {
+      return ColorSchemeType.starlight;
+    }
+    return ColorSchemeType.wooden;
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final scheme = _getColorSchemeType(Theme.of(context).primaryColor);
 
     return GestureDetector(
       onTap: widget.onTap,
@@ -108,19 +160,17 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
                 width: widget.width,
                 height: widget.height,
                 decoration: BoxDecoration(
-                  color: _getBackgroundColor(isDark, showFrontNow),
+                  color: _getBackgroundColor(isDark, showFrontNow, scheme),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     color: widget.isSelected
-                        ? WoodenColors.accentAmber
-                        : _getBorderColor(isDark, showFrontNow),
+                        ? _getAccentColor(scheme)
+                        : _getBorderColor(isDark, scheme),
                     width: widget.isSelected ? 2 : 1,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: isDark
-                          ? WoodenColors.darkShadow.withAlpha(100)
-                          : WoodenColors.lightShadow.withAlpha(100),
+                      color: Colors.black.withAlpha(100),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -131,20 +181,20 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
                     if (showFrontNow && widget.card != null)
                       _buildRevealedCard(isDark)
                     else if (!showFrontNow)
-                      _buildHiddenCard(isDark),
+                      _buildHiddenCard(isDark, scheme),
                     if (widget.showMinIndicator)
                       Positioned(
                         left: 2,
                         top: 0,
                         bottom: 0,
-                        child: _buildIndicator('MIN', isDark),
+                        child: _buildIndicator('MIN', scheme),
                       ),
                     if (widget.showMaxIndicator)
                       Positioned(
                         right: 2,
                         top: 0,
                         bottom: 0,
-                        child: _buildIndicator('MAX', isDark),
+                        child: _buildIndicator('MAX', scheme),
                       ),
                   ],
                 ),
@@ -213,7 +263,7 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
     );
   }
 
-  Widget _buildHiddenCard(bool isDark) {
+  Widget _buildHiddenCard(bool isDark, ColorSchemeType scheme) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -221,14 +271,14 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
           end: Alignment.bottomRight,
           colors: isDark
               ? [
-                  WoodenColors.darkPrimary,
-                  WoodenColors.darkSecondary,
-                  WoodenColors.darkPrimary,
+                  _getPrimaryColor(isDark, scheme),
+                  _getSecondaryColor(isDark, scheme),
+                  _getPrimaryColor(isDark, scheme),
                 ]
               : [
-                  WoodenColors.lightPrimary,
-                  WoodenColors.lightSecondary,
-                  WoodenColors.lightPrimary,
+                  _getPrimaryColor(isDark, scheme),
+                  _getSecondaryColor(isDark, scheme),
+                  _getPrimaryColor(isDark, scheme),
                 ],
         ),
         borderRadius: BorderRadius.circular(7),
@@ -236,245 +286,6 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
       child: Center(
         child: CustomPaint(
           size: Size(widget.width * 0.6, widget.height * 0.6),
-          painter: _CardBackPainter(
-            color: isDark
-                ? WoodenColors.accentGold.withAlpha(150)
-                : Colors.white.withAlpha(180),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildIndicator(String text, bool isDark) {
-    return RotatedBox(
-      quarterTurns: 3,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-        decoration: BoxDecoration(
-          color: WoodenColors.accentAmber.withAlpha(200),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 8,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Color _getBackgroundColor(bool isDark, bool isFront) {
-    if (isFront) {
-      return isDark ? WoodenColors.darkSurface : Colors.white;
-    }
-    return isDark ? WoodenColors.darkPrimary : WoodenColors.lightPrimary;
-  }
-
-  Color _getBorderColor(bool isDark, bool isFront) {
-    if (isFront) {
-      return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
-    }
-    return isDark ? WoodenColors.darkSecondary : WoodenColors.lightSecondary;
-  }
-}
-
-class _CardBackPainter extends CustomPainter {
-  final Color color;
-
-  _CardBackPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 1
-      ..style = PaintingStyle.stroke;
-
-    final path = Path();
-    final step = size.width / 4;
-
-    for (var i = 0; i <= 4; i++) {
-      canvas.drawLine(
-        Offset(step * i, 0),
-        Offset(step * i, size.height),
-        paint,
-      );
-      canvas.drawLine(Offset(0, step * i), Offset(size.width, step * i), paint);
-    }
-
-    path.moveTo(size.width / 2, 0);
-    path.lineTo(size.width, size.height / 2);
-    path.lineTo(size.width / 2, size.height);
-    path.lineTo(0, size.height / 2);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-/// 不带动画的简单卡牌显示组件
-class CardDisplay extends StatelessWidget {
-  final PlayingCard? card;
-  final bool isRevealed;
-  final bool isHidden;
-  final double width;
-  final double height;
-  final VoidCallback? onTap;
-  final bool isSelected;
-  final bool showMinIndicator;
-  final bool showMaxIndicator;
-
-  const CardDisplay({
-    super.key,
-    this.card,
-    this.isRevealed = false,
-    this.isHidden = false,
-    this.width = 60,
-    this.height = 84,
-    this.onTap,
-    this.isSelected = false,
-    this.showMinIndicator = false,
-    this.showMaxIndicator = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: _getBackgroundColor(isDark, isRevealed || !isHidden),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: isSelected
-                ? WoodenColors.accentAmber
-                : _getBorderColor(isDark, isRevealed || !isHidden),
-            width: isSelected ? 2 : 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: isDark
-                  ? WoodenColors.darkShadow.withAlpha(100)
-                  : WoodenColors.lightShadow.withAlpha(100),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            if (isRevealed || !isHidden && card != null)
-              _buildRevealedCard(isDark)
-            else
-              _buildHiddenCard(isDark),
-            if (showMinIndicator)
-              Positioned(
-                left: 2,
-                top: 0,
-                bottom: 0,
-                child: _buildIndicator('MIN', isDark),
-              ),
-            if (showMaxIndicator)
-              Positioned(
-                right: 2,
-                top: 0,
-                bottom: 0,
-                child: _buildIndicator('MAX', isDark),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRevealedCard(bool isDark) {
-    if (card == null) return const SizedBox();
-
-    final textColor = card!.suit.isRed ? Colors.red : Colors.black;
-    final bgColor = isDark ? WoodenColors.darkSurface : Colors.white;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(7),
-      ),
-      padding: const EdgeInsets.all(4),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildCorner(card!, textColor),
-          Expanded(
-            child: Center(
-              child: Text(
-                card!.suit.symbol,
-                style: TextStyle(fontSize: width * 0.4, color: textColor),
-              ),
-            ),
-          ),
-          Transform.rotate(
-            angle: 3.14159,
-            child: _buildCorner(card!, textColor),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCorner(PlayingCard card, Color color) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          card.rank.symbol,
-          style: TextStyle(
-            fontSize: width * 0.22,
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
-        ),
-        Text(
-          card.suit.symbol,
-          style: TextStyle(fontSize: width * 0.18, color: color),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildHiddenCard(bool isDark) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: isDark
-              ? [
-                  WoodenColors.darkPrimary,
-                  WoodenColors.darkSecondary,
-                  WoodenColors.darkPrimary,
-                ]
-              : [
-                  WoodenColors.lightPrimary,
-                  WoodenColors.lightSecondary,
-                  WoodenColors.lightPrimary,
-                ],
-        ),
-        borderRadius: BorderRadius.circular(7),
-      ),
-      child: Center(
-        child: CustomPaint(
-          size: Size(width * 0.6, height * 0.6),
           painter: _CardBackPainterSimple(
             color: isDark
                 ? WoodenColors.accentGold.withAlpha(150)
@@ -485,13 +296,13 @@ class CardDisplay extends StatelessWidget {
     );
   }
 
-  Widget _buildIndicator(String text, bool isDark) {
+  Widget _buildIndicator(String text, ColorSchemeType scheme) {
     return RotatedBox(
       quarterTurns: 3,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         decoration: BoxDecoration(
-          color: WoodenColors.accentAmber.withAlpha(200),
+          color: _getAccentColor(scheme).withAlpha(200),
           borderRadius: BorderRadius.circular(4),
         ),
         child: Text(
@@ -506,18 +317,11 @@ class CardDisplay extends StatelessWidget {
     );
   }
 
-  Color _getBackgroundColor(bool isDark, bool isFront) {
+  Color _getBackgroundColor(bool isDark, bool isFront, ColorSchemeType scheme) {
     if (isFront) {
-      return isDark ? WoodenColors.darkSurface : Colors.white;
+      return _getSurfaceColor(isDark, scheme);
     }
-    return isDark ? WoodenColors.darkPrimary : WoodenColors.lightPrimary;
-  }
-
-  Color _getBorderColor(bool isDark, bool isFront) {
-    if (isFront) {
-      return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
-    }
-    return isDark ? WoodenColors.darkSecondary : WoodenColors.lightSecondary;
+    return _getPrimaryColor(isDark, scheme);
   }
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../theme/theme_provider.dart';
-import '../theme/wooden_colors.dart';
+import '../theme/theme_colors.dart';
 
 /// An animated theme toggle widget with sun/moon icons.
 ///
@@ -21,14 +21,18 @@ class ThemeToggle extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeModeAsync = ref.watch(themeModeNotifierProvider);
+    final colorSchemeAsync = ref.watch(colorSchemeNotifierProvider);
 
     return themeModeAsync.when(
       data: (themeMode) {
         final isDark = _isDarkMode(themeMode, context);
+        final colorSchemeType =
+            colorSchemeAsync.value ?? ColorSchemeType.wooden;
         return _ThemeToggleInternal(
           isDark: isDark,
           size: size,
           onToggle: onToggle ?? () => _handleToggle(ref, themeMode),
+          colorSchemeType: colorSchemeType,
         );
       },
       loading: () => _buildLoadingPlaceholder(),
@@ -82,11 +86,13 @@ class _ThemeToggleInternal extends StatefulWidget {
   final bool isDark;
   final double size;
   final VoidCallback onToggle;
+  final ColorSchemeType colorSchemeType;
 
   const _ThemeToggleInternal({
     required this.isDark,
     required this.size,
     required this.onToggle,
+    required this.colorSchemeType,
   });
 
   @override
@@ -175,8 +181,6 @@ class _ThemeToggleInternalState extends State<_ThemeToggleInternal>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -185,9 +189,7 @@ class _ThemeToggleInternalState extends State<_ThemeToggleInternal>
           child: Material(
             elevation: 4,
             borderRadius: BorderRadius.circular(widget.size / 2),
-            shadowColor: isDark
-                ? WoodenColors.darkShadow
-                : WoodenColors.lightShadow,
+            shadowColor: context.themeShadow,
             child: InkWell(
               onTap: widget.onToggle,
               borderRadius: BorderRadius.circular(widget.size / 2),
@@ -195,14 +197,9 @@ class _ThemeToggleInternalState extends State<_ThemeToggleInternal>
                 width: widget.size,
                 height: widget.size,
                 decoration: BoxDecoration(
-                  gradient: _buildBackgroundGradient(isDark),
+                  gradient: _buildBackgroundGradient(),
                   borderRadius: BorderRadius.circular(widget.size / 2),
-                  border: Border.all(
-                    color: isDark
-                        ? WoodenColors.darkBorder
-                        : WoodenColors.lightBorder,
-                    width: 2,
-                  ),
+                  border: Border.all(color: context.themeBorder, width: 2),
                 ),
                 child: Stack(
                   alignment: Alignment.center,
@@ -214,7 +211,7 @@ class _ThemeToggleInternalState extends State<_ThemeToggleInternal>
                         angle: _rotationAnimation.value * 3.14159 / 180,
                         child: Icon(
                           Icons.wb_sunny_rounded,
-                          color: WoodenColors.accentAmber,
+                          color: context.themeAccent,
                           size: widget.size * 0.5,
                         ),
                       ),
@@ -226,7 +223,7 @@ class _ThemeToggleInternalState extends State<_ThemeToggleInternal>
                         angle: (_rotationAnimation.value - 180) * 3.14159 / 180,
                         child: Icon(
                           Icons.nightlight_round,
-                          color: WoodenColors.accentAmber,
+                          color: context.themeAccent,
                           size: widget.size * 0.5,
                         ),
                       ),
@@ -241,18 +238,15 @@ class _ThemeToggleInternalState extends State<_ThemeToggleInternal>
     );
   }
 
-  LinearGradient _buildBackgroundGradient(bool isDark) {
-    if (widget.isDark) {
-      return const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [WoodenColors.darkSurface, WoodenColors.darkCard],
-      );
-    }
-    return const LinearGradient(
+  LinearGradient _buildBackgroundGradient() {
+    // Use theme-aware colors
+    final surfaceColor = context.themeSurface;
+    final cardColor = context.themeCard;
+
+    return LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [WoodenColors.lightSurface, WoodenColors.lightCard],
+      colors: [surfaceColor, cardColor],
     );
   }
 }
@@ -283,9 +277,7 @@ class ThemeToggleCompact extends ConsumerWidget {
             child: Icon(
               isDark ? Icons.dark_mode : Icons.light_mode,
               key: ValueKey<bool>(isDark),
-              color: isDark
-                  ? WoodenColors.accentAmber
-                  : WoodenColors.lightPrimary,
+              color: context.themeAccent,
             ),
           ),
           tooltip: isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme',

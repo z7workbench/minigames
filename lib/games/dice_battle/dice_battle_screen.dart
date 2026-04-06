@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/generated/app_localizations.dart';
-import '../../ui/theme/wooden_colors.dart';
+import '../../ui/theme/theme_colors.dart';
 import '../../ui/widgets/wooden_button.dart';
 import '../../ui/widgets/wooden_app_bar.dart';
 import 'models/dice_battle_state.dart';
@@ -15,6 +15,7 @@ import 'dice_battle_provider.dart';
 
 // Helper functions for keyword parsing (moved from keyword_popup.dart for this screen)
 List<InlineSpan> parseKeywords(
+  BuildContext context,
   String text,
   AppLocalizations l10n,
   bool isDark,
@@ -30,13 +31,7 @@ List<InlineSpan> parseKeywords(
       spans.add(
         TextSpan(
           text: text.substring(lastEnd, match.start),
-          style:
-              baseStyle ??
-              TextStyle(
-                color: isDark
-                    ? WoodenColors.darkTextPrimary
-                    : WoodenColors.lightTextPrimary,
-              ),
+          style: baseStyle ?? TextStyle(color: context.themeTextPrimary),
         ),
       );
     }
@@ -50,7 +45,7 @@ List<InlineSpan> parseKeywords(
         text: keywordText,
         style: (baseStyle ?? const TextStyle()).copyWith(
           fontWeight: FontWeight.bold,
-          color: WoodenColors.accentAmber,
+          color: context.themeAccent,
         ),
       ),
     );
@@ -63,13 +58,7 @@ List<InlineSpan> parseKeywords(
     spans.add(
       TextSpan(
         text: text.substring(lastEnd),
-        style:
-            baseStyle ??
-            TextStyle(
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
-            ),
+        style: baseStyle ?? TextStyle(color: context.themeTextPrimary),
       ),
     );
   }
@@ -142,9 +131,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? WoodenColors.darkBackground
-          : WoodenColors.lightBackground,
+      backgroundColor: context.themeBackground,
       appBar: WoodenAppBar(
         titleText: l10n.game_dice_battle,
         actions: [
@@ -165,7 +152,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
     AppLocalizations l10n,
   ) {
     if (state.status == GameStatus.idle) {
-      return _buildLoadingState(isDark, l10n);
+      return _buildLoadingState(context, isDark, l10n);
     }
 
     if (state.isGameOver) {
@@ -178,20 +165,20 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
       child: Column(
         children: [
           // Player cards (expandable, contains health + info)
-          _buildPlayerCards(state, isDark, l10n),
+          _buildPlayerCards(context, state, isDark, l10n),
 
           // Game phase indicator
-          _buildPhaseIndicator(state, isDark, l10n),
+          _buildPhaseIndicator(context, state, isDark, l10n),
           const SizedBox(height: 8),
 
           // Main game area
           Expanded(
             child: Stack(
               children: [
-                _buildGameArea(state, isDark, l10n),
+                _buildGameArea(context, state, isDark, l10n),
                 // Damage animation overlay
                 if (state.status == GameStatus.damageAnimation)
-                  _buildDamageOverlay(state, isDark, l10n),
+                  _buildDamageOverlay(context, state, isDark, l10n),
               ],
             ),
           ),
@@ -205,27 +192,26 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
 
           // Action buttons
           if (!state.isGameOver && !state.shouldAiAct())
-            _buildActionButtons(state, isDark, l10n),
+            _buildActionButtons(context, state, isDark, l10n),
         ],
       ),
     );
   }
 
-  Widget _buildLoadingState(bool isDark, AppLocalizations l10n) {
+  Widget _buildLoadingState(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircularProgressIndicator(color: WoodenColors.accentAmber),
+          CircularProgressIndicator(color: context.themeAccent),
           const SizedBox(height: 16),
           Text(
             l10n.loading,
-            style: TextStyle(
-              fontSize: 18,
-              color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
-            ),
+            style: TextStyle(fontSize: 18, color: context.themeTextSecondary),
           ),
         ],
       ),
@@ -234,6 +220,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
 
   /// Build expandable player cards with health and info
   Widget _buildPlayerCards(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -270,23 +257,20 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
           if (!state.isFirstRound && effect != null) ...[
             const SizedBox(height: 8),
             GestureDetector(
-              onTap: () => _showEffectDialog(effect, l10n, isDark),
+              onTap: () => _showEffectDialog(context, effect, l10n, isDark),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 10,
                 ),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      WoodenColors.accentAmber,
-                      WoodenColors.accentCopper,
-                    ],
+                  gradient: LinearGradient(
+                    colors: [context.themeAccent, context.themeAccentSecondary],
                   ),
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: WoodenColors.accentAmber.withAlpha(100),
+                      color: context.themeAccent.withAlpha(100),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),
@@ -361,6 +345,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
   }
 
   void _showEffectDialog(
+    BuildContext context,
     BattleEffect effect,
     AppLocalizations l10n,
     bool isDark,
@@ -368,21 +353,15 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: isDark
-            ? WoodenColors.darkCard
-            : WoodenColors.lightCard,
+        backgroundColor: context.themeCard,
         title: Row(
           children: [
-            Icon(
-              _getEffectIcon(effect),
-              color: WoodenColors.accentAmber,
-              size: 28,
-            ),
+            Icon(_getEffectIcon(effect), color: context.themeAccent, size: 28),
             const SizedBox(width: 12),
             Text(
               _getLocalizedEffectName(effect, l10n),
               style: TextStyle(
-                color: WoodenColors.accentAmber,
+                color: context.themeAccent,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -391,15 +370,11 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
         content: RichText(
           text: TextSpan(
             children: parseKeywords(
+              context,
               effect.getLocalizedDescription(l10n),
               l10n,
               isDark,
-              TextStyle(
-                fontSize: 16,
-                color: isDark
-                    ? WoodenColors.darkTextPrimary
-                    : WoodenColors.lightTextPrimary,
-              ),
+              TextStyle(fontSize: 16, color: context.themeTextPrimary),
             ),
           ),
         ),
@@ -414,6 +389,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
   }
 
   Widget _buildPhaseIndicator(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -458,21 +434,21 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: WoodenColors.accentAmber.withAlpha(30),
+        color: context.themeAccent.withAlpha(30),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: WoodenColors.accentAmber),
+        border: Border.all(color: context.themeAccent),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(phaseIcon, color: WoodenColors.accentAmber, size: 20),
+          Icon(phaseIcon, color: context.themeAccent, size: 20),
           const SizedBox(width: 8),
           Text(
             phaseText,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: WoodenColors.accentAmber,
+              color: context.themeAccent,
             ),
           ),
         ],
@@ -481,6 +457,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
   }
 
   Widget _buildGameArea(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -489,40 +466,42 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
     switch (state.status) {
       case GameStatus.attackRolling:
       case GameStatus.defenseRolling:
-        return _buildRollingState(state, isDark, l10n);
+        return _buildRollingState(context, state, isDark, l10n);
       case GameStatus.attackSelecting:
-        return _buildAttackSelectingState(state, isDark, l10n);
+        return _buildAttackSelectingState(context, state, isDark, l10n);
       case GameStatus.defenseSelecting:
-        return _buildDefenseSelectingState(state, isDark, l10n);
+        return _buildDefenseSelectingState(context, state, isDark, l10n);
       case GameStatus.damageCalculating:
       case GameStatus.damageAnimation:
       case GameStatus.defenseEffectApply:
       case GameStatus.finalEffectApply:
-        return _buildCalculatingState(isDark, l10n);
+        return _buildCalculatingState(context, isDark, l10n);
       case GameStatus.turnEnd:
-        return _buildTurnEndState(isDark, l10n);
+        return _buildTurnEndState(context, isDark, l10n);
       case GameStatus.coinFlip:
-        return _buildCoinFlipState(isDark, l10n);
+        return _buildCoinFlipState(context, isDark, l10n);
       default:
         return Center(child: Text(l10n.loading));
     }
   }
 
-  Widget _buildCoinFlipState(bool isDark, AppLocalizations l10n) {
+  Widget _buildCoinFlipState(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.flip, size: 80, color: WoodenColors.accentAmber),
+          Icon(Icons.flip, size: 80, color: context.themeAccent),
           const SizedBox(height: 24),
           Text(
             l10n.db_coinFlip,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
         ],
@@ -531,6 +510,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
   }
 
   Widget _buildRollingState(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -546,20 +526,13 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 16),
           Text(
             l10n.db_rollDice,
-            style: TextStyle(
-              fontSize: 18,
-              color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
-            ),
+            style: TextStyle(fontSize: 18, color: context.themeTextSecondary),
           ),
           const SizedBox(height: 32),
           WoodenButton(
@@ -576,6 +549,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
 
   /// Attack selecting state - shows dice selector with reroll option
   Widget _buildAttackSelectingState(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -593,21 +567,21 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: WoodenColors.accentAmber.withAlpha(30),
+              color: context.themeAccent.withAlpha(30),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: WoodenColors.accentAmber),
+              border: Border.all(color: context.themeAccent),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.refresh, color: WoodenColors.accentAmber, size: 20),
+                Icon(Icons.refresh, color: context.themeAccent, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   l10n.db_rerollsRemaining(remainingRerolls),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: WoodenColors.accentAmber,
+                    color: context.themeAccent,
                   ),
                 ),
               ],
@@ -621,11 +595,9 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
                 : l10n.db_selectAttackDice(maxDice),
             style: TextStyle(
               fontSize: 14,
-              color: isOverLimit
-                  ? Colors.red
-                  : (isDark
-                        ? WoodenColors.darkTextSecondary
-                        : WoodenColors.lightTextSecondary),
+              color: (isDark
+                  ? context.themeTextSecondary
+                  : context.themeTextSecondary),
             ),
           ),
           const SizedBox(height: 12),
@@ -652,6 +624,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
 
   /// Defense selecting state - shows attacker's points and dice selector
   Widget _buildDefenseSelectingState(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -690,12 +663,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
           const SizedBox(height: 8),
           Text(
             l10n.db_selectDefenseDice(maxDice),
-            style: TextStyle(
-              fontSize: 14,
-              color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
-            ),
+            style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
           ),
           const SizedBox(height: 12),
           // Dice selector
@@ -716,7 +684,11 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
     );
   }
 
-  Widget _buildCalculatingState(bool isDark, AppLocalizations l10n) {
+  Widget _buildCalculatingState(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -726,19 +698,21 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
-          const CircularProgressIndicator(color: WoodenColors.accentAmber),
+          CircularProgressIndicator(color: context.themeAccent),
         ],
       ),
     );
   }
 
-  Widget _buildTurnEndState(bool isDark, AppLocalizations l10n) {
+  Widget _buildTurnEndState(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -748,13 +722,11 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
-          const CircularProgressIndicator(color: WoodenColors.accentAmber),
+          CircularProgressIndicator(color: context.themeAccent),
         ],
       ),
     );
@@ -762,6 +734,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
 
   /// Damage animation overlay widget
   Widget _buildDamageOverlay(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -822,6 +795,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
   }
 
   Widget _buildActionButtons(
+    BuildContext context,
     DiceBattleState state,
     bool isDark,
     AppLocalizations l10n,
@@ -905,7 +879,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.emoji_events, size: 64, color: WoodenColors.accentGold),
+            Icon(Icons.emoji_events, size: 64, color: context.themeAccent),
             const SizedBox(height: 16),
             Text(
               l10n.db_victory(winner.name),
@@ -939,7 +913,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
                   );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: WoodenColors.accentAmber,
+              backgroundColor: context.themeAccent,
             ),
             child: Text(l10n.db_playAgain),
           ),
@@ -972,7 +946,7 @@ class _DiceBattleScreenState extends ConsumerState<DiceBattleScreen> {
                   );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: WoodenColors.accentAmber,
+              backgroundColor: context.themeAccent,
             ),
             child: Text(l10n.restart),
           ),
@@ -1009,25 +983,21 @@ class _PlayerCard extends StatelessWidget {
           gradient: isActive
               ? LinearGradient(
                   colors: [
-                    WoodenColors.accentAmber.withAlpha(50),
-                    WoodenColors.accentCopper.withAlpha(30),
+                    context.themeAccent.withAlpha(50),
+                    context.themeAccentSecondary.withAlpha(30),
                   ],
                 )
               : null,
-          color: isActive
-              ? null
-              : (isDark ? WoodenColors.darkCard : WoodenColors.lightCard),
+          color: isActive ? null : context.themeCard,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isActive
-                ? WoodenColors.accentAmber
-                : (isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder),
+            color: isActive ? context.themeAccent : context.themeBorder,
             width: isActive ? 2 : 1,
           ),
           boxShadow: isActive
               ? [
                   BoxShadow(
-                    color: WoodenColors.accentAmber.withAlpha(50),
+                    color: context.themeAccent.withAlpha(50),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -1046,20 +1016,14 @@ class _PlayerCard extends StatelessWidget {
                   height: 28,
                   decoration: BoxDecoration(
                     color: isActive
-                        ? WoodenColors.accentAmber
-                        : (isDark
-                              ? WoodenColors.darkSurface
-                              : WoodenColors.lightSurface),
+                        ? context.themeAccent
+                        : context.themeSurface,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Icon(
                     player.isAi ? Icons.smart_toy : Icons.person,
                     size: 18,
-                    color: isActive
-                        ? Colors.black
-                        : (isDark
-                              ? WoodenColors.darkTextPrimary
-                              : WoodenColors.lightTextPrimary),
+                    color: isActive ? Colors.black : context.themeTextPrimary,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -1071,10 +1035,8 @@ class _PlayerCard extends StatelessWidget {
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
                       color: isActive
-                          ? WoodenColors.accentAmber
-                          : (isDark
-                                ? WoodenColors.darkTextPrimary
-                                : WoodenColors.lightTextPrimary),
+                          ? context.themeAccent
+                          : context.themeTextPrimary,
                     ),
                   ),
                 ),
@@ -1084,9 +1046,7 @@ class _PlayerCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: isDark
-                        ? WoodenColors.darkTextSecondary
-                        : WoodenColors.lightTextSecondary,
+                    color: context.themeTextSecondary,
                   ),
                 ),
               ],
@@ -1099,9 +1059,7 @@ class _PlayerCard extends StatelessWidget {
                 children: [
                   Container(
                     height: 6,
-                    color: isDark
-                        ? WoodenColors.darkDisabled.withAlpha(100)
-                        : WoodenColors.lightDisabled.withAlpha(100),
+                    color: context.themeDisabled.withAlpha(100),
                   ),
                   FractionallySizedBox(
                     widthFactor: healthPercent.clamp(0.0, 1.0),
@@ -1133,20 +1091,12 @@ class _PlayerCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: isDark
-                            ? WoodenColors.darkTextSecondary
-                            : WoodenColors.lightTextSecondary,
+                        color: context.themeTextSecondary,
                       ),
                     ),
                   ],
                 ),
-                Container(
-                  width: 1,
-                  height: 12,
-                  color: isDark
-                      ? WoodenColors.darkBorder
-                      : WoodenColors.lightBorder,
-                ),
+                Container(width: 1, height: 12, color: context.themeBorder),
                 // Defense
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -1158,9 +1108,7 @@ class _PlayerCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: isDark
-                            ? WoodenColors.darkTextSecondary
-                            : WoodenColors.lightTextSecondary,
+                        color: context.themeTextSecondary,
                       ),
                     ),
                   ],
@@ -1210,10 +1158,10 @@ class _PlayerDetailsDialog extends StatelessWidget {
     final healthPercent = player.health / player.maxHealth;
 
     return Dialog(
-      backgroundColor: isDark ? WoodenColors.darkCard : WoodenColors.lightCard,
+      backgroundColor: context.themeCard,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: WoodenColors.accentAmber, width: 2),
+        side: BorderSide(color: context.themeAccent, width: 2),
       ),
       child: SingleChildScrollView(
         child: Padding(
@@ -1229,10 +1177,10 @@ class _PlayerDetailsDialog extends StatelessWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [
-                          WoodenColors.accentAmber,
-                          WoodenColors.accentCopper,
+                          context.themeAccent,
+                          context.themeAccentSecondary,
                         ],
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -1253,16 +1201,14 @@ class _PlayerDetailsDialog extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: WoodenColors.accentAmber,
+                            color: context.themeAccent,
                           ),
                         ),
                         Text(
                           player.isAi ? 'AI' : 'Player',
                           style: TextStyle(
                             fontSize: 12,
-                            color: isDark
-                                ? WoodenColors.darkTextSecondary
-                                : WoodenColors.lightTextSecondary,
+                            color: context.themeTextSecondary,
                           ),
                         ),
                       ],
@@ -1271,12 +1217,7 @@ class _PlayerDetailsDialog extends StatelessWidget {
                   // Close button
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: Icon(
-                      Icons.close,
-                      color: isDark
-                          ? WoodenColors.darkTextSecondary
-                          : WoodenColors.lightTextSecondary,
-                    ),
+                    icon: Icon(Icons.close, color: context.themeTextSecondary),
                   ),
                 ],
               ),
@@ -1294,9 +1235,7 @@ class _PlayerDetailsDialog extends StatelessWidget {
                         children: [
                           Container(
                             height: 20,
-                            color: isDark
-                                ? WoodenColors.darkDisabled.withAlpha(100)
-                                : WoodenColors.lightDisabled.withAlpha(100),
+                            color: context.themeDisabled.withAlpha(100),
                           ),
                           FractionallySizedBox(
                             widthFactor: healthPercent.clamp(0.0, 1.0),
@@ -1316,10 +1255,10 @@ class _PlayerDetailsDialog extends StatelessWidget {
                   const SizedBox(width: 12),
                   Text(
                     '${player.health} / ${player.maxHealth}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: WoodenColors.accentAmber,
+                      color: context.themeAccent,
                     ),
                   ),
                 ],
@@ -1353,11 +1292,7 @@ class _PlayerDetailsDialog extends StatelessWidget {
               const SizedBox(height: 16),
 
               // Dice configuration section
-              _buildSectionTitle(
-                '骰子配置',
-                Icons.casino,
-                WoodenColors.accentAmber,
-              ),
+              _buildSectionTitle('骰子配置', Icons.casino, context.themeAccent),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
@@ -1370,16 +1305,16 @@ class _PlayerDetailsDialog extends StatelessWidget {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: WoodenColors.accentAmber.withAlpha(30),
+                      color: context.themeAccent.withAlpha(30),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: WoodenColors.accentAmber),
+                      border: Border.all(color: context.themeAccent),
                     ),
                     child: Text(
                       name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: WoodenColors.accentAmber,
+                        color: context.themeAccent,
                       ),
                     ),
                   );
@@ -1394,23 +1329,15 @@ class _PlayerDetailsDialog extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: isDark
-                      ? WoodenColors.darkSurface.withAlpha(50)
-                      : WoodenColors.lightSurface.withAlpha(50),
+                  color: context.themeSurface.withAlpha(50),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: isDark
-                        ? WoodenColors.darkBorder
-                        : WoodenColors.lightBorder,
-                  ),
+                  border: Border.all(color: context.themeBorder),
                 ),
                 child: Text(
                   '无', // 目前组合中没有特殊效果
                   style: TextStyle(
                     fontSize: 14,
-                    color: isDark
-                        ? WoodenColors.darkTextSecondary
-                        : WoodenColors.lightTextSecondary,
+                    color: context.themeTextSecondary,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -1422,15 +1349,15 @@ class _PlayerDetailsDialog extends StatelessWidget {
                 _buildSectionTitle(
                   'AI难度',
                   Icons.psychology,
-                  WoodenColors.accentAmber,
+                  context.themeAccent,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   player.aiDifficulty?.name ?? 'N/A',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: WoodenColors.accentAmber,
+                    color: context.themeAccent,
                   ),
                 ),
               ],

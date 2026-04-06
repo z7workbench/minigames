@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minigames/ui/theme/wooden_colors.dart';
+import 'package:minigames/ui/theme/theme_colors.dart';
 
 class GuessHistoryItem extends StatelessWidget {
   final List<int> guess;
@@ -17,17 +17,13 @@ class GuessHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightBackground,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightSecondary,
-        ),
+        border: Border.all(color: context.themeBorder),
       ),
       child: Row(
         children: [
@@ -41,18 +37,14 @@ class GuessHistoryItem extends StatelessWidget {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? WoodenColors.darkPrimary
-                        : WoodenColors.lightPrimary,
+                    color: context.themePrimary,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Center(
                     child: Text(
                       number > 0 ? number.toString() : '',
                       style: TextStyle(
-                        color: isDark
-                            ? WoodenColors.darkOnPrimary
-                            : Colors.white,
+                        color: context.themeOnPrimary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -68,7 +60,7 @@ class GuessHistoryItem extends StatelessWidget {
                 hits,
                 (_) => Icon(
                   Icons.check_circle,
-                  color: isDark ? WoodenColors.darkSuccess : Colors.green,
+                  color: context.themeSuccess,
                   size: 16,
                 ),
               ),
@@ -76,7 +68,7 @@ class GuessHistoryItem extends StatelessWidget {
                 blows,
                 (_) => Icon(
                   Icons.check_circle_outline,
-                  color: isDark ? WoodenColors.darkTextSecondary : Colors.grey,
+                  color: context.themeTextSecondary,
                   size: 16,
                 ),
               ),

@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:minigames/ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
+import '../../../ui/theme/theme_provider.dart';
+import '../../../ui/theme/starlight_colors.dart';
 
 /// A reusable animated dice widget with spin animation.
 ///
@@ -185,18 +187,72 @@ class _AnimatedDiceState extends State<AnimatedDice>
     return _diceEmojis[value] ?? '●';
   }
 
-  Color _getBackgroundColor(bool isDark) {
-    if (widget.isKept) {
-      return WoodenColors.accentAmber;
+  Color _getAccentColor(BuildContext context, ColorSchemeType scheme) {
+    if (scheme == ColorSchemeType.starlight) {
+      return StarlightColors.accentStar;
     }
-    return isDark ? WoodenColors.darkCard : WoodenColors.lightCard;
+    return context.themeAccent;
   }
 
-  Color _getBorderColor(bool isDark) {
-    if (widget.isKept) {
-      return WoodenColors.accentAmber;
+  Color _getCardColor(
+    BuildContext context,
+    bool isDark,
+    ColorSchemeType scheme,
+  ) {
+    if (scheme == ColorSchemeType.starlight) {
+      return isDark ? StarlightColors.darkCard : StarlightColors.lightCard;
     }
-    return isDark ? WoodenColors.darkSecondary : WoodenColors.lightSecondary;
+    return context.themeCard;
+  }
+
+  Color _getSecondaryColor(
+    BuildContext context,
+    bool isDark,
+    ColorSchemeType scheme,
+  ) {
+    if (scheme == ColorSchemeType.starlight) {
+      return isDark
+          ? StarlightColors.darkSecondary
+          : StarlightColors.lightSecondary;
+    }
+    return context.themeSecondary;
+  }
+
+  Color _getShadowColor(
+    BuildContext context,
+    bool isDark,
+    ColorSchemeType scheme,
+  ) {
+    if (scheme == ColorSchemeType.starlight) {
+      return isDark ? StarlightColors.darkShadow : StarlightColors.lightShadow;
+    }
+    return context.themeShadow;
+  }
+
+  ColorSchemeType _getColorSchemeType(Color primaryColor) {
+    if (primaryColor == StarlightColors.lightPrimary ||
+        primaryColor == StarlightColors.darkPrimary) {
+      return ColorSchemeType.starlight;
+    }
+    return ColorSchemeType.wooden;
+  }
+
+  Color _getBackgroundColor(BuildContext context, ColorSchemeType scheme) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    if (widget.isKept) {
+      return _getAccentColor(context, scheme);
+    }
+    return _getCardColor(context, isDark, scheme);
+  }
+
+  Color _getBorderColor(BuildContext context, ColorSchemeType scheme) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    if (widget.isKept) {
+      return _getAccentColor(context, scheme);
+    }
+    return _getSecondaryColor(context, isDark, scheme);
   }
 
   Color _getTextColor(bool isDark) {
@@ -210,6 +266,7 @@ class _AnimatedDiceState extends State<AnimatedDice>
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
     final isDark = brightness == Brightness.dark;
+    final scheme = _getColorSchemeType(Theme.of(context).primaryColor);
 
     return GestureDetector(
       onTap: widget.onTap,
@@ -228,14 +285,15 @@ class _AnimatedDiceState extends State<AnimatedDice>
           width: widget.size,
           height: widget.size,
           decoration: BoxDecoration(
-            color: _getBackgroundColor(isDark),
+            color: _getBackgroundColor(context, scheme),
             borderRadius: BorderRadius.circular(widget.size * 0.15),
-            border: Border.all(color: _getBorderColor(isDark), width: 2),
+            border: Border.all(
+              color: _getBorderColor(context, scheme),
+              width: 2,
+            ),
             boxShadow: [
               BoxShadow(
-                color: isDark
-                    ? WoodenColors.darkShadow.withAlpha(100)
-                    : WoodenColors.lightShadow.withAlpha(60),
+                color: _getShadowColor(context, isDark, scheme).withAlpha(100),
                 blurRadius: 4,
                 offset: const Offset(2, 2),
               ),

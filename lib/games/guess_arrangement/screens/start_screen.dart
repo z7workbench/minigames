@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
 import '../models/guess_arrangement_state.dart';
 import '../guess_arrangement_screen.dart';
@@ -20,19 +21,18 @@ class _GuessArrangementStartScreenState
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark
-          ? WoodenColors.darkBackground
-          : WoodenColors.lightBackground,
+          ? context.themeBackground
+          : context.themeBackground,
       appBar: AppBar(
-        title: const Text('猜排列'),
-        backgroundColor: isDark
-            ? WoodenColors.darkPrimary
-            : WoodenColors.lightPrimary,
+        title: Text(l10n.game_guess_arrangement),
+        backgroundColor: isDark ? context.themePrimary : context.themePrimary,
         foregroundColor: isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary,
+            ? context.themeOnPrimary
+            : context.themeOnPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -51,26 +51,26 @@ class _GuessArrangementStartScreenState
                 const SizedBox(height: 32),
 
                 // Game title and description
-                _buildTitleSection(isDark),
+                _buildTitleSection(context, isDark, l10n),
                 const SizedBox(height: 48),
 
                 // Mode selection
-                _buildModeSelection(context, isDark),
+                _buildModeSelection(context, isDark, l10n),
                 const SizedBox(height: 24),
 
                 // Rules button
                 WoodenButton(
-                  text: '游戏规则',
+                  text: l10n.ga_howToPlay,
                   icon: Icons.help_outline,
                   variant: WoodenButtonVariant.outlined,
                   expandWidth: true,
-                  onPressed: () => _showRulesDialog(context, isDark),
+                  onPressed: () => _showRulesDialog(context, isDark, l10n),
                 ),
                 const SizedBox(height: 16),
 
                 // Back button
                 WoodenButton(
-                  text: '返回',
+                  text: l10n.back,
                   icon: Icons.arrow_back,
                   variant: WoodenButtonVariant.ghost,
                   expandWidth: true,
@@ -94,19 +94,17 @@ class _GuessArrangementStartScreenState
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: isDark
-                ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-                : [WoodenColors.lightCard, WoodenColors.lightSurface],
+                ? [context.themeCard, context.themeSurface]
+                : [context.themeCard, context.themeSurface],
           ),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
+            color: isDark ? context.themeBorder : context.themeBorder,
             width: 2,
           ),
           boxShadow: [
             BoxShadow(
-              color: isDark
-                  ? WoodenColors.darkShadow
-                  : WoodenColors.lightShadow,
+              color: isDark ? context.themeShadow : context.themeShadow,
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -117,18 +115,20 @@ class _GuessArrangementStartScreenState
     );
   }
 
-  Widget _buildTitleSection(bool isDark) {
+  Widget _buildTitleSection(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Column(
       children: [
         Text(
-          '猜排列',
+          l10n.game_guess_arrangement,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: isDark
-                ? WoodenColors.darkTextPrimary
-                : WoodenColors.lightTextPrimary,
+            color: isDark ? context.themeTextPrimary : context.themeTextPrimary,
             letterSpacing: 1,
           ),
         ),
@@ -139,38 +139,42 @@ class _GuessArrangementStartScreenState
           style: TextStyle(
             fontSize: 18,
             color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
+                ? context.themeTextSecondary
+                : context.themeTextSecondary,
           ),
         ),
         const SizedBox(height: 16),
         Text(
-          '猜测对手隐藏的牌面，考验你的推理能力！',
+          l10n.ga_gameDescription,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14,
             color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
+                ? context.themeTextSecondary
+                : context.themeTextSecondary,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildModeSelection(BuildContext context, bool isDark) {
+  Widget _buildModeSelection(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: isDark ? context.themeSurface : context.themeSurface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
+          color: isDark ? context.themeBorder : context.themeBorder,
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: (isDark ? WoodenColors.darkShadow : WoodenColors.lightShadow)
+            color: (isDark ? context.themeShadow : context.themeShadow)
                 .withAlpha(128),
             blurRadius: 8,
             offset: const Offset(0, 4),
@@ -181,21 +185,21 @@ class _GuessArrangementStartScreenState
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '选择游戏模式',
+            l10n.ga_selectGameMode,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+                  ? context.themeTextPrimary
+                  : context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
 
           // 2 Player mode
           WoodenButton(
-            text: '双人对战',
+            text: l10n.ga_twoPlayers,
             icon: Icons.people,
             size: WoodenButtonSize.large,
             variant: WoodenButtonVariant.primary,
@@ -206,7 +210,7 @@ class _GuessArrangementStartScreenState
 
           // AI modes
           WoodenButton(
-            text: '简单AI',
+            text: l10n.ga_easyAI,
             icon: Icons.computer,
             size: WoodenButtonSize.medium,
             variant: WoodenButtonVariant.secondary,
@@ -215,7 +219,7 @@ class _GuessArrangementStartScreenState
           ),
           const SizedBox(height: 8),
           WoodenButton(
-            text: '中等AI',
+            text: l10n.ga_mediumAI,
             icon: Icons.psychology,
             size: WoodenButtonSize.medium,
             variant: WoodenButtonVariant.secondary,
@@ -224,7 +228,7 @@ class _GuessArrangementStartScreenState
           ),
           const SizedBox(height: 8),
           WoodenButton(
-            text: '困难AI',
+            text: l10n.ga_hardAI,
             icon: Icons.smart_toy,
             size: WoodenButtonSize.medium,
             variant: WoodenButtonVariant.accent,
@@ -246,12 +250,16 @@ class _GuessArrangementStartScreenState
     );
   }
 
-  void _showRulesDialog(BuildContext context, bool isDark) {
+  void _showRulesDialog(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     showDialog(
       context: context,
       builder: (context) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        backgroundColor: isDark ? WoodenColors.darkSurface : Colors.white,
+        backgroundColor: isDark ? context.themeSurface : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -262,13 +270,13 @@ class _GuessArrangementStartScreenState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '游戏规则',
+                    l10n.ga_howToPlay,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: isDark
-                          ? WoodenColors.darkTextPrimary
-                          : WoodenColors.lightTextPrimary,
+                          ? context.themeTextPrimary
+                          : context.themeTextPrimary,
                     ),
                   ),
                   IconButton(
@@ -278,32 +286,24 @@ class _GuessArrangementStartScreenState
                 ],
               ),
               const SizedBox(height: 16),
-              _buildRuleItem(
-                '1. 发牌',
-                '每位玩家从52张牌中抽取8张，按从小到大（A=1最小，K=13最大）面朝下排列。',
-                isDark,
-              ),
+              _buildRuleItem(l10n.ga_rule1Title, l10n.ga_rule1Desc, isDark),
               const SizedBox(height: 12),
-              _buildRuleItem(
-                '2. 猜测',
-                '双方轮流猜对方的牌。例如："第3张是7"。只需猜数字，不用猜花色。',
-                isDark,
-              ),
+              _buildRuleItem(l10n.ga_rule2Title, l10n.ga_rule2Desc, isDark),
               const SizedBox(height: 12),
-              _buildRuleItem('3. 猜对', '翻开对方的牌！你可以继续猜测，连击数+1。', isDark),
+              _buildRuleItem(l10n.ga_rule3Title, l10n.ga_rule3Desc, isDark),
               const SizedBox(height: 12),
-              _buildRuleItem('4. 猜错', '轮到对方猜测。你的连击数重置。', isDark),
+              _buildRuleItem(l10n.ga_rule4Title, l10n.ga_rule4Desc, isDark),
               const SizedBox(height: 12),
-              _buildRuleItem('5. 胜负', '谁的牌先被全部翻开，谁就输了！', isDark),
+              _buildRuleItem(l10n.ga_rule5Title, l10n.ga_rule5Desc, isDark),
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: WoodenColors.accentAmber,
+                    backgroundColor: context.themeAccent,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('明白了！'),
+                  child: Text(l10n.ga_gotIt),
                 ),
               ),
             ],
@@ -322,7 +322,7 @@ class _GuessArrangementStartScreenState
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
-            color: WoodenColors.accentAmber,
+            color: context.themeAccent,
           ),
         ),
         const SizedBox(height: 4),
@@ -331,8 +331,8 @@ class _GuessArrangementStartScreenState
           style: TextStyle(
             fontSize: 13,
             color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
+                ? context.themeTextSecondary
+                : context.themeTextSecondary,
           ),
         ),
       ],

@@ -1,11 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import '../../../l10n/generated/app_localizations.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../models/keyword.dart';
-import '../models/battle_effect.dart';
 
 /// 关键词弹窗
 /// 点击带有粗体标记的关键词文字时弹出，显示关键词的详细解释
@@ -17,7 +16,6 @@ class KeywordPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final l10n = AppLocalizations.of(context)!;
 
     return GestureDetector(
@@ -32,15 +30,13 @@ class KeywordPopup extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: isDark
-                    ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-                    : [WoodenColors.lightCard, WoodenColors.lightSurface],
+                colors: [context.themeCard, context.themeSurface],
               ),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: WoodenColors.accentAmber, width: 2),
+              border: Border.all(color: context.themeAccent, width: 2),
               boxShadow: [
                 BoxShadow(
-                  color: WoodenColors.accentAmber.withAlpha(100),
+                  color: context.themeAccent.withAlpha(100),
                   blurRadius: 20,
                   spreadRadius: 5,
                 ),
@@ -55,7 +51,7 @@ class KeywordPopup extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: WoodenColors.accentAmber,
+                      color: context.themeAccent,
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(14),
                       ),
@@ -105,7 +101,7 @@ class KeywordPopup extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: WoodenColors.accentAmber,
+                            color: context.themeAccent,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -113,9 +109,7 @@ class KeywordPopup extends StatelessWidget {
                           _getLocalizedDescription(l10n),
                           style: TextStyle(
                             fontSize: 16,
-                            color: isDark
-                                ? WoodenColors.darkTextPrimary
-                                : WoodenColors.lightTextPrimary,
+                            color: context.themeTextPrimary,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -125,31 +119,23 @@ class KeywordPopup extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: WoodenColors.accentAmber,
+                            color: context.themeAccent,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: isDark
-                                ? WoodenColors.darkSurface.withAlpha(100)
-                                : WoodenColors.lightSurface.withAlpha(100),
+                            color: context.themeSurface.withAlpha(100),
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: isDark
-                                  ? WoodenColors.darkBorder
-                                  : WoodenColors.lightBorder,
-                            ),
+                            border: Border.all(color: context.themeBorder),
                           ),
                           child: Text(
                             keyword.example,
                             style: TextStyle(
                               fontSize: 14,
                               fontStyle: FontStyle.italic,
-                              color: isDark
-                                  ? WoodenColors.darkTextSecondary
-                                  : WoodenColors.lightTextSecondary,
+                              color: context.themeTextSecondary,
                             ),
                           ),
                         ),
@@ -233,9 +219,9 @@ class KeywordText extends StatelessWidget {
         _getLocalizedName(context),
         style: (style ?? const TextStyle()).copyWith(
           fontWeight: FontWeight.bold,
-          color: WoodenColors.accentAmber,
+          color: context.themeAccent,
           decoration: TextDecoration.underline,
-          decorationColor: WoodenColors.accentAmber,
+          decorationColor: context.themeAccent,
         ),
       ),
     );

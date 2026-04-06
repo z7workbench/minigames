@@ -155,3 +155,76 @@ Dice battle game - coming soon!
 | macOS | ✅ Supported |
 
 All games run offline with no network dependencies.
+
+# Theme System
+
+This app supports **2 color schemes × 2 brightness modes = 4 theme combinations**:
+
+| Color Scheme | Light Mode | Dark Mode |
+|--------------|------------|-----------|
+| **Wooden** | Warm wood tones (khaki, brown) | Dark walnut (deep brown, ebony) |
+| **Starlight** | Soft purple, sky blue | Deep purple, navy blue |
+
+## Theme-Aware Color Usage
+
+When developing components, **always use theme-aware colors** from `context.theme*` extension:
+
+```dart
+import 'package:flutter/material.dart';
+import '../../ui/theme/theme_colors.dart';
+
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // ✅ Correct: Auto-adapts to Wooden/Starlight + Dark/Light
+      color: context.themeBackground,
+      child: Text(
+        'Hello',
+        style: TextStyle(color: context.themeTextPrimary),
+      ),
+    );
+  }
+}
+```
+
+### Available Theme Colors
+
+| Extension | Usage |
+|-----------|-------|
+| `context.themePrimary` | Primary color (AppBar, main buttons) |
+| `context.themeBackground` | Background color (Scaffold) |
+| `context.themeSurface` | Surface color (cards, containers) |
+| `context.themeCard` | Card background |
+| `context.themeAccent` | Accent color (icons, highlights) |
+| `context.themeTextPrimary` | Primary text |
+| `context.themeTextSecondary` | Secondary text |
+| `context.themeBorder` | Border color |
+| `context.themeOnPrimary` | Text/icons on primary color (AppBar icons) |
+
+### ❌ Never Hardcode Colors
+
+```dart
+// ❌ WRONG: This breaks Starlight theme
+Icon(Icons.settings, color: WoodenColors.accentAmber),
+
+// ✅ CORRECT: Works for all themes
+Icon(Icons.settings, color: context.themeOnPrimary),
+```
+
+### Component Development Checklist
+
+- [ ] Use `context.theme*` extensions, not `WoodenColors.*` directly
+- [ ] Import `theme_colors.dart`
+- [ ] Test in **Dark + Wooden** theme
+- [ ] Test in **Dark + Starlight** theme
+- [ ] Test in **Light + Wooden** theme
+- [ ] Test in **Light + Starlight** theme
+- [ ] AppBar icons/text use `themeOnPrimary`
+
+### Pre-adapted Shared Components
+
+- `WoodenButton` - Button with theme support (primary, secondary, accent, ghost variants)
+- `WoodenAppBar` - Application bar
+- `GameCard` - Game card widget
+- `ThemeToggle` - Theme toggle switch

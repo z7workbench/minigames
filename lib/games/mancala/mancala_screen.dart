@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/generated/app_localizations.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import 'components/board_widget.dart';
 import 'models/mancala_state.dart';
 import 'mancala_provider.dart';
@@ -60,16 +60,12 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
       },
       child: Scaffold(
         backgroundColor: isDark
-            ? WoodenColors.darkBackground
-            : WoodenColors.lightBackground,
+            ? context.themeBackground
+            : context.themeBackground,
         appBar: AppBar(
           title: Text(l10n.game_mancala),
-          backgroundColor: isDark
-              ? WoodenColors.darkPrimary
-              : WoodenColors.lightPrimary,
-          foregroundColor: isDark
-              ? WoodenColors.darkOnPrimary
-              : WoodenColors.lightOnPrimary,
+          backgroundColor: context.themePrimary,
+          foregroundColor: context.themeOnPrimary,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () async {
@@ -130,12 +126,12 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: isDark
-              ? [WoodenColors.darkSurface, WoodenColors.darkCard]
-              : [WoodenColors.lightSurface, WoodenColors.lightCard],
+              ? [context.themeSurface, context.themeCard]
+              : [context.themeSurface, context.themeCard],
         ),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
+          color: isDark ? context.themeBorder : context.themeBorder,
         ),
       ),
       child: Row(
@@ -156,7 +152,7 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
           // Timer
           Column(
             children: [
-              Icon(Icons.timer, color: WoodenColors.accentAmber, size: 20),
+              Icon(Icons.timer, color: context.themeAccent, size: 20),
               const SizedBox(height: 4),
               Text(
                 _formatTime(state.elapsedSeconds),
@@ -164,8 +160,8 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: isDark
-                      ? WoodenColors.darkTextPrimary
-                      : WoodenColors.lightTextPrimary,
+                      ? context.themeTextPrimary
+                      : context.themeTextPrimary,
                 ),
               ),
             ],
@@ -197,11 +193,11 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: isActive
-            ? WoodenColors.accentAmber.withAlpha(30)
+            ? context.themeAccent.withAlpha(30)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         border: isActive
-            ? Border.all(color: WoodenColors.accentAmber, width: 2)
+            ? Border.all(color: context.themeAccent, width: 2)
             : null,
       ),
       child: Column(
@@ -211,8 +207,8 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
             style: TextStyle(
               fontSize: 12,
               color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
+                  ? context.themeTextSecondary
+                  : context.themeTextSecondary,
             ),
           ),
           const SizedBox(height: 4),
@@ -222,10 +218,10 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: isActive
-                  ? WoodenColors.accentAmber
+                  ? context.themeAccent
                   : (isDark
-                        ? WoodenColors.darkTextPrimary
-                        : WoodenColors.lightTextPrimary),
+                        ? context.themeTextPrimary
+                        : context.themeTextPrimary),
             ),
           ),
         ],
@@ -318,7 +314,7 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
           children: [
             Icon(
               winner != null ? Icons.emoji_events : Icons.handshake,
-              color: WoodenColors.accentAmber,
+              color: context.themeAccent,
               size: 48,
             ),
             const SizedBox(height: 16),
@@ -328,8 +324,8 @@ class _MancalaScreenState extends ConsumerState<MancalaScreen> {
               '用时: ${_formatTime(state.elapsedSeconds)}',
               style: TextStyle(
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? WoodenColors.darkTextSecondary
-                    : WoodenColors.lightTextSecondary,
+                    ? context.themeTextSecondary
+                    : context.themeTextSecondary,
               ),
             ),
           ],

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../models/scoring.dart';
 import '../models/scoring_category.dart';
 import '../models/yacht_dice_state.dart';
-import 'package:minigames/ui/theme/wooden_colors.dart';
 import 'package:minigames/l10n/generated/app_localizations.dart';
 
 /// A scrollable score card widget that shows potential scores for each category
@@ -45,50 +44,31 @@ class ScorePreviewCard extends StatelessWidget {
   final void Function(ScoringCategory category) onCategorySelected;
 
   /// Gets the theme colors based on whether we're in light or dark mode.
-  static (Color cardColor, Color textColor, Color boundaryColor)
-  _getThemeColors(BuildContext context, bool isUsed, int potentialScore) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+  (Color cardColor, Color textColor, Color boundaryColor) _getThemeColors(
+    BuildContext context,
+    bool isUsed,
+    int potentialScore,
+  ) {
+    final colorScheme = Theme.of(context).colorScheme;
 
-    if (isDark) {
-      if (isUsed) {
-        return (
-          WoodenColors.darkSurface.withAlpha(128),
-          WoodenColors.darkTextSecondary,
-          Colors.transparent,
-        );
-      } else if (potentialScore > 0) {
-        return (
-          WoodenColors.darkCard,
-          WoodenColors.darkTextPrimary,
-          WoodenColors.accentAmber,
-        );
-      } else {
-        return (
-          WoodenColors.darkCard.withAlpha(200),
-          WoodenColors.darkTextPrimary,
-          Colors.transparent,
-        );
-      }
+    if (isUsed) {
+      return (
+        colorScheme.surface.withAlpha(128),
+        colorScheme.onSurfaceVariant,
+        Colors.transparent,
+      );
+    } else if (potentialScore > 0) {
+      return (
+        colorScheme.surfaceContainerHighest,
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
     } else {
-      if (isUsed) {
-        return (
-          WoodenColors.lightSecondary.withAlpha(128),
-          Colors.grey,
-          Colors.transparent,
-        );
-      } else if (potentialScore > 0) {
-        return (
-          WoodenColors.lightPrimary.withAlpha(200),
-          WoodenColors.lightTextPrimary,
-          WoodenColors.accentAmber,
-        );
-      } else {
-        return (
-          WoodenColors.lightCard,
-          WoodenColors.lightTextPrimary,
-          Colors.transparent,
-        );
-      }
+      return (
+        colorScheme.surfaceContainerHighest.withAlpha(200),
+        colorScheme.onSurface,
+        Colors.transparent,
+      );
     }
   }
 
@@ -152,7 +132,9 @@ class ScorePreviewCard extends StatelessWidget {
                       color: isUsed
                           ? null
                           : (potentialScore > 0
-                                ? WoodenColors.accentAmber.withAlpha(50)
+                                ? Theme.of(
+                                    context,
+                                  ).colorScheme.primary.withAlpha(50)
                                 : null),
                       borderRadius: BorderRadius.circular(4),
                     ),

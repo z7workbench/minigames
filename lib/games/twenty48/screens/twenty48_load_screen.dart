@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../data/database.dart';
 import '../../../l10n/generated/app_localizations.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../twenty48_provider.dart';
 import '../twenty48_screen.dart';
 import '../models/twenty48_state.dart';
@@ -100,30 +100,18 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final backgroundColor = isDark
-        ? WoodenColors.darkBackground
-        : WoodenColors.lightBackground;
-    final surfaceColor = isDark
-        ? WoodenColors.darkSurface
-        : WoodenColors.lightSurface;
-    final textPrimaryColor = isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-    final textSecondaryColor = isDark
-        ? WoodenColors.darkTextSecondary
-        : WoodenColors.lightTextSecondary;
+    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
+    final backgroundColor = themeColors.background;
+    final surfaceColor = themeColors.surface;
+    final textPrimaryColor = themeColors.textPrimary;
+    final textSecondaryColor = themeColors.textSecondary;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text(l10n.t48_loadGame),
-        backgroundColor: isDark
-            ? WoodenColors.darkPrimary
-            : WoodenColors.lightPrimary,
-        foregroundColor: isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary,
+        backgroundColor: themeColors.primary,
+        foregroundColor: themeColors.onPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -158,17 +146,10 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
                   decoration: BoxDecoration(
                     color: surfaceColor,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: isDark
-                          ? WoodenColors.darkBorder
-                          : WoodenColors.lightBorder,
-                      width: 1.5,
-                    ),
+                    border: Border.all(color: themeColors.border, width: 1.5),
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? WoodenColors.darkShadow.withAlpha(100)
-                            : WoodenColors.lightShadow.withAlpha(100),
+                        color: themeColors.shadow.withAlpha(100),
                         blurRadius: 4,
                         offset: const Offset(0, 2),
                       ),
@@ -188,9 +169,7 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
                               width: 60,
                               height: 60,
                               decoration: BoxDecoration(
-                                color: isDark
-                                    ? WoodenColors.darkCard
-                                    : WoodenColors.lightCard,
+                                color: themeColors.card,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Center(
@@ -244,9 +223,7 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
                             IconButton(
                               icon: Icon(
                                 Icons.delete_outline,
-                                color: isDark
-                                    ? WoodenColors.darkError
-                                    : WoodenColors.lightError,
+                                color: themeColors.error,
                               ),
                               onPressed: () => _deleteSave(save),
                               tooltip: l10n.t48_delete,

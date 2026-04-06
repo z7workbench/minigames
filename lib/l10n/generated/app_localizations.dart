@@ -773,7 +773,7 @@ abstract class AppLocalizations {
   /// System default theme option
   ///
   /// In en, this message translates to:
-  /// **'System Default'**
+  /// **'Default'**
   String get systemTheme;
 
   /// Sound setting label
@@ -985,6 +985,336 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exit'**
   String get ga_exit;
+
+  /// Round label
+  ///
+  /// In en, this message translates to:
+  /// **'Round'**
+  String get ga_round;
+
+  /// Turn label
+  ///
+  /// In en, this message translates to:
+  /// **'Turn'**
+  String get ga_turn;
+
+  /// Combo label
+  ///
+  /// In en, this message translates to:
+  /// **'Combo'**
+  String get ga_combo;
+
+  /// Dealing cards message
+  ///
+  /// In en, this message translates to:
+  /// **'Dealing cards...'**
+  String get ga_dealing;
+
+  /// AI thinking message
+  ///
+  /// In en, this message translates to:
+  /// **'AI Thinking...'**
+  String get ga_aiThinking;
+
+  /// Position label
+  ///
+  /// In en, this message translates to:
+  /// **'Position'**
+  String get ga_position;
+
+  /// Your turn message
+  ///
+  /// In en, this message translates to:
+  /// **'Your Turn!'**
+  String get ga_yourTurn;
+
+  /// Opponent's turn message
+  ///
+  /// In en, this message translates to:
+  /// **'Opponent\'s Turn'**
+  String get ga_opponentTurn;
+
+  /// Cards remaining label
+  ///
+  /// In en, this message translates to:
+  /// **'Cards Remaining'**
+  String get ga_cardsRemaining;
+
+  /// Select game mode label
+  ///
+  /// In en, this message translates to:
+  /// **'Select Game Mode'**
+  String get ga_selectGameMode;
+
+  /// Got it button
+  ///
+  /// In en, this message translates to:
+  /// **'Got it!'**
+  String get ga_gotIt;
+
+  /// Player's cards label with placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'{name}\'s Cards'**
+  String ga_playerCards(String name);
+
+  /// Your cards label
+  ///
+  /// In en, this message translates to:
+  /// **'Your Cards'**
+  String get ga_yourCards;
+
+  /// Hint to tap card
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a card to guess'**
+  String get ga_tapToGuess;
+
+  /// Position selected message with placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Position {position} selected - Choose a number below'**
+  String ga_positionSelected(int position);
+
+  /// Select number label
+  ///
+  /// In en, this message translates to:
+  /// **'Select Number (A-K)'**
+  String get ga_selectNumber;
+
+  /// Correct guess message with card placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Correct! {card}'**
+  String ga_guessCorrect(String card);
+
+  /// Correct guess message with combo
+  ///
+  /// In en, this message translates to:
+  /// **'Correct! {card} Combo x{combo}'**
+  String ga_guessCorrectCombo(String card, int combo);
+
+  /// Combo label with number
+  ///
+  /// In en, this message translates to:
+  /// **'Combo x{n}'**
+  String ga_comboLabel(int n);
+
+  /// Clear selection button
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Selection'**
+  String get ga_clearSelection;
+
+  /// End turn button
+  ///
+  /// In en, this message translates to:
+  /// **'End Turn'**
+  String get ga_endTurn;
+
+  /// Exit game dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Exit Game?'**
+  String get ga_exitGameTitle;
+
+  /// Exit game dialog message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit? Current progress will be lost.'**
+  String get ga_exitGameMessage;
+
+  /// Restart game dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Restart?'**
+  String get ga_restartGameTitle;
+
+  /// Restart game dialog message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to restart the game?'**
+  String get ga_restartGameMessage;
+
+  /// Restart button
+  ///
+  /// In en, this message translates to:
+  /// **'Restart'**
+  String get ga_restart;
+
+  /// AI guessing message with placeholders
+  ///
+  /// In en, this message translates to:
+  /// **'AI Guessing: Position {position} is {rank}'**
+  String ga_aiGuessing(int position, String rank);
+
+  /// Rule 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'1. Dealing'**
+  String get ga_rule1Title;
+
+  /// Rule 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Each player draws 8 cards from a 52-card deck, arranged face-down from low to high (A=1 lowest, K=13 highest).'**
+  String get ga_rule1Desc;
+
+  /// Rule 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'2. Guessing'**
+  String get ga_rule2Title;
+
+  /// Rule 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Players take turns guessing each other\'s cards. For example: \"Position 3 is a 7\". Guess the rank only, not the suit.'**
+  String get ga_rule2Desc;
+
+  /// Rule 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'3. Correct Guess'**
+  String get ga_rule3Title;
+
+  /// Rule 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal opponent\'s card! You can continue guessing, combo +1.'**
+  String get ga_rule3Desc;
+
+  /// Rule 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'4. Wrong Guess'**
+  String get ga_rule4Title;
+
+  /// Rule 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'Turn passes to opponent. Your combo resets.'**
+  String get ga_rule4Desc;
+
+  /// Rule 5 title
+  ///
+  /// In en, this message translates to:
+  /// **'5. Win Condition'**
+  String get ga_rule5Title;
+
+  /// Rule 5 description
+  ///
+  /// In en, this message translates to:
+  /// **'The player whose cards are all revealed first loses!'**
+  String get ga_rule5Desc;
+
+  /// Winner label for player
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get ga_winnerPlayer;
+
+  /// Winner label for opponent
+  ///
+  /// In en, this message translates to:
+  /// **'Opponent'**
+  String get ga_winnerOpponent;
+
+  /// AI wrong guess message
+  ///
+  /// In en, this message translates to:
+  /// **'AI guessed wrong!'**
+  String get ga_aiWrongGuess;
+
+  /// Wrong guess title
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong Guess!'**
+  String get ga_wrongGuessTitle;
+
+  /// Turn to player message
+  ///
+  /// In en, this message translates to:
+  /// **'Your turn now!'**
+  String get ga_turnToYou;
+
+  /// Turn to opponent message
+  ///
+  /// In en, this message translates to:
+  /// **'Opponent\'s turn now.'**
+  String get ga_turnToOpponent;
+
+  /// Continue button
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get ga_continue;
+
+  /// AI round end title
+  ///
+  /// In en, this message translates to:
+  /// **'AI Round End'**
+  String get ga_aiRoundEnd;
+
+  /// AI correct guess count
+  ///
+  /// In en, this message translates to:
+  /// **'AI guessed correctly {correct}/{total} times'**
+  String ga_aiCorrectCount(int correct, int total);
+
+  /// Position label with number
+  ///
+  /// In en, this message translates to:
+  /// **'Position {n}'**
+  String ga_positionLabel(int n);
+
+  /// Switch turn hint message
+  ///
+  /// In en, this message translates to:
+  /// **'Please hand the device to {name}.\nRemember to hide your cards!'**
+  String ga_switchTurnHint(String name);
+
+  /// Winner wins message
+  ///
+  /// In en, this message translates to:
+  /// **'{name} Wins!'**
+  String ga_winnerWins(String name);
+
+  /// Opponent wins message
+  ///
+  /// In en, this message translates to:
+  /// **'{name} Wins...'**
+  String ga_winnerLoses(String name);
+
+  /// Correct guesses label
+  ///
+  /// In en, this message translates to:
+  /// **'Correct Guesses'**
+  String get ga_correctGuessesLabel;
+
+  /// Max combo label
+  ///
+  /// In en, this message translates to:
+  /// **'Max Combo'**
+  String get ga_maxComboLabel;
+
+  /// Play duration label
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get ga_playDurationLabel;
+
+  /// Play again button in game over
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get ga_playAgainButton;
+
+  /// Duration format
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m {seconds}s'**
+  String ga_durationFormat(int minutes, int seconds);
 
   /// 2048 game title
   ///
@@ -1711,6 +2041,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Active Effect'**
   String get db_noActiveEffect;
+
+  /// Coming soon text
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon'**
+  String get comingSoon;
 }
 
 class _AppLocalizationsDelegate

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../ui/theme/wooden_colors.dart';
+
+import '../../../ui/theme/theme_colors.dart';
 import '../models/battle_effect.dart';
 
 /// Displays the current battle effect with animation.
@@ -24,13 +26,13 @@ class EffectDisplay extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [WoodenColors.accentAmber, WoodenColors.accentCopper],
+        gradient: LinearGradient(
+          colors: [context.themeAccent, context.themeAccentSecondary],
         ),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: WoodenColors.accentAmber.withAlpha(100),
+            color: context.themeAccent.withAlpha(100),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -71,20 +73,16 @@ class EffectDisplay extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkCard : WoodenColors.lightCard,
+        color: context.themeCard,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-        ),
+        border: Border.all(color: context.themeBorder),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             Icons.remove_circle_outline,
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
+            color: context.themeTextSecondary,
             size: 24,
           ),
           const SizedBox(width: 8),
@@ -93,8 +91,8 @@ class EffectDisplay extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
+                  ? context.themeTextSecondary
+                  : context.themeTextSecondary,
             ),
           ),
         ],
@@ -150,8 +148,8 @@ class EffectNotification extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [WoodenColors.accentGold, WoodenColors.accentAmber],
+          gradient: LinearGradient(
+            colors: [context.themeAccent, context.themeAccentSecondary],
           ),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
@@ -198,7 +196,7 @@ class EffectNotification extends StatelessWidget {
               onPressed: onDismiss,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
-                foregroundColor: WoodenColors.accentAmber,
+                foregroundColor: context.themeAccent,
               ),
               child: const Text('Continue'),
             ),

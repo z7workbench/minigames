@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../theme/wooden_colors.dart';
+import '../theme/theme_colors.dart';
+import '../theme/theme_provider.dart';
+import '../theme/wooden_colors.dart' as wooden;
+import '../theme/starlight_colors.dart' as starlight;
 
 /// A reusable wooden-styled button with customizable appearance.
 ///
@@ -47,38 +50,32 @@ class WoodenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       width: expandWidth ? double.infinity : null,
       child: Material(
         elevation: onPressed != null ? _elevation : 0,
         borderRadius: BorderRadius.circular(borderRadius),
-        shadowColor: isDark
-            ? WoodenColors.darkShadow
-            : WoodenColors.lightShadow,
+        shadowColor: context.themeShadow,
         child: InkWell(
           onTap: onPressed,
           borderRadius: BorderRadius.circular(borderRadius),
           child: Container(
             padding: padding ?? _resolvedPadding,
             decoration: BoxDecoration(
-              gradient: _buildGradient(isDark),
+              gradient: _buildGradient(context),
               borderRadius: BorderRadius.circular(borderRadius),
-              border: Border.all(color: _borderColor(isDark), width: 1.5),
+              border: Border.all(color: _borderColor(context), width: 1.5),
             ),
-            child: _buildContent(theme),
+            child: _buildContent(context),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildContent(ThemeData theme) {
-    final isDark = theme.brightness == Brightness.dark;
-    final foregroundColor = _foregroundColor(isDark);
+  Widget _buildContent(BuildContext context) {
+    final foregroundColor = _foregroundColor(context);
 
     if (text != null && icon != null) {
       return Row(
@@ -113,10 +110,13 @@ class WoodenButton extends StatelessWidget {
     }
   }
 
-  LinearGradient? _buildGradient(bool isDark) {
+  LinearGradient? _buildGradient(BuildContext context) {
     if (onPressed == null) {
       return null;
     }
+
+    final isDark = context.isDarkMode;
+    final isStarlight = context.colorSchemeType == ColorSchemeType.starlight;
 
     switch (variant) {
       case WoodenButtonVariant.primary:
@@ -124,22 +124,58 @@ class WoodenButton extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: isDark
-              ? [WoodenColors.darkPrimary, WoodenColors.darkSecondary]
-              : [WoodenColors.lightPrimary, WoodenColors.lightSecondary],
+              ? [
+                  isStarlight
+                      ? starlight.StarlightColors.darkPrimary
+                      : wooden.WoodenColors.darkPrimary,
+                  isStarlight
+                      ? starlight.StarlightColors.darkSecondary
+                      : wooden.WoodenColors.darkSecondary,
+                ]
+              : [
+                  isStarlight
+                      ? starlight.StarlightColors.lightPrimary
+                      : wooden.WoodenColors.lightPrimary,
+                  isStarlight
+                      ? starlight.StarlightColors.lightSecondary
+                      : wooden.WoodenColors.lightSecondary,
+                ],
         );
       case WoodenButtonVariant.secondary:
         return LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: isDark
-              ? [WoodenColors.darkSurface, WoodenColors.darkCard]
-              : [WoodenColors.lightSurface, WoodenColors.lightCard],
+              ? [
+                  isStarlight
+                      ? starlight.StarlightColors.darkSurface
+                      : wooden.WoodenColors.darkSurface,
+                  isStarlight
+                      ? starlight.StarlightColors.darkCard
+                      : wooden.WoodenColors.darkCard,
+                ]
+              : [
+                  isStarlight
+                      ? starlight.StarlightColors.lightSurface
+                      : wooden.WoodenColors.lightSurface,
+                  isStarlight
+                      ? starlight.StarlightColors.lightCard
+                      : wooden.WoodenColors.lightCard,
+                ],
         );
       case WoodenButtonVariant.accent:
-        return const LinearGradient(
+        return LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [WoodenColors.accentAmber, WoodenColors.accentCopper],
+          colors: isStarlight
+              ? [
+                  starlight.StarlightColors.accentStar,
+                  starlight.StarlightColors.accentNebula,
+                ]
+              : [
+                  wooden.WoodenColors.accentAmber,
+                  wooden.WoodenColors.accentCopper,
+                ],
         );
       case WoodenButtonVariant.outlined:
       case WoodenButtonVariant.ghost:
@@ -147,44 +183,74 @@ class WoodenButton extends StatelessWidget {
     }
   }
 
-  Color _borderColor(bool isDark) {
+  Color _borderColor(BuildContext context) {
     if (onPressed == null) {
-      return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
+      return context.themeDisabled;
     }
+
+    final isDark = context.isDarkMode;
+    final isStarlight = context.colorSchemeType == ColorSchemeType.starlight;
 
     switch (variant) {
       case WoodenButtonVariant.primary:
-        return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
+        return isDark
+            ? (isStarlight
+                  ? starlight.StarlightColors.darkBorder
+                  : wooden.WoodenColors.darkBorder)
+            : (isStarlight
+                  ? starlight.StarlightColors.lightBorder
+                  : wooden.WoodenColors.lightBorder);
       case WoodenButtonVariant.secondary:
-        return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
+        return isDark
+            ? (isStarlight
+                  ? starlight.StarlightColors.darkBorder
+                  : wooden.WoodenColors.darkBorder)
+            : (isStarlight
+                  ? starlight.StarlightColors.lightBorder
+                  : wooden.WoodenColors.lightBorder);
       case WoodenButtonVariant.accent:
-        return WoodenColors.accentBronze;
+        return isStarlight
+            ? starlight.StarlightColors.accentNebula
+            : wooden.WoodenColors.accentBronze;
       case WoodenButtonVariant.outlined:
-        return isDark ? WoodenColors.accentAmber : WoodenColors.lightPrimary;
+        return context.themeAccent;
       case WoodenButtonVariant.ghost:
         return Colors.transparent;
     }
   }
 
-  Color _foregroundColor(bool isDark) {
+  Color _foregroundColor(BuildContext context) {
     if (onPressed == null) {
-      return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
+      return context.themeDisabled;
     }
+
+    final isDark = context.isDarkMode;
+    final isStarlight = context.colorSchemeType == ColorSchemeType.starlight;
 
     switch (variant) {
       case WoodenButtonVariant.primary:
         return isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary;
+            ? (isStarlight
+                  ? starlight.StarlightColors.darkOnPrimary
+                  : wooden.WoodenColors.darkOnPrimary)
+            : (isStarlight
+                  ? starlight.StarlightColors.lightOnPrimary
+                  : wooden.WoodenColors.lightOnPrimary);
       case WoodenButtonVariant.secondary:
         return isDark
-            ? WoodenColors.darkTextPrimary
-            : WoodenColors.lightTextPrimary;
+            ? (isStarlight
+                  ? starlight.StarlightColors.darkTextPrimary
+                  : wooden.WoodenColors.darkTextPrimary)
+            : (isStarlight
+                  ? starlight.StarlightColors.lightTextPrimary
+                  : wooden.WoodenColors.lightTextPrimary);
       case WoodenButtonVariant.accent:
-        return WoodenColors.lightTextPrimary;
+        return isStarlight
+            ? Colors.white
+            : wooden.WoodenColors.lightTextPrimary;
       case WoodenButtonVariant.outlined:
       case WoodenButtonVariant.ghost:
-        return isDark ? WoodenColors.accentAmber : WoodenColors.lightPrimary;
+        return context.themeAccent;
     }
   }
 

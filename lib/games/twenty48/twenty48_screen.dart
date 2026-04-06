@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
 import 'models/twenty48_state.dart';
 import 'twenty48_provider.dart';
@@ -95,7 +95,7 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
               await _showSaveDialog();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: WoodenColors.accentAmber,
+              backgroundColor: context.themeAccent,
               foregroundColor: Colors.white,
             ),
             child: Text(l10n.t48_saveAndExit),
@@ -157,7 +157,7 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
               ref.read(twenty48GameProvider.notifier).startNewGame();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: WoodenColors.accentAmber,
+              backgroundColor: context.themeAccent,
               foregroundColor: Colors.white,
             ),
             child: Text(l10n.t48_playAgain),
@@ -190,26 +190,17 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
       }
     });
 
-    final backgroundColor = isDark
-        ? WoodenColors.darkBackground
-        : WoodenColors.lightBackground;
-    final textPrimaryColor = isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-    final textSecondaryColor = isDark
-        ? WoodenColors.darkTextSecondary
-        : WoodenColors.lightTextSecondary;
+    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
+    final backgroundColor = themeColors.background;
+    final textPrimaryColor = themeColors.textPrimary;
+    final textSecondaryColor = themeColors.textSecondary;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text(l10n.game_2048),
-        backgroundColor: isDark
-            ? WoodenColors.darkPrimary
-            : WoodenColors.lightPrimary,
-        foregroundColor: isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary,
+        backgroundColor: themeColors.primary,
+        foregroundColor: themeColors.onPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: _showExitDialog,
@@ -321,26 +312,19 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
     String value,
     bool isDark,
   ) {
+    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: themeColors.surface,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-          width: 1,
-        ),
+        border: Border.all(color: themeColors.border, width: 1),
       ),
       child: Column(
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
-            ),
+            style: TextStyle(fontSize: 12, color: themeColors.textSecondary),
           ),
           const SizedBox(height: 4),
           Text(
@@ -348,9 +332,7 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: themeColors.textPrimary,
             ),
           ),
         ],

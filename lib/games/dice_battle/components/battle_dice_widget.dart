@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../models/dice_type.dart';
 
 /// An animated dice widget for dice battle with multi-sided dice support.
@@ -147,31 +147,35 @@ class _BattleDiceWidgetState extends State<BattleDiceWidget>
     super.dispose();
   }
 
-  Color _getBackgroundColor(bool isDark) {
+  Color _getBackgroundColor(BuildContext context) {
     if (widget.isSelected) {
-      return WoodenColors.accentAmber;
+      return context.themeAccent;
     }
-    return isDark ? WoodenColors.darkCard : WoodenColors.lightCard;
+    return context.themeCard;
   }
 
-  Color _getBorderColor(bool isDark) {
+  Color _getBorderColor(BuildContext context) {
     if (widget.isSelected) {
-      return WoodenColors.accentGold;
+      return context.themeAccent;
     }
     if (!widget.isSelectable) {
-      return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
+      return context.themeDisabled;
     }
-    return isDark ? WoodenColors.darkSecondary : WoodenColors.lightSecondary;
+    return context.themeSecondary;
   }
 
-  Color _getTextColor(bool isDark) {
+  Color _getTextColor(BuildContext context) {
     if (widget.isSelected) {
       return Colors.black;
     }
     if (!widget.isSelectable) {
-      return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
+      return context.themeDisabled;
     }
-    return isDark ? Colors.white : Colors.black;
+    return Colors.white;
+  }
+
+  Color _getShadowColor(BuildContext context) {
+    return context.themeShadow.withAlpha(100);
   }
 
   String _getDiceLabel() {
@@ -180,8 +184,7 @@ class _BattleDiceWidgetState extends State<BattleDiceWidget>
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-    final isDark = brightness == Brightness.dark;
+    // isDark available but unused in build
 
     return GestureDetector(
       onTap: widget.isSelectable ? widget.onTap : null,
@@ -200,17 +203,15 @@ class _BattleDiceWidgetState extends State<BattleDiceWidget>
           width: widget.size,
           height: widget.size,
           decoration: BoxDecoration(
-            color: _getBackgroundColor(isDark),
+            color: _getBackgroundColor(context),
             borderRadius: BorderRadius.circular(widget.size * 0.15),
             border: Border.all(
-              color: _getBorderColor(isDark),
+              color: _getBorderColor(context),
               width: widget.isSelected ? 3 : 2,
             ),
             boxShadow: [
               BoxShadow(
-                color: isDark
-                    ? WoodenColors.darkShadow.withAlpha(100)
-                    : WoodenColors.lightShadow.withAlpha(60),
+                color: _getShadowColor(context),
                 blurRadius: 4,
                 offset: const Offset(2, 2),
               ),
@@ -224,14 +225,14 @@ class _BattleDiceWidgetState extends State<BattleDiceWidget>
                 style: TextStyle(
                   fontSize: widget.size * 0.4,
                   fontWeight: FontWeight.bold,
-                  color: _getTextColor(isDark),
+                  color: _getTextColor(context),
                 ),
               ),
               Text(
                 _getDiceLabel(),
                 style: TextStyle(
                   fontSize: widget.size * 0.18,
-                  color: _getTextColor(isDark).withAlpha(200),
+                  color: _getTextColor(context).withAlpha(200),
                 ),
               ),
             ],

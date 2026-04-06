@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 
 /// A pit widget that displays seeds and handles tap events.
 class PitWidget extends StatelessWidget {
@@ -42,16 +42,14 @@ class PitWidget extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: _buildGradient(isDark),
+          gradient: _buildGradient(context, isDark),
           border: Border.all(
-            color: _borderColor(isDark),
+            color: _borderColor(context, isDark),
             width: highlight ? 3 : 1.5,
           ),
           boxShadow: [
             BoxShadow(
-              color: isDark
-                  ? WoodenColors.darkShadow.withAlpha(100)
-                  : WoodenColors.lightShadow.withAlpha(100),
+              color: context.themeShadow.withAlpha(100),
               blurRadius: highlight ? 12 : 6,
               offset: const Offset(0, 3),
             ),
@@ -61,7 +59,7 @@ class PitWidget extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             // Seed visualization
-            if (seeds > 0) _buildSeeds(isDark),
+            if (seeds > 0) _buildSeeds(context, isDark),
 
             // Seed count
             Positioned(
@@ -69,9 +67,7 @@ class PitWidget extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: isDark
-                      ? WoodenColors.darkSurface.withAlpha(200)
-                      : WoodenColors.lightSurface.withAlpha(200),
+                  color: context.themeSurface.withAlpha(200),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -79,9 +75,7 @@ class PitWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: isDark
-                        ? WoodenColors.darkTextPrimary
-                        : WoodenColors.lightTextPrimary,
+                    color: context.themeTextPrimary,
                   ),
                 ),
               ),
@@ -92,12 +86,10 @@ class PitWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildSeeds(bool isDark) {
+  Widget _buildSeeds(BuildContext context, bool isDark) {
     // Show up to 8 seeds visually, then use a number for more
     final displaySeeds = seeds.clamp(0, 8);
-    final seedColor = isDark
-        ? WoodenColors.accentAmber
-        : WoodenColors.accentCopper;
+    final seedColor = context.themeAccent;
 
     if (seeds <= 4) {
       // Show individual seeds for small counts
@@ -148,34 +140,30 @@ class PitWidget extends StatelessWidget {
     );
   }
 
-  LinearGradient _buildGradient(bool isDark) {
+  LinearGradient _buildGradient(BuildContext context, bool isDark) {
     if (highlight) {
       return LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: isDark
-            ? [WoodenColors.darkCard, WoodenColors.accentAmber.withAlpha(50)]
-            : [WoodenColors.lightCard, WoodenColors.accentAmber.withAlpha(50)],
+        colors: [context.themeCard, context.themeAccent.withAlpha(50)],
       );
     }
 
     return LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: isDark
-          ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-          : [WoodenColors.lightCard, WoodenColors.lightSurface],
+      colors: [context.themeCard, context.themeSurface],
     );
   }
 
-  Color _borderColor(bool isDark) {
+  Color _borderColor(BuildContext context, bool isDark) {
     if (highlight) {
-      return WoodenColors.accentAmber;
+      return context.themeAccent;
     }
     if (isPlayable && seeds > 0) {
-      return isDark ? WoodenColors.accentAmber : WoodenColors.lightPrimary;
+      return context.themeAccent;
     }
-    return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
+    return context.themeBorder;
   }
 }
 
@@ -206,22 +194,16 @@ class StoreWidget extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: isDark
-              ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-              : [WoodenColors.lightCard, WoodenColors.lightSurface],
+          colors: [context.themeCard, context.themeSurface],
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isCurrentPlayer
-              ? WoodenColors.accentAmber
-              : (isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder),
+          color: isCurrentPlayer ? context.themeAccent : context.themeBorder,
           width: isCurrentPlayer ? 2 : 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? WoodenColors.darkShadow.withAlpha(100)
-                : WoodenColors.lightShadow.withAlpha(100),
+            color: context.themeShadow.withAlpha(100),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -236,20 +218,12 @@ class StoreWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w500,
-                color: isDark
-                    ? WoodenColors.darkTextSecondary
-                    : WoodenColors.lightTextSecondary,
+                color: context.themeTextSecondary,
               ),
             ),
             const SizedBox(height: 4),
           ],
-          Icon(
-            Icons.inventory_2,
-            color: isDark
-                ? WoodenColors.accentAmber
-                : WoodenColors.accentCopper,
-            size: 20,
-          ),
+          Icon(Icons.inventory_2, color: context.themeAccent, size: 20),
           const SizedBox(height: 4),
           Text(
             '$seeds',
@@ -257,10 +231,8 @@ class StoreWidget extends StatelessWidget {
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: isCurrentPlayer
-                  ? WoodenColors.accentAmber
-                  : (isDark
-                        ? WoodenColors.darkTextPrimary
-                        : WoodenColors.lightTextPrimary),
+                  ? context.themeAccent
+                  : context.themeTextPrimary,
             ),
           ),
         ],

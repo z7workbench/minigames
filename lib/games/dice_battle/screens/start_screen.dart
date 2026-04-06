@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/generated/app_localizations.dart';
 
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
 import '../models/dice_battle_player.dart';
 import '../models/dice_set.dart';
@@ -37,17 +37,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? WoodenColors.darkBackground
-          : WoodenColors.lightBackground,
+      backgroundColor: context.themeBackground,
       appBar: AppBar(
         title: Text(l10n.game_dice_battle),
-        backgroundColor: isDark
-            ? WoodenColors.darkPrimary
-            : WoodenColors.lightPrimary,
-        foregroundColor: isDark
-            ? WoodenColors.darkOnPrimary
-            : WoodenColors.lightOnPrimary,
+        backgroundColor: context.themePrimary,
+        foregroundColor: context.themeOnPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -111,20 +105,13 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: isDark
-                ? [WoodenColors.darkCard, WoodenColors.darkSurface]
-                : [WoodenColors.lightCard, WoodenColors.lightSurface],
+            colors: [context.themeCard, context.themeSurface],
           ),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-            width: 2,
-          ),
+          border: Border.all(color: context.themeBorder, width: 2),
           boxShadow: [
             BoxShadow(
-              color: isDark
-                  ? WoodenColors.darkShadow
-                  : WoodenColors.lightShadow,
+              color: context.themeShadow,
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -144,9 +131,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: isDark
-                ? WoodenColors.darkTextPrimary
-                : WoodenColors.lightTextPrimary,
+            color: context.themeTextPrimary,
             letterSpacing: 1,
           ),
         ),
@@ -154,12 +139,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
         Text(
           l10n.db_gameDescription,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14,
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
-          ),
+          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
         ),
       ],
     );
@@ -174,16 +154,12 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-          width: 1.5,
-        ),
+        border: Border.all(color: context.themeBorder, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: (isDark ? WoodenColors.darkShadow : WoodenColors.lightShadow)
-                .withAlpha(128),
+            color: context.themeShadow.withAlpha(128),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -198,9 +174,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
@@ -297,11 +271,9 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-        ),
+        border: Border.all(color: context.themeBorder),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -312,14 +284,12 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
           ...DiceSets.all.map(
-            (set) => _buildDiceSetCard(set, isDark, true, l10n),
+            (set) => _buildDiceSetCard(context, set, isDark, true, l10n),
           ),
           const SizedBox(height: 16),
           WoodenButton(
@@ -345,11 +315,9 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-        ),
+        border: Border.all(color: context.themeBorder),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -360,25 +328,18 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             '${l10n.db_player1Select}: ${_getLocalizedName(_player1Set?.id ?? '', l10n)}',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
-            ),
+            style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
           ),
           const SizedBox(height: 24),
           ...DiceSets.all.map(
-            (set) => _buildDiceSetCard(set, isDark, false, l10n),
+            (set) => _buildDiceSetCard(context, set, isDark, false, l10n),
           ),
           const SizedBox(height: 16),
           WoodenButton(
@@ -413,6 +374,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
   }
 
   Widget _buildDiceSetCard(
+    BuildContext context,
     DiceSet set,
     bool isDark,
     bool isPlayer1,
@@ -451,13 +413,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: isSelected
-              ? WoodenColors.accentAmber.withAlpha(30)
-              : (isDark ? WoodenColors.darkCard : WoodenColors.lightCard),
+              ? context.themeAccent.withAlpha(30)
+              : context.themeCard,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isSelected
-                ? WoodenColors.accentAmber
-                : (isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder),
+            color: isSelected ? context.themeAccent : context.themeBorder,
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -472,9 +432,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: isDark
-                          ? WoodenColors.darkTextPrimary
-                          : WoodenColors.lightTextPrimary,
+                      color: context.themeTextPrimary,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -482,9 +440,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                     '${l10n.db_attackPoints}: ${set.attackPoints} | ${l10n.db_defensePoints}: ${set.defensePoints}',
                     style: TextStyle(
                       fontSize: 12,
-                      color: isDark
-                          ? WoodenColors.darkTextSecondary
-                          : WoodenColors.lightTextSecondary,
+                      color: context.themeTextSecondary,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -492,16 +448,14 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                     '${l10n.db_diceConfig}: ${set.diceTypes.map((t) => t.displayName).join(', ')}',
                     style: TextStyle(
                       fontSize: 11,
-                      color: isDark
-                          ? WoodenColors.darkTextSecondary
-                          : WoodenColors.lightTextSecondary,
+                      color: context.themeTextSecondary,
                     ),
                   ),
                 ],
               ),
             ),
             if (isSelected)
-              const Icon(Icons.check_circle, color: WoodenColors.accentAmber),
+              Icon(Icons.check_circle, color: context.themeAccent),
           ],
         ),
       ),
@@ -533,7 +487,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
       context: context,
       builder: (context) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        backgroundColor: isDark ? WoodenColors.darkSurface : Colors.white,
+        backgroundColor: context.themeSurface,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -548,9 +502,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: isDark
-                          ? WoodenColors.darkTextPrimary
-                          : WoodenColors.lightTextPrimary,
+                      color: context.themeTextPrimary,
                     ),
                   ),
                   IconButton(
@@ -561,36 +513,42 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
               ),
               const SizedBox(height: 16),
               _buildRuleItem(
+                context,
                 '1. ${l10n.db_gameRules}',
                 l10n.db_gameDescription,
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
+                context,
                 '2. ${l10n.db_selectDiceSet}',
                 '${l10n.db_attackPoints}: ${l10n.db_defensePoints}',
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
+                context,
                 '3. ${l10n.db_attacking}',
                 '${l10n.db_rollDice} (2 ${l10n.db_reroll})',
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
+                context,
                 '4. ${l10n.db_defending}',
                 l10n.db_finishDefense,
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
+                context,
                 '5. ${l10n.db_damageDealt}',
                 '${l10n.db_attack} - ${l10n.db_defense} = ${l10n.db_damageDealt}',
                 isDark,
               ),
               const SizedBox(height: 12),
               _buildRuleItem(
+                context,
                 '6. ${l10n.db_fieldEffect}',
                 l10n.db_noActiveEffect,
                 isDark,
@@ -600,7 +558,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: WoodenColors.accentAmber,
+                    backgroundColor: context.themeAccent,
                     foregroundColor: Colors.white,
                   ),
                   child: Text(l10n.ok),
@@ -613,27 +571,27 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     );
   }
 
-  Widget _buildRuleItem(String title, String description, bool isDark) {
+  Widget _buildRuleItem(
+    BuildContext context,
+    String title,
+    String description,
+    bool isDark,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
-            color: WoodenColors.accentAmber,
+            color: context.themeAccent,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           description,
-          style: TextStyle(
-            fontSize: 13,
-            color: isDark
-                ? WoodenColors.darkTextSecondary
-                : WoodenColors.lightTextSecondary,
-          ),
+          style: TextStyle(fontSize: 13, color: context.themeTextSecondary),
         ),
       ],
     );

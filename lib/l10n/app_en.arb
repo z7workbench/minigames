@@ -485,7 +485,7 @@
   "@darkTheme": {
     "description": "Dark theme option"
   },
-  "systemTheme": "System Default",
+  "systemTheme": "Default",
   "@systemTheme": {
     "description": "System default theme option"
   },
@@ -630,6 +630,298 @@
   "ga_exit": "Exit",
   "@ga_exit": {
     "description": "Exit button"
+  },
+  "ga_round": "Round",
+  "@ga_round": {
+    "description": "Round label"
+  },
+  "ga_turn": "Turn",
+  "@ga_turn": {
+    "description": "Turn label"
+  },
+  "ga_combo": "Combo",
+  "@ga_combo": {
+    "description": "Combo label"
+  },
+  "ga_dealing": "Dealing cards...",
+  "@ga_dealing": {
+    "description": "Dealing cards message"
+  },
+  "ga_aiThinking": "AI Thinking...",
+  "@ga_aiThinking": {
+    "description": "AI thinking message"
+  },
+  "ga_position": "Position",
+  "@ga_position": {
+    "description": "Position label"
+  },
+  "ga_yourTurn": "Your Turn!",
+  "@ga_yourTurn": {
+    "description": "Your turn message"
+  },
+  "ga_opponentTurn": "Opponent's Turn",
+  "@ga_opponentTurn": {
+    "description": "Opponent's turn message"
+  },
+  "ga_cardsRemaining": "Cards Remaining",
+  "@ga_cardsRemaining": {
+    "description": "Cards remaining label"
+  },
+  "ga_selectGameMode": "Select Game Mode",
+  "@ga_selectGameMode": {
+    "description": "Select game mode label"
+  },
+  "ga_gotIt": "Got it!",
+  "@ga_gotIt": {
+    "description": "Got it button"
+  },
+  "ga_playerCards": "{name}'s Cards",
+  "@ga_playerCards": {
+    "description": "Player's cards label with placeholder",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_yourCards": "Your Cards",
+  "@ga_yourCards": {
+    "description": "Your cards label"
+  },
+  "ga_tapToGuess": "Tap a card to guess",
+  "@ga_tapToGuess": {
+    "description": "Hint to tap card"
+  },
+  "ga_positionSelected": "Position {position} selected - Choose a number below",
+  "@ga_positionSelected": {
+    "description": "Position selected message with placeholder",
+    "placeholders": {
+      "position": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_selectNumber": "Select Number (A-K)",
+  "@ga_selectNumber": {
+    "description": "Select number label"
+  },
+  "ga_guessCorrect": "Correct! {card}",
+  "@ga_guessCorrect": {
+    "description": "Correct guess message with card placeholder",
+    "placeholders": {
+      "card": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_guessCorrectCombo": "Correct! {card} Combo x{combo}",
+  "@ga_guessCorrectCombo": {
+    "description": "Correct guess message with combo",
+    "placeholders": {
+      "card": {
+        "type": "String"
+      },
+      "combo": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_comboLabel": "Combo x{n}",
+  "@ga_comboLabel": {
+    "description": "Combo label with number",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_clearSelection": "Clear Selection",
+  "@ga_clearSelection": {
+    "description": "Clear selection button"
+  },
+  "ga_endTurn": "End Turn",
+  "@ga_endTurn": {
+    "description": "End turn button"
+  },
+  "ga_exitGameTitle": "Exit Game?",
+  "@ga_exitGameTitle": {
+    "description": "Exit game dialog title"
+  },
+  "ga_exitGameMessage": "Are you sure you want to exit? Current progress will be lost.",
+  "@ga_exitGameMessage": {
+    "description": "Exit game dialog message"
+  },
+  "ga_restartGameTitle": "Restart?",
+  "@ga_restartGameTitle": {
+    "description": "Restart game dialog title"
+  },
+  "ga_restartGameMessage": "Are you sure you want to restart the game?",
+  "@ga_restartGameMessage": {
+    "description": "Restart game dialog message"
+  },
+  "ga_restart": "Restart",
+  "@ga_restart": {
+    "description": "Restart button"
+  },
+  "ga_aiGuessing": "AI Guessing: Position {position} is {rank}",
+  "@ga_aiGuessing": {
+    "description": "AI guessing message with placeholders",
+    "placeholders": {
+      "position": {
+        "type": "int"
+      },
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_rule1Title": "1. Dealing",
+  "@ga_rule1Title": {
+    "description": "Rule 1 title"
+  },
+  "ga_rule1Desc": "Each player draws 8 cards from a 52-card deck, arranged face-down from low to high (A=1 lowest, K=13 highest).",
+  "@ga_rule1Desc": {
+    "description": "Rule 1 description"
+  },
+  "ga_rule2Title": "2. Guessing",
+  "@ga_rule2Title": {
+    "description": "Rule 2 title"
+  },
+  "ga_rule2Desc": "Players take turns guessing each other's cards. For example: \"Position 3 is a 7\". Guess the rank only, not the suit.",
+  "@ga_rule2Desc": {
+    "description": "Rule 2 description"
+  },
+  "ga_rule3Title": "3. Correct Guess",
+  "@ga_rule3Title": {
+    "description": "Rule 3 title"
+  },
+  "ga_rule3Desc": "Reveal opponent's card! You can continue guessing, combo +1.",
+  "@ga_rule3Desc": {
+    "description": "Rule 3 description"
+  },
+  "ga_rule4Title": "4. Wrong Guess",
+  "@ga_rule4Title": {
+    "description": "Rule 4 title"
+  },
+  "ga_rule4Desc": "Turn passes to opponent. Your combo resets.",
+  "@ga_rule4Desc": {
+    "description": "Rule 4 description"
+  },
+  "ga_rule5Title": "5. Win Condition",
+  "@ga_rule5Title": {
+    "description": "Rule 5 title"
+  },
+  "ga_rule5Desc": "The player whose cards are all revealed first loses!",
+  "@ga_rule5Desc": {
+    "description": "Rule 5 description"
+  },
+  "ga_winnerPlayer": "You",
+  "@ga_winnerPlayer": {
+    "description": "Winner label for player"
+  },
+  "ga_winnerOpponent": "Opponent",
+  "@ga_winnerOpponent": {
+    "description": "Winner label for opponent"
+  },
+  "ga_aiWrongGuess": "AI guessed wrong!",
+  "@ga_aiWrongGuess": {
+    "description": "AI wrong guess message"
+  },
+  "ga_wrongGuessTitle": "Wrong Guess!",
+  "@ga_wrongGuessTitle": {
+    "description": "Wrong guess title"
+  },
+  "ga_turnToYou": "Your turn now!",
+  "@ga_turnToYou": {
+    "description": "Turn to player message"
+  },
+  "ga_turnToOpponent": "Opponent's turn now.",
+  "@ga_turnToOpponent": {
+    "description": "Turn to opponent message"
+  },
+  "ga_continue": "Continue",
+  "@ga_continue": {
+    "description": "Continue button"
+  },
+  "ga_aiRoundEnd": "AI Round End",
+  "@ga_aiRoundEnd": {
+    "description": "AI round end title"
+  },
+  "ga_aiCorrectCount": "AI guessed correctly {correct}/{total} times",
+  "@ga_aiCorrectCount": {
+    "description": "AI correct guess count",
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_positionLabel": "Position {n}",
+  "@ga_positionLabel": {
+    "description": "Position label with number",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ga_switchTurnHint": "Please hand the device to {name}.\nRemember to hide your cards!",
+  "@ga_switchTurnHint": {
+    "description": "Switch turn hint message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_winnerWins": "{name} Wins!",
+  "@ga_winnerWins": {
+    "description": "Winner wins message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_winnerLoses": "{name} Wins...",
+  "@ga_winnerLoses": {
+    "description": "Opponent wins message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ga_correctGuessesLabel": "Correct Guesses",
+  "@ga_correctGuessesLabel": {
+    "description": "Correct guesses label"
+  },
+  "ga_maxComboLabel": "Max Combo",
+  "@ga_maxComboLabel": {
+    "description": "Max combo label"
+  },
+  "ga_playDurationLabel": "Duration",
+  "@ga_playDurationLabel": {
+    "description": "Play duration label"
+  },
+  "ga_playAgainButton": "Play Again",
+  "@ga_playAgainButton": {
+    "description": "Play again button in game over"
+  },
+  "ga_durationFormat": "{minutes}m {seconds}s",
+  "@ga_durationFormat": {
+    "description": "Duration format",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "seconds": {
+        "type": "int"
+      }
+    }
   },
 
   "game_2048": "2048",
@@ -1021,5 +1313,7 @@
   "db_fieldEffect": "Field Effect",
   "@db_fieldEffect": { "description": "Field effect label" },
   "db_noActiveEffect": "No Active Effect",
-  "@db_noActiveEffect": { "description": "No active effect message" }
+  "@db_noActiveEffect": { "description": "No active effect message" },
+  "comingSoon": "Coming Soon",
+  "@comingSoon": { "description": "Coming soon text" }
 }

@@ -2,44 +2,39 @@ import 'package:flutter/material.dart';
 
 import '../models/yacht_dice_state.dart';
 import '../models/scoring_category.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 
 /// Shows a bottom sheet modal with detailed score breakdown for a player
 void showScoreDetailModal(BuildContext context, PlayerState player) {
-  final isDark = Theme.of(context).brightness == Brightness.dark;
-
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
     backgroundColor: Colors.transparent,
-    builder: (context) => _ScoreDetailContent(player: player, isDark: isDark),
+    builder: (context) => _ScoreDetailContent(player: player),
   );
 }
 
-class _ScoreDetailContent extends StatelessWidget {
+class _ScoreDetailContent extends StatefulWidget {
   final PlayerState player;
-  final bool isDark;
 
-  const _ScoreDetailContent({required this.player, required this.isDark});
+  const _ScoreDetailContent({required this.player});
 
-  Color get backgroundColor =>
-      isDark ? WoodenColors.darkCard : WoodenColors.lightCard;
+  @override
+  State<_ScoreDetailContent> createState() => _ScoreDetailContentState();
+}
 
-  Color get surfaceColor =>
-      isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface;
+class _ScoreDetailContentState extends State<_ScoreDetailContent> {
+  Color get backgroundColor => context.themeCard;
+  Color get surfaceColor => context.themeSurface;
+  Color get textPrimaryColor => context.themeTextPrimary;
+  Color get textSecondaryColor => context.themeTextSecondary;
+  Color get dividerColor => context.themeDivider;
+  Color get accentColor => context.themeAccent;
+  Color get successColor => context.themeSuccess;
 
-  Color get textPrimaryColor =>
-      isDark ? WoodenColors.darkTextPrimary : WoodenColors.lightTextPrimary;
-
-  Color get textSecondaryColor =>
-      isDark ? WoodenColors.darkTextSecondary : WoodenColors.lightTextSecondary;
-
-  Color get dividerColor =>
-      isDark ? WoodenColors.darkDivider : WoodenColors.lightDivider;
-
-  Color get accentColor => WoodenColors.accentAmber;
+  Color get primaryColor => context.themePrimary;
 
   /// Upper section categories in order
   static const List<ScoringCategory> upperCategories = [
@@ -64,7 +59,7 @@ class _ScoreDetailContent extends StatelessWidget {
   /// Calculate upper section sum
   int get upperSum {
     return upperCategories
-        .map((category) => player.scores[category] ?? 0)
+        .map((category) => widget.player.scores[category] ?? 0)
         .reduce((a, b) => a + b);
   }
 
@@ -74,7 +69,7 @@ class _ScoreDetailContent extends StatelessWidget {
   /// Calculate lower section sum
   int get lowerSum {
     return lowerCategories
-        .map((category) => player.scores[category] ?? 0)
+        .map((category) => widget.player.scores[category] ?? 0)
         .reduce((a, b) => a + b);
   }
 
@@ -146,16 +141,9 @@ class _ScoreDetailContent extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: isDark
-                          ? WoodenColors.darkPrimary.withAlpha(60)
-                          : WoodenColors.lightPrimary.withAlpha(30),
+                      color: primaryColor.withAlpha(60),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isDark
-                            ? WoodenColors.darkPrimary
-                            : WoodenColors.lightPrimary,
-                        width: 2,
-                      ),
+                      border: Border.all(color: primaryColor, width: 2),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,13 +157,11 @@ class _ScoreDetailContent extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          player.totalScore.toString(),
+                          widget.player.totalScore.toString(),
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: isDark
-                                ? WoodenColors.darkPrimary
-                                : WoodenColors.lightPrimary,
+                            color: primaryColor,
                           ),
                         ),
                       ],
@@ -207,7 +193,7 @@ class _ScoreDetailContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  player.name,
+                  widget.player.name,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -226,19 +212,15 @@ class _ScoreDetailContent extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: isDark
-                  ? WoodenColors.darkPrimary.withAlpha(60)
-                  : WoodenColors.lightPrimary.withAlpha(40),
+              color: primaryColor.withAlpha(60),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              player.totalScore.toString(),
+              widget.player.totalScore.toString(),
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: isDark
-                    ? WoodenColors.darkPrimary
-                    : WoodenColors.lightPrimary,
+                color: primaryColor,
               ),
             ),
           ),
@@ -251,7 +233,7 @@ class _ScoreDetailContent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: surfaceColor.withAlpha(isDark ? 100 : 80),
+        color: surfaceColor.withAlpha(100),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
@@ -269,7 +251,7 @@ class _ScoreDetailContent extends StatelessWidget {
     required ScoringCategory category,
     required AppLocalizations l10n,
   }) {
-    final score = player.scores[category];
+    final score = widget.player.scores[category];
     final isPlayed = score != null;
 
     return Padding(
@@ -345,11 +327,7 @@ class _ScoreDetailContent extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               if (hasBonus)
-                const Icon(
-                  Icons.check_circle,
-                  size: 16,
-                  color: WoodenColors.lightSuccess,
-                ),
+                Icon(Icons.check_circle, size: 16, color: successColor),
             ],
           ),
           Text(
@@ -357,7 +335,7 @@ class _ScoreDetailContent extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: hasBonus ? WoodenColors.lightSuccess : textSecondaryColor,
+              color: hasBonus ? successColor : textSecondaryColor,
             ),
           ),
         ],

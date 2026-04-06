@@ -361,7 +361,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get darkTheme => 'Dark';
 
   @override
-  String get systemTheme => 'System Default';
+  String get systemTheme => 'Default';
 
   @override
   String get sound => 'Sound';
@@ -470,6 +470,201 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ga_exit => 'Exit';
+
+  @override
+  String get ga_round => 'Round';
+
+  @override
+  String get ga_turn => 'Turn';
+
+  @override
+  String get ga_combo => 'Combo';
+
+  @override
+  String get ga_dealing => 'Dealing cards...';
+
+  @override
+  String get ga_aiThinking => 'AI Thinking...';
+
+  @override
+  String get ga_position => 'Position';
+
+  @override
+  String get ga_yourTurn => 'Your Turn!';
+
+  @override
+  String get ga_opponentTurn => 'Opponent\'s Turn';
+
+  @override
+  String get ga_cardsRemaining => 'Cards Remaining';
+
+  @override
+  String get ga_selectGameMode => 'Select Game Mode';
+
+  @override
+  String get ga_gotIt => 'Got it!';
+
+  @override
+  String ga_playerCards(String name) {
+    return '$name\'s Cards';
+  }
+
+  @override
+  String get ga_yourCards => 'Your Cards';
+
+  @override
+  String get ga_tapToGuess => 'Tap a card to guess';
+
+  @override
+  String ga_positionSelected(int position) {
+    return 'Position $position selected - Choose a number below';
+  }
+
+  @override
+  String get ga_selectNumber => 'Select Number (A-K)';
+
+  @override
+  String ga_guessCorrect(String card) {
+    return 'Correct! $card';
+  }
+
+  @override
+  String ga_guessCorrectCombo(String card, int combo) {
+    return 'Correct! $card Combo x$combo';
+  }
+
+  @override
+  String ga_comboLabel(int n) {
+    return 'Combo x$n';
+  }
+
+  @override
+  String get ga_clearSelection => 'Clear Selection';
+
+  @override
+  String get ga_endTurn => 'End Turn';
+
+  @override
+  String get ga_exitGameTitle => 'Exit Game?';
+
+  @override
+  String get ga_exitGameMessage =>
+      'Are you sure you want to exit? Current progress will be lost.';
+
+  @override
+  String get ga_restartGameTitle => 'Restart?';
+
+  @override
+  String get ga_restartGameMessage =>
+      'Are you sure you want to restart the game?';
+
+  @override
+  String get ga_restart => 'Restart';
+
+  @override
+  String ga_aiGuessing(int position, String rank) {
+    return 'AI Guessing: Position $position is $rank';
+  }
+
+  @override
+  String get ga_rule1Title => '1. Dealing';
+
+  @override
+  String get ga_rule1Desc =>
+      'Each player draws 8 cards from a 52-card deck, arranged face-down from low to high (A=1 lowest, K=13 highest).';
+
+  @override
+  String get ga_rule2Title => '2. Guessing';
+
+  @override
+  String get ga_rule2Desc =>
+      'Players take turns guessing each other\'s cards. For example: \"Position 3 is a 7\". Guess the rank only, not the suit.';
+
+  @override
+  String get ga_rule3Title => '3. Correct Guess';
+
+  @override
+  String get ga_rule3Desc =>
+      'Reveal opponent\'s card! You can continue guessing, combo +1.';
+
+  @override
+  String get ga_rule4Title => '4. Wrong Guess';
+
+  @override
+  String get ga_rule4Desc => 'Turn passes to opponent. Your combo resets.';
+
+  @override
+  String get ga_rule5Title => '5. Win Condition';
+
+  @override
+  String get ga_rule5Desc =>
+      'The player whose cards are all revealed first loses!';
+
+  @override
+  String get ga_winnerPlayer => 'You';
+
+  @override
+  String get ga_winnerOpponent => 'Opponent';
+
+  @override
+  String get ga_aiWrongGuess => 'AI guessed wrong!';
+
+  @override
+  String get ga_wrongGuessTitle => 'Wrong Guess!';
+
+  @override
+  String get ga_turnToYou => 'Your turn now!';
+
+  @override
+  String get ga_turnToOpponent => 'Opponent\'s turn now.';
+
+  @override
+  String get ga_continue => 'Continue';
+
+  @override
+  String get ga_aiRoundEnd => 'AI Round End';
+
+  @override
+  String ga_aiCorrectCount(int correct, int total) {
+    return 'AI guessed correctly $correct/$total times';
+  }
+
+  @override
+  String ga_positionLabel(int n) {
+    return 'Position $n';
+  }
+
+  @override
+  String ga_switchTurnHint(String name) {
+    return 'Please hand the device to $name.\nRemember to hide your cards!';
+  }
+
+  @override
+  String ga_winnerWins(String name) {
+    return '$name Wins!';
+  }
+
+  @override
+  String ga_winnerLoses(String name) {
+    return '$name Wins...';
+  }
+
+  @override
+  String get ga_correctGuessesLabel => 'Correct Guesses';
+
+  @override
+  String get ga_maxComboLabel => 'Max Combo';
+
+  @override
+  String get ga_playDurationLabel => 'Duration';
+
+  @override
+  String get ga_playAgainButton => 'Play Again';
+
+  @override
+  String ga_durationFormat(int minutes, int seconds) {
+    return '${minutes}m ${seconds}s';
+  }
 
   @override
   String get game_2048 => '2048';
@@ -876,4 +1071,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get db_noActiveEffect => 'No Active Effect';
+
+  @override
+  String get comingSoon => 'Coming Soon';
 }

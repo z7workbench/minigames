@@ -9,7 +9,7 @@ import 'components/score_preview_card.dart';
 import 'components/score_detail_modal.dart';
 import 'components/animated_dice.dart';
 import 'components/category_confirmation_dialog.dart';
-import 'package:minigames/ui/theme/wooden_colors.dart';
+import 'package:minigames/ui/theme/theme_colors.dart';
 import 'package:minigames/l10n/generated/app_localizations.dart';
 
 class YachtDiceScreen extends ConsumerStatefulWidget {
@@ -63,11 +63,6 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
 
   /// Show a full-screen player turn indicator
   void _showPlayerTurnIndicator(String playerName) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark
-        ? WoodenColors.darkPrimary
-        : WoodenColors.lightPrimary;
-
     showGeneralDialog(
       context: context,
       barrierDismissible: false,
@@ -85,7 +80,7 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
                   vertical: 32,
                 ),
                 decoration: BoxDecoration(
-                  color: primaryColor,
+                  color: context.themePrimary,
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
@@ -137,7 +132,6 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
   /// Show celebration animation for special combinations
   void _showCombinationCelebration(ScoringCategory category) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     // Get category name and color based on type
     String categoryName;
@@ -282,7 +276,7 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
           ElevatedButton(
             onPressed: () => Navigator.pop(context, 'save_and_exit'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: WoodenColors.accentAmber,
+              backgroundColor: context.themeAccent,
               foregroundColor: Colors.white,
             ),
             child: Text(l10n.yd_saveAndExit),
@@ -361,7 +355,7 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
           ),
         ],
       ),
-      backgroundColor: WoodenColors.accentAmber,
+      backgroundColor: context.themeAccent,
       duration: const Duration(seconds: 2),
       behavior: SnackBarBehavior.floating,
     );
@@ -454,26 +448,13 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
     _isFirstBuild = false;
 
     // Theme-aware colors
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDark
-        ? WoodenColors.darkBackground
-        : WoodenColors.lightBackground;
-    final surfaceColor = isDark
-        ? WoodenColors.darkSurface
-        : WoodenColors.lightSurface;
-    final cardColor = isDark ? WoodenColors.darkCard : WoodenColors.lightCard;
-    final primaryColor = isDark
-        ? WoodenColors.darkPrimary
-        : WoodenColors.lightPrimary;
-    final secondaryColor = isDark
-        ? WoodenColors.darkSecondary
-        : WoodenColors.lightSecondary;
-    final textPrimary = isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-    final textSecondary = isDark
-        ? WoodenColors.darkTextSecondary
-        : WoodenColors.lightTextSecondary;
+    final backgroundColor = context.themeBackground;
+    final surfaceColor = context.themeSurface;
+    final cardColor = context.themeCard;
+    final primaryColor = context.themePrimary;
+    final secondaryColor = context.themeSecondary;
+    final textPrimary = context.themeTextPrimary;
+    final textSecondary = context.themeTextSecondary;
 
     // Check game over
     if (state.isGameOver) {
@@ -514,8 +495,8 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: WoodenColors.accentAmber,
-                  foregroundColor: Colors.white,
+                  backgroundColor: context.themeAccent,
+                  foregroundColor: context.themeOnAccent,
                 ),
                 child: Text(l10n.newGame),
               ),
@@ -572,7 +553,7 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
         appBar: AppBar(
           title: Text(l10n.game_yacht_dice),
           backgroundColor: primaryColor,
-          foregroundColor: Colors.white,
+          foregroundColor: context.themeOnPrimary,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () async {
@@ -648,7 +629,7 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
                     horizontal: 16,
                     vertical: 8,
                   ),
-                  color: WoodenColors.accentAmber.withValues(alpha: 0.9),
+                  color: context.themeAccent.withValues(alpha: 0.9),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -727,7 +708,7 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
                   child: ElevatedButton(
                     onPressed: _performRoll,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: WoodenColors.accentAmber,
+                      backgroundColor: context.themeAccent,
                       foregroundColor: Colors.white,
                       minimumSize: const Size(double.infinity, 48),
                     ),
@@ -790,11 +771,11 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
                           ),
                           decoration: BoxDecoration(
                             color: isCurrent
-                                ? WoodenColors.accentAmber.withAlpha(50)
+                                ? context.themeAccent.withAlpha(50)
                                 : null,
                             borderRadius: BorderRadius.circular(4),
                             border: isCurrent
-                                ? Border.all(color: WoodenColors.accentAmber)
+                                ? Border.all(color: context.themeAccent)
                                 : null,
                           ),
                           child: Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minigames/ui/theme/wooden_colors.dart';
+import 'package:minigames/ui/theme/theme_colors.dart';
 
 class NumberSelector extends StatelessWidget {
   final int number;
@@ -15,19 +15,13 @@ class NumberSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Container(
       margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: isSelected
-            ? WoodenColors.accentAmber
-            : (isDark ? WoodenColors.darkPrimary : WoodenColors.lightPrimary),
+        color: isSelected ? context.themeAccent : context.themePrimary,
         shape: BoxShape.circle,
         border: Border.all(
-          color: isSelected
-              ? WoodenColors.accentAmber
-              : (isDark ? WoodenColors.darkBorder : Colors.transparent),
+          color: isSelected ? context.themeAccent : context.themeBorder,
           width: 2,
         ),
       ),
@@ -43,9 +37,7 @@ class NumberSelector extends StatelessWidget {
               child: Text(
                 number.toString(),
                 style: TextStyle(
-                  color: isSelected
-                      ? Colors.black
-                      : (isDark ? WoodenColors.darkOnPrimary : Colors.white),
+                  color: isSelected ? Colors.black : context.themeOnPrimary,
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
+import '../../../ui/theme/theme_provider.dart';
 import '../models/twenty48_tile.dart';
 
 /// A widget that displays a single 2048 tile with animations.
@@ -66,8 +67,17 @@ class _TileWidgetState extends State<TileWidget>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final tileColor = _getTileColor(widget.tile.value, isDark);
-    final textColor = _getTextColor(widget.tile.value, isDark);
+    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
+    final tileColor = _getTileColor(
+      widget.tile.value,
+      isDark,
+      context.colorSchemeType,
+    );
+    final textColor = _getTextColor(
+      widget.tile.value,
+      isDark,
+      context.colorSchemeType,
+    );
 
     return ScaleTransition(
       scale: _scaleAnimation,
@@ -84,9 +94,7 @@ class _TileWidgetState extends State<TileWidget>
           ),
           boxShadow: [
             BoxShadow(
-              color: isDark
-                  ? WoodenColors.darkShadow.withAlpha(80)
-                  : WoodenColors.lightShadow.withAlpha(60),
+              color: themeColors.shadow.withAlpha(isDark ? 80 : 60),
               blurRadius: 3,
               offset: const Offset(0, 1),
             ),
@@ -106,20 +114,70 @@ class _TileWidgetState extends State<TileWidget>
     );
   }
 
-  Color _getTileColor(int value, bool isDark) {
-    // Color gradient based on tile value
-    final colors = isDark ? _darkTileColors : _lightTileColors;
-    return colors[value] ??
-        (isDark ? const Color(0xFF3B5998) : const Color(0xFF3B5998));
+  Color _getTileColor(int value, bool isDark, ColorSchemeType schemeType) {
+    // Color gradient based on tile value and theme
+    final colors = _getTileColorsForScheme(value, isDark, schemeType);
+    return colors ?? defaultTileColor(isDark, schemeType);
   }
 
-  Color _getTextColor(int value, bool isDark) {
+  Color _getTextColor(int value, bool isDark, ColorSchemeType schemeType) {
     // Higher value tiles have lighter text
     if (value >= 8) {
-      return Colors.white;
+      return isDark ? Colors.white : const Color(0xFF311B92);
     }
     // Low value tiles: dark text for light mode, light text for dark mode
-    return isDark ? const Color(0xFFE0D8CF) : const Color(0xFF776E65);
+    return isDark ? const Color(0xFFE8EAF6) : const Color(0xFF311B92);
+  }
+
+  Color? _getTileColorsForScheme(
+    int value,
+    bool isDark,
+    ColorSchemeType schemeType,
+  ) {
+    if (schemeType == ColorSchemeType.starlight) {
+      // Starlight theme - cooler, bluer tones for 2048 tiles
+      final starlightColors = <int, Color>{
+        2: Color(0xFFC5CAE9),
+        4: Color(0xFF9FA8DA),
+        8: Color(0xFF7986CB),
+        16: Color(0xFF5C6BC0),
+        32: Color(0xFF3F51B5),
+        64: Color(0xFF303F9F),
+        128: Color(0xFF5C6BC0),
+        256: Color(0xFF536DFE),
+        512: Color(0xFF448AFF),
+        1024: Color(0xFF448AFF),
+        2048: Color(0xFF2962FF),
+        4096: Color(0xFF283593),
+        8192: Color(0xFF1A237E),
+      };
+      return starlightColors[value];
+    } else {
+      // Wooden theme - warmer, gold/amber tones (original 2048 colors)
+      final woodenColors = <int, Color>{
+        2: Color(0xFFEEE4DA),
+        4: Color(0xFFEDE0C8),
+        8: Color(0xFFF2B179),
+        16: Color(0xFFF59563),
+        32: Color(0xFFF67C5F),
+        64: Color(0xFFF65E3B),
+        128: Color(0xFFEDCF72),
+        256: Color(0xFFEDCC61),
+        512: Color(0xFFEDC850),
+        1024: Color(0xFFEDC53F),
+        2048: Color(0xFFEDC22E),
+        4096: Color(0xFF3C3A32),
+        8192: Color(0xFF3C3A32),
+      };
+      return woodenColors[value];
+    }
+  }
+
+  Color defaultTileColor(bool isDark, ColorSchemeType schemeType) {
+    if (schemeType == ColorSchemeType.starlight) {
+      return isDark ? const Color(0xFF303F9F) : const Color(0xFF5C6BC0);
+    }
+    return const Color(0xFF3B5998);
   }
 
   double _getFontSize(int value) {
@@ -127,36 +185,4 @@ class _TileWidgetState extends State<TileWidget>
     if (value < 1000) return widget.size * 0.4;
     return widget.size * 0.35;
   }
-
-  static const Map<int, Color> _lightTileColors = {
-    2: Color(0xFFEEE4DA),
-    4: Color(0xFFEDE0C8),
-    8: Color(0xFFF2B179),
-    16: Color(0xFFF59563),
-    32: Color(0xFFF67C5F),
-    64: Color(0xFFF65E3B),
-    128: Color(0xFFEDCF72),
-    256: Color(0xFFEDCC61),
-    512: Color(0xFFEDC850),
-    1024: Color(0xFFEDC53F),
-    2048: Color(0xFFEDC22E),
-    4096: Color(0xFF3C3A32),
-    8192: Color(0xFF3C3A32),
-  };
-
-  static const Map<int, Color> _darkTileColors = {
-    2: Color(0xFF6B6359),
-    4: Color(0xFF6D6557),
-    8: Color(0xFFE09A50),
-    16: Color(0xFFD98048),
-    32: Color(0xFFD66A48),
-    64: Color(0xFFD64A28),
-    128: Color(0xFFC9A848),
-    256: Color(0xFFC99E38),
-    512: Color(0xFFC99530),
-    1024: Color(0xFFC98C28),
-    2048: Color(0xFFC98220),
-    4096: Color(0xFF2C2A25),
-    8192: Color(0xFF2C2A25),
-  };
 }

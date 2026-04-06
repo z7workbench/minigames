@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
-import '../../../ui/theme/wooden_colors.dart';
+import '../../../ui/theme/theme_colors.dart';
 
 /// A dialog that shows the game result (win or lose)
 class GameResultDialog extends StatelessWidget {
@@ -23,13 +23,10 @@ class GameResultDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: isDark
-          ? WoodenColors.darkSurface
-          : WoodenColors.lightSurface,
+      backgroundColor: context.themeSurface,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -39,7 +36,7 @@ class GameResultDialog extends StatelessWidget {
             Icon(
               isWin ? Icons.check_circle : Icons.cancel,
               size: 64,
-              color: isWin ? Colors.green : Colors.red,
+              color: isWin ? context.themeSuccess : context.themeError,
             ),
             const SizedBox(height: 16),
             // Result text
@@ -68,8 +65,8 @@ class GameResultDialog extends StatelessWidget {
                 ElevatedButton(
                   onPressed: onPlayAgain,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: WoodenColors.accentAmber,
-                    foregroundColor: Colors.white,
+                    backgroundColor: context.themeAccent,
+                    foregroundColor: context.themeOnAccent,
                   ),
                   child: Text(l10n.newGame),
                 ),
