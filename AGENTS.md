@@ -104,6 +104,38 @@ lib/
 │       ├── twenty48_provider.dart     # Riverpod Provider
 │       └── twenty48_screen.dart       # 主游戏界面
 │
+│   └── hearts/                # 红心大战游戏
+│       ├── models/            # 数据模型
+│       │   ├── hearts_state.dart       # 游戏状态
+│       │   ├── hearts_player.dart      # 玩家模型
+│       │   ├── hearts_card.dart        # 卡牌模型
+│       │   ├── trick.dart              # 一轮牌
+│       │   └── enums.dart              # 游戏枚举
+│       ├── components/        # UI组件
+│       │   ├── card_widget.dart        # 单张卡牌显示
+│       │   ├── hand_widget.dart        # 手牌显示(带高亮)
+│       │   ├── trick_widget.dart       # 当前一轮牌显示
+│       │   ├── player_info_widget.dart # 玩家信息显示
+│       │   ├── pass_phase_widget.dart  # 交换手牌界面
+│       │   └── scoreboard_widget.dart  # 计分板
+│       ├── logic/             # 游戏逻辑
+│       │   ├── hearts_rules.dart       # 规则验证
+│       │   └── hearts_scoring.dart     # 计分逻辑
+│       ├── ai/                # AI系统
+│       │   ├── hearts_ai.dart          # AI基类
+│       │   ├── easy_ai.dart            # 简单难度
+│       │   ├── medium_ai.dart          # 中等难度
+│       │   ├── hard_ai.dart            # 困难难度
+│       │   ├── ai_decision.dart        # AI决策模型
+│       │   └── card_tracker.dart       # 卡牌追踪器
+│       ├── utils/             # 工具类
+│       │   ├── deck_utils.dart         # 牌堆工具
+│       │   └── card_utils.dart         # 卡牌工具
+│       ├── screens/           # 游戏页面
+│       │   └── hearts_start_screen.dart  # 开始页面
+│       ├── hearts_provider.dart        # Riverpod Provider
+│       └── hearts_screen.dart          # 主游戏界面
+│
 ├── ui/                        # 上层：UI层
 │   ├── screens/               # 页面
 │   │   ├── home_screen.dart
@@ -483,6 +515,31 @@ AI决策流程:
 - **Easy**: 完全随机选择位置和点数
 - **Medium**: 基于位置上下文推断（相邻已翻开牌提供边界）
 - **Hard**: 完整概率分布计算 + 剩余牌统计 + 位置邻接分析
+
+### 红心大战AI
+
+AI位于`lib/games/hearts/ai/`:
+- `hearts_ai.dart` - AI基类 + CardTracker（卡牌追踪器）
+- `easy_ai.dart` - 简单难度（避免拿分）
+- `medium_ai.dart` - 中等难度（策略出牌）
+- `hard_ai.dart` - 困难难度（最优策略 + shoot moon判断）
+
+AI决策流程:
+1. 分析当前trick状态和已出的牌
+2. 追踪已出现的牌（CardTracker记录每轮trick）
+3. 根据手牌和规则选择最优出牌
+4. 决策是否尝试shoot moon（全收26分）
+
+**核心机制:**
+- **Pass阶段**: 选择传递的高风险牌（如Q♠、A♠、K♠）
+- **出牌策略**: 
+  - Easy: 简单避分，优先出小牌
+  - Medium: 策略性出牌，控制trick走向
+  - Hard: 深度分析，考虑shoot moon和反shoot moon
+- **Shoot Moon**: AI会判断是否有能力全收26分，并调整策略
+- **卡牌追踪**: 记录每张已出牌的位置和时间，用于推断对手手牌
+
+**AI延迟**: 固定1秒决策延迟，保证流畅的游戏体验
 
 ## 常见问题
 

@@ -62,18 +62,22 @@ extension ThemeColorsExtension on BuildContext {
 
   /// Get theme-aware accent color (amber for wooden, star for starlight)
   Color get themeAccent {
+    final isDark = isDarkMode;
     if (colorSchemeType == ColorSchemeType.starlight) {
       return StarlightColors.accentStar;
     }
-    return WoodenColors.accentAmber;
+    // Wooden: use bronze in light mode for better contrast, amber in dark mode
+    return isDark ? WoodenColors.accentAmber : WoodenColors.accentBronze;
   }
 
   /// Get theme-aware secondary accent color
   Color get themeAccentSecondary {
+    final isDark = isDarkMode;
     if (colorSchemeType == ColorSchemeType.starlight) {
       return StarlightColors.accentNebula;
     }
-    return WoodenColors.accentCopper;
+    // Wooden: use copper in light mode, amber secondary in dark mode
+    return isDark ? WoodenColors.accentCopper : WoodenColors.accentCopper;
   }
 
   /// Get success color (theme-aware)
@@ -124,6 +128,26 @@ extension ThemeColorsExtension on BuildContext {
       return isDark ? Colors.white : StarlightColors.darkOnPrimary;
     }
     return Colors.black;
+  }
+
+  /// Get theme-aware selection color for chips/buttons (with good contrast)
+  Color get themeSelectionColor {
+    final isDark = isDarkMode;
+    if (colorSchemeType == ColorSchemeType.starlight) {
+      // Starlight: use bright purple for selection
+      return isDark
+          ? StarlightColors.darkPrimary.withAlpha(200) // Brighter in dark mode
+          : StarlightColors.lightPrimary.withAlpha(
+              150,
+            ); // Visible in light mode
+    } else {
+      // Wooden: use amber/copper for selection
+      return isDark
+          ? WoodenColors.accentAmber.withAlpha(200) // Bright amber in dark mode
+          : WoodenColors.accentCopper.withAlpha(
+              180,
+            ); // Copper in light mode for contrast
+    }
   }
 }
 

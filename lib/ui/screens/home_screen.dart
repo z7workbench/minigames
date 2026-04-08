@@ -13,6 +13,7 @@ import '../../games/guess_arrangement/screens/start_screen.dart';
 import '../../games/twenty48/screens/twenty48_start_screen.dart';
 import '../../games/dice_battle/screens/start_screen.dart' as dice_battle;
 import '../../games/mancala/screens/mancala_start_screen.dart';
+import '../../games/hearts/screens/hearts_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -69,6 +70,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           MaterialPageRoute(builder: (context) => const MancalaStartScreen()),
         );
         break;
+      case GameType.hearts:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HeartsStartScreen()),
+        );
+        break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -102,6 +109,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.game_dice_battle;
       case GameType.mancala:
         return l10n.game_mancala;
+      case GameType.hearts:
+        return l10n.hearts_game_hearts;
       default:
         return gameType.displayName;
     }
@@ -122,6 +131,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.db_gameDescription;
       case GameType.mancala:
         return l10n.mc_gameDescription;
+      case GameType.hearts:
+        return l10n.hearts_description;
       default:
         return '${gameType.displayName} - Coming Soon!';
     }
@@ -129,7 +140,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   /// Check if a game is a placeholder
   bool _isPlaceholder(GameType gameType) {
-    return gameType.index >= 6; // First 6 games are real, rest are placeholders
+    return gameType.index >=
+        7; // First 7 games are real (0-6), rest are placeholders
   }
 
   @override

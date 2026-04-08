@@ -1044,5 +1044,198 @@ class AppLocalizationsZh extends AppLocalizations {
   String get db_noActiveEffect => '无场地效果';
 
   @override
+  String get hearts_game_hearts => '红心大战';
+
+  @override
+  String get hearts_description => '避开红心和黑桃皇后！';
+
+  @override
+  String get hearts_howToPlay => '游戏规则';
+
+  @override
+  String get hearts_startGame => '开始游戏';
+
+  @override
+  String get hearts_playAgain => '再来一局';
+
+  @override
+  String get hearts_dealing => '发牌中...';
+
+  @override
+  String get hearts_passing => '传牌阶段';
+
+  @override
+  String get hearts_playing => '游戏中';
+
+  @override
+  String get hearts_roundEnd => '本局结束';
+
+  @override
+  String get hearts_gameOver => '游戏结束';
+
+  @override
+  String get hearts_aiThinking => 'AI思考中...';
+
+  @override
+  String get hearts_passDirection => '传牌方向';
+
+  @override
+  String get hearts_passLeft => '向左传';
+
+  @override
+  String get hearts_passRight => '向右传';
+
+  @override
+  String get hearts_passAcross => '向对面传';
+
+  @override
+  String get hearts_passHold => '不传牌';
+
+  @override
+  String hearts_selectCardsToPass(int n) {
+    return '选择$n张牌传递';
+  }
+
+  @override
+  String hearts_passTimer(int s) {
+    return '剩余时间: $s秒';
+  }
+
+  @override
+  String get hearts_confirmPass => '确认传牌';
+
+  @override
+  String get hearts_timerUnlimited => '无限时';
+
+  @override
+  String get hearts_timer15s => '15秒';
+
+  @override
+  String get hearts_timer20s => '20秒';
+
+  @override
+  String get hearts_timer30s => '30秒';
+
+  @override
+  String get hearts_yourTurn => '你的回合！';
+
+  @override
+  String get hearts_waitTurn => '等待对手...';
+
+  @override
+  String get hearts_heartsBroken => '红心已破！';
+
+  @override
+  String get hearts_firstTrick => '第一墩 - 梅花2先出';
+
+  @override
+  String hearts_trickWon(String player) {
+    return '$player赢得此墩';
+  }
+
+  @override
+  String get hearts_roundScores => '本局得分';
+
+  @override
+  String get hearts_totalScores => '总得分';
+
+  @override
+  String get hearts_pointsTaken => '得分';
+
+  @override
+  String hearts_heartsCount(int n) {
+    return '红心: $n张';
+  }
+
+  @override
+  String get hearts_shootMoon => '全收！';
+
+  @override
+  String get hearts_shootMoonSuccess => '成功全收！';
+
+  @override
+  String get hearts_announceMoonOption => '声明全收意图';
+
+  @override
+  String get hearts_hideMoonOption => '隐藏全收意图';
+
+  @override
+  String hearts_player(int n) {
+    return '玩家$n';
+  }
+
+  @override
+  String get hearts_you => '你';
+
+  @override
+  String get hearts_winner => '获胜者';
+
+  @override
+  String get hearts_finalResults => '最终结果';
+
+  @override
+  String get hearts_rule1Title => '1. 目标';
+
+  @override
+  String get hearts_rule1Desc => '避开红心（每张♥=1分）和黑桃皇后（♠Q=13分）。得分最低者获胜！';
+
+  @override
+  String get hearts_rule2Title => '2. 传牌';
+
+  @override
+  String get hearts_rule2Desc => '每局开始前传3张牌：左→右→对面→不传，每4局循环一次。';
+
+  @override
+  String get hearts_rule3Title => '3. 出牌';
+
+  @override
+  String get hearts_rule3Desc => '拥有梅花2的玩家先出。必须跟花色（如有）。红心未破前不能先出红心。';
+
+  @override
+  String get hearts_rule4Title => '4. 计分';
+
+  @override
+  String get hearts_rule4Desc => '收集全部14张罚分牌=全收（你得0分，其他各得26分）。任一玩家达到100分时游戏结束。';
+
+  @override
+  String get hearts_rule5Title => '5. 胜利';
+
+  @override
+  String get hearts_rule5Desc => '游戏结束时总得分最低者获胜！';
+
+  @override
+  String get hearts_resume => '继续';
+
+  @override
+  String get hearts_saveGame => '保存游戏';
+
+  @override
+  String get hearts_loadGame => '加载游戏';
+
+  @override
+  String get hearts_newGame => '新游戏';
+
+  @override
+  String get hearts_exitGame => '退出';
+
+  @override
+  String get hearts_aiDifficulty => 'AI难度';
+
+  @override
+  String get hearts_randomPosition => '随机玩家位置';
+
+  @override
+  String get hearts_passTimerSetting => '传牌计时';
+
+  @override
+  String get hearts_passComplete => '传牌完成';
+
+  @override
+  String get hearts_receivedCards => '你收到了这些牌：';
+
+  @override
+  String get hearts_continuePlaying => '继续';
+
+  @override
   String get comingSoon => '即将推出';
 }

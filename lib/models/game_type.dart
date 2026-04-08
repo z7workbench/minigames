@@ -9,7 +9,7 @@ enum GameType {
   twenty48,
   diceBattle,
   mancala,
-  placeholder7,
+  hearts,
   placeholder8,
   placeholder9,
   placeholder10,
@@ -33,8 +33,8 @@ extension GameTypeExtension on GameType {
         return 'Dice Battle';
       case GameType.mancala:
         return 'Mancala';
-      case GameType.placeholder7:
-        return 'Game 7';
+      case GameType.hearts:
+        return 'Hearts';
       case GameType.placeholder8:
         return 'Game 8';
       case GameType.placeholder9:
@@ -63,8 +63,8 @@ extension GameTypeExtension on GameType {
         return Icons.sports_mma;
       case GameType.mancala:
         return Icons.grain;
-      case GameType.placeholder7:
-        return Icons.games;
+      case GameType.hearts:
+        return Icons.favorite;
       case GameType.placeholder8:
         return Icons.videogame_asset;
       case GameType.placeholder9:
@@ -74,7 +74,7 @@ extension GameTypeExtension on GameType {
       case GameType.placeholder11:
         return Icons.toys;
       case GameType.placeholder12:
-        return Icons.widgets;
+        return Icons.games;
     }
   }
 
@@ -93,8 +93,8 @@ extension GameTypeExtension on GameType {
         return '/dice-battle';
       case GameType.mancala:
         return '/mancala';
-      case GameType.placeholder7:
-        return '/game-7';
+      case GameType.hearts:
+        return '/hearts';
       case GameType.placeholder8:
         return '/game-8';
       case GameType.placeholder9:

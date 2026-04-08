@@ -2042,6 +2042,372 @@ abstract class AppLocalizations {
   /// **'No Active Effect'**
   String get db_noActiveEffect;
 
+  /// Hearts game title
+  ///
+  /// In en, this message translates to:
+  /// **'Hearts'**
+  String get hearts_game_hearts;
+
+  /// Hearts game description
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid hearts and Queen of Spades!'**
+  String get hearts_description;
+
+  /// How to play button
+  ///
+  /// In en, this message translates to:
+  /// **'How to Play'**
+  String get hearts_howToPlay;
+
+  /// Start game button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Game'**
+  String get hearts_startGame;
+
+  /// Play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get hearts_playAgain;
+
+  /// Dealing cards message
+  ///
+  /// In en, this message translates to:
+  /// **'Dealing cards...'**
+  String get hearts_dealing;
+
+  /// Pass phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Pass Phase'**
+  String get hearts_passing;
+
+  /// Playing status
+  ///
+  /// In en, this message translates to:
+  /// **'Playing'**
+  String get hearts_playing;
+
+  /// Round end label
+  ///
+  /// In en, this message translates to:
+  /// **'Round End'**
+  String get hearts_roundEnd;
+
+  /// Game over label
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over'**
+  String get hearts_gameOver;
+
+  /// AI thinking message
+  ///
+  /// In en, this message translates to:
+  /// **'AI is thinking...'**
+  String get hearts_aiThinking;
+
+  /// Pass direction label
+  ///
+  /// In en, this message translates to:
+  /// **'Pass Direction'**
+  String get hearts_passDirection;
+
+  /// Pass left direction
+  ///
+  /// In en, this message translates to:
+  /// **'Pass Left'**
+  String get hearts_passLeft;
+
+  /// Pass right direction
+  ///
+  /// In en, this message translates to:
+  /// **'Pass Right'**
+  String get hearts_passRight;
+
+  /// Pass across direction
+  ///
+  /// In en, this message translates to:
+  /// **'Pass Across'**
+  String get hearts_passAcross;
+
+  /// Hold (no pass) option
+  ///
+  /// In en, this message translates to:
+  /// **'Hold (No Pass)'**
+  String get hearts_passHold;
+
+  /// Select cards to pass instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Select {n} cards to pass'**
+  String hearts_selectCardsToPass(int n);
+
+  /// Pass timer display
+  ///
+  /// In en, this message translates to:
+  /// **'Time remaining: {s}s'**
+  String hearts_passTimer(int s);
+
+  /// Confirm pass button
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Pass'**
+  String get hearts_confirmPass;
+
+  /// Unlimited timer option
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited'**
+  String get hearts_timerUnlimited;
+
+  /// 15 second timer option
+  ///
+  /// In en, this message translates to:
+  /// **'15 seconds'**
+  String get hearts_timer15s;
+
+  /// 20 second timer option
+  ///
+  /// In en, this message translates to:
+  /// **'20 seconds'**
+  String get hearts_timer20s;
+
+  /// 30 second timer option
+  ///
+  /// In en, this message translates to:
+  /// **'30 seconds'**
+  String get hearts_timer30s;
+
+  /// Your turn message
+  ///
+  /// In en, this message translates to:
+  /// **'Your turn!'**
+  String get hearts_yourTurn;
+
+  /// Waiting for opponent message
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for opponent...'**
+  String get hearts_waitTurn;
+
+  /// Hearts broken message
+  ///
+  /// In en, this message translates to:
+  /// **'Hearts Broken!'**
+  String get hearts_heartsBroken;
+
+  /// First trick instruction
+  ///
+  /// In en, this message translates to:
+  /// **'First trick - 2♣ leads'**
+  String get hearts_firstTrick;
+
+  /// Trick won message
+  ///
+  /// In en, this message translates to:
+  /// **'Trick won by {player}'**
+  String hearts_trickWon(String player);
+
+  /// Round scores label
+  ///
+  /// In en, this message translates to:
+  /// **'Round Scores'**
+  String get hearts_roundScores;
+
+  /// Total scores label
+  ///
+  /// In en, this message translates to:
+  /// **'Total Scores'**
+  String get hearts_totalScores;
+
+  /// Points taken label
+  ///
+  /// In en, this message translates to:
+  /// **'Points taken'**
+  String get hearts_pointsTaken;
+
+  /// Hearts count display
+  ///
+  /// In en, this message translates to:
+  /// **'Hearts: {n}'**
+  String hearts_heartsCount(int n);
+
+  /// Shoot the moon message
+  ///
+  /// In en, this message translates to:
+  /// **'Shoot the Moon!'**
+  String get hearts_shootMoon;
+
+  /// Shoot moon success message
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully shot the moon!'**
+  String get hearts_shootMoonSuccess;
+
+  /// Announce moon option
+  ///
+  /// In en, this message translates to:
+  /// **'Announce moon attempt'**
+  String get hearts_announceMoonOption;
+
+  /// Hide moon option
+  ///
+  /// In en, this message translates to:
+  /// **'Hide moon attempt'**
+  String get hearts_hideMoonOption;
+
+  /// Player number with placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Player {n}'**
+  String hearts_player(int n);
+
+  /// Player you label
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get hearts_you;
+
+  /// Winner label
+  ///
+  /// In en, this message translates to:
+  /// **'Winner'**
+  String get hearts_winner;
+
+  /// Final results label
+  ///
+  /// In en, this message translates to:
+  /// **'Final Results'**
+  String get hearts_finalResults;
+
+  /// Rule 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'1. Goal'**
+  String get hearts_rule1Title;
+
+  /// Rule 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid collecting hearts (♥ = 1 point each) and Queen of Spades (♠Q = 13 points). Lowest score wins!'**
+  String get hearts_rule1Desc;
+
+  /// Rule 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'2. Passing'**
+  String get hearts_rule2Title;
+
+  /// Rule 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Before each round, pass 3 cards: left→right→across→hold, cycling every 4 rounds.'**
+  String get hearts_rule2Desc;
+
+  /// Rule 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'3. Playing'**
+  String get hearts_rule3Title;
+
+  /// Rule 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'Player with 2♣ leads first trick. Must follow suit if possible. Hearts can\'t lead until \"broken\".'**
+  String get hearts_rule3Desc;
+
+  /// Rule 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'4. Scoring'**
+  String get hearts_rule4Title;
+
+  /// Rule 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'Collect all 14 penalty cards = Shoot the Moon (you get 0, others get 26). Game ends at 100 points.'**
+  String get hearts_rule4Desc;
+
+  /// Rule 5 title
+  ///
+  /// In en, this message translates to:
+  /// **'5. Winning'**
+  String get hearts_rule5Title;
+
+  /// Rule 5 description
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest total score wins when game ends!'**
+  String get hearts_rule5Desc;
+
+  /// Resume button
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get hearts_resume;
+
+  /// Save game button
+  ///
+  /// In en, this message translates to:
+  /// **'Save Game'**
+  String get hearts_saveGame;
+
+  /// Load game button
+  ///
+  /// In en, this message translates to:
+  /// **'Load Game'**
+  String get hearts_loadGame;
+
+  /// New game button
+  ///
+  /// In en, this message translates to:
+  /// **'New Game'**
+  String get hearts_newGame;
+
+  /// Exit button
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get hearts_exitGame;
+
+  /// AI difficulty setting
+  ///
+  /// In en, this message translates to:
+  /// **'AI Difficulty'**
+  String get hearts_aiDifficulty;
+
+  /// Random position setting
+  ///
+  /// In en, this message translates to:
+  /// **'Random player position'**
+  String get hearts_randomPosition;
+
+  /// Pass timer setting
+  ///
+  /// In en, this message translates to:
+  /// **'Pass timer'**
+  String get hearts_passTimerSetting;
+
+  /// Pass complete dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Pass Complete'**
+  String get hearts_passComplete;
+
+  /// Received cards dialog message
+  ///
+  /// In en, this message translates to:
+  /// **'You received these cards:'**
+  String get hearts_receivedCards;
+
+  /// Continue button after showing received cards
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get hearts_continuePlaying;
+
   /// Coming soon text
   ///
   /// In en, this message translates to:

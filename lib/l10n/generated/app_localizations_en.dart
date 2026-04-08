@@ -1073,5 +1073,202 @@ class AppLocalizationsEn extends AppLocalizations {
   String get db_noActiveEffect => 'No Active Effect';
 
   @override
+  String get hearts_game_hearts => 'Hearts';
+
+  @override
+  String get hearts_description => 'Avoid hearts and Queen of Spades!';
+
+  @override
+  String get hearts_howToPlay => 'How to Play';
+
+  @override
+  String get hearts_startGame => 'Start Game';
+
+  @override
+  String get hearts_playAgain => 'Play Again';
+
+  @override
+  String get hearts_dealing => 'Dealing cards...';
+
+  @override
+  String get hearts_passing => 'Pass Phase';
+
+  @override
+  String get hearts_playing => 'Playing';
+
+  @override
+  String get hearts_roundEnd => 'Round End';
+
+  @override
+  String get hearts_gameOver => 'Game Over';
+
+  @override
+  String get hearts_aiThinking => 'AI is thinking...';
+
+  @override
+  String get hearts_passDirection => 'Pass Direction';
+
+  @override
+  String get hearts_passLeft => 'Pass Left';
+
+  @override
+  String get hearts_passRight => 'Pass Right';
+
+  @override
+  String get hearts_passAcross => 'Pass Across';
+
+  @override
+  String get hearts_passHold => 'Hold (No Pass)';
+
+  @override
+  String hearts_selectCardsToPass(int n) {
+    return 'Select $n cards to pass';
+  }
+
+  @override
+  String hearts_passTimer(int s) {
+    return 'Time remaining: ${s}s';
+  }
+
+  @override
+  String get hearts_confirmPass => 'Confirm Pass';
+
+  @override
+  String get hearts_timerUnlimited => 'Unlimited';
+
+  @override
+  String get hearts_timer15s => '15 seconds';
+
+  @override
+  String get hearts_timer20s => '20 seconds';
+
+  @override
+  String get hearts_timer30s => '30 seconds';
+
+  @override
+  String get hearts_yourTurn => 'Your turn!';
+
+  @override
+  String get hearts_waitTurn => 'Waiting for opponent...';
+
+  @override
+  String get hearts_heartsBroken => 'Hearts Broken!';
+
+  @override
+  String get hearts_firstTrick => 'First trick - 2♣ leads';
+
+  @override
+  String hearts_trickWon(String player) {
+    return 'Trick won by $player';
+  }
+
+  @override
+  String get hearts_roundScores => 'Round Scores';
+
+  @override
+  String get hearts_totalScores => 'Total Scores';
+
+  @override
+  String get hearts_pointsTaken => 'Points taken';
+
+  @override
+  String hearts_heartsCount(int n) {
+    return 'Hearts: $n';
+  }
+
+  @override
+  String get hearts_shootMoon => 'Shoot the Moon!';
+
+  @override
+  String get hearts_shootMoonSuccess => 'Successfully shot the moon!';
+
+  @override
+  String get hearts_announceMoonOption => 'Announce moon attempt';
+
+  @override
+  String get hearts_hideMoonOption => 'Hide moon attempt';
+
+  @override
+  String hearts_player(int n) {
+    return 'Player $n';
+  }
+
+  @override
+  String get hearts_you => 'You';
+
+  @override
+  String get hearts_winner => 'Winner';
+
+  @override
+  String get hearts_finalResults => 'Final Results';
+
+  @override
+  String get hearts_rule1Title => '1. Goal';
+
+  @override
+  String get hearts_rule1Desc =>
+      'Avoid collecting hearts (♥ = 1 point each) and Queen of Spades (♠Q = 13 points). Lowest score wins!';
+
+  @override
+  String get hearts_rule2Title => '2. Passing';
+
+  @override
+  String get hearts_rule2Desc =>
+      'Before each round, pass 3 cards: left→right→across→hold, cycling every 4 rounds.';
+
+  @override
+  String get hearts_rule3Title => '3. Playing';
+
+  @override
+  String get hearts_rule3Desc =>
+      'Player with 2♣ leads first trick. Must follow suit if possible. Hearts can\'t lead until \"broken\".';
+
+  @override
+  String get hearts_rule4Title => '4. Scoring';
+
+  @override
+  String get hearts_rule4Desc =>
+      'Collect all 14 penalty cards = Shoot the Moon (you get 0, others get 26). Game ends at 100 points.';
+
+  @override
+  String get hearts_rule5Title => '5. Winning';
+
+  @override
+  String get hearts_rule5Desc => 'Lowest total score wins when game ends!';
+
+  @override
+  String get hearts_resume => 'Resume';
+
+  @override
+  String get hearts_saveGame => 'Save Game';
+
+  @override
+  String get hearts_loadGame => 'Load Game';
+
+  @override
+  String get hearts_newGame => 'New Game';
+
+  @override
+  String get hearts_exitGame => 'Exit';
+
+  @override
+  String get hearts_aiDifficulty => 'AI Difficulty';
+
+  @override
+  String get hearts_randomPosition => 'Random player position';
+
+  @override
+  String get hearts_passTimerSetting => 'Pass timer';
+
+  @override
+  String get hearts_passComplete => 'Pass Complete';
+
+  @override
+  String get hearts_receivedCards => 'You received these cards:';
+
+  @override
+  String get hearts_continuePlaying => 'Continue';
+
+  @override
   String get comingSoon => 'Coming Soon';
 }
