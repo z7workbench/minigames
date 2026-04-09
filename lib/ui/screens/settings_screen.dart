@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../providers/settings_provider.dart';
 import '../../ui/theme/theme_colors.dart';
@@ -587,6 +588,11 @@ class _AboutSetting extends StatelessWidget {
 
   const _AboutSetting(this.context);
 
+  Future<String> _getVersion() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -627,11 +633,17 @@ class _AboutSetting extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    '${l10n.version} 4.0.0',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: context.themeTextSecondary,
-                    ),
+                  FutureBuilder<String>(
+                    future: _getVersion(),
+                    builder: (context, snapshot) {
+                      final version = snapshot.data ?? '...';
+                      return Text(
+                        '${l10n.version} $version',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: context.themeTextSecondary,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
