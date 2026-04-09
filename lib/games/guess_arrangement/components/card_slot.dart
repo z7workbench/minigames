@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/playing_card.dart';
 import 'card_display.dart';
-import '../../../ui/theme/wooden_colors.dart';
-import '../../../ui/theme/starlight_colors.dart';
-import '../../../ui/theme/theme_provider.dart';
+import '../../../ui/theme/theme_colors.dart';
 
 /// A slot that holds a card at a specific position.
 /// Used for both the guessing interface and displaying hands.
@@ -35,53 +33,8 @@ class CardSlot extends StatelessWidget {
     this.enableFlipAnimation = true,
   });
 
-  Color _getAccentColor(ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return StarlightColors.accentStar;
-    }
-    return WoodenColors.accentAmber;
-  }
-
-  Color _getSurfaceColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkSurface
-          : StarlightColors.lightSurface;
-    }
-    return isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface;
-  }
-
-  Color _getBorderColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark ? StarlightColors.darkBorder : StarlightColors.lightBorder;
-    }
-    return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
-  }
-
-  Color _getTextPrimaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkTextPrimary
-          : StarlightColors.lightTextPrimary;
-    }
-    return isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-  }
-
-  ColorSchemeType _getColorSchemeType(Color primaryColor) {
-    if (primaryColor == StarlightColors.lightPrimary ||
-        primaryColor == StarlightColors.darkPrimary) {
-      return ColorSchemeType.starlight;
-    }
-    return ColorSchemeType.wooden;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final scheme = _getColorSchemeType(Theme.of(context).primaryColor);
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -90,11 +43,9 @@ class CardSlot extends StatelessWidget {
           width: 20,
           height: 20,
           decoration: BoxDecoration(
-            color: isSelectable
-                ? _getAccentColor(scheme)
-                : _getSurfaceColor(isDark, scheme),
+            color: isSelectable ? context.themeAccent : context.themeSurface,
             shape: BoxShape.circle,
-            border: Border.all(color: _getBorderColor(isDark, scheme)),
+            border: Border.all(color: context.themeBorder),
           ),
           child: Center(
             child: Text(
@@ -102,9 +53,7 @@ class CardSlot extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
-                color: isSelectable
-                    ? Colors.white
-                    : _getTextPrimaryColor(isDark, scheme),
+                color: isSelectable ? Colors.white : context.themeTextPrimary,
               ),
             ),
           ),
@@ -212,91 +161,8 @@ class RankSelector extends StatelessWidget {
     this.itemHeight = 50,
   });
 
-  Color _getPrimaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkPrimary
-          : StarlightColors.lightPrimary;
-    }
-    return isDark ? WoodenColors.darkPrimary : WoodenColors.lightPrimary;
-  }
-
-  Color _getSecondaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkSecondary
-          : StarlightColors.lightSecondary;
-    }
-    return isDark ? WoodenColors.darkSecondary : WoodenColors.lightSecondary;
-  }
-
-  Color _getSurfaceColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkSurface
-          : StarlightColors.lightSurface;
-    }
-    return isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface;
-  }
-
-  Color _getBorderColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark ? StarlightColors.darkBorder : StarlightColors.lightBorder;
-    }
-    return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
-  }
-
-  Color _getShadowColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark ? StarlightColors.darkShadow : StarlightColors.lightShadow;
-    }
-    return isDark ? WoodenColors.darkShadow : WoodenColors.lightShadow;
-  }
-
-  Color _getTextPrimaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkTextPrimary
-          : StarlightColors.lightTextPrimary;
-    }
-    return isDark
-        ? WoodenColors.darkTextPrimary
-        : WoodenColors.lightTextPrimary;
-  }
-
-  Color _getTextSecondaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkTextSecondary
-          : StarlightColors.lightTextSecondary;
-    }
-    return isDark
-        ? WoodenColors.darkTextSecondary
-        : WoodenColors.lightTextSecondary;
-  }
-
-  Color _getOnPrimaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkOnPrimary
-          : StarlightColors.lightOnPrimary;
-    }
-    return isDark ? WoodenColors.darkOnPrimary : WoodenColors.lightOnPrimary;
-  }
-
-  ColorSchemeType _getColorSchemeType(Color primaryColor) {
-    if (primaryColor == StarlightColors.lightPrimary ||
-        primaryColor == StarlightColors.darkPrimary) {
-      return ColorSchemeType.starlight;
-    }
-    return ColorSchemeType.wooden;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final scheme = _getColorSchemeType(Theme.of(context).primaryColor);
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Wrap(
@@ -306,17 +172,16 @@ class RankSelector extends StatelessWidget {
         children: CardRank.values.map((rank) {
           final isDisabled = disabledRanks?.contains(rank.value) ?? false;
 
-          return _buildRankButton(rank, isDisabled, isDark, scheme);
+          return _buildRankButton(context, rank, isDisabled);
         }).toList(),
       ),
     );
   }
 
   Widget _buildRankButton(
+    BuildContext context,
     CardRank rank,
     bool isDisabled,
-    bool isDark,
-    ColorSchemeType scheme,
   ) {
     return GestureDetector(
       onTap: isDisabled ? null : () => onRankSelected(rank.value),
@@ -331,19 +196,16 @@ class RankSelector extends StatelessWidget {
                 : LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [
-                      _getPrimaryColor(isDark, scheme),
-                      _getSecondaryColor(isDark, scheme),
-                    ],
+                    colors: [context.themePrimary, context.themeSecondary],
                   ),
-            color: isDisabled ? _getSurfaceColor(isDark, scheme) : null,
+            color: isDisabled ? context.themeSurface : null,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: _getBorderColor(isDark, scheme)),
+            border: Border.all(color: context.themeBorder),
             boxShadow: isDisabled
                 ? null
                 : [
                     BoxShadow(
-                      color: _getShadowColor(isDark, scheme).withAlpha(100),
+                      color: context.themeShadow.withAlpha(100),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -356,8 +218,8 @@ class RankSelector extends StatelessWidget {
                 fontSize: itemWidth * 0.5,
                 fontWeight: FontWeight.bold,
                 color: isDisabled
-                    ? _getTextSecondaryColor(isDark, scheme)
-                    : _getOnPrimaryColor(isDark, scheme),
+                    ? context.themeTextSecondary
+                    : context.themeOnPrimary,
               ),
             ),
           ),

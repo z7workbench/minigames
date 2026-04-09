@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/generated/app_localizations.dart';
-import '../../ui/theme/wooden_colors.dart';
+import '../../ui/theme/theme_colors.dart';
 import '../../ui/widgets/wooden_button.dart';
 import 'models/guess_arrangement_state.dart';
 import 'models/playing_card.dart';
@@ -46,31 +46,23 @@ class _GuessArrangementScreenState
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(guessArrangementGameProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? WoodenColors.darkBackground
-          : WoodenColors.lightBackground,
-      appBar: _buildAppBar(context, isDark, l10n),
-      body: _buildBody(context, state, isDark, l10n),
+      backgroundColor: context.themeBackground,
+      appBar: _buildAppBar(context, l10n),
+      body: _buildBody(context, state, l10n),
     );
   }
 
   PreferredSizeWidget _buildAppBar(
     BuildContext context,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     return AppBar(
       title: Text(l10n.game_guess_arrangement),
-      backgroundColor: isDark
-          ? WoodenColors.darkPrimary
-          : WoodenColors.lightPrimary,
-      foregroundColor: isDark
-          ? WoodenColors.darkOnPrimary
-          : WoodenColors.lightOnPrimary,
+      backgroundColor: context.themePrimary,
+      foregroundColor: context.themeOnPrimary,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () => _showExitConfirmation(context, l10n),
@@ -87,19 +79,18 @@ class _GuessArrangementScreenState
   Widget _buildBody(
     BuildContext context,
     GuessArrangementState state,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     if (state.status == GameStatus.idle) {
-      return _buildLoadingState(isDark);
+      return _buildLoadingState();
     }
 
     if (state.status == GameStatus.dealing) {
-      return _buildDealingState(isDark, l10n);
+      return _buildDealingState(l10n);
     }
 
     if (state.status == GameStatus.switching) {
-      return _buildSwitchingState(state, isDark, l10n);
+      return _buildSwitchingState(state, l10n);
     }
 
     if (state.isGameOver) {
@@ -108,16 +99,14 @@ class _GuessArrangementScreenState
       });
     }
 
-    return _buildPlayingState(context, state, isDark, l10n);
+    return _buildPlayingState(context, state, l10n);
   }
 
-  Widget _buildLoadingState(bool isDark) {
-    return Center(
-      child: CircularProgressIndicator(color: WoodenColors.accentAmber),
-    );
+  Widget _buildLoadingState() {
+    return Center(child: CircularProgressIndicator(color: context.themeAccent));
   }
 
-  Widget _buildDealingState(bool isDark, AppLocalizations l10n) {
+  Widget _buildDealingState(AppLocalizations l10n) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(milliseconds: 500), () {
         ref.read(guessArrangementGameProvider.notifier).finishDealing();
@@ -139,13 +128,11 @@ class _GuessArrangementScreenState
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
-          CircularProgressIndicator(color: WoodenColors.accentAmber),
+          CircularProgressIndicator(color: context.themeAccent),
         ],
       ),
     );
@@ -153,7 +140,6 @@ class _GuessArrangementScreenState
 
   Widget _buildSwitchingState(
     GuessArrangementState state,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     final nextPlayer = state.opponentPlayer;
@@ -171,38 +157,29 @@ class _GuessArrangementScreenState
   Widget _buildPlayingState(
     BuildContext context,
     GuessArrangementState state,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     return SafeArea(
       child: Column(
         children: [
-          _buildGameHeader(state, isDark, l10n),
-          Expanded(flex: 3, child: _buildOpponentHand(state, isDark, l10n)),
-          _buildCenterInfo(state, isDark, l10n),
+          _buildGameHeader(state, l10n),
+          Expanded(flex: 3, child: _buildOpponentHand(state, l10n)),
+          _buildCenterInfo(state, l10n),
           if (_showRankSelector && _selectedPosition != null)
-            _buildRankSelectorSheet(state, isDark, l10n),
-          _buildCurrentPlayerHand(state, isDark, l10n),
-          if (!state.isAiTurn) _buildActionButtons(state, isDark, l10n),
+            _buildRankSelectorSheet(state, l10n),
+          _buildCurrentPlayerHand(state, l10n),
+          if (!state.isAiTurn) _buildActionButtons(state, l10n),
         ],
       ),
     );
   }
 
-  Widget _buildGameHeader(
-    GuessArrangementState state,
-    bool isDark,
-    AppLocalizations l10n,
-  ) {
+  Widget _buildGameHeader(GuessArrangementState state, AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
-        border: Border(
-          bottom: BorderSide(
-            color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-          ),
-        ),
+        color: context.themeSurface,
+        border: Border(bottom: BorderSide(color: context.themeBorder)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -211,19 +188,16 @@ class _GuessArrangementScreenState
             icon: Icons.person,
             label: l10n.ga_round,
             value: state.currentPlayer.name,
-            isDark: isDark,
           ),
           _buildInfoItem(
             icon: Icons.format_list_numbered,
             label: l10n.ga_turn,
             value: '${state.roundNumber}',
-            isDark: isDark,
           ),
           _buildInfoItem(
             icon: Icons.local_fire_department,
             label: l10n.ga_combo,
             value: 'x${state.currentPlayer.maxCombo}',
-            isDark: isDark,
             highlight: state.currentPlayer.maxCombo >= 3,
           ),
         ],
@@ -235,7 +209,6 @@ class _GuessArrangementScreenState
     required IconData icon,
     required String label,
     required String value,
-    required bool isDark,
     bool highlight = false,
   }) {
     return Column(
@@ -247,18 +220,13 @@ class _GuessArrangementScreenState
               icon,
               size: 14,
               color: highlight
-                  ? WoodenColors.accentAmber
-                  : WoodenColors.accentCopper,
+                  ? context.themeAccent
+                  : context.themeAccentSecondary,
             ),
             const SizedBox(width: 4),
             Text(
               label,
-              style: TextStyle(
-                fontSize: 11,
-                color: isDark
-                    ? WoodenColors.darkTextSecondary
-                    : WoodenColors.lightTextSecondary,
-              ),
+              style: TextStyle(fontSize: 11, color: context.themeTextSecondary),
             ),
           ],
         ),
@@ -268,11 +236,7 @@ class _GuessArrangementScreenState
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
-            color: highlight
-                ? WoodenColors.accentAmber
-                : (isDark
-                      ? WoodenColors.darkTextPrimary
-                      : WoodenColors.lightTextPrimary),
+            color: highlight ? context.themeAccent : context.themeTextPrimary,
           ),
         ),
       ],
@@ -281,7 +245,6 @@ class _GuessArrangementScreenState
 
   Widget _buildOpponentHand(
     GuessArrangementState state,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     final opponent = state.opponentPlayer;
@@ -295,20 +258,13 @@ class _GuessArrangementScreenState
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             state.isAiTurn ? l10n.ga_aiThinking : l10n.ga_tapToGuess,
-            style: TextStyle(
-              fontSize: 11,
-              color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
-            ),
+            style: TextStyle(fontSize: 11, color: context.themeTextSecondary),
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -347,7 +303,7 @@ class _GuessArrangementScreenState
                                 child: Container(
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: WoodenColors.accentAmber,
+                                      color: context.themeAccent,
                                       width: 3,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
@@ -368,7 +324,7 @@ class _GuessArrangementScreenState
               l10n.ga_positionSelected(_selectedPosition! + 1),
               style: TextStyle(
                 fontSize: 12,
-                color: WoodenColors.accentAmber,
+                color: context.themeAccent,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -377,11 +333,7 @@ class _GuessArrangementScreenState
     );
   }
 
-  Widget _buildCenterInfo(
-    GuessArrangementState state,
-    bool isDark,
-    AppLocalizations l10n,
-  ) {
+  Widget _buildCenterInfo(GuessArrangementState state, AppLocalizations l10n) {
     // 显示AI当前猜测
     if (_isAiTurnInProgress &&
         _aiCurrentPosition != null &&
@@ -391,21 +343,21 @@ class _GuessArrangementScreenState
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          color: WoodenColors.accentAmber.withAlpha(30),
+          color: context.themeAccent.withAlpha(30),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: WoodenColors.accentAmber),
+          border: Border.all(color: context.themeAccent),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.smart_toy, color: WoodenColors.accentAmber),
+            Icon(Icons.smart_toy, color: context.themeAccent),
             const SizedBox(width: 8),
             Text(
               l10n.ga_aiGuessing(_aiCurrentPosition! + 1, rankSymbol),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: WoodenColors.accentAmber,
+                color: context.themeAccent,
               ),
             ),
           ],
@@ -421,7 +373,7 @@ class _GuessArrangementScreenState
           Icon(
             state.isAiTurn ? Icons.smart_toy : Icons.person,
             size: 18,
-            color: WoodenColors.accentAmber,
+            color: context.themeAccent,
           ),
           const SizedBox(width: 8),
           Text(
@@ -429,9 +381,7 @@ class _GuessArrangementScreenState
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: isDark
-                  ? WoodenColors.darkTextPrimary
-                  : WoodenColors.lightTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
         ],
@@ -441,20 +391,14 @@ class _GuessArrangementScreenState
 
   Widget _buildRankSelectorSheet(
     GuessArrangementState state,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 220),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface,
-        border: Border(
-          top: BorderSide(
-            color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-            width: 2,
-          ),
-        ),
+        color: context.themeSurface,
+        border: Border(top: BorderSide(color: context.themeBorder, width: 2)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -497,7 +441,6 @@ class _GuessArrangementScreenState
 
   Widget _buildCurrentPlayerHand(
     GuessArrangementState state,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     final player = state.currentPlayer;
@@ -505,14 +448,8 @@ class _GuessArrangementScreenState
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
-        color: isDark
-            ? WoodenColors.darkSurface.withAlpha(100)
-            : WoodenColors.lightSurface.withAlpha(100),
-        border: Border(
-          top: BorderSide(
-            color: isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder,
-          ),
-        ),
+        color: context.themeSurface.withAlpha(100),
+        border: Border(top: BorderSide(color: context.themeBorder)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -522,9 +459,7 @@ class _GuessArrangementScreenState
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
-              color: isDark
-                  ? WoodenColors.darkTextSecondary
-                  : WoodenColors.lightTextSecondary,
+              color: context.themeTextSecondary,
             ),
           ),
           const SizedBox(height: 6),
@@ -556,7 +491,6 @@ class _GuessArrangementScreenState
 
   Widget _buildActionButtons(
     GuessArrangementState state,
-    bool isDark,
     AppLocalizations l10n,
   ) {
     return Container(
@@ -888,7 +822,7 @@ class _GuessArrangementScreenState
                   .startGame(aiDifficulty: widget.aiDifficulty);
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: WoodenColors.accentAmber,
+              backgroundColor: context.themeAccent,
             ),
             child: Text(l10n.ga_restart),
           ),

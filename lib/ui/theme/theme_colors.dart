@@ -149,6 +149,17 @@ extension ThemeColorsExtension on BuildContext {
             ); // Copper in light mode for contrast
     }
   }
+
+  /// Get theme-aware pattern/decorative color (for card back patterns, etc.)
+  /// Wooden: golden/copper tones, Starlight: white/light tones
+  Color get themePattern {
+    if (colorSchemeType == ColorSchemeType.starlight) {
+      // Starlight: white pattern for contrast against purple background
+      return Colors.white.withAlpha(180);
+    }
+    // Wooden: golden/copper pattern against brown background
+    return WoodenColors.accentCopper.withAlpha(150);
+  }
 }
 
 /// Helper class to get theme-aware colors without BuildContext
@@ -201,6 +212,7 @@ class ThemeColors {
           onPrimary: isDark
               ? StarlightColors.darkOnPrimary
               : StarlightColors.lightOnPrimary,
+          pattern: Colors.white.withAlpha(180),
         );
       case ColorSchemeType.wooden:
         return ThemeColorSet(
@@ -240,6 +252,7 @@ class ThemeColors {
           onPrimary: isDark
               ? WoodenColors.darkOnPrimary
               : WoodenColors.lightOnPrimary,
+          pattern: WoodenColors.accentCopper.withAlpha(150),
         );
     }
   }
@@ -263,6 +276,7 @@ class ThemeColorSet {
   final Color success;
   final Color warning;
   final Color onPrimary;
+  final Color pattern;
 
   const ThemeColorSet({
     required this.primary,
@@ -281,5 +295,6 @@ class ThemeColorSet {
     required this.success,
     required this.warning,
     required this.onPrimary,
+    required this.pattern,
   });
 }

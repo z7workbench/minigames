@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/playing_card.dart';
-import '../../../ui/theme/wooden_colors.dart';
-import '../../../ui/theme/starlight_colors.dart';
-import '../../../ui/theme/theme_provider.dart';
+import '../../../ui/theme/theme_colors.dart';
 
 /// 带翻牌动画的卡牌显示组件
 class AnimatedCardDisplay extends StatefulWidget {
@@ -84,60 +82,8 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
     super.dispose();
   }
 
-  Color _getPrimaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkPrimary
-          : StarlightColors.lightPrimary;
-    }
-    return isDark ? WoodenColors.darkPrimary : WoodenColors.lightPrimary;
-  }
-
-  Color _getSecondaryColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkSecondary
-          : StarlightColors.lightSecondary;
-    }
-    return isDark ? WoodenColors.darkSecondary : WoodenColors.lightSecondary;
-  }
-
-  Color _getSurfaceColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkSurface
-          : StarlightColors.lightSurface;
-    }
-    return isDark ? WoodenColors.darkSurface : WoodenColors.lightSurface;
-  }
-
-  Color _getBorderColor(bool isDark, ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return isDark ? StarlightColors.darkBorder : StarlightColors.lightBorder;
-    }
-    return isDark ? WoodenColors.darkBorder : WoodenColors.lightBorder;
-  }
-
-  Color _getAccentColor(ColorSchemeType scheme) {
-    if (scheme == ColorSchemeType.starlight) {
-      return StarlightColors.accentStar;
-    }
-    return WoodenColors.accentAmber;
-  }
-
-  ColorSchemeType _getColorSchemeType(Color primaryColor) {
-    if (primaryColor == StarlightColors.lightPrimary ||
-        primaryColor == StarlightColors.darkPrimary) {
-      return ColorSchemeType.starlight;
-    }
-    return ColorSchemeType.wooden;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final scheme = _getColorSchemeType(Theme.of(context).primaryColor);
-
     return GestureDetector(
       onTap: widget.onTap,
       child: AnimatedBuilder(
@@ -160,12 +106,12 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
                 width: widget.width,
                 height: widget.height,
                 decoration: BoxDecoration(
-                  color: _getBackgroundColor(isDark, showFrontNow, scheme),
+                  color: _getBackgroundColor(context, showFrontNow),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     color: widget.isSelected
-                        ? _getAccentColor(scheme)
-                        : _getBorderColor(isDark, scheme),
+                        ? context.themeAccent
+                        : context.themeBorder,
                     width: widget.isSelected ? 2 : 1,
                   ),
                   boxShadow: [
@@ -179,22 +125,22 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
                 child: Stack(
                   children: [
                     if (showFrontNow && widget.card != null)
-                      _buildRevealedCard(isDark)
+                      _buildRevealedCard()
                     else if (!showFrontNow)
-                      _buildHiddenCard(isDark, scheme),
+                      _buildHiddenCard(context),
                     if (widget.showMinIndicator)
                       Positioned(
                         left: 2,
                         top: 0,
                         bottom: 0,
-                        child: _buildIndicator('MIN', scheme),
+                        child: _buildIndicator(context, 'MIN'),
                       ),
                     if (widget.showMaxIndicator)
                       Positioned(
                         right: 2,
                         top: 0,
                         bottom: 0,
-                        child: _buildIndicator('MAX', scheme),
+                        child: _buildIndicator(context, 'MAX'),
                       ),
                   ],
                 ),
@@ -206,15 +152,21 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
     );
   }
 
-  Widget _buildRevealedCard(bool isDark) {
+  Color _getBackgroundColor(BuildContext context, bool isFront) {
+    if (isFront) {
+      return context.themeSurface;
+    }
+    return context.themePrimary;
+  }
+
+  Widget _buildRevealedCard() {
     if (widget.card == null) return const SizedBox();
 
     final textColor = widget.card!.suit.isRed ? Colors.red : Colors.black;
-    final bgColor = isDark ? WoodenColors.darkSurface : Colors.white;
 
     return Container(
       decoration: BoxDecoration(
-        color: bgColor,
+        color: context.themeCard,
         borderRadius: BorderRadius.circular(7),
       ),
       padding: const EdgeInsets.all(4),
@@ -263,46 +215,36 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
     );
   }
 
-  Widget _buildHiddenCard(bool isDark, ColorSchemeType scheme) {
+  Widget _buildHiddenCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: isDark
-              ? [
-                  _getPrimaryColor(isDark, scheme),
-                  _getSecondaryColor(isDark, scheme),
-                  _getPrimaryColor(isDark, scheme),
-                ]
-              : [
-                  _getPrimaryColor(isDark, scheme),
-                  _getSecondaryColor(isDark, scheme),
-                  _getPrimaryColor(isDark, scheme),
-                ],
+          colors: [
+            context.themePrimary,
+            context.themeSecondary,
+            context.themePrimary,
+          ],
         ),
         borderRadius: BorderRadius.circular(7),
       ),
       child: Center(
         child: CustomPaint(
           size: Size(widget.width * 0.6, widget.height * 0.6),
-          painter: _CardBackPainterSimple(
-            color: isDark
-                ? WoodenColors.accentGold.withAlpha(150)
-                : Colors.white.withAlpha(180),
-          ),
+          painter: _CardBackPainterSimple(color: context.themePattern),
         ),
       ),
     );
   }
 
-  Widget _buildIndicator(String text, ColorSchemeType scheme) {
+  Widget _buildIndicator(BuildContext context, String text) {
     return RotatedBox(
       quarterTurns: 3,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         decoration: BoxDecoration(
-          color: _getAccentColor(scheme).withAlpha(200),
+          color: context.themeAccent.withAlpha(200),
           borderRadius: BorderRadius.circular(4),
         ),
         child: Text(
@@ -315,13 +257,6 @@ class _AnimatedCardDisplayState extends State<AnimatedCardDisplay>
         ),
       ),
     );
-  }
-
-  Color _getBackgroundColor(bool isDark, bool isFront, ColorSchemeType scheme) {
-    if (isFront) {
-      return _getSurfaceColor(isDark, scheme);
-    }
-    return _getPrimaryColor(isDark, scheme);
   }
 }
 
