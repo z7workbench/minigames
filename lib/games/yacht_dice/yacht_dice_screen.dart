@@ -459,6 +459,44 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
     // Check game over
     if (state.isGameOver) {
       final winner = ref.read(yachtDiceGameProvider.notifier).getWinner();
+      final isDraw = winner == null;
+
+      // Calculate detailed scores for all players
+      final playerScores = state.players.map((player) {
+        final upperCategories = [
+          ScoringCategory.ones,
+          ScoringCategory.twos,
+          ScoringCategory.threes,
+          ScoringCategory.fours,
+          ScoringCategory.fives,
+          ScoringCategory.sixes,
+        ];
+        final lowerCategories = [
+          ScoringCategory.allSelect,
+          ScoringCategory.fullHouse,
+          ScoringCategory.fourOfAKind,
+          ScoringCategory.smallStraight,
+          ScoringCategory.largeStraight,
+          ScoringCategory.yacht,
+        ];
+
+        final upperSum = upperCategories
+            .map((category) => player.scores[category] ?? 0)
+            .reduce((a, b) => a + b);
+        final bonus = upperSum >= 63 ? 35 : 0;
+        final lowerSum = lowerCategories
+            .map((category) => player.scores[category] ?? 0)
+            .reduce((a, b) => a + b);
+
+        return {
+          'player': player,
+          'upperSum': upperSum,
+          'bonus': bonus,
+          'lowerSum': lowerSum,
+          'totalScore': player.totalScore,
+        };
+      }).toList();
+
       return Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
@@ -466,46 +504,268 @@ class _YachtDiceScreenState extends ConsumerState<YachtDiceScreen> {
           backgroundColor: primaryColor,
           foregroundColor: Colors.white,
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.emoji_events, size: 64, color: Colors.amber),
-              const SizedBox(height: 16),
-              Text(
-                winner != null ? '${winner.name} wins!' : 'Draw!',
-                style: Theme.of(
-                  context,
-                ).textTheme.headlineSmall?.copyWith(color: textPrimary),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Winner announcement
+                  Icon(
+                    isDraw ? Icons.handshake : Icons.emoji_events,
+                    size: 64,
+                    color: Colors.amber,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    isDraw ? 'Draw!' : '${winner!.name} wins!',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Detailed score comparison for all players
+                  ...playerScores.map((scoreData) {
+                    final player = scoreData['player'] as PlayerState;
+                    final upperSum = scoreData['upperSum'] as int;
+                    final bonus = scoreData['bonus'] as int;
+                    final lowerSum = scoreData['lowerSum'] as int;
+                    final totalScore = scoreData['totalScore'] as int;
+                    final isWinner = !isDraw && player == winner;
+
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: cardColor,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isWinner ? Colors.amber : secondaryColor,
+                          width: isWinner ? 3 : 1,
+                        ),
+                        boxShadow: isWinner
+                            ? [
+                                BoxShadow(
+                                  color: Colors.amber.withAlpha(100),
+                                  blurRadius: 8,
+                                  spreadRadius: 2,
+                                ),
+                              ]
+                            : null,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Player name with winner badge
+                          Row(
+                            children: [
+                              Text(
+                                player.name,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: textPrimary,
+                                ),
+                              ),
+                              if (isWinner)
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: Icon(
+                                    Icons.emoji_events,
+                                    color: Colors.amber,
+                                    size: 24,
+                                  ),
+                                ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+
+                          // Score breakdown
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: surfaceColor,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              children: [
+                                // Upper section
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      l10n.yd_bonusThreshold,
+                                      style: TextStyle(color: textSecondary),
+                                    ),
+                                    Text(
+                                      '$upperSum',
+                                      style: TextStyle(
+                                        color: textPrimary,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          l10n.yd_bonus,
+                                          style: TextStyle(
+                                            color: textSecondary,
+                                          ),
+                                        ),
+                                        if (bonus > 0)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 4,
+                                            ),
+                                            child: Icon(
+                                              Icons.check_circle,
+                                              color: context.themeSuccess,
+                                              size: 16,
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                    Text(
+                                      '+$bonus',
+                                      style: TextStyle(
+                                        color: bonus > 0
+                                            ? context.themeSuccess
+                                            : textSecondary,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Divider(
+                                  color: context.themeDivider,
+                                  height: 16,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Upper Total',
+                                      style: TextStyle(
+                                        color: textPrimary,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${upperSum + bonus}',
+                                      style: TextStyle(
+                                        color: textPrimary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                // Lower section
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Lower Total',
+                                      style: TextStyle(color: textSecondary),
+                                    ),
+                                    Text(
+                                      '$lowerSum',
+                                      style: TextStyle(
+                                        color: textPrimary,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Divider(
+                                  color: context.themeDivider,
+                                  height: 16,
+                                ),
+                                // Grand total
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: primaryColor.withAlpha(60),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        l10n.score,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: textPrimary,
+                                        ),
+                                      ),
+                                      Text(
+                                        '$totalScore',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+
+                  const SizedBox(height: 24),
+                  // Buttons
+                  ElevatedButton(
+                    onPressed: () {
+                      ref
+                          .read(yachtDiceGameProvider.notifier)
+                          .startGame(widget.playerCount, widget.aiDifficulty);
+                      Future.delayed(const Duration(milliseconds: 100), () {
+                        ref
+                            .read(yachtDiceGameProvider.notifier)
+                            .startFirstRoll();
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: context.themeAccent,
+                      foregroundColor: context.themeOnAccent,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: Text(l10n.newGame),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(l10n.back),
+                  ),
+                ],
               ),
-              Text(
-                'Score: ${winner?.totalScore ?? 0}',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(color: textSecondary),
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () {
-                  ref
-                      .read(yachtDiceGameProvider.notifier)
-                      .startGame(widget.playerCount, widget.aiDifficulty);
-                  Future.delayed(const Duration(milliseconds: 100), () {
-                    ref.read(yachtDiceGameProvider.notifier).startFirstRoll();
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: context.themeAccent,
-                  foregroundColor: context.themeOnAccent,
-                ),
-                child: Text(l10n.newGame),
-              ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(l10n.back),
-              ),
-            ],
+            ),
           ),
         ),
       );
