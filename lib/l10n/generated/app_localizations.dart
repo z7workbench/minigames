@@ -1640,6 +1640,12 @@ abstract class AppLocalizations {
   /// **'Starlight'**
   String get starlightScheme;
 
+  /// Forest color scheme option
+  ///
+  /// In en, this message translates to:
+  /// **'Forest'**
+  String get forestScheme;
+
   /// Dice Battle game title
   ///
   /// In en, this message translates to:

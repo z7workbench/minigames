@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'theme_provider.dart';
 import 'wooden_colors.dart';
 import 'starlight_colors.dart';
+import 'forest_colors.dart';
 
 /// Extension to easily access theme-aware colors from BuildContext
 extension ThemeColorsExtension on BuildContext {
@@ -15,13 +16,18 @@ extension ThemeColorsExtension on BuildContext {
       final asyncValue = container.read(colorSchemeNotifierProvider);
       return asyncValue.valueOrNull ?? ColorSchemeType.wooden;
     } catch (e) {
-      // Fallback: check if primary color matches Starlight colors
+      // Fallback: check if primary color matches known color schemes using toARGB32
       final primaryColor = Theme.of(this).primaryColor;
 
-      // Check if primary color matches Starlight colors using toARGB32
+      // Check Starlight
       if (primaryColor.toARGB32() == StarlightColors.lightPrimary.toARGB32() ||
           primaryColor.toARGB32() == StarlightColors.darkPrimary.toARGB32()) {
         return ColorSchemeType.starlight;
+      }
+      // Check Forest
+      if (primaryColor.toARGB32() == ForestColors.lightPrimary.toARGB32() ||
+          primaryColor.toARGB32() == ForestColors.darkPrimary.toARGB32()) {
+        return ColorSchemeType.forest;
       }
       return ColorSchemeType.wooden;
     }
@@ -60,62 +66,86 @@ extension ThemeColorsExtension on BuildContext {
   /// Get theme-aware shadow color
   Color get themeShadow => Theme.of(this).colorScheme.shadow;
 
-  /// Get theme-aware accent color (amber for wooden, star for starlight)
+  /// Get theme-aware accent color (amber for wooden, star for starlight, emerald for forest)
   Color get themeAccent {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      return StarlightColors.accentStar;
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        return StarlightColors.accentStar;
+      case ColorSchemeType.forest:
+        return ForestColors.accentEmerald;
+      case ColorSchemeType.wooden:
+        // Wooden: use bronze in light mode for better contrast, amber in dark mode
+        return isDark ? WoodenColors.accentAmber : WoodenColors.accentBronze;
     }
-    // Wooden: use bronze in light mode for better contrast, amber in dark mode
-    return isDark ? WoodenColors.accentAmber : WoodenColors.accentBronze;
   }
 
   /// Get theme-aware secondary accent color
   Color get themeAccentSecondary {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      return StarlightColors.accentNebula;
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        return StarlightColors.accentNebula;
+      case ColorSchemeType.forest:
+        return ForestColors.accentMoss;
+      case ColorSchemeType.wooden:
+        // Wooden: use copper in light mode, amber secondary in dark mode
+        return isDark ? WoodenColors.accentCopper : WoodenColors.accentCopper;
     }
-    // Wooden: use copper in light mode, amber secondary in dark mode
-    return isDark ? WoodenColors.accentCopper : WoodenColors.accentCopper;
   }
 
   /// Get success color (theme-aware)
   Color get themeSuccess {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      return StarlightColors.darkSuccess;
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        return StarlightColors.darkSuccess;
+      case ColorSchemeType.forest:
+        return isDark ? ForestColors.darkSuccess : ForestColors.lightSuccess;
+      case ColorSchemeType.wooden:
+        return isDark ? WoodenColors.darkSuccess : WoodenColors.lightSuccess;
     }
-    return isDark ? WoodenColors.darkSuccess : WoodenColors.lightSuccess;
   }
 
   /// Get error color (theme-aware)
   Color get themeError {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      return StarlightColors.darkError;
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        return StarlightColors.darkError;
+      case ColorSchemeType.forest:
+        return isDark ? ForestColors.darkError : ForestColors.lightError;
+      case ColorSchemeType.wooden:
+        return isDark ? WoodenColors.darkError : WoodenColors.lightError;
     }
-    return isDark ? WoodenColors.darkError : WoodenColors.lightError;
   }
 
   /// Get warning color (theme-aware)
   Color get themeWarning {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      return StarlightColors.darkWarning;
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        return StarlightColors.darkWarning;
+      case ColorSchemeType.forest:
+        return isDark ? ForestColors.darkWarning : ForestColors.lightWarning;
+      case ColorSchemeType.wooden:
+        return isDark ? WoodenColors.darkWarning : WoodenColors.lightWarning;
     }
-    return isDark ? WoodenColors.darkWarning : WoodenColors.lightWarning;
   }
 
   /// Get theme-aware disabled color
   Color get themeDisabled {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      return isDark
-          ? StarlightColors.darkDisabled
-          : StarlightColors.lightDisabled;
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        return isDark
+            ? StarlightColors.darkDisabled
+            : StarlightColors.lightDisabled;
+      case ColorSchemeType.forest:
+        return isDark ? ForestColors.darkDisabled : ForestColors.lightDisabled;
+      case ColorSchemeType.wooden:
+        return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
     }
-    return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
   }
 
   /// Get theme-aware on-primary color (text color on primary background)
@@ -124,41 +154,62 @@ extension ThemeColorsExtension on BuildContext {
   /// Get theme-aware on-accent color (text color on accent background)
   Color get themeOnAccent {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      return isDark ? Colors.white : StarlightColors.darkOnPrimary;
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        return isDark ? Colors.white : StarlightColors.darkOnPrimary;
+      case ColorSchemeType.forest:
+        return isDark
+            ? ForestColors.darkOnPrimary
+            : ForestColors.lightOnPrimary;
+      case ColorSchemeType.wooden:
+        return Colors.black;
     }
-    return Colors.black;
   }
 
   /// Get theme-aware selection color for chips/buttons (with good contrast)
   Color get themeSelectionColor {
     final isDark = isDarkMode;
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      // Starlight: use bright purple for selection
-      return isDark
-          ? StarlightColors.darkPrimary.withAlpha(200) // Brighter in dark mode
-          : StarlightColors.lightPrimary.withAlpha(
-              150,
-            ); // Visible in light mode
-    } else {
-      // Wooden: use amber/copper for selection
-      return isDark
-          ? WoodenColors.accentAmber.withAlpha(200) // Bright amber in dark mode
-          : WoodenColors.accentCopper.withAlpha(
-              180,
-            ); // Copper in light mode for contrast
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        // Starlight: use bright purple for selection
+        return isDark
+            ? StarlightColors.darkPrimary.withAlpha(
+                200,
+              ) // Brighter in dark mode
+            : StarlightColors.lightPrimary.withAlpha(
+                150,
+              ); // Visible in light mode
+      case ColorSchemeType.forest:
+        // Forest: use emerald for selection
+        return isDark
+            ? ForestColors.accentEmerald.withAlpha(200)
+            : ForestColors.lightPrimary.withAlpha(150);
+      case ColorSchemeType.wooden:
+        // Wooden: use amber/copper for selection
+        return isDark
+            ? WoodenColors.accentAmber.withAlpha(
+                200,
+              ) // Bright amber in dark mode
+            : WoodenColors.accentCopper.withAlpha(
+                180,
+              ); // Copper in light mode for contrast
     }
   }
 
   /// Get theme-aware pattern/decorative color (for card back patterns, etc.)
-  /// Wooden: golden/copper tones, Starlight: white/light tones
+  /// Wooden: golden/copper tones, Starlight: white/light tones, Forest: moss/spring tones
   Color get themePattern {
-    if (colorSchemeType == ColorSchemeType.starlight) {
-      // Starlight: white pattern for contrast against purple background
-      return Colors.white.withAlpha(180);
+    switch (colorSchemeType) {
+      case ColorSchemeType.starlight:
+        // Starlight: white pattern for contrast against purple background
+        return Colors.white.withAlpha(180);
+      case ColorSchemeType.forest:
+        // Forest: moss/spring pattern against green background
+        return ForestColors.accentMoss.withAlpha(150);
+      case ColorSchemeType.wooden:
+        // Wooden: golden/copper pattern against brown background
+        return WoodenColors.accentCopper.withAlpha(150);
     }
-    // Wooden: golden/copper pattern against brown background
-    return WoodenColors.accentCopper.withAlpha(150);
   }
 }
 
@@ -213,6 +264,46 @@ class ThemeColors {
               ? StarlightColors.darkOnPrimary
               : StarlightColors.lightOnPrimary,
           pattern: Colors.white.withAlpha(180),
+        );
+      case ColorSchemeType.forest:
+        return ThemeColorSet(
+          primary: isDark
+              ? ForestColors.darkPrimary
+              : ForestColors.lightPrimary,
+          secondary: isDark
+              ? ForestColors.darkSecondary
+              : ForestColors.lightSecondary,
+          background: isDark
+              ? ForestColors.darkBackground
+              : ForestColors.lightBackground,
+          surface: isDark
+              ? ForestColors.darkSurface
+              : ForestColors.lightSurface,
+          card: isDark ? ForestColors.darkCard : ForestColors.lightCard,
+          textPrimary: isDark
+              ? ForestColors.darkTextPrimary
+              : ForestColors.lightTextPrimary,
+          textSecondary: isDark
+              ? ForestColors.darkTextSecondary
+              : ForestColors.lightTextSecondary,
+          border: isDark ? ForestColors.darkBorder : ForestColors.lightBorder,
+          divider: isDark
+              ? ForestColors.darkDivider
+              : ForestColors.lightDivider,
+          shadow: isDark ? ForestColors.darkShadow : ForestColors.lightShadow,
+          accent: ForestColors.accentEmerald,
+          accentSecondary: ForestColors.accentMoss,
+          error: isDark ? ForestColors.darkError : ForestColors.lightError,
+          success: isDark
+              ? ForestColors.darkSuccess
+              : ForestColors.lightSuccess,
+          warning: isDark
+              ? ForestColors.darkWarning
+              : ForestColors.lightWarning,
+          onPrimary: isDark
+              ? ForestColors.darkOnPrimary
+              : ForestColors.lightOnPrimary,
+          pattern: ForestColors.accentMoss.withAlpha(150),
         );
       case ColorSchemeType.wooden:
         return ThemeColorSet(

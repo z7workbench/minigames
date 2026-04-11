@@ -1151,6 +1151,10 @@
   "@starlightScheme": {
     "description": "Starlight color scheme option"
   },
+  "forestScheme": "Forest",
+  "@forestScheme": {
+    "description": "Forest color scheme option"
+  },
   "game_dice_battle": "Dice Battle",
   "@game_dice_battle": {
     "description": "Dice Battle game title"

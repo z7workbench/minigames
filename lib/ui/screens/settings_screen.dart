@@ -357,7 +357,7 @@ class _ThemeAndColorSchemeSetting extends ConsumerWidget {
             child: _ColorSchemeOption(
               context: context,
               label: l10n.woodenScheme,
-              icon: Icons.forest,
+              icon: Icons.table_restaurant,
               isSelected: colorScheme == ColorSchemeType.wooden,
               onTap: () => ref
                   .read(colorSchemeNotifierProvider.notifier)
@@ -374,6 +374,18 @@ class _ThemeAndColorSchemeSetting extends ConsumerWidget {
               onTap: () => ref
                   .read(colorSchemeNotifierProvider.notifier)
                   .setColorScheme(ColorSchemeType.starlight),
+            ),
+          ),
+          Container(width: 1, height: 40, color: context.themeDivider),
+          Expanded(
+            child: _ColorSchemeOption(
+              context: context,
+              label: l10n.forestScheme,
+              icon: Icons.forest,
+              isSelected: colorScheme == ColorSchemeType.forest,
+              onTap: () => ref
+                  .read(colorSchemeNotifierProvider.notifier)
+                  .setColorScheme(ColorSchemeType.forest),
             ),
           ),
         ],

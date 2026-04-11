@@ -820,6 +820,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get starlightScheme => '星空风格';
 
   @override
+  String get forestScheme => '森林风格';
+
+  @override
   String get game_dice_battle => '骰子对战';
 
   @override

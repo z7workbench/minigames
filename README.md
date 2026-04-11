@@ -158,12 +158,13 @@ All games run offline with no network dependencies.
 
 # Theme System
 
-This app supports **2 color schemes × 2 brightness modes = 4 theme combinations**:
+This app supports **3 color schemes × 2 brightness modes = 6 theme combinations**:
 
 | Color Scheme | Light Mode | Dark Mode |
 |--------------|------------|-----------|
 | **Wooden** | Warm wood tones (khaki, brown) | Dark walnut (deep brown, ebony) |
 | **Starlight** | Soft purple, sky blue | Deep purple, navy blue |
+| **Forest** | Soft green, mint | Dark forest (deep green) |
 
 ## Theme-Aware Color Usage
 
@@ -177,7 +178,7 @@ class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // ✅ Correct: Auto-adapts to Wooden/Starlight + Dark/Light
+      // ✅ Correct: Auto-adapts to Wooden/Starlight/Forest + Dark/Light
       color: context.themeBackground,
       child: Text(
         'Hello',
@@ -205,7 +206,7 @@ class MyWidget extends StatelessWidget {
 ### ❌ Never Hardcode Colors
 
 ```dart
-// ❌ WRONG: This breaks Starlight theme
+// ❌ WRONG: This breaks Starlight/Forest theme
 Icon(Icons.settings, color: WoodenColors.accentAmber),
 
 // ✅ CORRECT: Works for all themes
@@ -218,8 +219,10 @@ Icon(Icons.settings, color: context.themeOnPrimary),
 - [ ] Import `theme_colors.dart`
 - [ ] Test in **Dark + Wooden** theme
 - [ ] Test in **Dark + Starlight** theme
+- [ ] Test in **Dark + Forest** theme
 - [ ] Test in **Light + Wooden** theme
 - [ ] Test in **Light + Starlight** theme
+- [ ] Test in **Light + Forest** theme
 - [ ] AppBar icons/text use `themeOnPrimary`
 
 ### Pre-adapted Shared Components

@@ -838,6 +838,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get starlightScheme => 'Starlight';
 
   @override
+  String get forestScheme => 'Forest';
+
+  @override
   String get game_dice_battle => 'Dice Battle';
 
   @override

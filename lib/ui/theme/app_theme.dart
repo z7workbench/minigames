@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'wooden_colors.dart';
 import 'starlight_colors.dart';
+import 'forest_colors.dart';
 import 'theme_provider.dart';
 
 /// Application theme configuration with wooden board game aesthetic.
@@ -128,8 +129,11 @@ class AppTheme {
         return brightness == Brightness.light
             ? _starlightLightColorScheme
             : _starlightDarkColorScheme;
+      case ColorSchemeType.forest:
+        return brightness == Brightness.light
+            ? _forestLightColorScheme
+            : _forestDarkColorScheme;
       case ColorSchemeType.wooden:
-      default:
         return brightness == Brightness.light
             ? _woodenLightColorScheme
             : _woodenDarkColorScheme;
@@ -269,6 +273,76 @@ class AppTheme {
   );
 
   // ===========================================================================
+  // FOREST COLOR SCHEMES
+  // ===========================================================================
+
+  static ColorScheme get _forestLightColorScheme => const ColorScheme(
+    brightness: Brightness.light,
+    primary: ForestColors.lightPrimary,
+    onPrimary: ForestColors.lightOnPrimary,
+    primaryContainer: ForestColors.lightSecondary,
+    onPrimaryContainer: ForestColors.lightOnPrimary,
+    secondary: ForestColors.lightSecondary,
+    onSecondary: ForestColors.lightOnSecondary,
+    secondaryContainer: ForestColors.lightCard,
+    onSecondaryContainer: ForestColors.lightTextPrimary,
+    tertiary: ForestColors.accentEmerald,
+    onTertiary: Colors.white,
+    tertiaryContainer: ForestColors.accentMoss,
+    onTertiaryContainer: Colors.white,
+    surface: ForestColors.lightSurface,
+    onSurface: ForestColors.lightOnSurface,
+    surfaceContainerHighest: ForestColors.lightCard,
+    onSurfaceVariant: ForestColors.lightTextSecondary,
+    background: ForestColors.lightBackground,
+    onBackground: ForestColors.lightOnBackground,
+    error: ForestColors.lightError,
+    onError: ForestColors.lightOnError,
+    errorContainer: Color(0xFFFFCDD2),
+    onErrorContainer: Color(0xFFB71C1C),
+    outline: ForestColors.lightBorder,
+    outlineVariant: ForestColors.lightDivider,
+    shadow: ForestColors.lightShadow,
+    scrim: Color(0xFF000000),
+    inverseSurface: ForestColors.darkSurface,
+    onInverseSurface: ForestColors.darkTextPrimary,
+    inversePrimary: ForestColors.darkPrimary,
+  );
+
+  static ColorScheme get _forestDarkColorScheme => const ColorScheme(
+    brightness: Brightness.dark,
+    primary: ForestColors.darkPrimary,
+    onPrimary: ForestColors.darkOnPrimary,
+    primaryContainer: ForestColors.darkSecondary,
+    onPrimaryContainer: ForestColors.darkOnPrimary,
+    secondary: ForestColors.darkSecondary,
+    onSecondary: ForestColors.darkOnSecondary,
+    secondaryContainer: ForestColors.darkCard,
+    onSecondaryContainer: ForestColors.darkTextPrimary,
+    tertiary: ForestColors.accentEmerald,
+    onTertiary: Colors.white,
+    tertiaryContainer: ForestColors.accentMoss,
+    onTertiaryContainer: Colors.white,
+    surface: ForestColors.darkSurface,
+    onSurface: ForestColors.darkOnSurface,
+    surfaceContainerHighest: ForestColors.darkCard,
+    onSurfaceVariant: ForestColors.darkTextSecondary,
+    background: ForestColors.darkBackground,
+    onBackground: ForestColors.darkOnBackground,
+    error: ForestColors.darkError,
+    onError: ForestColors.darkOnError,
+    errorContainer: Color(0xFFB71C1C),
+    onErrorContainer: Color(0xFFFFCDD2),
+    outline: ForestColors.darkBorder,
+    outlineVariant: ForestColors.darkDivider,
+    shadow: ForestColors.darkShadow,
+    scrim: Color(0xFF000000),
+    inverseSurface: ForestColors.lightSurface,
+    onInverseSurface: ForestColors.lightTextPrimary,
+    inversePrimary: ForestColors.lightPrimary,
+  );
+
+  // ===========================================================================
   // TEXT THEME
   // ===========================================================================
 
@@ -395,17 +469,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (primary, onPrimary, shadow) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightPrimary,
-            StarlightColors.lightOnPrimary,
-            StarlightColors.lightShadow,
-          )
-        : (
-            WoodenColors.lightPrimary,
-            WoodenColors.lightOnPrimary,
-            WoodenColors.lightShadow,
-          );
+    final (primary, onPrimary, shadow) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightPrimary,
+        StarlightColors.lightOnPrimary,
+        StarlightColors.lightShadow,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightPrimary,
+        ForestColors.lightOnPrimary,
+        ForestColors.lightShadow,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightPrimary,
+        WoodenColors.lightOnPrimary,
+        WoodenColors.lightShadow,
+      ),
+    };
 
     return AppBarTheme(
       backgroundColor: primary,
@@ -429,17 +509,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (primary, onPrimary, shadow) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkPrimary,
-            StarlightColors.darkOnPrimary,
-            StarlightColors.darkShadow,
-          )
-        : (
-            WoodenColors.darkPrimary,
-            WoodenColors.darkOnPrimary,
-            WoodenColors.darkShadow,
-          );
+    final (primary, onPrimary, shadow) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkPrimary,
+        StarlightColors.darkOnPrimary,
+        StarlightColors.darkShadow,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkPrimary,
+        ForestColors.darkOnPrimary,
+        ForestColors.darkShadow,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkPrimary,
+        WoodenColors.darkOnPrimary,
+        WoodenColors.darkShadow,
+      ),
+    };
 
     return AppBarTheme(
       backgroundColor: primary,
@@ -467,17 +553,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (card, shadow, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightCard,
-            StarlightColors.lightShadow,
-            StarlightColors.lightBorder,
-          )
-        : (
-            WoodenColors.lightCard,
-            WoodenColors.lightShadow,
-            WoodenColors.lightBorder,
-          );
+    final (card, shadow, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightCard,
+        StarlightColors.lightShadow,
+        StarlightColors.lightBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightCard,
+        ForestColors.lightShadow,
+        ForestColors.lightBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightCard,
+        WoodenColors.lightShadow,
+        WoodenColors.lightBorder,
+      ),
+    };
 
     return CardThemeData(
       color: card,
@@ -495,17 +587,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (card, shadow, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkCard,
-            StarlightColors.darkShadow,
-            StarlightColors.darkBorder,
-          )
-        : (
-            WoodenColors.darkCard,
-            WoodenColors.darkShadow,
-            WoodenColors.darkBorder,
-          );
+    final (card, shadow, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkCard,
+        StarlightColors.darkShadow,
+        StarlightColors.darkBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkCard,
+        ForestColors.darkShadow,
+        ForestColors.darkBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkCard,
+        WoodenColors.darkShadow,
+        WoodenColors.darkBorder,
+      ),
+    };
 
     return CardThemeData(
       color: card,
@@ -534,23 +632,32 @@ class AppTheme {
       disabledFg,
       shadow,
       border,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightPrimary,
-            StarlightColors.lightOnPrimary,
-            StarlightColors.lightDisabled,
-            StarlightColors.lightTextSecondary,
-            StarlightColors.lightShadow,
-            StarlightColors.lightBorder,
-          )
-        : (
-            WoodenColors.lightPrimary,
-            WoodenColors.lightOnPrimary,
-            WoodenColors.lightDisabled,
-            WoodenColors.lightTextSecondary,
-            WoodenColors.lightShadow,
-            WoodenColors.lightBorder,
-          );
+    ) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightPrimary,
+        StarlightColors.lightOnPrimary,
+        StarlightColors.lightDisabled,
+        StarlightColors.lightTextSecondary,
+        StarlightColors.lightShadow,
+        StarlightColors.lightBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightPrimary,
+        ForestColors.lightOnPrimary,
+        ForestColors.lightDisabled,
+        ForestColors.lightTextSecondary,
+        ForestColors.lightShadow,
+        ForestColors.lightBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightPrimary,
+        WoodenColors.lightOnPrimary,
+        WoodenColors.lightDisabled,
+        WoodenColors.lightTextSecondary,
+        WoodenColors.lightShadow,
+        WoodenColors.lightBorder,
+      ),
+    };
 
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -585,23 +692,32 @@ class AppTheme {
       disabledFg,
       shadow,
       border,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkPrimary,
-            StarlightColors.darkOnPrimary,
-            StarlightColors.darkDisabled,
-            StarlightColors.darkTextSecondary,
-            StarlightColors.darkShadow,
-            StarlightColors.darkBorder,
-          )
-        : (
-            WoodenColors.darkPrimary,
-            WoodenColors.darkOnPrimary,
-            WoodenColors.darkDisabled,
-            WoodenColors.darkTextSecondary,
-            WoodenColors.darkShadow,
-            WoodenColors.darkBorder,
-          );
+    ) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkPrimary,
+        StarlightColors.darkOnPrimary,
+        StarlightColors.darkDisabled,
+        StarlightColors.darkTextSecondary,
+        StarlightColors.darkShadow,
+        StarlightColors.darkBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkPrimary,
+        ForestColors.darkOnPrimary,
+        ForestColors.darkDisabled,
+        ForestColors.darkTextSecondary,
+        ForestColors.darkShadow,
+        ForestColors.darkBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkPrimary,
+        WoodenColors.darkOnPrimary,
+        WoodenColors.darkDisabled,
+        WoodenColors.darkTextSecondary,
+        WoodenColors.darkShadow,
+        WoodenColors.darkBorder,
+      ),
+    };
 
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -633,9 +749,20 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (primary, disabled) = type == ColorSchemeType.starlight
-        ? (StarlightColors.lightPrimary, StarlightColors.lightDisabled)
-        : (WoodenColors.lightPrimary, WoodenColors.lightDisabled);
+    final (primary, disabled) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightPrimary,
+        StarlightColors.lightDisabled,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightPrimary,
+        ForestColors.lightDisabled,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightPrimary,
+        WoodenColors.lightDisabled,
+      ),
+    };
 
     return TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -658,16 +785,25 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final accent = type == ColorSchemeType.starlight
-        ? StarlightColors.accentStar
-        : WoodenColors.accentAmber;
+    final (accent, disabled) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.accentStar,
+        StarlightColors.darkDisabled,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.accentEmerald,
+        ForestColors.darkDisabled,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.accentAmber,
+        WoodenColors.darkDisabled,
+      ),
+    };
 
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: accent,
-        disabledForegroundColor: type == ColorSchemeType.starlight
-            ? StarlightColors.darkDisabled
-            : WoodenColors.darkDisabled,
+        disabledForegroundColor: disabled,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_borderRadiusSmall),
@@ -689,17 +825,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (primary, disabled, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightPrimary,
-            StarlightColors.lightDisabled,
-            StarlightColors.lightBorder,
-          )
-        : (
-            WoodenColors.lightPrimary,
-            WoodenColors.lightDisabled,
-            WoodenColors.lightBorder,
-          );
+    final (primary, disabled, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightPrimary,
+        StarlightColors.lightDisabled,
+        StarlightColors.lightBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightPrimary,
+        ForestColors.lightDisabled,
+        ForestColors.lightBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightPrimary,
+        WoodenColors.lightDisabled,
+        WoodenColors.lightBorder,
+      ),
+    };
 
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
@@ -723,17 +865,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (accent, disabled, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.accentStar,
-            StarlightColors.darkDisabled,
-            StarlightColors.darkBorder,
-          )
-        : (
-            WoodenColors.accentAmber,
-            WoodenColors.darkDisabled,
-            WoodenColors.darkBorder,
-          );
+    final (accent, disabled, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.accentStar,
+        StarlightColors.darkDisabled,
+        StarlightColors.darkBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.accentEmerald,
+        ForestColors.darkDisabled,
+        ForestColors.darkBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.accentAmber,
+        WoodenColors.darkDisabled,
+        WoodenColors.darkBorder,
+      ),
+    };
 
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
@@ -761,27 +909,29 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      border,
-      primary,
-      error,
-      disabled,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightSurface,
-            StarlightColors.lightBorder,
-            StarlightColors.lightPrimary,
-            StarlightColors.lightError,
-            StarlightColors.lightDisabled,
-          )
-        : (
-            WoodenColors.lightSurface,
-            WoodenColors.lightBorder,
-            WoodenColors.lightPrimary,
-            WoodenColors.lightError,
-            WoodenColors.lightDisabled,
-          );
+    final (surface, border, primary, error, disabled) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightSurface,
+        StarlightColors.lightBorder,
+        StarlightColors.lightPrimary,
+        StarlightColors.lightError,
+        StarlightColors.lightDisabled,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightSurface,
+        ForestColors.lightBorder,
+        ForestColors.lightPrimary,
+        ForestColors.lightError,
+        ForestColors.lightDisabled,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightSurface,
+        WoodenColors.lightBorder,
+        WoodenColors.lightPrimary,
+        WoodenColors.lightError,
+        WoodenColors.lightDisabled,
+      ),
+    };
 
     return InputDecorationTheme(
       filled: true,
@@ -824,27 +974,29 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      border,
-      accent,
-      error,
-      disabled,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkSurface,
-            StarlightColors.darkBorder,
-            StarlightColors.accentStar,
-            StarlightColors.darkError,
-            StarlightColors.darkDisabled,
-          )
-        : (
-            WoodenColors.darkSurface,
-            WoodenColors.darkBorder,
-            WoodenColors.accentAmber,
-            WoodenColors.darkError,
-            WoodenColors.darkDisabled,
-          );
+    final (surface, border, accent, error, disabled) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkSurface,
+        StarlightColors.darkBorder,
+        StarlightColors.accentStar,
+        StarlightColors.darkError,
+        StarlightColors.darkDisabled,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkSurface,
+        ForestColors.darkBorder,
+        ForestColors.accentEmerald,
+        ForestColors.darkError,
+        ForestColors.darkDisabled,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkSurface,
+        WoodenColors.darkBorder,
+        WoodenColors.accentAmber,
+        WoodenColors.darkError,
+        WoodenColors.darkDisabled,
+      ),
+    };
 
     return InputDecorationTheme(
       filled: true,
@@ -891,17 +1043,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (accent, textPrimary, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.accentStar,
-            StarlightColors.lightTextPrimary,
-            StarlightColors.lightBorder,
-          )
-        : (
-            WoodenColors.accentAmber,
-            WoodenColors.lightTextPrimary,
-            WoodenColors.lightBorder,
-          );
+    final (accent, textPrimary, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.accentStar,
+        StarlightColors.lightTextPrimary,
+        StarlightColors.lightBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.accentEmerald,
+        ForestColors.lightTextPrimary,
+        ForestColors.lightBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.accentAmber,
+        WoodenColors.lightTextPrimary,
+        WoodenColors.lightBorder,
+      ),
+    };
 
     return FloatingActionButtonThemeData(
       backgroundColor: accent,
@@ -922,17 +1080,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (accent, textPrimary, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.accentStar,
-            StarlightColors.darkTextPrimary,
-            StarlightColors.darkBorder,
-          )
-        : (
-            WoodenColors.accentAmber,
-            WoodenColors.darkTextPrimary,
-            WoodenColors.darkBorder,
-          );
+    final (accent, textPrimary, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.accentStar,
+        StarlightColors.darkTextPrimary,
+        StarlightColors.darkBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.accentEmerald,
+        ForestColors.darkTextPrimary,
+        ForestColors.darkBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.accentAmber,
+        WoodenColors.darkTextPrimary,
+        WoodenColors.darkBorder,
+      ),
+    };
 
     return FloatingActionButtonThemeData(
       backgroundColor: accent,
@@ -966,9 +1130,11 @@ class AppTheme {
   // ===========================================================================
 
   static DividerThemeData _buildLightDividerTheme(ColorSchemeType type) {
-    final divider = type == ColorSchemeType.starlight
-        ? StarlightColors.lightDivider
-        : WoodenColors.lightDivider;
+    final divider = switch (type) {
+      ColorSchemeType.starlight => StarlightColors.lightDivider,
+      ColorSchemeType.forest => ForestColors.lightDivider,
+      ColorSchemeType.wooden => WoodenColors.lightDivider,
+    };
 
     return DividerThemeData(
       color: divider,
@@ -979,9 +1145,11 @@ class AppTheme {
   }
 
   static DividerThemeData _buildDarkDividerTheme(ColorSchemeType type) {
-    final divider = type == ColorSchemeType.starlight
-        ? StarlightColors.darkDivider
-        : WoodenColors.darkDivider;
+    final divider = switch (type) {
+      ColorSchemeType.starlight => StarlightColors.darkDivider,
+      ColorSchemeType.forest => ForestColors.darkDivider,
+      ColorSchemeType.wooden => WoodenColors.darkDivider,
+    };
 
     return DividerThemeData(
       color: divider,
@@ -999,24 +1167,26 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      card,
-      shadow,
-      border,
-      textPrimary,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightCard,
-            StarlightColors.lightShadow,
-            StarlightColors.lightBorder,
-            StarlightColors.lightTextPrimary,
-          )
-        : (
-            WoodenColors.lightCard,
-            WoodenColors.lightShadow,
-            WoodenColors.lightBorder,
-            WoodenColors.lightTextPrimary,
-          );
+    final (card, shadow, border, textPrimary) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightCard,
+        StarlightColors.lightShadow,
+        StarlightColors.lightBorder,
+        StarlightColors.lightTextPrimary,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightCard,
+        ForestColors.lightShadow,
+        ForestColors.lightBorder,
+        ForestColors.lightTextPrimary,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightCard,
+        WoodenColors.lightShadow,
+        WoodenColors.lightBorder,
+        WoodenColors.lightTextPrimary,
+      ),
+    };
 
     return DialogThemeData(
       backgroundColor: card,
@@ -1039,24 +1209,26 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      card,
-      shadow,
-      border,
-      textPrimary,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkCard,
-            StarlightColors.darkShadow,
-            StarlightColors.darkBorder,
-            StarlightColors.darkTextPrimary,
-          )
-        : (
-            WoodenColors.darkCard,
-            WoodenColors.darkShadow,
-            WoodenColors.darkBorder,
-            WoodenColors.darkTextPrimary,
-          );
+    final (card, shadow, border, textPrimary) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkCard,
+        StarlightColors.darkShadow,
+        StarlightColors.darkBorder,
+        StarlightColors.darkTextPrimary,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkCard,
+        ForestColors.darkShadow,
+        ForestColors.darkBorder,
+        ForestColors.darkTextPrimary,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkCard,
+        WoodenColors.darkShadow,
+        WoodenColors.darkBorder,
+        WoodenColors.darkTextPrimary,
+      ),
+    };
 
     return DialogThemeData(
       backgroundColor: card,
@@ -1083,24 +1255,26 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      primary,
-      disabled,
-      border,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightSurface,
-            StarlightColors.lightPrimary,
-            StarlightColors.lightDisabled,
-            StarlightColors.lightBorder,
-          )
-        : (
-            WoodenColors.lightSurface,
-            WoodenColors.lightPrimary,
-            WoodenColors.lightDisabled,
-            WoodenColors.lightBorder,
-          );
+    final (surface, primary, disabled, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightSurface,
+        StarlightColors.lightPrimary,
+        StarlightColors.lightDisabled,
+        StarlightColors.lightBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightSurface,
+        ForestColors.lightPrimary,
+        ForestColors.lightDisabled,
+        ForestColors.lightBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightSurface,
+        WoodenColors.lightPrimary,
+        WoodenColors.lightDisabled,
+        WoodenColors.lightBorder,
+      ),
+    };
 
     return SnackBarThemeData(
       backgroundColor: surface,
@@ -1120,24 +1294,26 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      accent,
-      disabled,
-      border,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkSurface,
-            StarlightColors.accentStar,
-            StarlightColors.darkDisabled,
-            StarlightColors.darkBorder,
-          )
-        : (
-            WoodenColors.darkSurface,
-            WoodenColors.accentAmber,
-            WoodenColors.darkDisabled,
-            WoodenColors.darkBorder,
-          );
+    final (surface, accent, disabled, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkSurface,
+        StarlightColors.accentStar,
+        StarlightColors.darkDisabled,
+        StarlightColors.darkBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkSurface,
+        ForestColors.accentEmerald,
+        ForestColors.darkDisabled,
+        ForestColors.darkBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkSurface,
+        WoodenColors.accentAmber,
+        WoodenColors.darkDisabled,
+        WoodenColors.darkBorder,
+      ),
+    };
 
     return SnackBarThemeData(
       backgroundColor: surface,
@@ -1161,17 +1337,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (card, shadow, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightCard,
-            StarlightColors.lightShadow,
-            StarlightColors.lightBorder,
-          )
-        : (
-            WoodenColors.lightCard,
-            WoodenColors.lightShadow,
-            WoodenColors.lightBorder,
-          );
+    final (card, shadow, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightCard,
+        StarlightColors.lightShadow,
+        StarlightColors.lightBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightCard,
+        ForestColors.lightShadow,
+        ForestColors.lightBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightCard,
+        WoodenColors.lightShadow,
+        WoodenColors.lightBorder,
+      ),
+    };
 
     return BottomSheetThemeData(
       backgroundColor: card,
@@ -1190,17 +1372,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (card, shadow, border) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkCard,
-            StarlightColors.darkShadow,
-            StarlightColors.darkBorder,
-          )
-        : (
-            WoodenColors.darkCard,
-            WoodenColors.darkShadow,
-            WoodenColors.darkBorder,
-          );
+    final (card, shadow, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkCard,
+        StarlightColors.darkShadow,
+        StarlightColors.darkBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkCard,
+        ForestColors.darkShadow,
+        ForestColors.darkBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkCard,
+        WoodenColors.darkShadow,
+        WoodenColors.darkBorder,
+      ),
+    };
 
     return BottomSheetThemeData(
       backgroundColor: card,
@@ -1223,27 +1411,29 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      disabled,
-      primary,
-      secondary,
-      border,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightSurface,
-            StarlightColors.lightDisabled,
-            StarlightColors.lightPrimary,
-            StarlightColors.lightSecondary,
-            StarlightColors.lightBorder,
-          )
-        : (
-            WoodenColors.lightSurface,
-            WoodenColors.lightDisabled,
-            WoodenColors.lightPrimary,
-            WoodenColors.lightSecondary,
-            WoodenColors.lightBorder,
-          );
+    final (surface, disabled, primary, secondary, border) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightSurface,
+        StarlightColors.lightDisabled,
+        StarlightColors.lightPrimary,
+        StarlightColors.lightSecondary,
+        StarlightColors.lightBorder,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightSurface,
+        ForestColors.lightDisabled,
+        ForestColors.lightPrimary,
+        ForestColors.lightSecondary,
+        ForestColors.lightBorder,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightSurface,
+        WoodenColors.lightDisabled,
+        WoodenColors.lightPrimary,
+        WoodenColors.lightSecondary,
+        WoodenColors.lightBorder,
+      ),
+    };
 
     return ChipThemeData(
       backgroundColor: surface,
@@ -1267,32 +1457,35 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      disabled,
-      accent,
-      border,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkSurface,
-            StarlightColors.darkDisabled,
-            StarlightColors.accentStar,
-            StarlightColors.darkBorder,
-          )
-        : (
-            WoodenColors.darkSurface,
-            WoodenColors.darkDisabled,
-            WoodenColors.accentAmber,
-            WoodenColors.darkBorder,
-          );
+    final (surface, disabled, accent, border, accentSecondary) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkSurface,
+        StarlightColors.darkDisabled,
+        StarlightColors.accentStar,
+        StarlightColors.darkBorder,
+        StarlightColors.accentNebula,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkSurface,
+        ForestColors.darkDisabled,
+        ForestColors.accentEmerald,
+        ForestColors.darkBorder,
+        ForestColors.accentMoss,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkSurface,
+        WoodenColors.darkDisabled,
+        WoodenColors.accentAmber,
+        WoodenColors.darkBorder,
+        WoodenColors.accentCopper,
+      ),
+    };
 
     return ChipThemeData(
       backgroundColor: surface,
       disabledColor: disabled,
       selectedColor: accent.withAlpha(51),
-      secondarySelectedColor: type == ColorSchemeType.starlight
-          ? StarlightColors.accentNebula.withAlpha(51)
-          : WoodenColors.accentCopper.withAlpha(51),
+      secondarySelectedColor: accentSecondary.withAlpha(51),
       labelStyle: TextStyle(color: colorScheme.onSurface, fontSize: 14),
       secondaryLabelStyle: TextStyle(
         color: colorScheme.onSurface,
@@ -1314,17 +1507,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (primary, textSecondary, divider) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightPrimary,
-            StarlightColors.lightTextSecondary,
-            StarlightColors.lightDivider,
-          )
-        : (
-            WoodenColors.lightPrimary,
-            WoodenColors.lightTextSecondary,
-            WoodenColors.lightDivider,
-          );
+    final (primary, textSecondary, divider) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightPrimary,
+        StarlightColors.lightTextSecondary,
+        StarlightColors.lightDivider,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightPrimary,
+        ForestColors.lightTextSecondary,
+        ForestColors.lightDivider,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightPrimary,
+        WoodenColors.lightTextSecondary,
+        WoodenColors.lightDivider,
+      ),
+    };
 
     return SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
@@ -1352,35 +1551,42 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final accent = type == ColorSchemeType.starlight
-        ? StarlightColors.accentStar
-        : WoodenColors.accentAmber;
+    final (accent, textSecondary, divider) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.accentStar,
+        StarlightColors.darkTextSecondary,
+        StarlightColors.darkDivider,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.accentEmerald,
+        ForestColors.darkTextSecondary,
+        ForestColors.darkDivider,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.accentAmber,
+        WoodenColors.darkTextSecondary,
+        WoodenColors.darkDivider,
+      ),
+    };
 
     return SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           return accent;
         }
-        return type == ColorSchemeType.starlight
-            ? StarlightColors.darkTextSecondary
-            : WoodenColors.darkTextSecondary;
+        return textSecondary;
       }),
       trackColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           return accent.withAlpha(128);
         }
-        return type == ColorSchemeType.starlight
-            ? StarlightColors.darkDivider
-            : WoodenColors.darkDivider;
+        return divider;
       }),
       overlayColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           return accent.withAlpha(51);
         }
-        return (type == ColorSchemeType.starlight
-                ? StarlightColors.darkTextSecondary
-                : WoodenColors.darkTextSecondary)
-            .withAlpha(51);
+        return textSecondary.withAlpha(51);
       }),
     );
   }
@@ -1393,17 +1599,23 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (primary, divider, accent) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightPrimary,
-            StarlightColors.lightDivider,
-            StarlightColors.accentStar,
-          )
-        : (
-            WoodenColors.lightPrimary,
-            WoodenColors.lightDivider,
-            WoodenColors.accentAmber,
-          );
+    final (primary, divider, accent) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightPrimary,
+        StarlightColors.lightDivider,
+        StarlightColors.accentStar,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightPrimary,
+        ForestColors.lightDivider,
+        ForestColors.accentEmerald,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightPrimary,
+        WoodenColors.lightDivider,
+        WoodenColors.accentAmber,
+      ),
+    };
 
     return SliderThemeData(
       activeTrackColor: primary,
@@ -1425,23 +1637,29 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final accent = type == ColorSchemeType.starlight
-        ? StarlightColors.accentStar
-        : WoodenColors.accentAmber;
+    final (accent, divider, thumbColor) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.accentStar,
+        StarlightColors.darkDivider,
+        StarlightColors.accentNebula,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.accentEmerald,
+        ForestColors.darkDivider,
+        ForestColors.accentMoss,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.accentAmber,
+        WoodenColors.darkDivider,
+        WoodenColors.accentCopper,
+      ),
+    };
 
     return SliderThemeData(
       activeTrackColor: accent,
-      inactiveTrackColor: type == ColorSchemeType.starlight
-          ? StarlightColors.darkDivider
-          : WoodenColors.darkDivider,
-      thumbColor: type == ColorSchemeType.starlight
-          ? StarlightColors.accentNebula
-          : WoodenColors.accentCopper,
-      overlayColor:
-          (type == ColorSchemeType.starlight
-                  ? StarlightColors.accentNebula
-                  : WoodenColors.accentCopper)
-              .withAlpha(51),
+      inactiveTrackColor: divider,
+      thumbColor: thumbColor,
+      overlayColor: thumbColor.withAlpha(51),
       valueIndicatorColor: colorScheme.surface,
       valueIndicatorTextStyle: TextStyle(
         color: colorScheme.onSurface,
@@ -1461,24 +1679,26 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      border,
-      shadow,
-      textPrimary,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.lightSurface,
-            StarlightColors.lightBorder,
-            StarlightColors.lightShadow,
-            StarlightColors.lightTextPrimary,
-          )
-        : (
-            WoodenColors.lightSurface,
-            WoodenColors.lightBorder,
-            WoodenColors.lightShadow,
-            WoodenColors.lightTextPrimary,
-          );
+    final (surface, border, shadow, textPrimary) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.lightSurface,
+        StarlightColors.lightBorder,
+        StarlightColors.lightShadow,
+        StarlightColors.lightTextPrimary,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.lightSurface,
+        ForestColors.lightBorder,
+        ForestColors.lightShadow,
+        ForestColors.lightTextPrimary,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.lightSurface,
+        WoodenColors.lightBorder,
+        WoodenColors.lightShadow,
+        WoodenColors.lightTextPrimary,
+      ),
+    };
 
     return TooltipThemeData(
       decoration: BoxDecoration(
@@ -1503,24 +1723,26 @@ class AppTheme {
     ColorScheme colorScheme,
     ColorSchemeType type,
   ) {
-    final (
-      surface,
-      border,
-      shadow,
-      textPrimary,
-    ) = type == ColorSchemeType.starlight
-        ? (
-            StarlightColors.darkSurface,
-            StarlightColors.darkBorder,
-            StarlightColors.darkShadow,
-            StarlightColors.darkTextPrimary,
-          )
-        : (
-            WoodenColors.darkSurface,
-            WoodenColors.darkBorder,
-            WoodenColors.darkShadow,
-            WoodenColors.darkTextPrimary,
-          );
+    final (surface, border, shadow, textPrimary) = switch (type) {
+      ColorSchemeType.starlight => (
+        StarlightColors.darkSurface,
+        StarlightColors.darkBorder,
+        StarlightColors.darkShadow,
+        StarlightColors.darkTextPrimary,
+      ),
+      ColorSchemeType.forest => (
+        ForestColors.darkSurface,
+        ForestColors.darkBorder,
+        ForestColors.darkShadow,
+        ForestColors.darkTextPrimary,
+      ),
+      ColorSchemeType.wooden => (
+        WoodenColors.darkSurface,
+        WoodenColors.darkBorder,
+        WoodenColors.darkShadow,
+        WoodenColors.darkTextPrimary,
+      ),
+    };
 
     return TooltipThemeData(
       decoration: BoxDecoration(

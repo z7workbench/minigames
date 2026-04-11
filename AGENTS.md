@@ -315,12 +315,13 @@ Text(AppLocalizations.of(context)!.appTitle)
 
 ### ⚠️ 重要：多主题适配规范
 
-本项目支持 **2 种配色方案 × 2 种亮度模式 = 4 种主题组合**：
+本项目支持 **3 种配色方案 × 2 种亮度模式 = 6 种主题组合**：
 
 | 配色方案 | 浅色模式 | 深色模式 |
 |---------|---------|---------|
 | **木质 (Wooden)** | 暖木色调（卡其色、棕色） | 深胡桃色（深棕、乌木） |
 | **星空 (Starlight)** | 柔和紫色、天蓝色 | 深紫色、深蓝色 |
+| **森林 (Forest)** | 柔和绿色、薄荷色 | 墨绿色（深森林色） |
 
 **🚨 组件开发必须适配所有 4 种主题组合！**
 
@@ -335,7 +336,7 @@ class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // ✅ 背景色 - 自动适配木质/星空 + 深色/浅色
+      // ✅ 背景色 - 自动适配木质/星空/森林 + 深色/浅色
       color: context.themeBackground,
       
       // ✅ 主要文字颜色
@@ -371,7 +372,7 @@ Icon(Icons.settings, color: WoodenColors.accentAmber),
 | `context.themeBackground` | 背景色 | Scaffold 背景 |
 | `context.themeSurface` | 表面色 | 卡片、容器背景 |
 | `context.themeCard` | 卡片色 | 卡片背景 |
-| `context.themeAccent` | 强调色 | 图标、按钮、高亮（木质=琥珀色，星空=紫色） |
+| `context.themeAccent` | 强调色 | 图标、按钮、高亮（木质=琥珀色，星空=紫色，森林=翠绿色） |
 | `context.themeAccentSecondary` | 次强调色 | 渐变、次要强调 |
 | `context.themeTextPrimary` | 主要文字 | 标题、重要文字 |
 | `context.themeTextSecondary` | 次要文字 | 描述、辅助文字 |
@@ -396,6 +397,7 @@ Icon(Icons.settings, color: WoodenColors.accentAmber),
 
 - **木质主题**: `lib/ui/theme/wooden_colors.dart`
 - **星空主题**: `lib/ui/theme/starlight_colors.dart`
+- **森林主题**: `lib/ui/theme/forest_colors.dart`
 - **主题感知扩展**: `lib/ui/theme/theme_colors.dart`
 - **主题应用**: `lib/ui/theme/app_theme.dart`
 - **主题 Provider**: `lib/ui/theme/theme_provider.dart`
@@ -418,8 +420,10 @@ ref.read(colorSchemeNotifierProvider.notifier).setColorScheme(ColorSchemeType.st
 - [ ] 已导入 `theme_colors.dart`
 - [ ] 在 **深色+木质** 主题下测试
 - [ ] 在 **深色+星空** 主题下测试
+- [ ] 在 **深色+森林** 主题下测试
 - [ ] 在 **浅色+木质** 主题下测试
 - [ ] 在 **浅色+星空** 主题下测试
+- [ ] 在 **浅色+森林** 主题下测试
 - [ ] AppBar 上的图标/文字使用 `themeOnPrimary`
 - [ ] 按钮使用 `WoodenButton` 组件（已适配主题）
 

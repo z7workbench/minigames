@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'theme_provider.g.dart';
 
 /// Available color schemes
-enum ColorSchemeType { wooden, starlight }
+enum ColorSchemeType { wooden, starlight, forest }
 
 @riverpod
 class ThemeModeNotifier extends _$ThemeModeNotifier {
@@ -78,6 +78,8 @@ class ColorSchemeNotifier extends _$ColorSchemeNotifier {
     switch (schemeString) {
       case 'starlight':
         return ColorSchemeType.starlight;
+      case 'forest':
+        return ColorSchemeType.forest;
       case 'wooden':
       default:
         return ColorSchemeType.wooden;
@@ -89,9 +91,11 @@ class ColorSchemeNotifier extends _$ColorSchemeNotifier {
   }
 
   Future<void> _setColorScheme(ColorSchemeType scheme) async {
-    final schemeString = scheme == ColorSchemeType.starlight
-        ? 'starlight'
-        : 'wooden';
+    final schemeString = switch (scheme) {
+      ColorSchemeType.starlight => 'starlight',
+      ColorSchemeType.forest => 'forest',
+      ColorSchemeType.wooden => 'wooden',
+    };
 
     await _prefs.setString('color_scheme', schemeString);
     state = AsyncValue.data(scheme);
