@@ -14,15 +14,24 @@ part 'twenty48_provider.g.dart';
 
 final _random = Random();
 
-@riverpod
+/// Provider for the 2048 game state.
+///
+/// IMPORTANT: keepAlive: true is required because:
+/// - The game state must persist across screen navigation (start -> load -> game)
+/// - Without keepAlive, auto-dispose would reset the state to initial()
+/// - This causes loaded saves to be lost when navigating to Twenty48Screen
+@Riverpod(keepAlive: true)
 class Twenty48Game extends _$Twenty48Game {
   Timer? _timer;
+  Timer? _autoSaveTimer;
+  static const _autoSaveInterval = Duration(minutes: 3);
 
   @override
   Twenty48State build() {
-    // Clean up timer when provider is disposed
+    // Clean up timers when provider is disposed
     ref.onDispose(() {
       _timer?.cancel();
+      _autoSaveTimer?.cancel();
     });
     return Twenty48State.initial();
   }
@@ -30,6 +39,7 @@ class Twenty48Game extends _$Twenty48Game {
   /// Start a new game with two initial tiles.
   void startNewGame() {
     _timer?.cancel();
+    _cancelAutoSaveTimer();
 
     // Create empty grid
     final grid = List.generate(4, (_) => List<Twenty48Tile?>.filled(4, null));
@@ -49,13 +59,16 @@ class Twenty48Game extends _$Twenty48Game {
     );
 
     _startTimer();
+    _startAutoSaveTimer();
   }
 
   /// Load a saved game from the given state.
   void loadGame(Twenty48State savedState) {
     _timer?.cancel();
+    _cancelAutoSaveTimer();
     state = savedState.copyWith(status: Twenty48Status.playing);
     _startTimer();
+    _startAutoSaveTimer();
   }
 
   /// Move tiles in the given direction.
@@ -129,6 +142,7 @@ class Twenty48Game extends _$Twenty48Game {
     if (state.status == Twenty48Status.gameOver ||
         state.status == Twenty48Status.won) {
       _timer?.cancel();
+      _cancelAutoSaveTimer();
       _saveGameRecord();
     }
   }
@@ -137,6 +151,7 @@ class Twenty48Game extends _$Twenty48Game {
   void pause() {
     if (state.status == Twenty48Status.playing) {
       _timer?.cancel();
+      _cancelAutoSaveTimer();
       state = state.copyWith(status: Twenty48Status.paused);
     }
   }
@@ -146,6 +161,7 @@ class Twenty48Game extends _$Twenty48Game {
     if (state.status == Twenty48Status.paused) {
       state = state.copyWith(status: Twenty48Status.playing);
       _startTimer();
+      _startAutoSaveTimer();
     }
   }
 
@@ -165,7 +181,7 @@ class Twenty48Game extends _$Twenty48Game {
 
     return await dao.saveGame(
       Twenty48SavesCompanion.insert(
-        slotIndex: Value(slotIndex),
+        slotIndex: slotIndex,
         gameStateJson: jsonEncode(state.toJson()),
         score: state.score,
         maxTile: maxTile,
@@ -213,6 +229,104 @@ class Twenty48Game extends _$Twenty48Game {
         : 0; // Return 0 if all slots are full (will overwrite)
   }
 
+  /// Auto-save current game to slot 0.
+  Future<int> autoSave() async {
+    final dao = ref.read(twenty48SavesDaoProvider);
+
+    // Calculate max tile
+    int maxTile = 0;
+    for (final row in state.grid) {
+      for (final tile in row) {
+        if (tile != null && tile.value > maxTile) {
+          maxTile = tile.value;
+        }
+      }
+    }
+
+    return await dao.saveGame(
+      Twenty48SavesCompanion.insert(
+        slotIndex: 0, // Always slot 0 for auto-save
+        gameStateJson: jsonEncode(state.toJson()),
+        score: state.score,
+        maxTile: maxTile,
+      ),
+    );
+  }
+
+  /// Save current game to a manual save slot (1-3).
+  Future<int> saveToManualSlot(int slotIndex) async {
+    if (slotIndex < 1 || slotIndex > 3) {
+      throw ArgumentError('Manual save slots must be 1-3');
+    }
+
+    final dao = ref.read(twenty48SavesDaoProvider);
+
+    int maxTile = 0;
+    for (final row in state.grid) {
+      for (final tile in row) {
+        if (tile != null && tile.value > maxTile) {
+          maxTile = tile.value;
+        }
+      }
+    }
+
+    return await dao.saveGame(
+      Twenty48SavesCompanion.insert(
+        slotIndex: slotIndex,
+        gameStateJson: jsonEncode(state.toJson()),
+        score: state.score,
+        maxTile: maxTile,
+      ),
+    );
+  }
+
+  /// Get the auto-save (slot 0).
+  Future<Twenty48Save?> getAutoSave() async {
+    final dao = ref.read(twenty48SavesDaoProvider);
+    return await dao.getAutoSave();
+  }
+
+  /// Get all manual saves (slots 1-3).
+  Future<List<Twenty48Save>> getManualSaves() async {
+    final dao = ref.read(twenty48SavesDaoProvider);
+    return await dao.getManualSaves();
+  }
+
+  /// Check if an auto-save exists.
+  Future<bool> hasAutoSave() async {
+    final dao = ref.read(twenty48SavesDaoProvider);
+    return await dao.hasAutoSave();
+  }
+
+  /// Check if any manual saves exist.
+  Future<bool> hasManualSaves() async {
+    final dao = ref.read(twenty48SavesDaoProvider);
+    return await dao.hasManualSaves();
+  }
+
+  /// Get first available empty manual slot (1-3).
+  /// Returns -1 if all manual slots are full.
+  Future<int> getFirstEmptyManualSlot() async {
+    final dao = ref.read(twenty48SavesDaoProvider);
+    return await dao.getFirstEmptyManualSlot();
+  }
+
+  /// Check if a specific manual slot has a save.
+  Future<bool> isManualSlotOccupied(int slotIndex) async {
+    if (slotIndex < 1 || slotIndex > 3) return false;
+    final dao = ref.read(twenty48SavesDaoProvider);
+    final save = await dao.getSaveBySlot(slotIndex);
+    return save != null;
+  }
+
+  /// Reset the game state to initial.
+  /// Call this when exiting the game screen to clean up for next session.
+  void reset() {
+    _timer?.cancel();
+    _cancelAutoSaveTimer();
+    state = Twenty48State.initial();
+  }
+
   void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
@@ -220,6 +334,20 @@ class Twenty48Game extends _$Twenty48Game {
         state = state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
       }
     });
+  }
+
+  void _startAutoSaveTimer() {
+    _autoSaveTimer?.cancel();
+    _autoSaveTimer = Timer.periodic(_autoSaveInterval, (_) {
+      if (state.status == Twenty48Status.playing) {
+        autoSave();
+      }
+    });
+  }
+
+  void _cancelAutoSaveTimer() {
+    _autoSaveTimer?.cancel();
+    _autoSaveTimer = null;
   }
 
   /// Clear merge and spawn flags from all tiles.
