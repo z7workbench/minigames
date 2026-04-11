@@ -602,7 +602,7 @@ class _AboutSetting extends StatelessWidget {
 
   Future<String> _getVersion() async {
     final packageInfo = await PackageInfo.fromPlatform();
-    return packageInfo.version;
+    return '${packageInfo.version} "Energetic Elderberry"';
   }
 
   @override
