@@ -21,7 +21,8 @@ class Twenty48LoadScreen extends ConsumerStatefulWidget {
 }
 
 class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
-  List<Twenty48Save> _saves = [];
+  Twenty48Save? _autoSave;
+  List<Twenty48Save> _manualSaves = [];
   bool _isLoading = true;
 
   @override
@@ -31,10 +32,16 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
   }
 
   Future<void> _loadSaves() async {
-    final saves = await ref.read(twenty48GameProvider.notifier).getAllSaves();
+    final autoSave = await ref
+        .read(twenty48GameProvider.notifier)
+        .getAutoSave();
+    final manualSaves = await ref
+        .read(twenty48GameProvider.notifier)
+        .getManualSaves();
     if (mounted) {
       setState(() {
-        _saves = saves;
+        _autoSave = autoSave;
+        _manualSaves = manualSaves;
         _isLoading = false;
       });
     }
@@ -53,24 +60,32 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
     );
   }
 
-  Future<void> _deleteSave(Twenty48Save save) async {
+  Future<void> _deleteSave(Twenty48Save save, bool isAutoSave) async {
+    final l10n = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Save'),
-        content: const Text('Are you sure you want to delete this save?'),
+        title: Text(l10n.t48_delete),
+        content: Text(
+          isAutoSave
+              ? '${l10n.t48_autoSave} - ${l10n.t48_delete}?'
+              : '${l10n.t48_saveSlot(save.slotIndex)} - ${l10n.t48_delete}?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
+              backgroundColor: themeColors.error,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Delete'),
+            child: Text(l10n.t48_delete),
           ),
         ],
       ),
@@ -82,32 +97,15 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
     }
   }
 
-  String _formatDuration(int seconds) {
-    final hours = seconds ~/ 3600;
-    final minutes = (seconds % 3600) ~/ 60;
-    final secs = seconds % 60;
-
-    if (hours > 0) {
-      return '${hours}h ${minutes}m ${secs}s';
-    } else if (minutes > 0) {
-      return '${minutes}m ${secs}s';
-    } else {
-      return '${secs}s';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
-    final backgroundColor = themeColors.background;
-    final surfaceColor = themeColors.surface;
-    final textPrimaryColor = themeColors.textPrimary;
-    final textSecondaryColor = themeColors.textSecondary;
+    final dateFormat = DateFormat.yMd().add_jm();
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: themeColors.background,
       appBar: AppBar(
         title: Text(l10n.t48_loadGame),
         backgroundColor: themeColors.primary,
@@ -120,122 +118,193 @@ class _Twenty48LoadScreenState extends ConsumerState<Twenty48LoadScreen> {
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _saves.isEmpty
+          : (_autoSave == null && _manualSaves.isEmpty)
           ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.folder_off, size: 64, color: textSecondaryColor),
+                  Icon(
+                    Icons.folder_off,
+                    size: 64,
+                    color: themeColors.textSecondary,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     l10n.t48_noSaves,
-                    style: TextStyle(color: textSecondaryColor, fontSize: 18),
+                    style: TextStyle(
+                      color: themeColors.textSecondary,
+                      fontSize: 18,
+                    ),
                   ),
                 ],
               ),
             )
-          : ListView.builder(
+          : ListView(
               padding: const EdgeInsets.all(16),
-              itemCount: _saves.length,
-              itemBuilder: (context, index) {
-                final save = _saves[index];
-                final dateFormat = DateFormat.yMd().add_jm();
+              children: [
+                // Auto-save section (if exists)
+                if (_autoSave != null)
+                  _buildSaveCard(
+                    context,
+                    _autoSave!,
+                    l10n,
+                    dateFormat,
+                    themeColors,
+                    isAutoSave: true,
+                  ),
 
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 12),
+                // Divider between auto-save and manual saves
+                if (_autoSave != null && _manualSaves.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Divider(color: themeColors.divider),
+                  ),
+
+                // Manual saves
+                ..._manualSaves.map(
+                  (save) => _buildSaveCard(
+                    context,
+                    save,
+                    l10n,
+                    dateFormat,
+                    themeColors,
+                    isAutoSave: false,
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildSaveCard(
+    BuildContext context,
+    Twenty48Save save,
+    AppLocalizations l10n,
+    DateFormat dateFormat,
+    dynamic themeColors, {
+    required bool isAutoSave,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: themeColors.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isAutoSave ? themeColors.accent : themeColors.border,
+          width: isAutoSave ? 2 : 1.5,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: themeColors.shadow.withAlpha(100),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () => _loadSave(save),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                // Icon/Max tile display
+                Container(
+                  width: 60,
+                  height: 60,
                   decoration: BoxDecoration(
-                    color: surfaceColor,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: themeColors.border, width: 1.5),
-                    boxShadow: [
-                      BoxShadow(
-                        color: themeColors.shadow.withAlpha(100),
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
+                    color: isAutoSave
+                        ? themeColors.accent.withAlpha(30)
+                        : themeColors.card,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: isAutoSave
+                        ? Icon(
+                            Icons.history,
+                            size: 32,
+                            color: themeColors.accent,
+                          )
+                        : Text(
+                            '${save.maxTile}',
+                            style: TextStyle(
+                              fontSize: save.maxTile >= 1000 ? 16 : 20,
+                              fontWeight: FontWeight.bold,
+                              color: themeColors.textPrimary,
+                            ),
+                          ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+
+                // Save info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            isAutoSave
+                                ? l10n.t48_autoSave
+                                : l10n.t48_saveSlot(save.slotIndex),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: themeColors.textPrimary,
+                            ),
+                          ),
+                          if (isAutoSave)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Icon(
+                                Icons.info_outline,
+                                size: 16,
+                                color: themeColors.textSecondary,
+                              ),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '${l10n.score}: ${save.score}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: themeColors.textSecondary,
+                        ),
+                      ),
+                      if (!isAutoSave)
+                        Text(
+                          '${l10n.t48_maxTile}: ${save.maxTile}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: themeColors.textSecondary,
+                          ),
+                        ),
+                      Text(
+                        l10n.t48_savedAt(dateFormat.format(save.savedAt)),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: themeColors.textSecondary,
+                        ),
                       ),
                     ],
                   ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: () => _loadSave(save),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Row(
-                          children: [
-                            // Max tile display
-                            Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: themeColors.card,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '${save.maxTile}',
-                                  style: TextStyle(
-                                    fontSize: save.maxTile >= 1000 ? 16 : 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: textPrimaryColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
+                ),
 
-                            // Save info
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    l10n.t48_saveSlot(save.slotIndex + 1),
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: textPrimaryColor,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    '${l10n.score}: ${save.score}',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: textSecondaryColor,
-                                    ),
-                                  ),
-                                  Text(
-                                    l10n.t48_savedAt(
-                                      dateFormat.format(save.savedAt),
-                                    ),
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: textSecondaryColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            // Delete button
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete_outline,
-                                color: themeColors.error,
-                              ),
-                              onPressed: () => _deleteSave(save),
-                              tooltip: l10n.t48_delete,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
+                // Delete button
+                IconButton(
+                  icon: Icon(Icons.delete_outline, color: themeColors.error),
+                  onPressed: () => _deleteSave(save, isAutoSave),
+                  tooltip: l10n.t48_delete,
+                ),
+              ],
             ),
+          ),
+        ),
+      ),
     );
   }
 }
