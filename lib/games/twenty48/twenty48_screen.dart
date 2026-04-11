@@ -257,74 +257,121 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
             onHorizontalDragEnd: _handleSwipeEnd,
             onVerticalDragStart: _handleSwipeStart,
             onVerticalDragEnd: _handleSwipeEnd,
-            child: Column(
-              children: [
-                // Score and time display
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildScoreCard(
-                        context,
-                        l10n.score,
-                        state.score.toString(),
-                        isDark,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isLandscape =
+                    constraints.maxWidth > constraints.maxHeight;
+                final isSmallScreen = constraints.maxHeight < 500;
+
+                // Calculate reserved space for UI elements (score, instructions, button)
+                final scoreAreaHeight = isLandscape ? 48.0 : 72.0;
+                final instructionsHeight = isSmallScreen
+                    ? 0.0
+                    : (isLandscape ? 32.0 : 48.0);
+                final buttonHeight = isLandscape ? 48.0 : 64.0;
+                final verticalPadding = isLandscape ? 16.0 : 32.0;
+
+                final totalReserved =
+                    scoreAreaHeight +
+                    instructionsHeight +
+                    buttonHeight +
+                    verticalPadding;
+                final availableHeight = constraints.maxHeight - totalReserved;
+                final availableWidth = constraints.maxWidth - 32.0;
+
+                // Grid size is the minimum of available width and height (maximize but stay within bounds)
+                final gridSize = [
+                  availableWidth,
+                  availableHeight,
+                ].reduce((a, b) => a < b ? a : b).clamp(200.0, double.infinity);
+
+                // Adjust spacing and padding for smaller screens
+                final gridSpacing = gridSize < 280 ? 4.0 : 8.0;
+                final gridPadding = gridSize < 280 ? 4.0 : 8.0;
+
+                return Column(
+                  children: [
+                    // Score and time display
+                    Padding(
+                      padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildScoreCard(
+                            context,
+                            l10n.score,
+                            state.score.toString(),
+                            isDark,
+                            compact: isLandscape,
+                          ),
+                          _buildScoreCard(
+                            context,
+                            l10n.highScore,
+                            state.bestScore.toString(),
+                            isDark,
+                            compact: isLandscape,
+                          ),
+                          _buildScoreCard(
+                            context,
+                            l10n.time,
+                            _formatTime(state.elapsedSeconds),
+                            isDark,
+                            compact: isLandscape,
+                          ),
+                        ],
                       ),
-                      _buildScoreCard(
-                        context,
-                        l10n.highScore,
-                        state.bestScore.toString(),
-                        isDark,
+                    ),
+
+                    // Game grid - centered and maximized within available space
+                    Expanded(
+                      child: Center(
+                        child: SizedBox(
+                          width: gridSize,
+                          height: gridSize,
+                          child: GridWidget(
+                            grid: state.grid,
+                            spacing: gridSpacing,
+                            padding: gridPadding,
+                          ),
+                        ),
                       ),
-                      _buildScoreCard(
-                        context,
-                        l10n.time,
-                        _formatTime(state.elapsedSeconds),
-                        isDark,
+                    ),
+
+                    // Instructions (hide in small screens)
+                    if (!isSmallScreen)
+                      Padding(
+                        padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
+                        child: Text(
+                          l10n.t48_instructions,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: textSecondaryColor,
+                            fontSize: isLandscape ? 12.0 : 14.0,
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                ),
 
-                const Spacer(),
-
-                // Game grid
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: AspectRatio(
-                    aspectRatio: 1.0,
-                    child: GridWidget(grid: state.grid),
-                  ),
-                ),
-
-                const Spacer(),
-
-                // Instructions
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    l10n.t48_instructions,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: textSecondaryColor, fontSize: 14),
-                  ),
-                ),
-
-                // New game button
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: WoodenButton(
-                    text: l10n.t48_newGame,
-                    icon: Icons.refresh,
-                    size: WoodenButtonSize.medium,
-                    variant: WoodenButtonVariant.secondary,
-                    expandWidth: true,
-                    onPressed: () {
-                      ref.read(twenty48GameProvider.notifier).startNewGame();
-                    },
-                  ),
-                ),
-              ],
+                    // New game button
+                    Padding(
+                      padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
+                      child: WoodenButton(
+                        text: l10n.t48_newGame,
+                        icon: Icons.refresh,
+                        size: isLandscape
+                            ? WoodenButtonSize.small
+                            : WoodenButtonSize.medium,
+                        variant: WoodenButtonVariant.secondary,
+                        expandWidth: true,
+                        onPressed: () {
+                          ref
+                              .read(twenty48GameProvider.notifier)
+                              .startNewGame();
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
@@ -527,11 +574,15 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
     BuildContext context,
     String label,
     String value,
-    bool isDark,
-  ) {
+    bool isDark, {
+    bool compact = false,
+  }) {
     final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: EdgeInsets.symmetric(
+        horizontal: compact ? 10 : 16,
+        vertical: compact ? 6 : 12,
+      ),
       decoration: BoxDecoration(
         color: themeColors.surface,
         borderRadius: BorderRadius.circular(8),
@@ -541,13 +592,16 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 12, color: themeColors.textSecondary),
+            style: TextStyle(
+              fontSize: compact ? 10 : 12,
+              color: themeColors.textSecondary,
+            ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: compact ? 2 : 4),
           Text(
             value,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: compact ? 16 : 20,
               fontWeight: FontWeight.bold,
               color: themeColors.textPrimary,
             ),
