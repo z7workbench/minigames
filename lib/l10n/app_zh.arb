@@ -1026,6 +1026,22 @@
   "@t48_overwrite": {
     "description": "2048 overwrite save button"
   },
+  "t48_autoSave": "自动保存",
+  "@t48_autoSave": {
+    "description": "2048 auto-save slot label"
+  },
+  "t48_overwriteConfirm": "该存档位已有存档，是否覆盖？",
+  "@t48_overwriteConfirm": {
+    "description": "2048 overwrite confirmation message"
+  },
+  "t48_savedSuccessfully": "游戏已保存！",
+  "@t48_savedSuccessfully": {
+    "description": "2048 game saved success message"
+  },
+  "t48_autoSaveInfo": "游戏进行时每3分钟自动保存",
+  "@t48_autoSaveInfo": {
+    "description": "2048 auto-save info tooltip"
+  },
   "db_battleLog": "战斗日志",
   "@db_battleLog": {
     "description": "Battle log header"

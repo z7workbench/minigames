@@ -1026,6 +1026,22 @@
   "@t48_overwrite": {
     "description": "2048 overwrite save button"
   },
+  "t48_autoSave": "Auto Save",
+  "@t48_autoSave": {
+    "description": "2048 auto-save slot label"
+  },
+  "t48_overwriteConfirm": "This slot already has a save. Overwrite it?",
+  "@t48_overwriteConfirm": {
+    "description": "2048 overwrite confirmation message"
+  },
+  "t48_savedSuccessfully": "Game saved!",
+  "@t48_savedSuccessfully": {
+    "description": "2048 game saved success message"
+  },
+  "t48_autoSaveInfo": "Auto-saved every 3 minutes during gameplay",
+  "@t48_autoSaveInfo": {
+    "description": "2048 auto-save info tooltip"
+  },
   "db_battleLog": "Battle Log",
   "@db_battleLog": {
     "description": "Battle log header"

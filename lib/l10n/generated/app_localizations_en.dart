@@ -742,6 +742,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get t48_overwrite => 'Overwrite';
 
   @override
+  String get t48_autoSave => 'Auto Save';
+
+  @override
+  String get t48_overwriteConfirm =>
+      'This slot already has a save. Overwrite it?';
+
+  @override
+  String get t48_savedSuccessfully => 'Game saved!';
+
+  @override
+  String get t48_autoSaveInfo => 'Auto-saved every 3 minutes during gameplay';
+
+  @override
   String get db_battleLog => 'Battle Log';
 
   @override

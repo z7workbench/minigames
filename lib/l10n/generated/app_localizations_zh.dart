@@ -726,6 +726,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get t48_overwrite => '覆盖';
 
   @override
+  String get t48_autoSave => '自动保存';
+
+  @override
+  String get t48_overwriteConfirm => '该存档位已有存档，是否覆盖？';
+
+  @override
+  String get t48_savedSuccessfully => '游戏已保存！';
+
+  @override
+  String get t48_autoSaveInfo => '游戏进行时每3分钟自动保存';
+
+  @override
   String get db_battleLog => '战斗日志';
 
   @override

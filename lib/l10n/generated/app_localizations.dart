@@ -1454,6 +1454,30 @@ abstract class AppLocalizations {
   /// **'Overwrite'**
   String get t48_overwrite;
 
+  /// 2048 auto-save slot label
+  ///
+  /// In en, this message translates to:
+  /// **'Auto Save'**
+  String get t48_autoSave;
+
+  /// 2048 overwrite confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'This slot already has a save. Overwrite it?'**
+  String get t48_overwriteConfirm;
+
+  /// 2048 game saved success message
+  ///
+  /// In en, this message translates to:
+  /// **'Game saved!'**
+  String get t48_savedSuccessfully;
+
+  /// 2048 auto-save info tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-saved every 3 minutes during gameplay'**
+  String get t48_autoSaveInfo;
+
   /// Battle log header
   ///
   /// In en, this message translates to:
