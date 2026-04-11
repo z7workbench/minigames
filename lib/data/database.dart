@@ -48,7 +48,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.memory() : super(createMemoryConnection());
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration {
@@ -73,6 +73,15 @@ class AppDatabase extends _$AppDatabase {
         if (from < 5) {
           // Add hearts_saves table for Hearts game state persistence
           await m.createTable(heartsSaves);
+        }
+        if (from < 6) {
+          // Add unique constraint to twenty48_saves.slotIndex
+          // First clean up any duplicate slots (keep the most recent)
+          await customStatement(
+            'DELETE FROM twenty48_saves WHERE id NOT IN '
+            '(SELECT MAX(id) FROM twenty48_saves GROUP BY slot_index)',
+          );
+          await m.alterTable(TableMigration(twenty48Saves));
         }
       },
     );

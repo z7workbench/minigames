@@ -2,14 +2,21 @@ import 'package:drift/drift.dart';
 
 /// Table for storing 2048 game save states.
 /// Allows players to save their progress and resume later.
-/// Maximum of 5 save slots per game type.
+///
+/// Slot organization:
+/// - Slot 0: Auto-save (triggered every 3 minutes during gameplay)
+/// - Slots 1-3: Manual save slots (user-initiated saves)
+///
+/// Total: 4 save slots.
 @DataClassName('Twenty48Save')
 class Twenty48Saves extends Table {
   /// Unique identifier for the save.
   IntColumn get id => integer().autoIncrement()();
 
-  /// Slot index (0-4) for display ordering.
-  IntColumn get slotIndex => integer().withDefault(const Constant(0))();
+  /// Slot index (0-3) for display ordering.
+  /// 0 = auto-save, 1-3 = manual save slots.
+  /// Unique constraint ensures only one save per slot.
+  IntColumn get slotIndex => integer().unique()();
 
   /// JSON-serialized Twenty48State containing all game data.
   TextColumn get gameStateJson => text()();

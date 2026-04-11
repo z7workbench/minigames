@@ -13,7 +13,12 @@ part 'database_provider.g.dart';
 
 /// Provides the singleton instance of AppDatabase.
 /// The database is created lazily and cached for the lifetime of the app.
-@riverpod
+///
+/// IMPORTANT: keepAlive: true is required because the database uses
+/// NativeDatabase.createInBackground() which runs in a background isolate.
+/// If the provider is auto-disposed, database.close() terminates the isolate,
+/// causing "Channel was closed before receiving a response" errors.
+@Riverpod(keepAlive: true)
 AppDatabase appDatabase(AppDatabaseRef ref) {
   // Create the database instance
   final database = AppDatabase();
