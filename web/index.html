@@ -42,5 +42,15 @@
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
   <script src="flutter_bootstrap.js" async></script>
+  <!-- Prevent arrow keys and WASD from scrolling the page (for 2048 game) -->
+  <script>
+    window.addEventListener('keydown', function(e) {
+      // Prevent arrow keys and WASD from scrolling
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+           'KeyW', 'KeyA', 'KeyS', 'KeyD'].includes(e.code)) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>

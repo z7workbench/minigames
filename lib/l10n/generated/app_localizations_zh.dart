@@ -659,7 +659,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get t48_gameDescription => '合并方块，达到2048！';
 
   @override
-  String get t48_instructions => '滑动移动方块。相同数字的方块相撞时会合并。尝试达到2048！';
+  String get t48_instructions => '滑动或使用方向键/WASD移动方块。相同数字的方块相撞时会合并。尝试达到2048！';
 
   @override
   String get t48_newGame => '新游戏';

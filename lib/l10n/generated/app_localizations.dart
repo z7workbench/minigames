@@ -1331,7 +1331,7 @@ abstract class AppLocalizations {
   /// 2048 game instructions
   ///
   /// In en, this message translates to:
-  /// **'Swipe to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!'**
+  /// **'Swipe or use Arrow keys/WASD to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!'**
   String get t48_instructions;
 
   /// 2048 new game button

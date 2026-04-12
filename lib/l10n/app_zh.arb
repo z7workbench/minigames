@@ -932,7 +932,7 @@
   "@t48_gameDescription": {
     "description": "2048 game description"
   },
-  "t48_instructions": "滑动移动方块。相同数字的方块相撞时会合并。尝试达到2048！",
+  "t48_instructions": "滑动或使用方向键/WASD移动方块。相同数字的方块相撞时会合并。尝试达到2048！",
   "@t48_instructions": {
     "description": "2048 game instructions"
   },

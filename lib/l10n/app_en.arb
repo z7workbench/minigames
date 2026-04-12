@@ -932,7 +932,7 @@
   "@t48_gameDescription": {
     "description": "2048 game description"
   },
-  "t48_instructions": "Swipe to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!",
+  "t48_instructions": "Swipe or use Arrow keys/WASD to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!",
   "@t48_instructions": {
     "description": "2048 game instructions"
   },

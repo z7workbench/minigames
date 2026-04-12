@@ -674,7 +674,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get t48_instructions =>
-      'Swipe to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!';
+      'Swipe or use Arrow keys/WASD to move tiles. When two tiles with the same number touch, they merge into one. Try to reach 2048!';
 
   @override
   String get t48_newGame => 'New Game';

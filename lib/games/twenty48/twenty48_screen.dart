@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/database.dart';
@@ -21,6 +22,15 @@ class Twenty48Screen extends ConsumerStatefulWidget {
 class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
   Offset? _swipeStart;
   static const double _swipeThreshold = 50.0;
+  final FocusNode _focusNode = FocusNode();
+  final FocusScopeNode _focusScopeNode = FocusScopeNode();
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _focusScopeNode.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -65,6 +75,37 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
     }
 
     _swipeStart = null;
+  }
+
+  /// Map logical keyboard key to game direction.
+  Twenty48Direction? _getDirectionFromKey(LogicalKeyboardKey key) {
+    // Arrow keys
+    if (key == LogicalKeyboardKey.arrowLeft) {
+      return Twenty48Direction.left;
+    }
+    if (key == LogicalKeyboardKey.arrowRight) {
+      return Twenty48Direction.right;
+    }
+    if (key == LogicalKeyboardKey.arrowUp) {
+      return Twenty48Direction.up;
+    }
+    if (key == LogicalKeyboardKey.arrowDown) {
+      return Twenty48Direction.down;
+    }
+    // WASD keys
+    if (key == LogicalKeyboardKey.keyA) {
+      return Twenty48Direction.left;
+    }
+    if (key == LogicalKeyboardKey.keyD) {
+      return Twenty48Direction.right;
+    }
+    if (key == LogicalKeyboardKey.keyW) {
+      return Twenty48Direction.up;
+    }
+    if (key == LogicalKeyboardKey.keyS) {
+      return Twenty48Direction.down;
+    }
+    return null;
   }
 
   void _showGameOverDialog() {
@@ -252,128 +293,174 @@ class _Twenty48ScreenState extends ConsumerState<Twenty48Screen> {
           ],
         ),
         body: SafeArea(
-          child: GestureDetector(
-            onHorizontalDragStart: _handleSwipeStart,
-            onHorizontalDragEnd: _handleSwipeEnd,
-            onVerticalDragStart: _handleSwipeStart,
-            onVerticalDragEnd: _handleSwipeEnd,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final isLandscape =
-                    constraints.maxWidth > constraints.maxHeight;
-                final isSmallScreen = constraints.maxHeight < 500;
+          child: FocusScope(
+            node: _focusScopeNode,
+            autofocus: true,
+            child: Shortcuts(
+              shortcuts: <ShortcutActivator, Intent>{
+                // Block arrow keys from triggering default focus traversal
+                const SingleActivator(LogicalKeyboardKey.arrowLeft):
+                    const DoNothingAndStopPropagationIntent(),
+                const SingleActivator(LogicalKeyboardKey.arrowRight):
+                    const DoNothingAndStopPropagationIntent(),
+                const SingleActivator(LogicalKeyboardKey.arrowUp):
+                    const DoNothingAndStopPropagationIntent(),
+                const SingleActivator(LogicalKeyboardKey.arrowDown):
+                    const DoNothingAndStopPropagationIntent(),
+                // WASD keys - also block from focus traversal
+                const SingleActivator(LogicalKeyboardKey.keyA):
+                    const DoNothingAndStopPropagationIntent(),
+                const SingleActivator(LogicalKeyboardKey.keyD):
+                    const DoNothingAndStopPropagationIntent(),
+                const SingleActivator(LogicalKeyboardKey.keyW):
+                    const DoNothingAndStopPropagationIntent(),
+                const SingleActivator(LogicalKeyboardKey.keyS):
+                    const DoNothingAndStopPropagationIntent(),
+              },
+              child: Focus(
+                focusNode: _focusNode,
+                autofocus: true,
+                descendantsAreTraversable: false,
+                onKeyEvent: (node, event) {
+                  if (event is! KeyDownEvent) {
+                    return KeyEventResult.ignored;
+                  }
+                  final state = ref.read(twenty48GameProvider);
+                  if (state.status != Twenty48Status.playing) {
+                    return KeyEventResult.ignored;
+                  }
+                  final direction = _getDirectionFromKey(event.logicalKey);
+                  if (direction != null) {
+                    ref.read(twenty48GameProvider.notifier).move(direction);
+                    return KeyEventResult.handled;
+                  }
+                  return KeyEventResult.ignored;
+                },
+                child: GestureDetector(
+                  onHorizontalDragStart: _handleSwipeStart,
+                  onHorizontalDragEnd: _handleSwipeEnd,
+                  onVerticalDragStart: _handleSwipeStart,
+                  onVerticalDragEnd: _handleSwipeEnd,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isLandscape =
+                          constraints.maxWidth > constraints.maxHeight;
+                      final isSmallScreen = constraints.maxHeight < 500;
 
-                // Calculate reserved space for UI elements (score, instructions, button)
-                final scoreAreaHeight = isLandscape ? 48.0 : 72.0;
-                final instructionsHeight = isSmallScreen
-                    ? 0.0
-                    : (isLandscape ? 32.0 : 48.0);
-                final buttonHeight = isLandscape ? 48.0 : 64.0;
-                final verticalPadding = isLandscape ? 16.0 : 32.0;
+                      // Calculate reserved space for UI elements (score, instructions, button)
+                      final scoreAreaHeight = isLandscape ? 48.0 : 72.0;
+                      final instructionsHeight = isSmallScreen
+                          ? 0.0
+                          : (isLandscape ? 32.0 : 48.0);
+                      final buttonHeight = isLandscape ? 48.0 : 64.0;
+                      final verticalPadding = isLandscape ? 16.0 : 32.0;
 
-                final totalReserved =
-                    scoreAreaHeight +
-                    instructionsHeight +
-                    buttonHeight +
-                    verticalPadding;
-                final availableHeight = constraints.maxHeight - totalReserved;
-                final availableWidth = constraints.maxWidth - 32.0;
+                      final totalReserved =
+                          scoreAreaHeight +
+                          instructionsHeight +
+                          buttonHeight +
+                          verticalPadding;
+                      final availableHeight =
+                          constraints.maxHeight - totalReserved;
+                      final availableWidth = constraints.maxWidth - 32.0;
 
-                // Grid size is the minimum of available width and height (maximize but stay within bounds)
-                final gridSize = [
-                  availableWidth,
-                  availableHeight,
-                ].reduce((a, b) => a < b ? a : b).clamp(200.0, double.infinity);
+                      // Grid size is the minimum of available width and height (maximize but stay within bounds)
+                      final gridSize = [availableWidth, availableHeight]
+                          .reduce((a, b) => a < b ? a : b)
+                          .clamp(200.0, double.infinity);
 
-                // Adjust spacing and padding for smaller screens
-                final gridSpacing = gridSize < 280 ? 4.0 : 8.0;
-                final gridPadding = gridSize < 280 ? 4.0 : 8.0;
+                      // Adjust spacing and padding for smaller screens
+                      final gridSpacing = gridSize < 280 ? 4.0 : 8.0;
+                      final gridPadding = gridSize < 280 ? 4.0 : 8.0;
 
-                return Column(
-                  children: [
-                    // Score and time display
-                    Padding(
-                      padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      return Column(
                         children: [
-                          _buildScoreCard(
-                            context,
-                            l10n.score,
-                            state.score.toString(),
-                            isDark,
-                            compact: isLandscape,
+                          // Score and time display
+                          Padding(
+                            padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                _buildScoreCard(
+                                  context,
+                                  l10n.score,
+                                  state.score.toString(),
+                                  isDark,
+                                  compact: isLandscape,
+                                ),
+                                _buildScoreCard(
+                                  context,
+                                  l10n.highScore,
+                                  state.bestScore.toString(),
+                                  isDark,
+                                  compact: isLandscape,
+                                ),
+                                _buildScoreCard(
+                                  context,
+                                  l10n.time,
+                                  _formatTime(state.elapsedSeconds),
+                                  isDark,
+                                  compact: isLandscape,
+                                ),
+                              ],
+                            ),
                           ),
-                          _buildScoreCard(
-                            context,
-                            l10n.highScore,
-                            state.bestScore.toString(),
-                            isDark,
-                            compact: isLandscape,
+
+                          // Game grid - centered and maximized within available space
+                          Expanded(
+                            child: Center(
+                              child: SizedBox(
+                                width: gridSize,
+                                height: gridSize,
+                                child: GridWidget(
+                                  grid: state.grid,
+                                  spacing: gridSpacing,
+                                  padding: gridPadding,
+                                ),
+                              ),
+                            ),
                           ),
-                          _buildScoreCard(
-                            context,
-                            l10n.time,
-                            _formatTime(state.elapsedSeconds),
-                            isDark,
-                            compact: isLandscape,
+
+                          // Instructions (hide in small screens)
+                          if (!isSmallScreen)
+                            Padding(
+                              padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
+                              child: Text(
+                                l10n.t48_instructions,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: textSecondaryColor,
+                                  fontSize: isLandscape ? 12.0 : 14.0,
+                                ),
+                              ),
+                            ),
+
+                          // New game button
+                          Padding(
+                            padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
+                            child: WoodenButton(
+                              text: l10n.t48_newGame,
+                              icon: Icons.refresh,
+                              size: isLandscape
+                                  ? WoodenButtonSize.small
+                                  : WoodenButtonSize.medium,
+                              variant: WoodenButtonVariant.secondary,
+                              expandWidth: true,
+                              onPressed: () {
+                                ref
+                                    .read(twenty48GameProvider.notifier)
+                                    .startNewGame();
+                              },
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-
-                    // Game grid - centered and maximized within available space
-                    Expanded(
-                      child: Center(
-                        child: SizedBox(
-                          width: gridSize,
-                          height: gridSize,
-                          child: GridWidget(
-                            grid: state.grid,
-                            spacing: gridSpacing,
-                            padding: gridPadding,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    // Instructions (hide in small screens)
-                    if (!isSmallScreen)
-                      Padding(
-                        padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
-                        child: Text(
-                          l10n.t48_instructions,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: textSecondaryColor,
-                            fontSize: isLandscape ? 12.0 : 14.0,
-                          ),
-                        ),
-                      ),
-
-                    // New game button
-                    Padding(
-                      padding: EdgeInsets.all(isLandscape ? 8.0 : 16.0),
-                      child: WoodenButton(
-                        text: l10n.t48_newGame,
-                        icon: Icons.refresh,
-                        size: isLandscape
-                            ? WoodenButtonSize.small
-                            : WoodenButtonSize.medium,
-                        variant: WoodenButtonVariant.secondary,
-                        expandWidth: true,
-                        onPressed: () {
-                          ref
-                              .read(twenty48GameProvider.notifier)
-                              .startNewGame();
-                        },
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
+                      );
+                    },
+                  ),
+                ),
+              ), // Focus
+            ), // Shortcuts
+          ), // FocusScope
         ),
       ),
     );
