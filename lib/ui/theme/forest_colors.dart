@@ -23,7 +23,9 @@ class ForestColors {
   static const lightBorder = Color(0xFF388E3C); // Pine
   static const lightDivider = Color(0xFFC8E6C9); // Mint
   static const lightShadow = Color(0x3D000000); // 24% black
-  static const lightDisabled = Color(0xFFA5D6A7); // Disabled
+  static const lightDisabled = Color(
+    0xFF81C784,
+  ); // Soft Green (darker than lightCard for contrast)
   static const lightOnPrimary = Color(0xFFFFFFFF); // White
   static const lightOnSecondary = Color(0xFFFFFFFF); // White
   static const lightOnBackground = Color(0xFF1B5E20); // Dark Forest
