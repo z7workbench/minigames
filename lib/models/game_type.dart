@@ -10,7 +10,7 @@ enum GameType {
   diceBattle,
   mancala,
   hearts,
-  placeholder8,
+  bluffBar,
   placeholder9,
   placeholder10,
   placeholder11,
@@ -35,8 +35,8 @@ extension GameTypeExtension on GameType {
         return 'Mancala';
       case GameType.hearts:
         return 'Hearts';
-      case GameType.placeholder8:
-        return 'Game 8';
+      case GameType.bluffBar:
+        return 'Bluff Bar';
       case GameType.placeholder9:
         return 'Game 9';
       case GameType.placeholder10:
@@ -65,8 +65,8 @@ extension GameTypeExtension on GameType {
         return Icons.grain;
       case GameType.hearts:
         return Icons.favorite;
-      case GameType.placeholder8:
-        return Icons.videogame_asset;
+      case GameType.bluffBar:
+        return Icons.local_bar;  // 酒吧/鸡尾酒图标，符合"吹牛酒吧"主题
       case GameType.placeholder9:
         return Icons.gamepad;
       case GameType.placeholder10:
@@ -95,8 +95,8 @@ extension GameTypeExtension on GameType {
         return '/mancala';
       case GameType.hearts:
         return '/hearts';
-      case GameType.placeholder8:
-        return '/game-8';
+      case GameType.bluffBar:
+        return '/bluff-bar';
       case GameType.placeholder9:
         return '/game-9';
       case GameType.placeholder10:

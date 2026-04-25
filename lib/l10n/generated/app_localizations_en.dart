@@ -1287,4 +1287,310 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comingSoon => 'Coming Soon';
+
+  @override
+  String get game_bluff_bar => 'Bluff Bar';
+
+  @override
+  String get bb_game_title => 'Bluff Bar';
+
+  @override
+  String get bb_game_subtitle => 'Bluff, Challenge, Survive';
+
+  @override
+  String get bb_gameDescription =>
+      'A poker-style bluffing game with Russian roulette elimination';
+
+  @override
+  String get bb_phase_setup => 'Setup Phase';
+
+  @override
+  String get bb_phase_deal => 'Dealing Phase';
+
+  @override
+  String get bb_phase_play => 'Play Phase';
+
+  @override
+  String get bb_phase_challenge => 'Challenge Phase';
+
+  @override
+  String get bb_phase_reveal => 'Reveal Phase';
+
+  @override
+  String get bb_phase_roulette => 'Russian Roulette';
+
+  @override
+  String get bb_phase_roundEnd => 'Round End';
+
+  @override
+  String get bb_phase_gameOver => 'Game Over';
+
+  @override
+  String get bb_target_card => 'Target Card';
+
+  @override
+  String get bb_target_jacks => 'Target: J';
+
+  @override
+  String get bb_target_queens => 'Target: Q';
+
+  @override
+  String get bb_target_kings => 'Target: K';
+
+  @override
+  String get bb_target_aces => 'Target: A';
+
+  @override
+  String get bb_play_cards => 'Play Cards';
+
+  @override
+  String get bb_challenge => 'Challenge!';
+
+  @override
+  String get bb_pass => 'Pass';
+
+  @override
+  String get bb_select_cards => 'Select Cards';
+
+  @override
+  String get bb_claim => 'Claim';
+
+  @override
+  String bb_claiming(int count, String rank) {
+    return '$count ${rank}s';
+  }
+
+  @override
+  String bb_cards_played(int count) {
+    return '$count cards played';
+  }
+
+  @override
+  String get bb_challenge_successful => 'Challenge Successful!';
+
+  @override
+  String get bb_challenge_failed => 'Challenge Failed';
+
+  @override
+  String get bb_liar_guilty => 'Caught the Liar!';
+
+  @override
+  String get bb_liar_innocent => 'Honest Play!';
+
+  @override
+  String get bb_roulette_draw => 'Draw Roulette Card';
+
+  @override
+  String get bb_roulette_survived => 'Survived!';
+
+  @override
+  String get bb_roulette_eliminated => 'Eliminated!';
+
+  @override
+  String bb_roulette_remaining(int count) {
+    return '$count cards remaining';
+  }
+
+  @override
+  String get bb_your_turn => 'Your Turn';
+
+  @override
+  String get bb_opponent_turn => 'Opponent\'s Turn';
+
+  @override
+  String bb_cards_in_hand(int count) {
+    return '$count cards in hand';
+  }
+
+  @override
+  String get bb_eliminated_player => 'Eliminated';
+
+  @override
+  String get bb_ai_thinking => 'AI Thinking...';
+
+  @override
+  String get bb_ai_playing => 'AI Playing...';
+
+  @override
+  String get bb_ai_challenging => 'AI Challenges!';
+
+  @override
+  String bb_winner(String name) {
+    return '$name Wins!';
+  }
+
+  @override
+  String get bb_last_survivor => 'Last Survivor';
+
+  @override
+  String get bb_play_again => 'Play Again';
+
+  @override
+  String get bb_exit => 'Exit';
+
+  @override
+  String get bb_ai_difficulty => 'AI Difficulty';
+
+  @override
+  String get bb_easy => 'Easy';
+
+  @override
+  String get bb_medium => 'Medium';
+
+  @override
+  String get bb_hard => 'Hard';
+
+  @override
+  String get bb_start_game => 'Start Game';
+
+  @override
+  String get bb_how_to_play => 'How to Play';
+
+  @override
+  String get bb_rule1_title => '1. Target Card';
+
+  @override
+  String get bb_rule1_desc =>
+      'Each round randomly designates J/Q/K/A as the target card. That card and Joker count as \"real cards\".';
+
+  @override
+  String get bb_rule2_title => '2. Playing Cards';
+
+  @override
+  String get bb_rule2_desc =>
+      'Each turn, play 1-5 cards face-down and claim they are target cards.';
+
+  @override
+  String get bb_rule3_title => '3. Challenge';
+
+  @override
+  String get bb_rule3_desc =>
+      'Call \"Liar!\" to challenge the previous player. Flip cards to verify: fake cards = challenger wins, real cards = challenger loses.';
+
+  @override
+  String get bb_rule4_title => '4. Elimination';
+
+  @override
+  String get bb_rule4_desc =>
+      'The loser triggers Russian roulette: draw a card. Live bullet = eliminated.';
+
+  @override
+  String get bb_rule5_title => '5. Victory';
+
+  @override
+  String get bb_rule5_desc => 'Become the last surviving player to win!';
+
+  @override
+  String get bb_got_it => 'Got it!';
+
+  @override
+  String get bb_two_players => '2 Players';
+
+  @override
+  String get bb_vs_ai => 'VS AI';
+
+  @override
+  String get bb_eliminated => 'ELIMINATED';
+
+  @override
+  String get bb_survived => 'SURVIVED!';
+
+  @override
+  String get bb_draw_card => 'Draw Card';
+
+  @override
+  String get bb_drawing => 'Drawing...';
+
+  @override
+  String bb_cards_remaining(int count) {
+    return '$count cards remaining';
+  }
+
+  @override
+  String get bb_no_cards_played => 'No cards played yet';
+
+  @override
+  String bb_cards_played_total(int count) {
+    return '$count cards played';
+  }
+
+  @override
+  String get bb_no_cards => 'No cards';
+
+  @override
+  String get bb_one_player_three_ai => '1 Player + 3 AI';
+
+  @override
+  String get bb_exit_confirm =>
+      'Are you sure you want to exit? Progress will be lost.';
+
+  @override
+  String bb_round(int number) {
+    return 'Round $number';
+  }
+
+  @override
+  String bb_round_ranking(int number) {
+    return 'Round $number Rankings';
+  }
+
+  @override
+  String get bb_roulette_shots => 'Shots fired';
+
+  @override
+  String get bb_select_claim => 'Select claim rank';
+
+  @override
+  String get bb_your_hand => 'Your Hand';
+
+  @override
+  String bb_waiting_for(String name) {
+    return 'Waiting for $name...';
+  }
+
+  @override
+  String get bb_game_screen_coming => 'Game screen coming soon!';
+
+  @override
+  String get bb_position_north => 'North';
+
+  @override
+  String get bb_position_south => 'South';
+
+  @override
+  String get bb_position_east => 'East';
+
+  @override
+  String get bb_position_west => 'West';
+
+  @override
+  String bb_challenge_title(String challenger, String challenged) {
+    return '$challenger challenges $challenged';
+  }
+
+  @override
+  String get bb_revealed_cards => 'Revealed Cards';
+
+  @override
+  String get bb_liar => 'Liar!';
+
+  @override
+  String get bb_honest => 'Honest!';
+
+  @override
+  String get bb_face_roulette => 'faces Roulette';
+
+  @override
+  String get bb_victory => 'VICTORY';
+
+  @override
+  String get bb_defeat => 'DEFEAT';
+
+  @override
+  String get bb_ranking => 'Rankings';
+
+  @override
+  String bb_rounds_survived(int count) {
+    return '$count rounds';
+  }
 }

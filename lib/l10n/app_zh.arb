@@ -1472,5 +1472,457 @@
   "hearts_continuePlaying": "继续",
   "@hearts_continuePlaying": { "description": "Continue button after showing received cards" },
   "comingSoon": "即将推出",
-  "@comingSoon": { "description": "Coming soon text" }
+  "@comingSoon": { "description": "Coming soon text" },
+
+  "game_bluff_bar": "吹牛酒吧",
+  "@game_bluff_bar": {
+    "description": "Bluff Bar game title"
+  },
+  "bb_game_title": "吹牛酒吧",
+  "@bb_game_title": {
+    "description": "Bluff Bar game title displayed in game"
+  },
+  "bb_game_subtitle": "虚张声势，挑战，生存",
+  "@bb_game_subtitle": {
+    "description": "Bluff Bar game subtitle"
+  },
+  "bb_gameDescription": "扑克风格的虚张声势游戏，带有俄罗斯轮盘淘汰机制",
+  "@bb_gameDescription": {
+    "description": "Bluff Bar game description"
+  },
+
+  "bb_phase_setup": "设置阶段",
+  "@bb_phase_setup": {
+    "description": "Setup phase label"
+  },
+  "bb_phase_deal": "发牌阶段",
+  "@bb_phase_deal": {
+    "description": "Dealing phase label"
+  },
+  "bb_phase_play": "出牌阶段",
+  "@bb_phase_play": {
+    "description": "Play phase label"
+  },
+  "bb_phase_challenge": "质疑阶段",
+  "@bb_phase_challenge": {
+    "description": "Challenge phase label"
+  },
+  "bb_phase_reveal": "翻牌阶段",
+  "@bb_phase_reveal": {
+    "description": "Reveal phase label"
+  },
+  "bb_phase_roulette": "俄罗斯轮盘",
+  "@bb_phase_roulette": {
+    "description": "Russian roulette phase label"
+  },
+  "bb_phase_roundEnd": "本轮结束",
+  "@bb_phase_roundEnd": {
+    "description": "Round end phase label"
+  },
+  "bb_phase_gameOver": "游戏结束",
+  "@bb_phase_gameOver": {
+    "description": "Game over phase label"
+  },
+
+  "bb_target_card": "目标牌",
+  "@bb_target_card": {
+    "description": "Target card label"
+  },
+  "bb_target_jacks": "本轮目标：J",
+  "@bb_target_jacks": {
+    "description": "Jack is the target card"
+  },
+  "bb_target_queens": "本轮目标：Q",
+  "@bb_target_queens": {
+    "description": "Queen is the target card"
+  },
+  "bb_target_kings": "本轮目标：K",
+  "@bb_target_kings": {
+    "description": "King is the target card"
+  },
+  "bb_target_aces": "本轮目标：A",
+  "@bb_target_aces": {
+    "description": "Ace is the target card"
+  },
+
+  "bb_play_cards": "出牌",
+  "@bb_play_cards": {
+    "description": "Play cards button"
+  },
+  "bb_challenge": "质疑！",
+  "@bb_challenge": {
+    "description": "Challenge button"
+  },
+  "bb_pass": "跳过",
+  "@bb_pass": {
+    "description": "Pass button"
+  },
+  "bb_select_cards": "选择牌",
+  "@bb_select_cards": {
+    "description": "Select cards label"
+  },
+
+  "bb_claim": "声称",
+  "@bb_claim": {
+    "description": "Claim label"
+  },
+  "bb_claiming": "{count}张{rank}",
+  "@bb_claiming": {
+    "description": "Claiming message with count and rank placeholders",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_cards_played": "已出{count}张牌",
+  "@bb_cards_played": {
+    "description": "Cards played message with count placeholder",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "bb_challenge_successful": "质疑成功！",
+  "@bb_challenge_successful": {
+    "description": "Challenge successful message"
+  },
+  "bb_challenge_failed": "质疑失败",
+  "@bb_challenge_failed": {
+    "description": "Challenge failed message"
+  },
+  "bb_liar_guilty": "抓到骗子！",
+  "@bb_liar_guilty": {
+    "description": "Liar caught message"
+  },
+  "bb_liar_innocent": "真诚出牌！",
+  "@bb_liar_innocent": {
+    "description": "Honest play message"
+  },
+
+  "bb_roulette_draw": "翻开轮盘牌",
+  "@bb_roulette_draw": {
+    "description": "Draw roulette card button"
+  },
+  "bb_roulette_survived": "生存！",
+  "@bb_roulette_survived": {
+    "description": "Survived roulette message"
+  },
+  "bb_roulette_eliminated": "淘汰！",
+  "@bb_roulette_eliminated": {
+    "description": "Eliminated by roulette message"
+  },
+  "bb_roulette_remaining": "剩余{count}张牌",
+  "@bb_roulette_remaining": {
+    "description": "Roulette cards remaining message with count placeholder",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "bb_your_turn": "你的回合",
+  "@bb_your_turn": {
+    "description": "Your turn message"
+  },
+  "bb_opponent_turn": "对手回合",
+  "@bb_opponent_turn": {
+    "description": "Opponent's turn message"
+  },
+  "bb_cards_in_hand": "手中有{count}张牌",
+  "@bb_cards_in_hand": {
+    "description": "Cards in hand message with count placeholder",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_eliminated_player": "已淘汰",
+  "@bb_eliminated_player": {
+    "description": "Eliminated player label"
+  },
+
+  "bb_ai_thinking": "AI思考中...",
+  "@bb_ai_thinking": {
+    "description": "AI thinking message"
+  },
+  "bb_ai_playing": "AI出牌...",
+  "@bb_ai_playing": {
+    "description": "AI playing message"
+  },
+  "bb_ai_challenging": "AI质疑！",
+  "@bb_ai_challenging": {
+    "description": "AI challenges message"
+  },
+
+  "bb_winner": "{name}获胜！",
+  "@bb_winner": {
+    "description": "Winner message with name placeholder",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_last_survivor": "最后幸存者",
+  "@bb_last_survivor": {
+    "description": "Last survivor label"
+  },
+  "bb_play_again": "再玩一次",
+  "@bb_play_again": {
+    "description": "Play again button"
+  },
+  "bb_exit": "退出",
+  "@bb_exit": {
+    "description": "Exit button"
+  },
+
+  "bb_ai_difficulty": "AI难度",
+  "@bb_ai_difficulty": {
+    "description": "AI difficulty setting label"
+  },
+  "bb_easy": "简单",
+  "@bb_easy": {
+    "description": "Easy difficulty option"
+  },
+  "bb_medium": "中等",
+  "@bb_medium": {
+    "description": "Medium difficulty option"
+  },
+  "bb_hard": "困难",
+  "@bb_hard": {
+    "description": "Hard difficulty option"
+  },
+  "bb_start_game": "开始游戏",
+  "@bb_start_game": {
+    "description": "Start game button"
+  },
+  "bb_how_to_play": "游戏规则",
+  "@bb_how_to_play": {
+    "description": "How to play button"
+  },
+
+  "bb_rule1_title": "1. 目标牌",
+  "@bb_rule1_title": {
+    "description": "Rule 1 title"
+  },
+  "bb_rule1_desc": "每轮随机指定J/Q/K/A为目标牌，该牌及Joker视为\"真牌\"",
+  "@bb_rule1_desc": {
+    "description": "Rule 1 description"
+  },
+  "bb_rule2_title": "2. 出牌",
+  "@bb_rule2_title": {
+    "description": "Rule 2 title"
+  },
+  "bb_rule2_desc": "每回合打出1-5张牌背面朝上，声称是目标牌",
+  "@bb_rule2_desc": {
+    "description": "Rule 2 description"
+  },
+  "bb_rule3_title": "3. 质疑",
+  "@bb_rule3_title": {
+    "description": "Rule 3 title"
+  },
+  "bb_rule3_desc": "喊\"骗子\"质疑上家，翻开验证：假牌则上家输，真牌则质疑者输",
+  "@bb_rule3_desc": {
+    "description": "Rule 3 description"
+  },
+  "bb_rule4_title": "4. 淘汰",
+  "@bb_rule4_title": {
+    "description": "Rule 4 title"
+  },
+  "bb_rule4_desc": "输家触发俄罗斯轮盘：翻一张牌，实弹则淘汰",
+  "@bb_rule4_desc": {
+    "description": "Rule 4 description"
+  },
+  "bb_rule5_title": "5. 胜利",
+  "@bb_rule5_title": {
+    "description": "Rule 5 title"
+  },
+  "bb_rule5_desc": "成为最后存活的玩家",
+  "@bb_rule5_desc": {
+    "description": "Rule 5 description"
+  },
+
+  "bb_got_it": "明白了！",
+  "@bb_got_it": {
+    "description": "Got it button"
+  },
+  "bb_two_players": "双人对战",
+  "@bb_two_players": {
+    "description": "2 player mode button"
+  },
+  "bb_vs_ai": "人机对战",
+  "@bb_vs_ai": {
+    "description": "VS AI mode button"
+  },
+
+  "bb_eliminated": "已淘汰",
+  "@bb_eliminated": {
+    "description": "Eliminated status badge"
+  },
+  "bb_survived": "生存！",
+  "@bb_survived": {
+    "description": "Survived status message"
+  },
+  "bb_draw_card": "翻开轮盘牌",
+  "@bb_draw_card": {
+    "description": "Draw card button for roulette"
+  },
+  "bb_drawing": "正在翻开...",
+  "@bb_drawing": {
+    "description": "Drawing status text"
+  },
+  "bb_cards_remaining": "剩余 {count} 张牌",
+  "@bb_cards_remaining": {
+    "description": "Cards remaining text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_no_cards_played": "尚未出牌",
+  "@bb_no_cards_played": {
+    "description": "Empty played pile message"
+  },
+  "bb_cards_played_total": "已出 {count} 张牌",
+  "@bb_cards_played_total": {
+    "description": "Total cards played text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_no_cards": "无手牌",
+  "@bb_no_cards": {
+    "description": "Empty hand message"
+  },
+  "bb_one_player_three_ai": "1名玩家 + 3名AI",
+  "@bb_one_player_three_ai": {
+    "description": "Game mode description"
+  },
+  "bb_exit_confirm": "确定退出吗？游戏进度将丢失。",
+  "@bb_exit_confirm": {
+    "description": "Exit confirmation message"
+  },
+  "bb_round": "第 {number} 轮",
+  "@bb_round": {
+    "description": "Round number display",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_round_ranking": "第 {number} 轮排名",
+  "@bb_round_ranking": {
+    "description": "Round ranking title",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_roulette_shots": "已开枪",
+  "@bb_roulette_shots": {
+    "description": "Roulette shots label"
+  },
+  "bb_select_claim": "选择声称的点数",
+  "@bb_select_claim": {
+    "description": "Claim selection hint"
+  },
+  "bb_your_hand": "你的手牌",
+  "@bb_your_hand": {
+    "description": "Hand section title"
+  },
+  "bb_waiting_for": "等待 {name}...",
+  "@bb_waiting_for": {
+    "description": "Waiting for opponent message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_game_screen_coming": "游戏页面即将推出！",
+  "@bb_game_screen_coming": {
+    "description": "Placeholder message"
+  },
+  "bb_position_north": "北",
+  "@bb_position_north": {
+    "description": "North position"
+  },
+  "bb_position_south": "南",
+  "@bb_position_south": {
+    "description": "South position"
+  },
+  "bb_position_east": "东",
+  "@bb_position_east": {
+    "description": "East position"
+  },
+  "bb_position_west": "西",
+  "@bb_position_west": {
+    "description": "West position"
+  },
+  "bb_challenge_title": "{challenger} 质疑 {challenged}",
+  "@bb_challenge_title": {
+    "description": "Challenge overlay title with challenger and challenged player names",
+    "placeholders": {
+      "challenger": {
+        "type": "String"
+      },
+      "challenged": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_revealed_cards": "翻开的牌",
+  "@bb_revealed_cards": {
+    "description": "Label for revealed cards section in challenge overlay"
+  },
+  "bb_liar": "骗子！",
+  "@bb_liar": {
+    "description": "Challenge result - player was lying"
+  },
+  "bb_honest": "真诚！",
+  "@bb_honest": {
+    "description": "Challenge result - player was telling truth"
+  },
+  "bb_face_roulette": "开枪",
+  "@bb_face_roulette": {
+    "description": "Label indicating player must face Russian roulette"
+  },
+  "bb_victory": "胜利",
+  "@bb_victory": {
+    "description": "Victory result text"
+  },
+  "bb_defeat": "失败",
+  "@bb_defeat": {
+    "description": "Defeat result text"
+  },
+  "bb_ranking": "排名",
+  "@bb_ranking": {
+    "description": "Rankings section title"
+  },
+  "bb_rounds_survived": "存活 {count} 轮",
+  "@bb_rounds_survived": {
+    "description": "Rounds survived text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_play_again": "再来一次",
+  "@bb_play_again": {
+    "description": "Play again button"
+  }
 }

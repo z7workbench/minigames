@@ -1253,4 +1253,304 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get comingSoon => '即将推出';
+
+  @override
+  String get game_bluff_bar => '吹牛酒吧';
+
+  @override
+  String get bb_game_title => '吹牛酒吧';
+
+  @override
+  String get bb_game_subtitle => '虚张声势，挑战，生存';
+
+  @override
+  String get bb_gameDescription => '扑克风格的虚张声势游戏，带有俄罗斯轮盘淘汰机制';
+
+  @override
+  String get bb_phase_setup => '设置阶段';
+
+  @override
+  String get bb_phase_deal => '发牌阶段';
+
+  @override
+  String get bb_phase_play => '出牌阶段';
+
+  @override
+  String get bb_phase_challenge => '质疑阶段';
+
+  @override
+  String get bb_phase_reveal => '翻牌阶段';
+
+  @override
+  String get bb_phase_roulette => '俄罗斯轮盘';
+
+  @override
+  String get bb_phase_roundEnd => '本轮结束';
+
+  @override
+  String get bb_phase_gameOver => '游戏结束';
+
+  @override
+  String get bb_target_card => '目标牌';
+
+  @override
+  String get bb_target_jacks => '本轮目标：J';
+
+  @override
+  String get bb_target_queens => '本轮目标：Q';
+
+  @override
+  String get bb_target_kings => '本轮目标：K';
+
+  @override
+  String get bb_target_aces => '本轮目标：A';
+
+  @override
+  String get bb_play_cards => '出牌';
+
+  @override
+  String get bb_challenge => '质疑！';
+
+  @override
+  String get bb_pass => '跳过';
+
+  @override
+  String get bb_select_cards => '选择牌';
+
+  @override
+  String get bb_claim => '声称';
+
+  @override
+  String bb_claiming(int count, String rank) {
+    return '$count张$rank';
+  }
+
+  @override
+  String bb_cards_played(int count) {
+    return '已出$count张牌';
+  }
+
+  @override
+  String get bb_challenge_successful => '质疑成功！';
+
+  @override
+  String get bb_challenge_failed => '质疑失败';
+
+  @override
+  String get bb_liar_guilty => '抓到骗子！';
+
+  @override
+  String get bb_liar_innocent => '真诚出牌！';
+
+  @override
+  String get bb_roulette_draw => '翻开轮盘牌';
+
+  @override
+  String get bb_roulette_survived => '生存！';
+
+  @override
+  String get bb_roulette_eliminated => '淘汰！';
+
+  @override
+  String bb_roulette_remaining(int count) {
+    return '剩余$count张牌';
+  }
+
+  @override
+  String get bb_your_turn => '你的回合';
+
+  @override
+  String get bb_opponent_turn => '对手回合';
+
+  @override
+  String bb_cards_in_hand(int count) {
+    return '手中有$count张牌';
+  }
+
+  @override
+  String get bb_eliminated_player => '已淘汰';
+
+  @override
+  String get bb_ai_thinking => 'AI思考中...';
+
+  @override
+  String get bb_ai_playing => 'AI出牌...';
+
+  @override
+  String get bb_ai_challenging => 'AI质疑！';
+
+  @override
+  String bb_winner(String name) {
+    return '$name获胜！';
+  }
+
+  @override
+  String get bb_last_survivor => '最后幸存者';
+
+  @override
+  String get bb_play_again => '再来一次';
+
+  @override
+  String get bb_exit => '退出';
+
+  @override
+  String get bb_ai_difficulty => 'AI难度';
+
+  @override
+  String get bb_easy => '简单';
+
+  @override
+  String get bb_medium => '中等';
+
+  @override
+  String get bb_hard => '困难';
+
+  @override
+  String get bb_start_game => '开始游戏';
+
+  @override
+  String get bb_how_to_play => '游戏规则';
+
+  @override
+  String get bb_rule1_title => '1. 目标牌';
+
+  @override
+  String get bb_rule1_desc => '每轮随机指定J/Q/K/A为目标牌，该牌及Joker视为\"真牌\"';
+
+  @override
+  String get bb_rule2_title => '2. 出牌';
+
+  @override
+  String get bb_rule2_desc => '每回合打出1-5张牌背面朝上，声称是目标牌';
+
+  @override
+  String get bb_rule3_title => '3. 质疑';
+
+  @override
+  String get bb_rule3_desc => '喊\"骗子\"质疑上家，翻开验证：假牌则上家输，真牌则质疑者输';
+
+  @override
+  String get bb_rule4_title => '4. 淘汰';
+
+  @override
+  String get bb_rule4_desc => '输家触发俄罗斯轮盘：翻一张牌，实弹则淘汰';
+
+  @override
+  String get bb_rule5_title => '5. 胜利';
+
+  @override
+  String get bb_rule5_desc => '成为最后存活的玩家';
+
+  @override
+  String get bb_got_it => '明白了！';
+
+  @override
+  String get bb_two_players => '双人对战';
+
+  @override
+  String get bb_vs_ai => '人机对战';
+
+  @override
+  String get bb_eliminated => '已淘汰';
+
+  @override
+  String get bb_survived => '生存！';
+
+  @override
+  String get bb_draw_card => '翻开轮盘牌';
+
+  @override
+  String get bb_drawing => '正在翻开...';
+
+  @override
+  String bb_cards_remaining(int count) {
+    return '剩余 $count 张牌';
+  }
+
+  @override
+  String get bb_no_cards_played => '尚未出牌';
+
+  @override
+  String bb_cards_played_total(int count) {
+    return '已出 $count 张牌';
+  }
+
+  @override
+  String get bb_no_cards => '无手牌';
+
+  @override
+  String get bb_one_player_three_ai => '1名玩家 + 3名AI';
+
+  @override
+  String get bb_exit_confirm => '确定退出吗？游戏进度将丢失。';
+
+  @override
+  String bb_round(int number) {
+    return '第 $number 轮';
+  }
+
+  @override
+  String bb_round_ranking(int number) {
+    return '第 $number 轮排名';
+  }
+
+  @override
+  String get bb_roulette_shots => '已开枪';
+
+  @override
+  String get bb_select_claim => '选择声称的点数';
+
+  @override
+  String get bb_your_hand => '你的手牌';
+
+  @override
+  String bb_waiting_for(String name) {
+    return '等待 $name...';
+  }
+
+  @override
+  String get bb_game_screen_coming => '游戏页面即将推出！';
+
+  @override
+  String get bb_position_north => '北';
+
+  @override
+  String get bb_position_south => '南';
+
+  @override
+  String get bb_position_east => '东';
+
+  @override
+  String get bb_position_west => '西';
+
+  @override
+  String bb_challenge_title(String challenger, String challenged) {
+    return '$challenger 质疑 $challenged';
+  }
+
+  @override
+  String get bb_revealed_cards => '翻开的牌';
+
+  @override
+  String get bb_liar => '骗子！';
+
+  @override
+  String get bb_honest => '真诚！';
+
+  @override
+  String get bb_face_roulette => '开枪';
+
+  @override
+  String get bb_victory => '胜利';
+
+  @override
+  String get bb_defeat => '失败';
+
+  @override
+  String get bb_ranking => '排名';
+
+  @override
+  String bb_rounds_survived(int count) {
+    return '存活 $count 轮';
+  }
 }

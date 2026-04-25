@@ -1472,5 +1472,457 @@
   "hearts_continuePlaying": "Continue",
   "@hearts_continuePlaying": { "description": "Continue button after showing received cards" },
   "comingSoon": "Coming Soon",
-  "@comingSoon": { "description": "Coming soon text" }
+  "@comingSoon": { "description": "Coming soon text" },
+
+  "game_bluff_bar": "Bluff Bar",
+  "@game_bluff_bar": {
+    "description": "Bluff Bar game title"
+  },
+  "bb_game_title": "Bluff Bar",
+  "@bb_game_title": {
+    "description": "Bluff Bar game title displayed in game"
+  },
+  "bb_game_subtitle": "Bluff, Challenge, Survive",
+  "@bb_game_subtitle": {
+    "description": "Bluff Bar game subtitle"
+  },
+  "bb_gameDescription": "A poker-style bluffing game with Russian roulette elimination",
+  "@bb_gameDescription": {
+    "description": "Bluff Bar game description"
+  },
+
+  "bb_phase_setup": "Setup Phase",
+  "@bb_phase_setup": {
+    "description": "Setup phase label"
+  },
+  "bb_phase_deal": "Dealing Phase",
+  "@bb_phase_deal": {
+    "description": "Dealing phase label"
+  },
+  "bb_phase_play": "Play Phase",
+  "@bb_phase_play": {
+    "description": "Play phase label"
+  },
+  "bb_phase_challenge": "Challenge Phase",
+  "@bb_phase_challenge": {
+    "description": "Challenge phase label"
+  },
+  "bb_phase_reveal": "Reveal Phase",
+  "@bb_phase_reveal": {
+    "description": "Reveal phase label"
+  },
+  "bb_phase_roulette": "Russian Roulette",
+  "@bb_phase_roulette": {
+    "description": "Russian roulette phase label"
+  },
+  "bb_phase_roundEnd": "Round End",
+  "@bb_phase_roundEnd": {
+    "description": "Round end phase label"
+  },
+  "bb_phase_gameOver": "Game Over",
+  "@bb_phase_gameOver": {
+    "description": "Game over phase label"
+  },
+
+  "bb_target_card": "Target Card",
+  "@bb_target_card": {
+    "description": "Target card label"
+  },
+  "bb_target_jacks": "Target: J",
+  "@bb_target_jacks": {
+    "description": "Jack is the target card"
+  },
+  "bb_target_queens": "Target: Q",
+  "@bb_target_queens": {
+    "description": "Queen is the target card"
+  },
+  "bb_target_kings": "Target: K",
+  "@bb_target_kings": {
+    "description": "King is the target card"
+  },
+  "bb_target_aces": "Target: A",
+  "@bb_target_aces": {
+    "description": "Ace is the target card"
+  },
+
+  "bb_play_cards": "Play Cards",
+  "@bb_play_cards": {
+    "description": "Play cards button"
+  },
+  "bb_challenge": "Challenge!",
+  "@bb_challenge": {
+    "description": "Challenge button"
+  },
+  "bb_pass": "Pass",
+  "@bb_pass": {
+    "description": "Pass button"
+  },
+  "bb_select_cards": "Select Cards",
+  "@bb_select_cards": {
+    "description": "Select cards label"
+  },
+
+  "bb_claim": "Claim",
+  "@bb_claim": {
+    "description": "Claim label"
+  },
+  "bb_claiming": "{count} {rank}s",
+  "@bb_claiming": {
+    "description": "Claiming message with count and rank placeholders",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_cards_played": "{count} cards played",
+  "@bb_cards_played": {
+    "description": "Cards played message with count placeholder",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "bb_challenge_successful": "Challenge Successful!",
+  "@bb_challenge_successful": {
+    "description": "Challenge successful message"
+  },
+  "bb_challenge_failed": "Challenge Failed",
+  "@bb_challenge_failed": {
+    "description": "Challenge failed message"
+  },
+  "bb_liar_guilty": "Caught the Liar!",
+  "@bb_liar_guilty": {
+    "description": "Liar caught message"
+  },
+  "bb_liar_innocent": "Honest Play!",
+  "@bb_liar_innocent": {
+    "description": "Honest play message"
+  },
+
+  "bb_roulette_draw": "Draw Roulette Card",
+  "@bb_roulette_draw": {
+    "description": "Draw roulette card button"
+  },
+  "bb_roulette_survived": "Survived!",
+  "@bb_roulette_survived": {
+    "description": "Survived roulette message"
+  },
+  "bb_roulette_eliminated": "Eliminated!",
+  "@bb_roulette_eliminated": {
+    "description": "Eliminated by roulette message"
+  },
+  "bb_roulette_remaining": "{count} cards remaining",
+  "@bb_roulette_remaining": {
+    "description": "Roulette cards remaining message with count placeholder",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "bb_your_turn": "Your Turn",
+  "@bb_your_turn": {
+    "description": "Your turn message"
+  },
+  "bb_opponent_turn": "Opponent's Turn",
+  "@bb_opponent_turn": {
+    "description": "Opponent's turn message"
+  },
+  "bb_cards_in_hand": "{count} cards in hand",
+  "@bb_cards_in_hand": {
+    "description": "Cards in hand message with count placeholder",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_eliminated_player": "Eliminated",
+  "@bb_eliminated_player": {
+    "description": "Eliminated player label"
+  },
+
+  "bb_ai_thinking": "AI Thinking...",
+  "@bb_ai_thinking": {
+    "description": "AI thinking message"
+  },
+  "bb_ai_playing": "AI Playing...",
+  "@bb_ai_playing": {
+    "description": "AI playing message"
+  },
+  "bb_ai_challenging": "AI Challenges!",
+  "@bb_ai_challenging": {
+    "description": "AI challenges message"
+  },
+
+  "bb_winner": "{name} Wins!",
+  "@bb_winner": {
+    "description": "Winner message with name placeholder",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_last_survivor": "Last Survivor",
+  "@bb_last_survivor": {
+    "description": "Last survivor label"
+  },
+  "bb_play_again": "Play Again",
+  "@bb_play_again": {
+    "description": "Play again button"
+  },
+  "bb_exit": "Exit",
+  "@bb_exit": {
+    "description": "Exit button"
+  },
+
+  "bb_ai_difficulty": "AI Difficulty",
+  "@bb_ai_difficulty": {
+    "description": "AI difficulty setting label"
+  },
+  "bb_easy": "Easy",
+  "@bb_easy": {
+    "description": "Easy difficulty option"
+  },
+  "bb_medium": "Medium",
+  "@bb_medium": {
+    "description": "Medium difficulty option"
+  },
+  "bb_hard": "Hard",
+  "@bb_hard": {
+    "description": "Hard difficulty option"
+  },
+  "bb_start_game": "Start Game",
+  "@bb_start_game": {
+    "description": "Start game button"
+  },
+  "bb_how_to_play": "How to Play",
+  "@bb_how_to_play": {
+    "description": "How to play button"
+  },
+
+  "bb_rule1_title": "1. Target Card",
+  "@bb_rule1_title": {
+    "description": "Rule 1 title"
+  },
+  "bb_rule1_desc": "Each round randomly designates J/Q/K/A as the target card. That card and Joker count as \"real cards\".",
+  "@bb_rule1_desc": {
+    "description": "Rule 1 description"
+  },
+  "bb_rule2_title": "2. Playing Cards",
+  "@bb_rule2_title": {
+    "description": "Rule 2 title"
+  },
+  "bb_rule2_desc": "Each turn, play 1-5 cards face-down and claim they are target cards.",
+  "@bb_rule2_desc": {
+    "description": "Rule 2 description"
+  },
+  "bb_rule3_title": "3. Challenge",
+  "@bb_rule3_title": {
+    "description": "Rule 3 title"
+  },
+  "bb_rule3_desc": "Call \"Liar!\" to challenge the previous player. Flip cards to verify: fake cards = challenger wins, real cards = challenger loses.",
+  "@bb_rule3_desc": {
+    "description": "Rule 3 description"
+  },
+  "bb_rule4_title": "4. Elimination",
+  "@bb_rule4_title": {
+    "description": "Rule 4 title"
+  },
+  "bb_rule4_desc": "The loser triggers Russian roulette: draw a card. Live bullet = eliminated.",
+  "@bb_rule4_desc": {
+    "description": "Rule 4 description"
+  },
+  "bb_rule5_title": "5. Victory",
+  "@bb_rule5_title": {
+    "description": "Rule 5 title"
+  },
+  "bb_rule5_desc": "Become the last surviving player to win!",
+  "@bb_rule5_desc": {
+    "description": "Rule 5 description"
+  },
+
+  "bb_got_it": "Got it!",
+  "@bb_got_it": {
+    "description": "Got it button"
+  },
+  "bb_two_players": "2 Players",
+  "@bb_two_players": {
+    "description": "2 player mode button"
+  },
+  "bb_vs_ai": "VS AI",
+  "@bb_vs_ai": {
+    "description": "VS AI mode button"
+  },
+
+  "bb_eliminated": "ELIMINATED",
+  "@bb_eliminated": {
+    "description": "Eliminated status badge"
+  },
+  "bb_survived": "SURVIVED!",
+  "@bb_survived": {
+    "description": "Survived status message"
+  },
+  "bb_draw_card": "Draw Card",
+  "@bb_draw_card": {
+    "description": "Draw card button for roulette"
+  },
+  "bb_drawing": "Drawing...",
+  "@bb_drawing": {
+    "description": "Drawing status text"
+  },
+  "bb_cards_remaining": "{count} cards remaining",
+  "@bb_cards_remaining": {
+    "description": "Cards remaining text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_no_cards_played": "No cards played yet",
+  "@bb_no_cards_played": {
+    "description": "Empty played pile message"
+  },
+  "bb_cards_played_total": "{count} cards played",
+  "@bb_cards_played_total": {
+    "description": "Total cards played text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_no_cards": "No cards",
+  "@bb_no_cards": {
+    "description": "Empty hand message"
+  },
+  "bb_one_player_three_ai": "1 Player + 3 AI",
+  "@bb_one_player_three_ai": {
+    "description": "Game mode description"
+  },
+  "bb_exit_confirm": "Are you sure you want to exit? Progress will be lost.",
+  "@bb_exit_confirm": {
+    "description": "Exit confirmation message"
+  },
+  "bb_round": "Round {number}",
+  "@bb_round": {
+    "description": "Round number display",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_round_ranking": "Round {number} Rankings",
+  "@bb_round_ranking": {
+    "description": "Round ranking title",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_roulette_shots": "Shots fired",
+  "@bb_roulette_shots": {
+    "description": "Roulette shots label"
+  },
+  "bb_select_claim": "Select claim rank",
+  "@bb_select_claim": {
+    "description": "Claim selection hint"
+  },
+  "bb_your_hand": "Your Hand",
+  "@bb_your_hand": {
+    "description": "Hand section title"
+  },
+  "bb_waiting_for": "Waiting for {name}...",
+  "@bb_waiting_for": {
+    "description": "Waiting for opponent message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_game_screen_coming": "Game screen coming soon!",
+  "@bb_game_screen_coming": {
+    "description": "Placeholder message"
+  },
+  "bb_position_north": "North",
+  "@bb_position_north": {
+    "description": "North position"
+  },
+  "bb_position_south": "South",
+  "@bb_position_south": {
+    "description": "South position"
+  },
+  "bb_position_east": "East",
+  "@bb_position_east": {
+    "description": "East position"
+  },
+  "bb_position_west": "West",
+  "@bb_position_west": {
+    "description": "West position"
+  },
+  "bb_challenge_title": "{challenger} challenges {challenged}",
+  "@bb_challenge_title": {
+    "description": "Challenge overlay title with challenger and challenged player names",
+    "placeholders": {
+      "challenger": {
+        "type": "String"
+      },
+      "challenged": {
+        "type": "String"
+      }
+    }
+  },
+  "bb_revealed_cards": "Revealed Cards",
+  "@bb_revealed_cards": {
+    "description": "Label for revealed cards section in challenge overlay"
+  },
+  "bb_liar": "Liar!",
+  "@bb_liar": {
+    "description": "Challenge result - player was lying"
+  },
+  "bb_honest": "Honest!",
+  "@bb_honest": {
+    "description": "Challenge result - player was telling truth"
+  },
+  "bb_face_roulette": "faces Roulette",
+  "@bb_face_roulette": {
+    "description": "Label indicating player must face Russian roulette"
+  },
+  "bb_victory": "VICTORY",
+  "@bb_victory": {
+    "description": "Victory result text"
+  },
+  "bb_defeat": "DEFEAT",
+  "@bb_defeat": {
+    "description": "Defeat result text"
+  },
+  "bb_ranking": "Rankings",
+  "@bb_ranking": {
+    "description": "Rankings section title"
+  },
+  "bb_rounds_survived": "{count} rounds",
+  "@bb_rounds_survived": {
+    "description": "Rounds survived text",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bb_play_again": "Play Again",
+  "@bb_play_again": {
+    "description": "Play again button"
+  }
 }

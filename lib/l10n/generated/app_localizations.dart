@@ -2443,6 +2443,558 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Coming Soon'**
   String get comingSoon;
+
+  /// Bluff Bar game title
+  ///
+  /// In en, this message translates to:
+  /// **'Bluff Bar'**
+  String get game_bluff_bar;
+
+  /// Bluff Bar game title displayed in game
+  ///
+  /// In en, this message translates to:
+  /// **'Bluff Bar'**
+  String get bb_game_title;
+
+  /// Bluff Bar game subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Bluff, Challenge, Survive'**
+  String get bb_game_subtitle;
+
+  /// Bluff Bar game description
+  ///
+  /// In en, this message translates to:
+  /// **'A poker-style bluffing game with Russian roulette elimination'**
+  String get bb_gameDescription;
+
+  /// Setup phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Setup Phase'**
+  String get bb_phase_setup;
+
+  /// Dealing phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Dealing Phase'**
+  String get bb_phase_deal;
+
+  /// Play phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Play Phase'**
+  String get bb_phase_play;
+
+  /// Challenge phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Challenge Phase'**
+  String get bb_phase_challenge;
+
+  /// Reveal phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal Phase'**
+  String get bb_phase_reveal;
+
+  /// Russian roulette phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Russian Roulette'**
+  String get bb_phase_roulette;
+
+  /// Round end phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Round End'**
+  String get bb_phase_roundEnd;
+
+  /// Game over phase label
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over'**
+  String get bb_phase_gameOver;
+
+  /// Target card label
+  ///
+  /// In en, this message translates to:
+  /// **'Target Card'**
+  String get bb_target_card;
+
+  /// Jack is the target card
+  ///
+  /// In en, this message translates to:
+  /// **'Target: J'**
+  String get bb_target_jacks;
+
+  /// Queen is the target card
+  ///
+  /// In en, this message translates to:
+  /// **'Target: Q'**
+  String get bb_target_queens;
+
+  /// King is the target card
+  ///
+  /// In en, this message translates to:
+  /// **'Target: K'**
+  String get bb_target_kings;
+
+  /// Ace is the target card
+  ///
+  /// In en, this message translates to:
+  /// **'Target: A'**
+  String get bb_target_aces;
+
+  /// Play cards button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Cards'**
+  String get bb_play_cards;
+
+  /// Challenge button
+  ///
+  /// In en, this message translates to:
+  /// **'Challenge!'**
+  String get bb_challenge;
+
+  /// Pass button
+  ///
+  /// In en, this message translates to:
+  /// **'Pass'**
+  String get bb_pass;
+
+  /// Select cards label
+  ///
+  /// In en, this message translates to:
+  /// **'Select Cards'**
+  String get bb_select_cards;
+
+  /// Claim label
+  ///
+  /// In en, this message translates to:
+  /// **'Claim'**
+  String get bb_claim;
+
+  /// Claiming message with count and rank placeholders
+  ///
+  /// In en, this message translates to:
+  /// **'{count} {rank}s'**
+  String bb_claiming(int count, String rank);
+
+  /// Cards played message with count placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'{count} cards played'**
+  String bb_cards_played(int count);
+
+  /// Challenge successful message
+  ///
+  /// In en, this message translates to:
+  /// **'Challenge Successful!'**
+  String get bb_challenge_successful;
+
+  /// Challenge failed message
+  ///
+  /// In en, this message translates to:
+  /// **'Challenge Failed'**
+  String get bb_challenge_failed;
+
+  /// Liar caught message
+  ///
+  /// In en, this message translates to:
+  /// **'Caught the Liar!'**
+  String get bb_liar_guilty;
+
+  /// Honest play message
+  ///
+  /// In en, this message translates to:
+  /// **'Honest Play!'**
+  String get bb_liar_innocent;
+
+  /// Draw roulette card button
+  ///
+  /// In en, this message translates to:
+  /// **'Draw Roulette Card'**
+  String get bb_roulette_draw;
+
+  /// Survived roulette message
+  ///
+  /// In en, this message translates to:
+  /// **'Survived!'**
+  String get bb_roulette_survived;
+
+  /// Eliminated by roulette message
+  ///
+  /// In en, this message translates to:
+  /// **'Eliminated!'**
+  String get bb_roulette_eliminated;
+
+  /// Roulette cards remaining message with count placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'{count} cards remaining'**
+  String bb_roulette_remaining(int count);
+
+  /// Your turn message
+  ///
+  /// In en, this message translates to:
+  /// **'Your Turn'**
+  String get bb_your_turn;
+
+  /// Opponent's turn message
+  ///
+  /// In en, this message translates to:
+  /// **'Opponent\'s Turn'**
+  String get bb_opponent_turn;
+
+  /// Cards in hand message with count placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'{count} cards in hand'**
+  String bb_cards_in_hand(int count);
+
+  /// Eliminated player label
+  ///
+  /// In en, this message translates to:
+  /// **'Eliminated'**
+  String get bb_eliminated_player;
+
+  /// AI thinking message
+  ///
+  /// In en, this message translates to:
+  /// **'AI Thinking...'**
+  String get bb_ai_thinking;
+
+  /// AI playing message
+  ///
+  /// In en, this message translates to:
+  /// **'AI Playing...'**
+  String get bb_ai_playing;
+
+  /// AI challenges message
+  ///
+  /// In en, this message translates to:
+  /// **'AI Challenges!'**
+  String get bb_ai_challenging;
+
+  /// Winner message with name placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'{name} Wins!'**
+  String bb_winner(String name);
+
+  /// Last survivor label
+  ///
+  /// In en, this message translates to:
+  /// **'Last Survivor'**
+  String get bb_last_survivor;
+
+  /// Play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get bb_play_again;
+
+  /// Exit button
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get bb_exit;
+
+  /// AI difficulty setting label
+  ///
+  /// In en, this message translates to:
+  /// **'AI Difficulty'**
+  String get bb_ai_difficulty;
+
+  /// Easy difficulty option
+  ///
+  /// In en, this message translates to:
+  /// **'Easy'**
+  String get bb_easy;
+
+  /// Medium difficulty option
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get bb_medium;
+
+  /// Hard difficulty option
+  ///
+  /// In en, this message translates to:
+  /// **'Hard'**
+  String get bb_hard;
+
+  /// Start game button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Game'**
+  String get bb_start_game;
+
+  /// How to play button
+  ///
+  /// In en, this message translates to:
+  /// **'How to Play'**
+  String get bb_how_to_play;
+
+  /// Rule 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'1. Target Card'**
+  String get bb_rule1_title;
+
+  /// Rule 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Each round randomly designates J/Q/K/A as the target card. That card and Joker count as \"real cards\".'**
+  String get bb_rule1_desc;
+
+  /// Rule 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'2. Playing Cards'**
+  String get bb_rule2_title;
+
+  /// Rule 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Each turn, play 1-5 cards face-down and claim they are target cards.'**
+  String get bb_rule2_desc;
+
+  /// Rule 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'3. Challenge'**
+  String get bb_rule3_title;
+
+  /// Rule 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'Call \"Liar!\" to challenge the previous player. Flip cards to verify: fake cards = challenger wins, real cards = challenger loses.'**
+  String get bb_rule3_desc;
+
+  /// Rule 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'4. Elimination'**
+  String get bb_rule4_title;
+
+  /// Rule 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'The loser triggers Russian roulette: draw a card. Live bullet = eliminated.'**
+  String get bb_rule4_desc;
+
+  /// Rule 5 title
+  ///
+  /// In en, this message translates to:
+  /// **'5. Victory'**
+  String get bb_rule5_title;
+
+  /// Rule 5 description
+  ///
+  /// In en, this message translates to:
+  /// **'Become the last surviving player to win!'**
+  String get bb_rule5_desc;
+
+  /// Got it button
+  ///
+  /// In en, this message translates to:
+  /// **'Got it!'**
+  String get bb_got_it;
+
+  /// 2 player mode button
+  ///
+  /// In en, this message translates to:
+  /// **'2 Players'**
+  String get bb_two_players;
+
+  /// VS AI mode button
+  ///
+  /// In en, this message translates to:
+  /// **'VS AI'**
+  String get bb_vs_ai;
+
+  /// Eliminated status badge
+  ///
+  /// In en, this message translates to:
+  /// **'ELIMINATED'**
+  String get bb_eliminated;
+
+  /// Survived status message
+  ///
+  /// In en, this message translates to:
+  /// **'SURVIVED!'**
+  String get bb_survived;
+
+  /// Draw card button for roulette
+  ///
+  /// In en, this message translates to:
+  /// **'Draw Card'**
+  String get bb_draw_card;
+
+  /// Drawing status text
+  ///
+  /// In en, this message translates to:
+  /// **'Drawing...'**
+  String get bb_drawing;
+
+  /// Cards remaining text
+  ///
+  /// In en, this message translates to:
+  /// **'{count} cards remaining'**
+  String bb_cards_remaining(int count);
+
+  /// Empty played pile message
+  ///
+  /// In en, this message translates to:
+  /// **'No cards played yet'**
+  String get bb_no_cards_played;
+
+  /// Total cards played text
+  ///
+  /// In en, this message translates to:
+  /// **'{count} cards played'**
+  String bb_cards_played_total(int count);
+
+  /// Empty hand message
+  ///
+  /// In en, this message translates to:
+  /// **'No cards'**
+  String get bb_no_cards;
+
+  /// Game mode description
+  ///
+  /// In en, this message translates to:
+  /// **'1 Player + 3 AI'**
+  String get bb_one_player_three_ai;
+
+  /// Exit confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit? Progress will be lost.'**
+  String get bb_exit_confirm;
+
+  /// Round number display
+  ///
+  /// In en, this message translates to:
+  /// **'Round {number}'**
+  String bb_round(int number);
+
+  /// Round ranking title
+  ///
+  /// In en, this message translates to:
+  /// **'Round {number} Rankings'**
+  String bb_round_ranking(int number);
+
+  /// Roulette shots label
+  ///
+  /// In en, this message translates to:
+  /// **'Shots fired'**
+  String get bb_roulette_shots;
+
+  /// Claim selection hint
+  ///
+  /// In en, this message translates to:
+  /// **'Select claim rank'**
+  String get bb_select_claim;
+
+  /// Hand section title
+  ///
+  /// In en, this message translates to:
+  /// **'Your Hand'**
+  String get bb_your_hand;
+
+  /// Waiting for opponent message
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for {name}...'**
+  String bb_waiting_for(String name);
+
+  /// Placeholder message
+  ///
+  /// In en, this message translates to:
+  /// **'Game screen coming soon!'**
+  String get bb_game_screen_coming;
+
+  /// North position
+  ///
+  /// In en, this message translates to:
+  /// **'North'**
+  String get bb_position_north;
+
+  /// South position
+  ///
+  /// In en, this message translates to:
+  /// **'South'**
+  String get bb_position_south;
+
+  /// East position
+  ///
+  /// In en, this message translates to:
+  /// **'East'**
+  String get bb_position_east;
+
+  /// West position
+  ///
+  /// In en, this message translates to:
+  /// **'West'**
+  String get bb_position_west;
+
+  /// Challenge overlay title with challenger and challenged player names
+  ///
+  /// In en, this message translates to:
+  /// **'{challenger} challenges {challenged}'**
+  String bb_challenge_title(String challenger, String challenged);
+
+  /// Label for revealed cards section in challenge overlay
+  ///
+  /// In en, this message translates to:
+  /// **'Revealed Cards'**
+  String get bb_revealed_cards;
+
+  /// Challenge result - player was lying
+  ///
+  /// In en, this message translates to:
+  /// **'Liar!'**
+  String get bb_liar;
+
+  /// Challenge result - player was telling truth
+  ///
+  /// In en, this message translates to:
+  /// **'Honest!'**
+  String get bb_honest;
+
+  /// Label indicating player must face Russian roulette
+  ///
+  /// In en, this message translates to:
+  /// **'faces Roulette'**
+  String get bb_face_roulette;
+
+  /// Victory result text
+  ///
+  /// In en, this message translates to:
+  /// **'VICTORY'**
+  String get bb_victory;
+
+  /// Defeat result text
+  ///
+  /// In en, this message translates to:
+  /// **'DEFEAT'**
+  String get bb_defeat;
+
+  /// Rankings section title
+  ///
+  /// In en, this message translates to:
+  /// **'Rankings'**
+  String get bb_ranking;
+
+  /// Rounds survived text
+  ///
+  /// In en, this message translates to:
+  /// **'{count} rounds'**
+  String bb_rounds_survived(int count);
 }
 
 class _AppLocalizationsDelegate
