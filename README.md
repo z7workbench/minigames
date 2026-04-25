@@ -31,6 +31,7 @@
 | **2048** | ✅ Complete | - | 5 slots + auto-save |
 | **Mancala** | ✅ Complete | Easy/Medium/Hard | 5 slots |
 | **Hearts** | ✅ Complete | Easy/Medium/Hard | 5 slots |
+| **Bluff Bar** | ✅ Complete | Easy/Medium/Hard | 5 slots |
 | **Dice Battle** | 🚧 WIP | Easy/Medium/Hard | Records |
 
 ---
@@ -184,6 +185,38 @@ Four-player Hearts with passing phase and shoot-the-moon mechanics. Avoid collec
 - 5 save slots with full state persistence
 - Scoreboard and trick history
 - Rule validation and scoring logic
+
+---
+
+### Bluff Bar
+
+A bluffing card game with Russian roulette elimination - call "Liar!" to challenge!
+
+**Description:**
+Four-player bluffing game where you play cards face-down claiming they match the target rank (J/Q/K/A). Others can challenge your claim. Loser faces Russian roulette (1 bullet + 5 blanks)! Be the last survivor to win!
+
+**Gameplay:**
+- **Target Card**: Each round has a target rank (J/Q/K/A), shown at center
+- **Play Cards**: Select 1-5 cards face-down, claim they match the target
+- **Challenge**: Call "Liar!" to flip previous player's cards
+  - Fake cards found → challenger wins, bluffer faces roulette
+  - All cards valid → bluffer wins, challenger faces roulette
+- **Roulette**: 1 bullet + 5 blanks shuffled. Draw one card - bullet = eliminated!
+- **Jokers**: Wild cards that count as any target rank
+- **Win Condition**: Be the last surviving player
+
+**Game Modes:**
+- **Player vs 3 AI**: Human (South) plays against AI opponents (East, West, North)
+- **AI Difficulties**: Easy (random), Medium (basic strategy), Hard (probability analysis + bluff detection)
+
+**Features:**
+- 24-card deck: 5×J/Q/K/A + 4 Jokers
+- Highlighted target cards and Jokers in hand
+- Clockwise turn order: South → East → North → West
+- Cumulative roulette shot tracking (X/6)
+- Challenge reveal overlay with card flip animation
+- Roulette draw animation with result display
+- 5 save slots with full game state
 
 ---
 

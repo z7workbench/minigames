@@ -136,6 +136,34 @@ lib/
 │       ├── hearts_provider.dart        # Riverpod Provider
 │       └── hearts_screen.dart          # 主游戏界面
 │
+│   └── bluff_bar/             # 吹牛酒吧游戏
+│       ├── models/            # 数据模型
+│       │   ├── bluff_bar_state.dart    # 游戏状态
+│       │   ├── bluff_bar_player.dart   # 玩家模型
+│       │   ├── roulette_deck.dart      # 俄罗斯轮盘牌组
+│       │   └── enums.dart              # 游戏枚举
+│       ├── logic/             # 游戏逻辑
+│       │   └── bluff_bar_rules.dart    # 规则验证和牌组创建
+│       ├── ai/                # AI系统
+│       │   ├── bluff_bar_ai.dart       # AI基类
+│       │   ├── easy_ai.dart            # 简单难度
+│       │   ├── medium_ai.dart          # 中等难度
+│       │   ├── hard_ai.dart            # 困难难度
+│       │   └── ai_decision.dart        # AI决策模型
+│       ├── components/        # UI组件
+│       │   ├── card_widget.dart        # 卡牌显示(带Joker/目标牌高亮)
+│       │   ├── hand_display_widget.dart # 手牌展示(带选择)
+│       │   ├── player_panel_widget.dart # 玩家信息面板
+│       │   ├── played_pile_widget.dart  # 已出牌堆显示
+│       │   ├── roulette_overlay_widget.dart # 轮盘覆盖层
+│       │   ├── challenge_overlay_widget.dart # 质疑覆盖层
+│       │   ├── ai_action_overlay_widget.dart # AI动作提示
+│       │   └── game_end_overlay_widget.dart # 游戏结束界面
+│       ├── screens/           # 游戏页面
+│       │   └── bluff_bar_start_screen.dart # 开始页面
+│       ├── bluff_bar_provider.dart     # Riverpod Provider
+│       └── bluff_bar_screen.dart       # 主游戏界面
+│
 ├── ui/                        # 上层：UI层
 │   ├── screens/               # 页面
 │   │   ├── home_screen.dart
