@@ -8,6 +8,7 @@ import '../daos/yacht_dice_saves_dao.dart';
 import '../daos/twenty48_saves_dao.dart';
 import '../daos/mancala_saves_dao.dart';
 import '../daos/hearts_saves_dao.dart';
+import '../daos/bluff_bar_saves_dao.dart';
 
 part 'database_provider.g.dart';
 
@@ -78,4 +79,11 @@ MancalaSavesDao mancalaSavesDao(MancalaSavesDaoRef ref) {
 HeartsSavesDao heartsSavesDao(HeartsSavesDaoRef ref) {
   final database = ref.watch(appDatabaseProvider);
   return database.heartsSavesDao;
+}
+
+/// Provides the BluffBarSavesDao instance.
+@riverpod
+BluffBarSavesDao bluffBarSavesDao(BluffBarSavesDaoRef ref) {
+  final database = ref.watch(appDatabaseProvider);
+  return database.bluffBarSavesDao;
 }

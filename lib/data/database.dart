@@ -8,6 +8,7 @@ import 'daos/yacht_dice_saves_dao.dart';
 import 'daos/twenty48_saves_dao.dart';
 import 'daos/mancala_saves_dao.dart';
 import 'daos/hearts_saves_dao.dart';
+import 'daos/bluff_bar_saves_dao.dart';
 import 'tables/game_records.dart';
 import 'tables/game_settings.dart';
 import 'tables/user_progress.dart';
@@ -15,6 +16,7 @@ import 'tables/yacht_dice_saves.dart';
 import 'tables/twenty48_saves.dart';
 import 'tables/mancala_saves.dart';
 import 'tables/hearts_saves.dart';
+import 'tables/bluff_bar_saves.dart';
 
 part 'database.g.dart';
 
@@ -29,6 +31,7 @@ part 'database.g.dart';
     Twenty48Saves,
     MancalaSaves,
     HeartsSaves,
+    BluffBarSaves,
   ],
   daos: [
     GameRecordsDao,
@@ -38,6 +41,7 @@ part 'database.g.dart';
     Twenty48SavesDao,
     MancalaSavesDao,
     HeartsSavesDao,
+    BluffBarSavesDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -48,7 +52,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.memory() : super(createMemoryConnection());
 
   @override
-  int get schemaVersion => 6;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration {
@@ -82,6 +86,10 @@ class AppDatabase extends _$AppDatabase {
             '(SELECT MAX(id) FROM twenty48_saves GROUP BY slot_index)',
           );
           await m.alterTable(TableMigration(twenty48Saves));
+        }
+        if (from < 7) {
+          // Add bluff_bar_saves table for Bluff Bar game state persistence
+          await m.createTable(bluffBarSaves);
         }
       },
     );
