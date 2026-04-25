@@ -50,11 +50,13 @@ class PlayingCard {
   final CardSuit suit;
   final CardRank rank;
   final bool isRevealed;
+  final bool isJoker;
 
   const PlayingCard({
     required this.suit,
     required this.rank,
     this.isRevealed = false,
+    this.isJoker = false,
   });
 
   /// Create a card from integer values (suit: 0-3, rank: 1-13)
@@ -78,11 +80,12 @@ class PlayingCard {
   String get fullName => '${rank.symbol} of ${suit.name}';
 
   /// Create a copy with updated revealed state
-  PlayingCard copyWith({CardSuit? suit, CardRank? rank, bool? isRevealed}) {
+  PlayingCard copyWith({CardSuit? suit, CardRank? rank, bool? isRevealed, bool? isJoker}) {
     return PlayingCard(
       suit: suit ?? this.suit,
       rank: rank ?? this.rank,
       isRevealed: isRevealed ?? this.isRevealed,
+      isJoker: isJoker ?? this.isJoker,
     );
   }
 
@@ -104,6 +107,7 @@ class PlayingCard {
     'suit': suit.index,
     'rank': rank.value,
     'isRevealed': isRevealed,
+    'isJoker': isJoker,
   };
 
   /// Deserialize from JSON
@@ -112,6 +116,7 @@ class PlayingCard {
       suit: CardSuit.values[json['suit'] as int],
       rank: CardRank.values.firstWhere((r) => r.value == json['rank']),
       isRevealed: json['isRevealed'] as bool? ?? false,
+      isJoker: json['isJoker'] as bool? ?? false,
     );
   }
 
@@ -121,11 +126,12 @@ class PlayingCard {
     return other is PlayingCard &&
         suit == other.suit &&
         rank == other.rank &&
-        isRevealed == other.isRevealed;
+        isRevealed == other.isRevealed &&
+        isJoker == other.isJoker;
   }
 
   @override
-  int get hashCode => Object.hash(suit, rank, isRevealed);
+  int get hashCode => Object.hash(suit, rank, isRevealed, isJoker);
 
   @override
   String toString() => isRevealed ? displayString : '?';
