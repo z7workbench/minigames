@@ -5,8 +5,16 @@ import 'ai_decision.dart';
 abstract class BluffBarAi {
   final String name;
   final AiDifficulty difficulty;
+  
+  /// Aggression factor (0.0 = very conservative, 1.0 = very aggressive)
+  /// Higher values = more likely to challenge and bluff
+  final double aggressionFactor;
 
-  BluffBarAi({required this.name, required this.difficulty});
+  BluffBarAi({
+    required this.name,
+    required this.difficulty,
+    this.aggressionFactor = 0.5,
+  });
 
   /// Decide what cards to play and what to claim
   Future<AiPlayDecision> decidePlay(BluffBarState state);

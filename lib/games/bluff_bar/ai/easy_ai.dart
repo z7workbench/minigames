@@ -7,7 +7,11 @@ import 'ai_decision.dart';
 class EasyBluffBarAi extends BluffBarAi {
   final Random _random = Random();
   
-  EasyBluffBarAi() : super(name: 'Easy', difficulty: AiDifficulty.easy);
+  EasyBluffBarAi() : super(
+    name: 'Easy',
+    difficulty: AiDifficulty.easy,
+    aggressionFactor: 0.3, // Conservative - rarely challenges
+  );
   
   @override
   Future<AiPlayDecision> decidePlay(BluffBarState state) async {
@@ -38,12 +42,13 @@ class EasyBluffBarAi extends BluffBarAi {
   
   @override
   Future<AiChallengeDecision> decideChallenge(BluffBarState state) async {
-    // 20% random chance to challenge
-    final shouldChallenge = _random.nextDouble() < 0.2;
+    // Challenge probability = aggressionFactor
+    // Easy AI (0.3) → 30% chance to challenge
+    final shouldChallenge = _random.nextDouble() < aggressionFactor;
     
     return AiChallengeDecision(
       shouldChallenge: shouldChallenge,
-      reasoning: 'Random challenge',
+      reasoning: 'Random challenge ($aggressionFactor probability)',
     );
   }
 }

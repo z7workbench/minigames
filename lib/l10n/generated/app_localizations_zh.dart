@@ -392,6 +392,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get version => '版本';
 
   @override
+  String get appDescription => '经典游戏合集——桌游、骰子、卡牌与益智游戏，适合所有人。';
+
+  @override
   String get yd_exitTitle => '退出游戏';
 
   @override

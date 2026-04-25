@@ -533,6 +533,10 @@
   "@version": {
     "description": "Version label"
   },
+  "appDescription": "经典游戏合集——桌游、骰子、卡牌与益智游戏，适合所有人。",
+  "@appDescription": {
+    "description": "Application description shown in settings"
+  },
 
   "yd_exitTitle": "退出游戏",
   "@yd_exitTitle": {

@@ -842,6 +842,12 @@ abstract class AppLocalizations {
   /// **'Version'**
   String get version;
 
+  /// Application description shown in settings
+  ///
+  /// In en, this message translates to:
+  /// **'Classic games for everyone - board, dice, cards and puzzles.'**
+  String get appDescription;
+
   /// Yacht Dice exit confirmation dialog title
   ///
   /// In en, this message translates to:

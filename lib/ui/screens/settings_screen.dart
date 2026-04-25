@@ -674,7 +674,7 @@ class _AboutSetting extends StatelessWidget {
             ),
           ),
           child: Text(
-            'A collection of classic board games brought to life with beautiful wooden aesthetics.',
+            AppLocalizations.of(context)!.appDescription,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: context.themeTextSecondary,
               height: 1.5,

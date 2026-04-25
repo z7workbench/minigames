@@ -533,6 +533,10 @@
   "@version": {
     "description": "Version label"
   },
+  "appDescription": "Classic games for everyone - board, dice, cards and puzzles.",
+  "@appDescription": {
+    "description": "Application description shown in settings"
+  },
 
   "yd_exitTitle": "Exit Game",
   "@yd_exitTitle": {

@@ -397,6 +397,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get version => 'Version';
 
   @override
+  String get appDescription =>
+      'Classic games for everyone - board, dice, cards and puzzles.';
+
+  @override
   String get yd_exitTitle => 'Exit Game';
 
   @override
