@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
-
 import '../../../ui/theme/theme_colors.dart';
 import '../../../ui/widgets/wooden_button.dart';
 import '../models/mancala_state.dart';
 import '../mancala_screen.dart';
 
-/// Pre-game start screen for Mancala with mode selection and rules.
 class MancalaStartScreen extends ConsumerStatefulWidget {
   const MancalaStartScreen({super.key});
 
@@ -17,9 +15,65 @@ class MancalaStartScreen extends ConsumerStatefulWidget {
 }
 
 class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
+  Widget _buildGameIcon(bool isDark, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [context.themeCard, context.themeSurface],
+        ),
+        borderRadius: BorderRadius.circular(size * 0.2),
+        border: Border.all(color: context.themeBorder, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: context.themeShadow.withAlpha(80),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Center(child: Text('🌾', style: TextStyle(fontSize: size * 0.5))),
+    );
+  }
+
+  Widget _buildTitleSection(AppLocalizations l10n, bool isLandscape) {
+    return Column(
+      crossAxisAlignment: isLandscape ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          l10n.game_mancala,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: context.themeTextPrimary,
+            letterSpacing: 1,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Mancala',
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 16, color: context.themeTextSecondary),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.mc_gameDescription,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: context.themeBackground,
@@ -33,107 +87,57 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Game icon
-                _buildGameIcon(context),
-                const SizedBox(height: 32),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+            final padding = isLandscape
+                ? const EdgeInsets.symmetric(horizontal: 24, vertical: 8)
+                : const EdgeInsets.all(24);
 
-                // Game title and description
-                _buildTitleSection(context, l10n),
-                const SizedBox(height: 48),
-
-                // Mode selection
-                _buildModeSelection(context, l10n),
-                const SizedBox(height: 24),
-
-                // Rules button
-                WoodenButton(
-                  text: l10n.mc_howToPlay,
-                  icon: Icons.help_outline,
-                  variant: WoodenButtonVariant.outlined,
-                  expandWidth: true,
-                  onPressed: () => _showRulesDialog(context, l10n),
+            return Center(
+              child: SingleChildScrollView(
+                padding: padding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildGameIcon(isDark, 80),
+                        const SizedBox(width: 16),
+                        Expanded(child: _buildTitleSection(l10n, true)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    _buildModeSelection(context, l10n, true),
+                    const SizedBox(height: 24),
+                    WoodenButton(
+                      text: l10n.mc_howToPlay,
+                      icon: Icons.help_outline,
+                      variant: WoodenButtonVariant.outlined,
+                      expandWidth: true,
+                      onPressed: () => _showRulesDialog(context, l10n),
+                    ),
+                    const SizedBox(height: 16),
+                    WoodenButton(
+                      text: l10n.back,
+                      icon: Icons.arrow_back,
+                      variant: WoodenButtonVariant.ghost,
+                      expandWidth: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16),
-
-                // Back button
-                WoodenButton(
-                  text: l10n.back,
-                  icon: Icons.arrow_back,
-                  variant: WoodenButtonVariant.ghost,
-                  expandWidth: true,
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _buildGameIcon(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [context.themeCard, context.themeSurface],
-          ),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: context.themeBorder, width: 2),
-          boxShadow: [
-            BoxShadow(
-              color: context.themeShadow,
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: const Center(child: Text('🌾', style: TextStyle(fontSize: 50))),
-      ),
-    );
-  }
-
-  Widget _buildTitleSection(BuildContext context, AppLocalizations l10n) {
-    return Column(
-      children: [
-        Text(
-          l10n.game_mancala,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: context.themeTextPrimary,
-            letterSpacing: 1,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          'Mancala',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, color: context.themeTextSecondary),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          l10n.mc_gameDescription,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildModeSelection(BuildContext context, AppLocalizations l10n) {
+  Widget _buildModeSelection(BuildContext context, AppLocalizations l10n, bool isLandscape) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -161,8 +165,6 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
             ),
           ),
           const SizedBox(height: 24),
-
-          // 2 Player mode
           WoodenButton(
             text: l10n.mc_twoPlayers,
             icon: Icons.people,
@@ -172,12 +174,10 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
             onPressed: () => _startGame(null),
           ),
           const SizedBox(height: 12),
-
-          // AI modes
           WoodenButton(
             text: l10n.mc_easyAI,
             icon: Icons.computer,
-            size: WoodenButtonSize.medium,
+            size: WoodenButtonSize.large,
             variant: WoodenButtonVariant.secondary,
             expandWidth: true,
             onPressed: () => _startGame(AiDifficulty.easy),
@@ -186,7 +186,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
           WoodenButton(
             text: l10n.mc_mediumAI,
             icon: Icons.psychology,
-            size: WoodenButtonSize.medium,
+            size: WoodenButtonSize.large,
             variant: WoodenButtonVariant.secondary,
             expandWidth: true,
             onPressed: () => _startGame(AiDifficulty.medium),
@@ -195,7 +195,7 @@ class _MancalaStartScreenState extends ConsumerState<MancalaStartScreen> {
           WoodenButton(
             text: l10n.mc_hardAI,
             icon: Icons.smart_toy,
-            size: WoodenButtonSize.medium,
+            size: WoodenButtonSize.large,
             variant: WoodenButtonVariant.accent,
             expandWidth: true,
             onPressed: () => _startGame(AiDifficulty.hard),

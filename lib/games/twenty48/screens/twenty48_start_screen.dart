@@ -8,9 +8,7 @@ import '../twenty48_provider.dart';
 import '../twenty48_screen.dart';
 import 'twenty48_load_screen.dart';
 
-/// Start screen for the 2048 game.
 class Twenty48StartScreen extends ConsumerStatefulWidget {
-  /// Creates the 2048 start screen.
   const Twenty48StartScreen({super.key});
 
   @override
@@ -53,6 +51,66 @@ class _Twenty48StartScreenState extends ConsumerState<Twenty48StartScreen> {
     ).then((_) => _checkForSaves());
   }
 
+  Widget _buildGameIcon(bool isDark, ThemeColorSet colors, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [colors.card, colors.surface],
+        ),
+        borderRadius: BorderRadius.circular(size * 0.2),
+        border: Border.all(color: colors.border, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: colors.shadow.withAlpha(128),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Icon(
+        Icons.grid_4x4,
+        size: size * 0.5,
+        color: isDark ? colors.accent : colors.secondary,
+      ),
+    );
+  }
+
+  Widget _buildTitleSection(
+    AppLocalizations l10n,
+    BuildContext context,
+    Color textPrimaryColor,
+    Color textSecondaryColor,
+    bool isLandscape,
+  ) {
+    return Column(
+      crossAxisAlignment: isLandscape ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          l10n.game_2048,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: textPrimaryColor,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.t48_gameDescription,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: textSecondaryColor,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -76,135 +134,92 @@ class _Twenty48StartScreenState extends ConsumerState<Twenty48StartScreen> {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Game icon
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: isDark
-                          ? [themeColors.card, themeColors.surface]
-                          : [themeColors.card, themeColors.surface],
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: themeColors.border, width: 2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: themeColors.shadow.withAlpha(128),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    Icons.grid_4x4,
-                    size: 50,
-                    color: isDark ? themeColors.accent : themeColors.secondary,
-                  ),
-                ),
-                const SizedBox(height: 32),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+            final padding = isLandscape
+                ? const EdgeInsets.symmetric(horizontal: 24, vertical: 8)
+                : const EdgeInsets.all(24.0);
 
-                // Game title
-                Text(
-                  l10n.game_2048,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: textPrimaryColor,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const SizedBox(height: 12),
-
-                // Game description
-                Text(
-                  l10n.t48_gameDescription,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyLarge?.copyWith(color: textSecondaryColor),
-                ),
-                const SizedBox(height: 48),
-
-                // Game mode selection container
-                Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: surfaceColor,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: themeColors.border, width: 1.5),
-                    boxShadow: [
-                      BoxShadow(
-                        color: themeColors.shadow.withAlpha(128),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Section title
-                      Text(
-                        l10n.t48_instructions,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: textSecondaryColor,
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-
-                      // New Game button
-                      WoodenButton(
-                        text: l10n.t48_newGame,
-                        icon: Icons.play_arrow,
-                        size: WoodenButtonSize.large,
-                        variant: WoodenButtonVariant.primary,
-                        expandWidth: true,
-                        onPressed: _startNewGame,
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Continue button
-                      if (!_isLoading) ...[
-                        WoodenButton(
-                          text: l10n.t48_loadGame,
-                          icon: Icons.folder_open,
-                          size: WoodenButtonSize.large,
-                          variant: _hasSaves
-                              ? WoodenButtonVariant.secondary
-                              : WoodenButtonVariant.ghost,
-                          expandWidth: true,
-                          onPressed: _hasSaves ? _showLoadScreen : null,
-                        ),
+            return Center(
+              child: SingleChildScrollView(
+                padding: padding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildGameIcon(isDark, themeColors, 80),
+                        const SizedBox(width: 16),
+                        Expanded(child: _buildTitleSection(l10n, context, textPrimaryColor, textSecondaryColor, true)),
                       ],
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: surfaceColor,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: themeColors.border, width: 1.5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: themeColors.shadow.withAlpha(128),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            l10n.t48_instructions,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: textSecondaryColor,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          WoodenButton(
+                            text: l10n.t48_newGame,
+                            icon: Icons.play_arrow,
+                            size: WoodenButtonSize.large,
+                            variant: WoodenButtonVariant.primary,
+                            expandWidth: true,
+                            onPressed: _startNewGame,
+                          ),
+                          if (!_isLoading) ...[
+                            const SizedBox(height: 16),
+                            WoodenButton(
+                              text: l10n.t48_loadGame,
+                              icon: Icons.folder_open,
+                              size: WoodenButtonSize.large,
+                              variant: _hasSaves
+                                  ? WoodenButtonVariant.secondary
+                                  : WoodenButtonVariant.ghost,
+                              expandWidth: true,
+                              onPressed: _hasSaves ? _showLoadScreen : null,
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    WoodenButton(
+                      text: l10n.back,
+                      icon: Icons.arrow_back,
+                      size: WoodenButtonSize.medium,
+                      variant: WoodenButtonVariant.ghost,
+                      expandWidth: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
                 ),
-
-                const SizedBox(height: 32),
-
-                // Back button
-                WoodenButton(
-                  text: l10n.back,
-                  icon: Icons.arrow_back,
-                  size: WoodenButtonSize.medium,
-                  variant: WoodenButtonVariant.ghost,
-                  expandWidth: true,
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

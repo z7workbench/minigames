@@ -9,14 +9,12 @@ import '../models/dice_set.dart';
 import '../models/dice_type.dart';
 import '../dice_battle_screen.dart';
 
-/// 选择步骤枚举
 enum _SelectionStep {
-  modeSelect, // 选择游戏模式
-  player1Select, // 玩家1选择组合
-  player2Select, // 玩家2选择组合（仅双人对战）
+  modeSelect,
+  player1Select,
+  player2Select,
 }
 
-/// Pre-game start screen for Dice Battle with mode selection and dice set selection.
 class DiceBattleStartScreen extends ConsumerStatefulWidget {
   const DiceBattleStartScreen({super.key});
 
@@ -30,6 +28,55 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
   AiDifficulty? _aiDifficulty;
   DiceSet? _player1Set;
   DiceSet? _player2Set;
+
+  Widget _buildGameIcon(bool isDark, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [context.themeCard, context.themeSurface],
+        ),
+        borderRadius: BorderRadius.circular(size * 0.2),
+        border: Border.all(color: context.themeBorder, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: context.themeShadow.withAlpha(80),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Center(child: Text('🎲', style: TextStyle(fontSize: size * 0.5))),
+    );
+  }
+
+  Widget _buildTitleSection(bool isDark, AppLocalizations l10n, bool isLandscape) {
+    return Column(
+      crossAxisAlignment: isLandscape ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          l10n.game_dice_battle,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: context.themeTextPrimary,
+            letterSpacing: 1,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.db_gameDescription,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,26 +103,35 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Game icon
-                _buildGameIcon(isDark),
-                const SizedBox(height: 32),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+            final padding = isLandscape
+                ? const EdgeInsets.symmetric(horizontal: 24, vertical: 8)
+                : const EdgeInsets.all(24);
 
-                // Game title and description
-                _buildTitleSection(isDark, l10n),
-                const SizedBox(height: 48),
-
-                // Current step content
-                _buildCurrentStep(context, isDark, l10n),
-              ],
-            ),
-          ),
+            return Center(
+              child: SingleChildScrollView(
+                padding: padding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildGameIcon(isDark, 80),
+                        const SizedBox(width: 16),
+                        Expanded(child: _buildTitleSection(isDark, l10n, true)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    _buildCurrentStep(context, isDark, l10n, true),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -85,10 +141,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     BuildContext context,
     bool isDark,
     AppLocalizations l10n,
+    bool isLandscape,
   ) {
     switch (_currentStep) {
       case _SelectionStep.modeSelect:
-        return _buildModeSelection(context, isDark, l10n);
+        return _buildModeSelection(context, isDark, l10n, isLandscape);
       case _SelectionStep.player1Select:
         return _buildPlayer1Selection(context, isDark, l10n);
       case _SelectionStep.player2Select:
@@ -96,61 +153,67 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     }
   }
 
-  Widget _buildGameIcon(bool isDark) {
-    return Center(
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [context.themeCard, context.themeSurface],
-          ),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: context.themeBorder, width: 2),
-          boxShadow: [
-            BoxShadow(
-              color: context.themeShadow,
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: const Center(child: Text('🎲', style: TextStyle(fontSize: 50))),
-      ),
-    );
-  }
-
-  Widget _buildTitleSection(bool isDark, AppLocalizations l10n) {
-    return Column(
-      children: [
-        Text(
-          l10n.game_dice_battle,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: context.themeTextPrimary,
-            letterSpacing: 1,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          l10n.db_gameDescription,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
-        ),
-      ],
-    );
-  }
-
-  /// 模式选择步骤
   Widget _buildModeSelection(
     BuildContext context,
     bool isDark,
     AppLocalizations l10n,
+    bool isLandscape,
   ) {
+    final buttons = <Widget>[
+      WoodenButton(
+        text: l10n.db_twoPlayers,
+        icon: Icons.people,
+        size: WoodenButtonSize.large,
+        variant: WoodenButtonVariant.primary,
+        expandWidth: true,
+        onPressed: () {
+          setState(() {
+            _aiDifficulty = null;
+            _currentStep = _SelectionStep.player1Select;
+          });
+        },
+      ),
+      WoodenButton(
+        text: l10n.db_easyAI,
+        icon: Icons.computer,
+        size: WoodenButtonSize.large,
+        variant: WoodenButtonVariant.secondary,
+        expandWidth: true,
+        onPressed: () {
+          setState(() {
+            _aiDifficulty = AiDifficulty.easy;
+            _currentStep = _SelectionStep.player1Select;
+          });
+        },
+      ),
+      WoodenButton(
+        text: l10n.db_mediumAI,
+        icon: Icons.psychology,
+        size: WoodenButtonSize.large,
+        variant: WoodenButtonVariant.secondary,
+        expandWidth: true,
+        onPressed: () {
+          setState(() {
+            _aiDifficulty = AiDifficulty.medium;
+            _currentStep = _SelectionStep.player1Select;
+          });
+        },
+      ),
+      WoodenButton(
+        text: l10n.db_hardAI,
+        icon: Icons.smart_toy,
+        size: WoodenButtonSize.large,
+        variant: WoodenButtonVariant.accent,
+        expandWidth: true,
+        onPressed: () {
+          setState(() {
+            _aiDifficulty = AiDifficulty.hard;
+            _currentStep = _SelectionStep.player1Select;
+          });
+        },
+      ),
+    ];
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -178,68 +241,23 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             ),
           ),
           const SizedBox(height: 24),
-
-          // 双人对战模式
-          WoodenButton(
-            text: l10n.db_twoPlayers,
-            icon: Icons.people,
-            size: WoodenButtonSize.large,
-            variant: WoodenButtonVariant.primary,
-            expandWidth: true,
-            onPressed: () {
-              setState(() {
-                _aiDifficulty = null;
-                _currentStep = _SelectionStep.player1Select;
-              });
-            },
-          ),
-          const SizedBox(height: 12),
-
-          // AI模式
-          WoodenButton(
-            text: l10n.db_easyAI,
-            icon: Icons.computer,
-            size: WoodenButtonSize.medium,
-            variant: WoodenButtonVariant.secondary,
-            expandWidth: true,
-            onPressed: () {
-              setState(() {
-                _aiDifficulty = AiDifficulty.easy;
-                _currentStep = _SelectionStep.player1Select;
-              });
-            },
-          ),
-          const SizedBox(height: 8),
-          WoodenButton(
-            text: l10n.db_mediumAI,
-            icon: Icons.psychology,
-            size: WoodenButtonSize.medium,
-            variant: WoodenButtonVariant.secondary,
-            expandWidth: true,
-            onPressed: () {
-              setState(() {
-                _aiDifficulty = AiDifficulty.medium;
-                _currentStep = _SelectionStep.player1Select;
-              });
-            },
-          ),
-          const SizedBox(height: 8),
-          WoodenButton(
-            text: l10n.db_hardAI,
-            icon: Icons.smart_toy,
-            size: WoodenButtonSize.medium,
-            variant: WoodenButtonVariant.accent,
-            expandWidth: true,
-            onPressed: () {
-              setState(() {
-                _aiDifficulty = AiDifficulty.hard;
-                _currentStep = _SelectionStep.player1Select;
-              });
-            },
-          ),
+          if (isLandscape)
+            GridView.count(
+              crossAxisCount: 4,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 3.0,
+              children: buttons,
+            )
+          else ...[
+            for (int i = 0; i < buttons.length; i++) ...[
+              buttons[i],
+              if (i < buttons.length - 1) const SizedBox(height: 12),
+            ],
+          ],
           const SizedBox(height: 24),
-
-          // 规则按钮
           WoodenButton(
             text: l10n.db_gameRules,
             icon: Icons.help_outline,
@@ -248,8 +266,6 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
             onPressed: () => _showRulesDialog(context, isDark, l10n),
           ),
           const SizedBox(height: 16),
-
-          // 返回按钮
           WoodenButton(
             text: l10n.back,
             icon: Icons.arrow_back,
@@ -262,7 +278,6 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     );
   }
 
-  /// 玩家1选择组合
   Widget _buildPlayer1Selection(
     BuildContext context,
     bool isDark,
@@ -306,7 +321,6 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
     );
   }
 
-  /// 玩家2选择组合（仅双人对战）
   Widget _buildPlayer2Selection(
     BuildContext context,
     bool isDark,
@@ -388,13 +402,11 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
       onTap: () {
         if (isPlayer1) {
           setState(() => _player1Set = set);
-          // 如果是双人对战，进入玩家2选择；如果是AI对战，直接开始
           if (_aiDifficulty == null) {
             Future.delayed(const Duration(milliseconds: 200), () {
               setState(() => _currentStep = _SelectionStep.player2Select);
             });
           } else {
-            // AI模式：AI随机选择一个组合
             final aiSet =
                 DiceSets.all[DateTime.now().millisecondsSinceEpoch %
                     DiceSets.all.length];
@@ -402,7 +414,6 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
           }
         } else {
           setState(() => _player2Set = set);
-          // 玩家2选择后，延迟开始游戏
           Future.delayed(const Duration(milliseconds: 200), () {
             _startGame(null);
           });

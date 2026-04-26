@@ -7,7 +7,6 @@ import '../../../ui/widgets/wooden_button.dart';
 import '../models/guess_arrangement_state.dart';
 import '../guess_arrangement_screen.dart';
 
-/// Pre-game start screen for Guess Arrangement with mode selection and rules.
 class GuessArrangementStartScreen extends ConsumerStatefulWidget {
   const GuessArrangementStartScreen({super.key});
 
@@ -24,94 +23,88 @@ class _GuessArrangementStartScreenState
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? context.themeBackground
-          : context.themeBackground,
+      backgroundColor: context.themeBackground,
       appBar: AppBar(
         title: Text(l10n.game_guess_arrangement),
-        backgroundColor: isDark ? context.themePrimary : context.themePrimary,
-        foregroundColor: isDark
-            ? context.themeOnPrimary
-            : context.themeOnPrimary,
+        backgroundColor: context.themePrimary,
+        foregroundColor: context.themeOnPrimary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Game icon
-                _buildGameIcon(isDark),
-                const SizedBox(height: 32),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+            final padding = isLandscape
+                ? const EdgeInsets.symmetric(horizontal: 24, vertical: 8)
+                : const EdgeInsets.all(24);
 
-                // Game title and description
-                _buildTitleSection(context, isDark, l10n),
-                const SizedBox(height: 48),
-
-                // Mode selection
-                _buildModeSelection(context, isDark, l10n),
-                const SizedBox(height: 24),
-
-                // Rules button
-                WoodenButton(
-                  text: l10n.ga_howToPlay,
-                  icon: Icons.help_outline,
-                  variant: WoodenButtonVariant.outlined,
-                  expandWidth: true,
-                  onPressed: () => _showRulesDialog(context, isDark, l10n),
+            return Center(
+              child: SingleChildScrollView(
+                padding: padding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildGameIcon(isDark, 80),
+                        const SizedBox(width: 16),
+                        Expanded(child: _buildTitleSection(context, isDark, l10n, true)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    _buildModeSelection(context, isDark, l10n),
+                    const SizedBox(height: 24),
+                    WoodenButton(
+                      text: l10n.ga_howToPlay,
+                      icon: Icons.help_outline,
+                      variant: WoodenButtonVariant.outlined,
+                      expandWidth: true,
+                      onPressed: () => _showRulesDialog(context, isDark, l10n),
+                    ),
+                    const SizedBox(height: 16),
+                    WoodenButton(
+                      text: l10n.back,
+                      icon: Icons.arrow_back,
+                      variant: WoodenButtonVariant.ghost,
+                      expandWidth: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16),
-
-                // Back button
-                WoodenButton(
-                  text: l10n.back,
-                  icon: Icons.arrow_back,
-                  variant: WoodenButtonVariant.ghost,
-                  expandWidth: true,
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _buildGameIcon(bool isDark) {
-    return Center(
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [context.themeCard, context.themeSurface]
-                : [context.themeCard, context.themeSurface],
-          ),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isDark ? context.themeBorder : context.themeBorder,
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: isDark ? context.themeShadow : context.themeShadow,
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
+  Widget _buildGameIcon(bool isDark, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [context.themeCard, context.themeSurface],
         ),
-        child: const Center(child: Text('🃏', style: TextStyle(fontSize: 50))),
+        borderRadius: BorderRadius.circular(size * 0.2),
+        border: Border.all(color: context.themeBorder, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: context.themeShadow.withAlpha(80),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
+      child: Center(child: Text('🃏', style: TextStyle(fontSize: size * 0.5))),
     );
   }
 
@@ -119,39 +112,37 @@ class _GuessArrangementStartScreenState
     BuildContext context,
     bool isDark,
     AppLocalizations l10n,
+    bool isLandscape,
   ) {
     return Column(
+      crossAxisAlignment: isLandscape ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         Text(
           l10n.game_guess_arrangement,
-          textAlign: TextAlign.center,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(
-            fontSize: 28,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: isDark ? context.themeTextPrimary : context.themeTextPrimary,
+            color: context.themeTextPrimary,
             letterSpacing: 1,
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Text(
           'Guess Arrangement',
-          textAlign: TextAlign.center,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(
-            fontSize: 18,
-            color: isDark
-                ? context.themeTextSecondary
-                : context.themeTextSecondary,
+            fontSize: 16,
+            color: context.themeTextSecondary,
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         Text(
           l10n.ga_gameDescription,
-          textAlign: TextAlign.center,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(
             fontSize: 14,
-            color: isDark
-                ? context.themeTextSecondary
-                : context.themeTextSecondary,
+            color: context.themeTextSecondary,
           ),
         ),
       ],
@@ -166,16 +157,12 @@ class _GuessArrangementStartScreenState
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: isDark ? context.themeSurface : context.themeSurface,
+        color: context.themeSurface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? context.themeBorder : context.themeBorder,
-          width: 1.5,
-        ),
+        border: Border.all(color: context.themeBorder, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: (isDark ? context.themeShadow : context.themeShadow)
-                .withAlpha(128),
+            color: context.themeShadow.withAlpha(128),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -190,14 +177,10 @@ class _GuessArrangementStartScreenState
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: isDark
-                  ? context.themeTextPrimary
-                  : context.themeTextPrimary,
+              color: context.themeTextPrimary,
             ),
           ),
           const SizedBox(height: 24),
-
-          // 2 Player mode
           WoodenButton(
             text: l10n.ga_twoPlayers,
             icon: Icons.people,
@@ -207,8 +190,6 @@ class _GuessArrangementStartScreenState
             onPressed: () => _startGame(null),
           ),
           const SizedBox(height: 12),
-
-          // AI modes
           WoodenButton(
             text: l10n.ga_easyAI,
             icon: Icons.computer,

@@ -7,7 +7,6 @@ import '../../../ui/widgets/wooden_button.dart';
 import '../models/enums.dart';
 import '../bluff_bar_screen.dart';
 
-/// Pre-game start screen for Bluff Bar with game settings configuration.
 class BluffBarStartScreen extends ConsumerStatefulWidget {
   const BluffBarStartScreen({super.key});
 
@@ -17,7 +16,6 @@ class BluffBarStartScreen extends ConsumerStatefulWidget {
 }
 
 class _BluffBarStartScreenState extends ConsumerState<BluffBarStartScreen> {
-  // AI difficulty for all 3 AI players (single selection applies to all)
   AiDifficulty _aiDifficulty = AiDifficulty.medium;
 
   void _startGame() {
@@ -109,9 +107,73 @@ class _BluffBarStartScreenState extends ConsumerState<BluffBarStartScreen> {
     );
   }
 
+  Widget _buildGameIcon(bool isDark, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [context.themeCard, context.themeSurface],
+        ),
+        borderRadius: BorderRadius.circular(size * 0.2),
+        border: Border.all(color: context.themeBorder, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: context.themeShadow.withAlpha(128),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Icon(
+        Icons.local_bar,
+        size: size * 0.6,
+        color: isDark ? context.themeAccent : context.themeSecondary,
+      ),
+    );
+  }
+
+  Widget _buildTitleSection(AppLocalizations l10n, bool isLandscape) {
+    return Column(
+      crossAxisAlignment: isLandscape ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          l10n.bb_game_title,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: context.themeTextPrimary,
+            letterSpacing: 1,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          l10n.bb_game_subtitle,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            color: context.themeTextSecondary,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.bb_gameDescription,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: context.themeBackground,
@@ -125,123 +187,62 @@ class _BluffBarStartScreenState extends ConsumerState<BluffBarStartScreen> {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Game icon
-                _buildGameIcon(context),
-                const SizedBox(height: 24),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+            final padding = isLandscape
+                ? const EdgeInsets.symmetric(horizontal: 24, vertical: 8)
+                : const EdgeInsets.all(24);
 
-                // Game title and description
-                _buildTitleSection(context, l10n),
-                const SizedBox(height: 32),
-
-                // Settings panel
-                _buildSettingsPanel(context, l10n),
-                const SizedBox(height: 24),
-
-                // How to Play button
-                WoodenButton(
-                  text: l10n.bb_how_to_play,
-                  icon: Icons.help_outline,
-                  variant: WoodenButtonVariant.outlined,
-                  expandWidth: true,
-                  onPressed: _showRules,
+            return Center(
+              child: SingleChildScrollView(
+                padding: padding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildGameIcon(isDark, 80),
+                        const SizedBox(width: 16),
+                        Expanded(child: _buildTitleSection(l10n, true)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    _buildSettingsPanel(context, l10n),
+                    const SizedBox(height: 24),
+                    WoodenButton(
+                      text: l10n.bb_how_to_play,
+                      icon: Icons.help_outline,
+                      variant: WoodenButtonVariant.outlined,
+                      expandWidth: true,
+                      onPressed: _showRules,
+                    ),
+                    const SizedBox(height: 12),
+                    WoodenButton(
+                      text: l10n.bb_start_game,
+                      icon: Icons.play_arrow,
+                      variant: WoodenButtonVariant.primary,
+                      size: WoodenButtonSize.large,
+                      expandWidth: true,
+                      onPressed: _startGame,
+                    ),
+                    const SizedBox(height: 12),
+                    WoodenButton(
+                      text: l10n.back,
+                      icon: Icons.arrow_back,
+                      variant: WoodenButtonVariant.ghost,
+                      expandWidth: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 12),
-
-                // Start Game button
-                WoodenButton(
-                  text: l10n.bb_start_game,
-                  icon: Icons.play_arrow,
-                  variant: WoodenButtonVariant.primary,
-                  size: WoodenButtonSize.large,
-                  expandWidth: true,
-                  onPressed: _startGame,
-                ),
-                const SizedBox(height: 12),
-
-                // Back button
-                WoodenButton(
-                  text: l10n.back,
-                  icon: Icons.arrow_back,
-                  variant: WoodenButtonVariant.ghost,
-                  expandWidth: true,
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
-    );
-  }
-
-  Widget _buildGameIcon(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [context.themeCard, context.themeSurface],
-          ),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: context.themeBorder, width: 2),
-          boxShadow: [
-            BoxShadow(
-              color: context.themeShadow.withAlpha(128),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: const Center(
-          child: Icon(
-            Icons.local_bar,  // 酒吧图标，符合"吹牛酒吧"主题
-            size: 60,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTitleSection(BuildContext context, AppLocalizations l10n) {
-    return Column(
-      children: [
-        Text(
-          l10n.bb_game_title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: context.themeTextPrimary,
-            letterSpacing: 1,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          l10n.bb_game_subtitle,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16,
-            color: context.themeTextSecondary,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          l10n.bb_gameDescription,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
-        ),
-      ],
     );
   }
 
@@ -263,7 +264,6 @@ class _BluffBarStartScreenState extends ConsumerState<BluffBarStartScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // AI Difficulty
           Text(
             l10n.bb_ai_difficulty,
             style: TextStyle(
@@ -282,10 +282,7 @@ class _BluffBarStartScreenState extends ConsumerState<BluffBarStartScreen> {
               _buildDifficultyChip(l10n.hard, AiDifficulty.hard),
             ],
           ),
-
           const SizedBox(height: 20),
-
-          // Game Mode Info
           Row(
             children: [
               Icon(Icons.people, size: 20, color: context.themeTextSecondary),

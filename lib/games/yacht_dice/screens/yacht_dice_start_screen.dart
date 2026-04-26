@@ -8,14 +8,7 @@ import '../models/yacht_dice_state.dart';
 import '../yacht_dice_provider.dart';
 import '../yacht_dice_screen.dart';
 
-/// Pre-game start screen for Yacht Dice allowing players to select game mode.
-///
-/// Provides options for:
-/// - 2 Player mode (local multiplayer)
-/// - vs AI Easy mode
-/// - vs AI Hard mode
 class YachtDiceStartScreen extends ConsumerStatefulWidget {
-  /// Creates the Yacht Dice start screen.
   const YachtDiceStartScreen({super.key});
 
   @override
@@ -24,7 +17,6 @@ class YachtDiceStartScreen extends ConsumerStatefulWidget {
 }
 
 class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
-  /// Check for saved game and show resume dialog if exists
   Future<void> _checkForSavedGameAndStart(
     int playerCount,
     AiDifficulty? aiDifficulty,
@@ -42,7 +34,6 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
         _startGame(playerCount, aiDifficulty, null);
       }
     } catch (e) {
-      // If there's an error checking for saves, just start a new game
       debugPrint('Error checking for saved game: $e');
       if (mounted) {
         _startGame(playerCount, aiDifficulty, null);
@@ -50,7 +41,6 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
     }
   }
 
-  /// Show dialog asking user to resume or start new game
   Future<void> _showResumeGameDialog(
     int playerCount,
     AiDifficulty? aiDifficulty,
@@ -83,10 +73,8 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
     if (!mounted) return;
 
     if (result == true) {
-      // Resume saved game
       _startGame(playerCount, aiDifficulty, savedState);
     } else if (result == false) {
-      // Delete save and start new game
       await ref
           .read(yachtDiceGameProvider.notifier)
           .deleteSavedGame(aiDifficulty);
@@ -94,7 +82,6 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
     }
   }
 
-  /// Navigate to the game screen with the selected mode
   void _startGame(
     int playerCount,
     AiDifficulty? aiDifficulty,
@@ -112,10 +99,66 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
     );
   }
 
+  Widget _buildGameIcon(double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [context.themeCard, context.themeSurface],
+        ),
+        borderRadius: BorderRadius.circular(size * 0.2),
+        border: Border.all(color: context.themeBorder, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: context.themeShadow.withAlpha(80),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Icon(
+        Icons.casino,
+        size: size * 0.5,
+        color: context.themeAccent,
+      ),
+    );
+  }
+
+  Widget _buildTitleSection(
+    AppLocalizations l10n,
+    BuildContext context,
+    Color textPrimaryColor,
+    Color textSecondaryColor,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          l10n.game_yacht_dice,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: textPrimaryColor,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.yd_gameDescription,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: textSecondaryColor,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    // Theme-aware colors
     final backgroundColor = context.themeBackground;
     final surfaceColor = context.themeSurface;
     final textPrimaryColor = context.themeTextPrimary;
@@ -134,193 +177,141 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Game icon
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [context.themeCard, context.themeSurface],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+            final padding = isLandscape
+                ? const EdgeInsets.symmetric(horizontal: 24, vertical: 8)
+                : const EdgeInsets.all(24.0);
+
+            return Center(
+              child: SingleChildScrollView(
+                padding: padding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildGameIcon(80),
+                        const SizedBox(width: 16),
+                        _buildTitleSection(l10n, context, textPrimaryColor, textSecondaryColor),
+                      ],
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: context.themeBorder, width: 2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: context.themeShadow.withAlpha(80),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
+                    const SizedBox(height: 24),
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: surfaceColor,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: context.themeBorder, width: 1.5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: context.themeShadow.withAlpha(128),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Icon(
-                    Icons.casino,
-                    size: 50,
-                    color: context.themeAccent,
-                  ),
-                ),
-                const SizedBox(height: 32),
-
-                // Game title
-                Text(
-                  l10n.game_yacht_dice,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: textPrimaryColor,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const SizedBox(height: 12),
-
-                // Game description
-                Text(
-                  l10n.yd_gameDescription,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyLarge?.copyWith(color: textSecondaryColor),
-                ),
-                const SizedBox(height: 48),
-
-                // Game mode selection container
-                Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: surfaceColor,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: context.themeBorder, width: 1.5),
-                    boxShadow: [
-                      BoxShadow(
-                        color: context.themeShadow.withAlpha(128),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Section title
-                      Text(
-                        l10n.yd_selectPlayers,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: textPrimaryColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        l10n.yd_instructions,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: textSecondaryColor,
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-
-                      // Game mode buttons with responsive layout
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          final isWidescreen = constraints.maxWidth >= 600;
-                          final buttons = <Widget>[
-                            WoodenButton(
-                              text: l10n.yd_twoPlayers,
-                              icon: Icons.people,
-                              size: WoodenButtonSize.large,
-                              variant: WoodenButtonVariant.primary,
-                              expandWidth: true,
-                              onPressed: () =>
-                                  _checkForSavedGameAndStart(2, null),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            l10n.yd_selectPlayers,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: textPrimaryColor,
+                              fontWeight: FontWeight.w600,
                             ),
-                            WoodenButton(
-                              text: l10n.yd_easyAI,
-                              icon: Icons.computer,
-                              size: WoodenButtonSize.large,
-                              variant: WoodenButtonVariant.secondary,
-                              expandWidth: true,
-                              onPressed: () => _checkForSavedGameAndStart(
-                                1,
-                                AiDifficulty.easy,
-                              ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            l10n.yd_instructions,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: textSecondaryColor,
                             ),
-                            WoodenButton(
-                              text: l10n.yd_mediumAI,
-                              icon: Icons.psychology,
-                              size: WoodenButtonSize.large,
-                              variant: WoodenButtonVariant.secondary,
-                              expandWidth: true,
-                              onPressed: () => _checkForSavedGameAndStart(
-                                1,
-                                AiDifficulty.medium,
-                              ),
-                            ),
-                            WoodenButton(
-                              text: l10n.yd_hardAI,
-                              icon: Icons.smart_toy,
-                              size: WoodenButtonSize.large,
-                              variant: WoodenButtonVariant.accent,
-                              expandWidth: true,
-                              onPressed: () => _checkForSavedGameAndStart(
-                                1,
-                                AiDifficulty.hard,
-                              ),
-                            ),
-                          ];
+                          ),
+                          const SizedBox(height: 24),
+                          LayoutBuilder(
+                            builder: (context, constraints) {
+                              final isWidescreen = constraints.maxWidth >= 600;
+                              final buttons = <Widget>[
+                                WoodenButton(
+                                  text: l10n.yd_twoPlayers,
+                                  icon: Icons.people,
+                                  size: WoodenButtonSize.large,
+                                  variant: WoodenButtonVariant.primary,
+                                  expandWidth: true,
+                                  onPressed: () => _checkForSavedGameAndStart(2, null),
+                                ),
+                                WoodenButton(
+                                  text: l10n.yd_easyAI,
+                                  icon: Icons.computer,
+                                  size: WoodenButtonSize.large,
+                                  variant: WoodenButtonVariant.secondary,
+                                  expandWidth: true,
+                                  onPressed: () => _checkForSavedGameAndStart(1, AiDifficulty.easy),
+                                ),
+                                WoodenButton(
+                                  text: l10n.yd_mediumAI,
+                                  icon: Icons.psychology,
+                                  size: WoodenButtonSize.large,
+                                  variant: WoodenButtonVariant.secondary,
+                                  expandWidth: true,
+                                  onPressed: () => _checkForSavedGameAndStart(1, AiDifficulty.medium),
+                                ),
+                                WoodenButton(
+                                  text: l10n.yd_hardAI,
+                                  icon: Icons.smart_toy,
+                                  size: WoodenButtonSize.large,
+                                  variant: WoodenButtonVariant.accent,
+                                  expandWidth: true,
+                                  onPressed: () => _checkForSavedGameAndStart(1, AiDifficulty.hard),
+                                ),
+                              ];
 
-                          if (isWidescreen) {
-                            // Two-column layout for widescreen
-                            return GridView.count(
-                              crossAxisCount: 2,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              mainAxisSpacing: 16,
-                              crossAxisSpacing: 16,
-                              childAspectRatio: 3.5,
-                              children: buttons,
-                            );
-                          } else {
-                            // Single column layout for mobile
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                for (int i = 0; i < buttons.length; i++) ...[
-                                  buttons[i],
-                                  if (i < buttons.length - 1)
-                                    const SizedBox(height: 16),
-                                ],
-                              ],
-                            );
-                          }
-                        },
+                              if (isWidescreen) {
+                                return GridView.count(
+                                  crossAxisCount: 4,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  mainAxisSpacing: 8,
+                                  crossAxisSpacing: 8,
+                                  childAspectRatio: 3.0,
+                                  children: buttons,
+                                );
+                              } else {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    for (int i = 0; i < buttons.length; i++) ...[
+                                      buttons[i],
+                                      if (i < buttons.length - 1) const SizedBox(height: 16),
+                                    ],
+                                  ],
+                                );
+                              }
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 24),
+                    WoodenButton(
+                      text: l10n.back,
+                      icon: Icons.arrow_back,
+                      size: WoodenButtonSize.medium,
+                      variant: WoodenButtonVariant.ghost,
+                      expandWidth: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
                 ),
-
-                const SizedBox(height: 32),
-
-                // Back button
-                WoodenButton(
-                  text: l10n.back,
-                  icon: Icons.arrow_back,
-                  size: WoodenButtonSize.medium,
-                  variant: WoodenButtonVariant.ghost,
-                  expandWidth: true,
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
