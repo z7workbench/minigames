@@ -3001,6 +3001,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} rounds'**
   String bb_rounds_survived(int count);
+
+  /// Reaction Test game title
+  ///
+  /// In en, this message translates to:
+  /// **'Reaction Test'**
+  String get game_reaction_test;
+
+  /// Reaction Test game description
+  ///
+  /// In en, this message translates to:
+  /// **'Test your reflexes! Tap as fast as you can when colors change.'**
+  String get rt_gameDescription;
+
+  /// Reaction Test game instructions
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for the background color to change, then tap as fast as you can!'**
+  String get rt_instructions;
+
+  /// Color preset selection label
+  ///
+  /// In en, this message translates to:
+  /// **'Select Color Scheme'**
+  String get rt_selectPreset;
+
+  /// Red-green colorblind friendly preset
+  ///
+  /// In en, this message translates to:
+  /// **'Red-Green Colorblind'**
+  String get rt_redGreenColorblind;
+
+  /// Blue-yellow colorblind friendly preset
+  ///
+  /// In en, this message translates to:
+  /// **'Blue-Yellow Colorblind'**
+  String get rt_blueYellowColorblind;
+
+  /// Monochromacy (grayscale) preset
+  ///
+  /// In en, this message translates to:
+  /// **'Monochromacy'**
+  String get rt_monochromacy;
+
+  /// Custom color selection option
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get rt_custom;
+
+  /// Before color selection label
+  ///
+  /// In en, this message translates to:
+  /// **'Before Color'**
+  String get rt_beforeColor;
+
+  /// After color selection label
+  ///
+  /// In en, this message translates to:
+  /// **'After Color'**
+  String get rt_afterColor;
+
+  /// Warning when same color is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Before and After colors cannot be the same!'**
+  String get rt_sameColorWarning;
+
+  /// Current test number display
+  ///
+  /// In en, this message translates to:
+  /// **'Test {current} of {total}'**
+  String rt_testNumber(int current, int total);
+
+  /// Instruction to wait for color change
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for it...'**
+  String get rt_waitForIt;
+
+  /// Instruction to tap when color changed
+  ///
+  /// In en, this message translates to:
+  /// **'TAP NOW!'**
+  String get rt_tapNow;
+
+  /// Reaction time display in milliseconds
+  ///
+  /// In en, this message translates to:
+  /// **'{time} ms'**
+  String rt_reactionTime(int time);
+
+  /// Results dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Results'**
+  String get rt_results;
+
+  /// Average reaction time label
+  ///
+  /// In en, this message translates to:
+  /// **'Average'**
+  String get rt_average;
+
+  /// Best reaction time label
+  ///
+  /// In en, this message translates to:
+  /// **'Best'**
+  String get rt_best;
+
+  /// Worst reaction time label
+  ///
+  /// In en, this message translates to:
+  /// **'Worst'**
+  String get rt_worst;
+
+  /// Warning when user taps before color changes
+  ///
+  /// In en, this message translates to:
+  /// **'Too early! Wait for the color to change.'**
+  String get rt_tooEarly;
+
+  /// Leaderboard dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get leaderboard;
+
+  /// Leaderboard subtitle for reaction test
+  ///
+  /// In en, this message translates to:
+  /// **'Fastest reaction times'**
+  String get rt_leaderboardSubtitle;
+
+  /// Message when no leaderboard records exist
+  ///
+  /// In en, this message translates to:
+  /// **'No records yet. Play to set your first record!'**
+  String get rt_noRecords;
+
+  /// Close button label
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// Aim Test game title
+  ///
+  /// In en, this message translates to:
+  /// **'Aim Test'**
+  String get game_aim_test;
+
+  /// Aim Test game description
+  ///
+  /// In en, this message translates to:
+  /// **'Test your aim! Click the bubbles as fast as you can in 30 seconds.'**
+  String get at_gameDescription;
+
+  /// Aim Test game instructions
+  ///
+  /// In en, this message translates to:
+  /// **'Click the bubbles before they disappear! You have 30 seconds.'**
+  String get at_instructions;
+
+  /// Settings section title
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get at_settings;
+
+  /// Dead zone setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Dead Zone'**
+  String get at_deadZone;
+
+  /// Dead zone percentage display
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% dead zone'**
+  String at_deadZonePercent(int percent);
+
+  /// Bubble color setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Bubble Color'**
+  String get at_bubbleColor;
+
+  /// Game duration setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Game Duration'**
+  String get at_gameDuration;
+
+  /// Missed clicks counter label
+  ///
+  /// In en, this message translates to:
+  /// **'Misses'**
+  String get at_misses;
+
+  /// Enable bubble appear animation setting
+  ///
+  /// In en, this message translates to:
+  /// **'Bubble Animation'**
+  String get at_appearAnimation;
+
+  /// Bubble size setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Bubble Size'**
+  String get at_bubbleSize;
+
+  /// Live preview label for settings
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get at_preview;
+
+  /// Hits counter label
+  ///
+  /// In en, this message translates to:
+  /// **'Hits'**
+  String get at_hits;
+
+  /// Accuracy percentage label
+  ///
+  /// In en, this message translates to:
+  /// **'Accuracy'**
+  String get at_accuracy;
+
+  /// Game over dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over!'**
+  String get at_gameOver;
+
+  /// Final score label
+  ///
+  /// In en, this message translates to:
+  /// **'Final Score'**
+  String get at_finalScore;
+
+  /// Total bubbles spawned label
+  ///
+  /// In en, this message translates to:
+  /// **'Bubbles Spawned'**
+  String get at_bubblesSpawned;
+
+  /// Time's up message
+  ///
+  /// In en, this message translates to:
+  /// **'Time\'s Up!'**
+  String get at_timeUp;
+
+  /// Play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get at_playAgain;
+
+  /// Start game button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Game'**
+  String get at_startGame;
+
+  /// Countdown number 3
+  ///
+  /// In en, this message translates to:
+  /// **'3'**
+  String get at_countdown3;
+
+  /// Countdown number 2
+  ///
+  /// In en, this message translates to:
+  /// **'2'**
+  String get at_countdown2;
+
+  /// Countdown number 1
+  ///
+  /// In en, this message translates to:
+  /// **'1'**
+  String get at_countdown1;
+
+  /// Countdown GO! message
+  ///
+  /// In en, this message translates to:
+  /// **'GO!'**
+  String get at_countdownGo;
 }
 
 class _AppLocalizationsDelegate

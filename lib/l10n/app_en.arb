@@ -1928,5 +1928,217 @@
   "bb_play_again": "Play Again",
   "@bb_play_again": {
     "description": "Play again button"
+  },
+
+  "game_reaction_test": "Reaction Test",
+  "@game_reaction_test": {
+    "description": "Reaction Test game title"
+  },
+  "rt_gameDescription": "Test your reflexes! Tap as fast as you can when colors change.",
+  "@rt_gameDescription": {
+    "description": "Reaction Test game description"
+  },
+  "rt_instructions": "Wait for the background color to change, then tap as fast as you can!",
+  "@rt_instructions": {
+    "description": "Reaction Test game instructions"
+  },
+  "rt_selectPreset": "Select Color Scheme",
+  "@rt_selectPreset": {
+    "description": "Color preset selection label"
+  },
+  "rt_redGreenColorblind": "Red-Green Colorblind",
+  "@rt_redGreenColorblind": {
+    "description": "Red-green colorblind friendly preset"
+  },
+  "rt_blueYellowColorblind": "Blue-Yellow Colorblind",
+  "@rt_blueYellowColorblind": {
+    "description": "Blue-yellow colorblind friendly preset"
+  },
+  "rt_monochromacy": "Monochromacy",
+  "@rt_monochromacy": {
+    "description": "Monochromacy (grayscale) preset"
+  },
+  "rt_custom": "Custom",
+  "@rt_custom": {
+    "description": "Custom color selection option"
+  },
+  "rt_beforeColor": "Before Color",
+  "@rt_beforeColor": {
+    "description": "Before color selection label"
+  },
+  "rt_afterColor": "After Color",
+  "@rt_afterColor": {
+    "description": "After color selection label"
+  },
+  "rt_sameColorWarning": "Before and After colors cannot be the same!",
+  "@rt_sameColorWarning": {
+    "description": "Warning when same color is selected"
+  },
+  "rt_testNumber": "Test {current} of {total}",
+  "@rt_testNumber": {
+    "description": "Current test number display",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "rt_waitForIt": "Wait for it...",
+  "@rt_waitForIt": {
+    "description": "Instruction to wait for color change"
+  },
+  "rt_tapNow": "TAP NOW!",
+  "@rt_tapNow": {
+    "description": "Instruction to tap when color changed"
+  },
+  "rt_reactionTime": "{time} ms",
+  "@rt_reactionTime": {
+    "description": "Reaction time display in milliseconds",
+    "placeholders": {
+      "time": {
+        "type": "int"
+      }
+    }
+  },
+  "rt_results": "Results",
+  "@rt_results": {
+    "description": "Results dialog title"
+  },
+  "rt_average": "Average",
+  "@rt_average": {
+    "description": "Average reaction time label"
+  },
+  "rt_best": "Best",
+  "@rt_best": {
+    "description": "Best reaction time label"
+  },
+  "rt_worst": "Worst",
+  "@rt_worst": {
+    "description": "Worst reaction time label"
+  },
+  "rt_tooEarly": "Too early! Wait for the color to change.",
+  "@rt_tooEarly": {
+    "description": "Warning when user taps before color changes"
+  },
+  "leaderboard": "Leaderboard",
+  "@leaderboard": {
+    "description": "Leaderboard dialog title"
+  },
+  "rt_leaderboardSubtitle": "Fastest reaction times",
+  "@rt_leaderboardSubtitle": {
+    "description": "Leaderboard subtitle for reaction test"
+  },
+  "rt_noRecords": "No records yet. Play to set your first record!",
+  "@rt_noRecords": {
+    "description": "Message when no leaderboard records exist"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button label"
+  },
+
+  "game_aim_test": "Aim Test",
+  "@game_aim_test": {
+    "description": "Aim Test game title"
+  },
+  "at_gameDescription": "Test your aim! Click the bubbles as fast as you can in 30 seconds.",
+  "@at_gameDescription": {
+    "description": "Aim Test game description"
+  },
+  "at_instructions": "Click the bubbles before they disappear! You have 30 seconds.",
+  "@at_instructions": {
+    "description": "Aim Test game instructions"
+  },
+  "at_settings": "Settings",
+  "@at_settings": {
+    "description": "Settings section title"
+  },
+  "at_deadZone": "Dead Zone",
+  "@at_deadZone": {
+    "description": "Dead zone setting label"
+  },
+  "at_deadZonePercent": "{percent}% dead zone",
+  "@at_deadZonePercent": {
+    "description": "Dead zone percentage display",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "at_bubbleColor": "Bubble Color",
+  "@at_bubbleColor": {
+    "description": "Bubble color setting label"
+  },
+  "at_gameDuration": "Game Duration",
+  "@at_gameDuration": {
+    "description": "Game duration setting label"
+  },
+  "at_misses": "Misses",
+  "@at_misses": {
+    "description": "Missed clicks counter label"
+  },
+  "at_appearAnimation": "Bubble Animation",
+  "@at_appearAnimation": {
+    "description": "Enable bubble appear animation setting"
+  },
+  "at_bubbleSize": "Bubble Size",
+  "@at_bubbleSize": {
+    "description": "Bubble size setting label"
+  },
+  "at_preview": "Preview",
+  "@at_preview": {
+    "description": "Live preview label for settings"
+  },
+  "at_hits": "Hits",
+  "@at_hits": {
+    "description": "Hits counter label"
+  },
+  "at_accuracy": "Accuracy",
+  "@at_accuracy": {
+    "description": "Accuracy percentage label"
+  },
+  "at_gameOver": "Game Over!",
+  "@at_gameOver": {
+    "description": "Game over dialog title"
+  },
+  "at_finalScore": "Final Score",
+  "@at_finalScore": {
+    "description": "Final score label"
+  },
+  "at_bubblesSpawned": "Bubbles Spawned",
+  "@at_bubblesSpawned": {
+    "description": "Total bubbles spawned label"
+  },
+  "at_timeUp": "Time's Up!",
+  "@at_timeUp": {
+    "description": "Time's up message"
+  },
+  "at_playAgain": "Play Again",
+  "@at_playAgain": {
+    "description": "Play again button"
+  },
+  "at_startGame": "Start Game",
+  "@at_startGame": {
+    "description": "Start game button"
+  },
+  "at_countdown3": "3",
+  "@at_countdown3": {
+    "description": "Countdown number 3"
+  },
+  "at_countdown2": "2",
+  "@at_countdown2": {
+    "description": "Countdown number 2"
+  },
+  "at_countdown1": "1",
+  "@at_countdown1": {
+    "description": "Countdown number 1"
+  },
+  "at_countdownGo": "GO!",
+  "@at_countdownGo": {
+    "description": "Countdown GO! message"
   }
 }

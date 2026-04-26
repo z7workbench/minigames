@@ -1597,4 +1597,159 @@ class AppLocalizationsEn extends AppLocalizations {
   String bb_rounds_survived(int count) {
     return '$count rounds';
   }
+
+  @override
+  String get game_reaction_test => 'Reaction Test';
+
+  @override
+  String get rt_gameDescription =>
+      'Test your reflexes! Tap as fast as you can when colors change.';
+
+  @override
+  String get rt_instructions =>
+      'Wait for the background color to change, then tap as fast as you can!';
+
+  @override
+  String get rt_selectPreset => 'Select Color Scheme';
+
+  @override
+  String get rt_redGreenColorblind => 'Red-Green Colorblind';
+
+  @override
+  String get rt_blueYellowColorblind => 'Blue-Yellow Colorblind';
+
+  @override
+  String get rt_monochromacy => 'Monochromacy';
+
+  @override
+  String get rt_custom => 'Custom';
+
+  @override
+  String get rt_beforeColor => 'Before Color';
+
+  @override
+  String get rt_afterColor => 'After Color';
+
+  @override
+  String get rt_sameColorWarning =>
+      'Before and After colors cannot be the same!';
+
+  @override
+  String rt_testNumber(int current, int total) {
+    return 'Test $current of $total';
+  }
+
+  @override
+  String get rt_waitForIt => 'Wait for it...';
+
+  @override
+  String get rt_tapNow => 'TAP NOW!';
+
+  @override
+  String rt_reactionTime(int time) {
+    return '$time ms';
+  }
+
+  @override
+  String get rt_results => 'Results';
+
+  @override
+  String get rt_average => 'Average';
+
+  @override
+  String get rt_best => 'Best';
+
+  @override
+  String get rt_worst => 'Worst';
+
+  @override
+  String get rt_tooEarly => 'Too early! Wait for the color to change.';
+
+  @override
+  String get leaderboard => 'Leaderboard';
+
+  @override
+  String get rt_leaderboardSubtitle => 'Fastest reaction times';
+
+  @override
+  String get rt_noRecords => 'No records yet. Play to set your first record!';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get game_aim_test => 'Aim Test';
+
+  @override
+  String get at_gameDescription =>
+      'Test your aim! Click the bubbles as fast as you can in 30 seconds.';
+
+  @override
+  String get at_instructions =>
+      'Click the bubbles before they disappear! You have 30 seconds.';
+
+  @override
+  String get at_settings => 'Settings';
+
+  @override
+  String get at_deadZone => 'Dead Zone';
+
+  @override
+  String at_deadZonePercent(int percent) {
+    return '$percent% dead zone';
+  }
+
+  @override
+  String get at_bubbleColor => 'Bubble Color';
+
+  @override
+  String get at_gameDuration => 'Game Duration';
+
+  @override
+  String get at_misses => 'Misses';
+
+  @override
+  String get at_appearAnimation => 'Bubble Animation';
+
+  @override
+  String get at_bubbleSize => 'Bubble Size';
+
+  @override
+  String get at_preview => 'Preview';
+
+  @override
+  String get at_hits => 'Hits';
+
+  @override
+  String get at_accuracy => 'Accuracy';
+
+  @override
+  String get at_gameOver => 'Game Over!';
+
+  @override
+  String get at_finalScore => 'Final Score';
+
+  @override
+  String get at_bubblesSpawned => 'Bubbles Spawned';
+
+  @override
+  String get at_timeUp => 'Time\'s Up!';
+
+  @override
+  String get at_playAgain => 'Play Again';
+
+  @override
+  String get at_startGame => 'Start Game';
+
+  @override
+  String get at_countdown3 => '3';
+
+  @override
+  String get at_countdown2 => '2';
+
+  @override
+  String get at_countdown1 => '1';
+
+  @override
+  String get at_countdownGo => 'GO!';
 }

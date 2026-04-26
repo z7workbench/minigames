@@ -1556,4 +1556,154 @@ class AppLocalizationsZh extends AppLocalizations {
   String bb_rounds_survived(int count) {
     return '存活 $count 轮';
   }
+
+  @override
+  String get game_reaction_test => '反应力测试';
+
+  @override
+  String get rt_gameDescription => '测试你的反应速度！颜色变化时尽快点击。';
+
+  @override
+  String get rt_instructions => '等待背景颜色变化，然后尽快点击！';
+
+  @override
+  String get rt_selectPreset => '选择配色方案';
+
+  @override
+  String get rt_redGreenColorblind => '红绿色盲';
+
+  @override
+  String get rt_blueYellowColorblind => '蓝黄色盲';
+
+  @override
+  String get rt_monochromacy => '全色盲';
+
+  @override
+  String get rt_custom => '自定义';
+
+  @override
+  String get rt_beforeColor => '变化前颜色';
+
+  @override
+  String get rt_afterColor => '变化后颜色';
+
+  @override
+  String get rt_sameColorWarning => '变化前和变化后颜色不能相同！';
+
+  @override
+  String rt_testNumber(int current, int total) {
+    return '第 $current 次测试，共 $total 次';
+  }
+
+  @override
+  String get rt_waitForIt => '等待中...';
+
+  @override
+  String get rt_tapNow => '立即点击！';
+
+  @override
+  String rt_reactionTime(int time) {
+    return '$time 毫秒';
+  }
+
+  @override
+  String get rt_results => '测试结果';
+
+  @override
+  String get rt_average => '平均';
+
+  @override
+  String get rt_best => '最快';
+
+  @override
+  String get rt_worst => '最慢';
+
+  @override
+  String get rt_tooEarly => '太早了！请等待颜色变化。';
+
+  @override
+  String get leaderboard => '排行榜';
+
+  @override
+  String get rt_leaderboardSubtitle => '最快反应时间';
+
+  @override
+  String get rt_noRecords => '暂无记录，开始游戏创造你的第一条记录吧！';
+
+  @override
+  String get close => '关闭';
+
+  @override
+  String get game_aim_test => '瞄准测试';
+
+  @override
+  String get at_gameDescription => '测试你的瞄准能力！在30秒内尽可能多地点击气泡。';
+
+  @override
+  String get at_instructions => '在气泡消失前点击它们！你有30秒时间。';
+
+  @override
+  String get at_settings => '设置';
+
+  @override
+  String get at_deadZone => '死区';
+
+  @override
+  String at_deadZonePercent(int percent) {
+    return '死区 $percent%';
+  }
+
+  @override
+  String get at_bubbleColor => '气泡颜色';
+
+  @override
+  String get at_gameDuration => '游戏时长';
+
+  @override
+  String get at_misses => '失误';
+
+  @override
+  String get at_appearAnimation => '气泡动画';
+
+  @override
+  String get at_bubbleSize => '气泡大小';
+
+  @override
+  String get at_preview => '预览';
+
+  @override
+  String get at_hits => '命中';
+
+  @override
+  String get at_accuracy => '准确率';
+
+  @override
+  String get at_gameOver => '游戏结束！';
+
+  @override
+  String get at_finalScore => '最终得分';
+
+  @override
+  String get at_bubblesSpawned => '生成气泡数';
+
+  @override
+  String get at_timeUp => '时间到！';
+
+  @override
+  String get at_playAgain => '再玩一次';
+
+  @override
+  String get at_startGame => '开始游戏';
+
+  @override
+  String get at_countdown3 => '3';
+
+  @override
+  String get at_countdown2 => '2';
+
+  @override
+  String get at_countdown1 => '1';
+
+  @override
+  String get at_countdownGo => '开始!';
 }

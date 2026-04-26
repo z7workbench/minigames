@@ -1928,5 +1928,217 @@
   "bb_play_again": "再来一次",
   "@bb_play_again": {
     "description": "Play again button"
+  },
+
+  "game_reaction_test": "反应力测试",
+  "@game_reaction_test": {
+    "description": "Reaction Test game title"
+  },
+  "rt_gameDescription": "测试你的反应速度！颜色变化时尽快点击。",
+  "@rt_gameDescription": {
+    "description": "Reaction Test game description"
+  },
+  "rt_instructions": "等待背景颜色变化，然后尽快点击！",
+  "@rt_instructions": {
+    "description": "Reaction Test game instructions"
+  },
+  "rt_selectPreset": "选择配色方案",
+  "@rt_selectPreset": {
+    "description": "Color preset selection label"
+  },
+  "rt_redGreenColorblind": "红绿色盲",
+  "@rt_redGreenColorblind": {
+    "description": "Red-green colorblind friendly preset"
+  },
+  "rt_blueYellowColorblind": "蓝黄色盲",
+  "@rt_blueYellowColorblind": {
+    "description": "Blue-yellow colorblind friendly preset"
+  },
+  "rt_monochromacy": "全色盲",
+  "@rt_monochromacy": {
+    "description": "Monochromacy (grayscale) preset"
+  },
+  "rt_custom": "自定义",
+  "@rt_custom": {
+    "description": "Custom color selection option"
+  },
+  "rt_beforeColor": "变化前颜色",
+  "@rt_beforeColor": {
+    "description": "Before color selection label"
+  },
+  "rt_afterColor": "变化后颜色",
+  "@rt_afterColor": {
+    "description": "After color selection label"
+  },
+  "rt_sameColorWarning": "变化前和变化后颜色不能相同！",
+  "@rt_sameColorWarning": {
+    "description": "Warning when same color is selected"
+  },
+  "rt_testNumber": "第 {current} 次测试，共 {total} 次",
+  "@rt_testNumber": {
+    "description": "Current test number display",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "rt_waitForIt": "等待中...",
+  "@rt_waitForIt": {
+    "description": "Instruction to wait for color change"
+  },
+  "rt_tapNow": "立即点击！",
+  "@rt_tapNow": {
+    "description": "Instruction to tap when color changed"
+  },
+  "rt_reactionTime": "{time} 毫秒",
+  "@rt_reactionTime": {
+    "description": "Reaction time display in milliseconds",
+    "placeholders": {
+      "time": {
+        "type": "int"
+      }
+    }
+  },
+  "rt_results": "测试结果",
+  "@rt_results": {
+    "description": "Results dialog title"
+  },
+  "rt_average": "平均",
+  "@rt_average": {
+    "description": "Average reaction time label"
+  },
+  "rt_best": "最快",
+  "@rt_best": {
+    "description": "Best reaction time label"
+  },
+  "rt_worst": "最慢",
+  "@rt_worst": {
+    "description": "Worst reaction time label"
+  },
+  "rt_tooEarly": "太早了！请等待颜色变化。",
+  "@rt_tooEarly": {
+    "description": "Warning when user taps before color changes"
+  },
+  "leaderboard": "排行榜",
+  "@leaderboard": {
+    "description": "Leaderboard dialog title"
+  },
+  "rt_leaderboardSubtitle": "最快反应时间",
+  "@rt_leaderboardSubtitle": {
+    "description": "Leaderboard subtitle for reaction test"
+  },
+  "rt_noRecords": "暂无记录，开始游戏创造你的第一条记录吧！",
+  "@rt_noRecords": {
+    "description": "Message when no leaderboard records exist"
+  },
+  "close": "关闭",
+  "@close": {
+    "description": "Close button label"
+  },
+
+  "game_aim_test": "瞄准测试",
+  "@game_aim_test": {
+    "description": "Aim Test game title"
+  },
+  "at_gameDescription": "测试你的瞄准能力！在30秒内尽可能多地点击气泡。",
+  "@at_gameDescription": {
+    "description": "Aim Test game description"
+  },
+  "at_instructions": "在气泡消失前点击它们！你有30秒时间。",
+  "@at_instructions": {
+    "description": "Aim Test game instructions"
+  },
+  "at_settings": "设置",
+  "@at_settings": {
+    "description": "Settings section title"
+  },
+  "at_deadZone": "死区",
+  "@at_deadZone": {
+    "description": "Dead zone setting label"
+  },
+  "at_deadZonePercent": "死区 {percent}%",
+  "@at_deadZonePercent": {
+    "description": "Dead zone percentage display",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "at_bubbleColor": "气泡颜色",
+  "@at_bubbleColor": {
+    "description": "Bubble color setting label"
+  },
+  "at_gameDuration": "游戏时长",
+  "@at_gameDuration": {
+    "description": "Game duration setting label"
+  },
+  "at_misses": "失误",
+  "@at_misses": {
+    "description": "Missed clicks counter label"
+  },
+  "at_appearAnimation": "气泡动画",
+  "@at_appearAnimation": {
+    "description": "Enable bubble appear animation setting"
+  },
+  "at_bubbleSize": "气泡大小",
+  "@at_bubbleSize": {
+    "description": "Bubble size setting label"
+  },
+  "at_preview": "预览",
+  "@at_preview": {
+    "description": "Live preview label for settings"
+  },
+  "at_hits": "命中",
+  "@at_hits": {
+    "description": "Hits counter label"
+  },
+  "at_accuracy": "准确率",
+  "@at_accuracy": {
+    "description": "Accuracy percentage label"
+  },
+  "at_gameOver": "游戏结束！",
+  "@at_gameOver": {
+    "description": "Game over dialog title"
+  },
+  "at_finalScore": "最终得分",
+  "@at_finalScore": {
+    "description": "Final score label"
+  },
+  "at_bubblesSpawned": "生成气泡数",
+  "@at_bubblesSpawned": {
+    "description": "Total bubbles spawned label"
+  },
+  "at_timeUp": "时间到！",
+  "@at_timeUp": {
+    "description": "Time's up message"
+  },
+  "at_playAgain": "再玩一次",
+  "@at_playAgain": {
+    "description": "Play again button"
+  },
+  "at_startGame": "开始游戏",
+  "@at_startGame": {
+    "description": "Start game button"
+  },
+  "at_countdown3": "3",
+  "@at_countdown3": {
+    "description": "Countdown number 3"
+  },
+  "at_countdown2": "2",
+  "@at_countdown2": {
+    "description": "Countdown number 2"
+  },
+  "at_countdown1": "1",
+  "@at_countdown1": {
+    "description": "Countdown number 1"
+  },
+  "at_countdownGo": "开始!",
+  "@at_countdownGo": {
+    "description": "Countdown GO! message"
   }
 }
