@@ -11,8 +11,8 @@ enum GameType {
   mancala,
   hearts,
   bluffBar,
-  placeholder9,
-  placeholder10,
+  reactionTest,
+  aimTest,
   placeholder11,
   placeholder12,
 }
@@ -37,10 +37,10 @@ extension GameTypeExtension on GameType {
         return 'Hearts';
       case GameType.bluffBar:
         return 'Bluff Bar';
-      case GameType.placeholder9:
-        return 'Game 9';
-      case GameType.placeholder10:
-        return 'Game 10';
+      case GameType.reactionTest:
+        return 'Reaction Test';
+      case GameType.aimTest:
+        return 'Aim Test';
       case GameType.placeholder11:
         return 'Game 11';
       case GameType.placeholder12:
@@ -67,10 +67,10 @@ extension GameTypeExtension on GameType {
         return Icons.favorite;
       case GameType.bluffBar:
         return Icons.local_bar;  // 酒吧/鸡尾酒图标，符合"吹牛酒吧"主题
-      case GameType.placeholder9:
-        return Icons.gamepad;
-      case GameType.placeholder10:
-        return Icons.extension;
+      case GameType.reactionTest:
+        return Icons.touch_app;
+      case GameType.aimTest:
+        return Icons.gps_fixed;
       case GameType.placeholder11:
         return Icons.toys;
       case GameType.placeholder12:
@@ -97,10 +97,10 @@ extension GameTypeExtension on GameType {
         return '/hearts';
       case GameType.bluffBar:
         return '/bluff-bar';
-      case GameType.placeholder9:
-        return '/game-9';
-      case GameType.placeholder10:
-        return '/game-10';
+      case GameType.reactionTest:
+        return '/reaction-test';
+      case GameType.aimTest:
+        return '/aim-test';
       case GameType.placeholder11:
         return '/game-11';
       case GameType.placeholder12:
