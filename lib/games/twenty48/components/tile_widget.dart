@@ -1,7 +1,96 @@
 import 'package:flutter/material.dart';
-import '../../../ui/theme/theme_colors.dart';
-import '../../../ui/theme/theme_provider.dart';
 import '../models/twenty48_tile.dart';
+
+/// 2048 tile colors - classic design, only light/dark mode distinction
+/// These colors are intentionally NOT theme-aware to ensure readability
+class _TileColors {
+  // Light mode colors - classic 2048 palette extended to 65536
+  static const lightColors = <int, Color>{
+    2: Color(0xFFEEE4DA),    // Light beige
+    4: Color(0xFFEDE0C8),    // Cream
+    8: Color(0xFFF2B179),    // Orange
+    16: Color(0xFFF59563),   // Dark orange
+    32: Color(0xFFF67C5F),   // Red-orange
+    64: Color(0xFFF65E3B),   // Bright red
+    128: Color(0xFFEDCF72),  // Gold
+    256: Color(0xFFEDCC61),  // Yellow-gold
+    512: Color(0xFFEDC850),  // Bright yellow
+    1024: Color(0xFFEDC53F), // Brighter yellow
+    2048: Color(0xFFEDC22E), // Golden yellow (winning tile!)
+    // Beyond 2048 - cooler tones for higher achievements
+    4096: Color(0xFF5D536B), // Deep purple-gray
+    8192: Color(0xFF4A4A6B), // Dark blue-gray
+    16384: Color(0xFF2F4F6B), // Deep teal
+    32768: Color(0xFF1E3A5F), // Navy blue
+    65536: Color(0xFF1A1A2E), // Very dark blue
+  };
+
+  // Dark mode colors - adjusted for dark background visibility
+  static const darkColors = <int, Color>{
+    2: Color(0xFF5C554A),    // Darker warm gray (more contrast)
+    4: Color(0xFF7D7668),    // Lighter warm gray (distinct from 2)
+    8: Color(0xFFD49A5D),    // Warm orange
+    16: Color(0xFFD97B4D),   // Orange
+    32: Color(0xFFD95E45),   // Red-orange
+    64: Color(0xFFD94432),   // Red
+    128: Color(0xFFC9A654),  // Gold
+    256: Color(0xFFC9963D),  // Yellow-gold
+    512: Color(0xFFC98528),  // Bright yellow
+    1024: Color(0xFFC97518), // Brighter yellow
+    2048: Color(0xFFC9660A), // Golden yellow (winning tile!)
+    // Beyond 2048 - cooler tones for higher achievements
+    4096: Color(0xFF8B7D8B), // Light purple-gray
+    8192: Color(0xFF7A7A9B), // Light blue-gray
+    16384: Color(0xFF5F8F9B), // Teal
+    32768: Color(0xFF4A6A8F), // Steel blue
+    65536: Color(0xFF3A5A7E), // Medium blue
+  };
+
+  // Light mode text colors
+  static const lightTextColors = <int, Color>{
+    // Low value tiles (2, 4): dark text
+    2: Color(0xFF776E65),
+    4: Color(0xFF776E65),
+    // Higher values: white text for contrast
+    // All tiles >= 8 use white text
+  };
+
+  // Dark mode text colors
+  static const darkTextColors = <int, Color>{
+    // Low value tiles (2, 4): light text
+    2: Color(0xFFE8E4E0),
+    4: Color(0xFFE8E4E0),
+    // Higher values: white text
+  };
+
+  static Color getTileColor(int value, bool isDark) {
+    final colors = isDark ? darkColors : lightColors;
+    // If we have a specific color for this value, use it
+    if (colors.containsKey(value)) {
+      return colors[value]!;
+    }
+    // For values beyond 65536, use the darkest color with slight variation
+    if (value > 65536) {
+      return isDark 
+          ? const Color(0xFF2A4A6A) // Medium blue for dark mode
+          : const Color(0xFF0F0F1E); // Very dark for light mode
+    }
+    // Default fallback
+    return isDark ? const Color(0xFF1F1D1B) : const Color(0xFFCDC1B4);
+  }
+
+  static Color getTextColor(int value, bool isDark) {
+    // Tiles >= 8 always have white text for visibility
+    if (value >= 8) {
+      return Colors.white;
+    }
+    // Low value tiles (2, 4): dark text in light mode, light text in dark mode
+    if (isDark) {
+      return darkTextColors[value] ?? const Color(0xFFE8E4E0);
+    }
+    return lightTextColors[value] ?? const Color(0xFF776E65);
+  }
+}
 
 /// A widget that displays a single 2048 tile with animations.
 class TileWidget extends StatefulWidget {
@@ -67,17 +156,8 @@ class _TileWidgetState extends State<TileWidget>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
-    final tileColor = _getTileColor(
-      widget.tile.value,
-      isDark,
-      context.colorSchemeType,
-    );
-    final textColor = _getTextColor(
-      widget.tile.value,
-      isDark,
-      context.colorSchemeType,
-    );
+    final tileColor = _TileColors.getTileColor(widget.tile.value, isDark);
+    final textColor = _TileColors.getTextColor(widget.tile.value, isDark);
 
     return ScaleTransition(
       scale: _scaleAnimation,
@@ -87,15 +167,17 @@ class _TileWidgetState extends State<TileWidget>
         decoration: BoxDecoration(
           color: tileColor,
           borderRadius: BorderRadius.circular(6),
-          // Light subtle border
+          // Subtle inner border effect
           border: Border.all(
-            color: tileColor.withAlpha(isDark ? 80 : 60),
-            width: 0.5,
+            color: tileColor.withAlpha(isDark ? 120 : 80),
+            width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: themeColors.shadow.withAlpha(isDark ? 80 : 60),
-              blurRadius: 3,
+              color: isDark 
+                  ? Colors.black.withAlpha(60)
+                  : tileColor.withAlpha(40),
+              blurRadius: 2,
               offset: const Offset(0, 1),
             ),
           ],
@@ -114,75 +196,12 @@ class _TileWidgetState extends State<TileWidget>
     );
   }
 
-  Color _getTileColor(int value, bool isDark, ColorSchemeType schemeType) {
-    // Color gradient based on tile value and theme
-    final colors = _getTileColorsForScheme(value, isDark, schemeType);
-    return colors ?? defaultTileColor(isDark, schemeType);
-  }
-
-  Color _getTextColor(int value, bool isDark, ColorSchemeType schemeType) {
-    // Higher value tiles have lighter text
-    if (value >= 8) {
-      return isDark ? Colors.white : const Color(0xFF311B92);
-    }
-    // Low value tiles: dark text for light mode, light text for dark mode
-    return isDark ? const Color(0xFFE8EAF6) : const Color(0xFF311B92);
-  }
-
-  Color? _getTileColorsForScheme(
-    int value,
-    bool isDark,
-    ColorSchemeType schemeType,
-  ) {
-    if (schemeType == ColorSchemeType.starlight) {
-      // Starlight theme - cooler, bluer tones for 2048 tiles
-      final starlightColors = <int, Color>{
-        2: Color(0xFFC5CAE9),
-        4: Color(0xFF9FA8DA),
-        8: Color(0xFF7986CB),
-        16: Color(0xFF5C6BC0),
-        32: Color(0xFF3F51B5),
-        64: Color(0xFF303F9F),
-        128: Color(0xFF5C6BC0),
-        256: Color(0xFF536DFE),
-        512: Color(0xFF448AFF),
-        1024: Color(0xFF448AFF),
-        2048: Color(0xFF2962FF),
-        4096: Color(0xFF283593),
-        8192: Color(0xFF1A237E),
-      };
-      return starlightColors[value];
-    } else {
-      // Wooden theme - warmer, gold/amber tones (original 2048 colors)
-      final woodenColors = <int, Color>{
-        2: Color(0xFFEEE4DA),
-        4: Color(0xFFEDE0C8),
-        8: Color(0xFFF2B179),
-        16: Color(0xFFF59563),
-        32: Color(0xFFF67C5F),
-        64: Color(0xFFF65E3B),
-        128: Color(0xFFEDCF72),
-        256: Color(0xFFEDCC61),
-        512: Color(0xFFEDC850),
-        1024: Color(0xFFEDC53F),
-        2048: Color(0xFFEDC22E),
-        4096: Color(0xFF3C3A32),
-        8192: Color(0xFF3C3A32),
-      };
-      return woodenColors[value];
-    }
-  }
-
-  Color defaultTileColor(bool isDark, ColorSchemeType schemeType) {
-    if (schemeType == ColorSchemeType.starlight) {
-      return isDark ? const Color(0xFF303F9F) : const Color(0xFF5C6BC0);
-    }
-    return const Color(0xFF3B5998);
-  }
-
   double _getFontSize(int value) {
-    if (value < 100) return widget.size * 0.5;
-    if (value < 1000) return widget.size * 0.4;
-    return widget.size * 0.35;
+    // Adjust font size based on number of digits
+    if (value < 100) return widget.size * 0.5;       // 1-2 digits: 2, 4, 8, 16, 32, 64
+    if (value < 1000) return widget.size * 0.4;      // 3 digits: 128, 256, 512
+    if (value < 10000) return widget.size * 0.35;    // 4 digits: 1024, 2048, 4096, 8192
+    if (value < 100000) return widget.size * 0.28;   // 5 digits: 16384, 32768, 65536
+    return widget.size * 0.22;                        // 6+ digits: 131072, etc.
   }
 }

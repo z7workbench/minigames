@@ -59,4 +59,11 @@ class StarlightColors {
   static const accentNebula = Color(0xFFE040FB); // Pink nebula
   static const accentCosmos = Color(0xFF536DFE); // Blue cosmos
   static const accentGalaxy = Color(0xFF448AFF); // Galaxy blue
+
+  // Theme-aware accent colors
+  /// Light mode accent color - Use bright purple star
+  static const lightAccent = accentStar;
+
+  /// Dark mode accent color - Use nebula pink for glow effect
+  static const darkAccent = accentNebula;
 }

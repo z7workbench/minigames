@@ -64,6 +64,20 @@ class ForestColors {
   static const darkSuccess = Color(0xFF81C784); // Light Green
   static const darkWarning = Color(0xFFFFE0B2); // Light Amber
 
+  // ==================== FOREST EFFECT COLORS ====================
+
+  /// Forest light effect 1 - Pale green for gradients/patterns
+  static const forestLight1 = Color(0xFFC8E6C9);
+
+  /// Forest light effect 2 - Mint for subtle overlays
+  static const forestLight2 = Color(0xFFA5D6A7);
+
+  /// Forest dark effect 1 - Deep forest for dark patterns
+  static const forestDark1 = Color(0xFF1B5E20);
+
+  /// Forest dark effect 2 - Dark moss for subtle dark overlays
+  static const forestDark2 = Color(0xFF0D1F12);
+
   // ==================== ACCENT COLORS ====================
 
   /// Emerald - Bright green accent
@@ -79,4 +93,12 @@ class ForestColors {
 
   /// Mint Glow - Alternative soft accent
   static const accentMintGlow = Color(0xFFB9F6CA);
+
+  // ==================== THEME-AWARE ACCENT COLORS ====================
+
+  /// Light mode accent color - Use emerald for high contrast
+  static const lightAccent = accentEmerald;
+
+  /// Dark mode accent color - Use moss for soft glow effect
+  static const darkAccent = accentMoss;
 }

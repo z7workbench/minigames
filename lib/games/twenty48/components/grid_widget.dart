@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../../ui/theme/theme_colors.dart';
 import '../models/twenty48_tile.dart';
 import 'tile_widget.dart';
+
+/// 2048 grid background colors - classic design, only light/dark mode distinction
+class _GridColors {
+  // Light mode - classic 2048 background
+  static const backgroundColor = Color(0xFFBBADA0); // Warm gray-brown
+  static const emptyCellColor = Color(0xFFCDC1B4);  // Light beige
+
+  // Dark mode - adjusted for visibility
+  static const darkBackgroundColor = Color(0xFF3C3A32); // Dark brown-gray
+  static const darkEmptyCellColor = Color(0xFF4A4640);  // Slightly lighter gray
+}
 
 /// A 4x4 grid widget for the 2048 game.
 class GridWidget extends StatelessWidget {
@@ -24,7 +34,12 @@ class GridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final themeColors = ThemeColors.getColors(isDark, context.colorSchemeType);
+    final bgColor = isDark 
+        ? _GridColors.darkBackgroundColor 
+        : _GridColors.backgroundColor;
+    final emptyCellColor = isDark 
+        ? _GridColors.darkEmptyCellColor 
+        : _GridColors.emptyCellColor;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -38,12 +53,13 @@ class GridWidget extends StatelessWidget {
         return Container(
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
-            color: themeColors.surface,
+            color: bgColor,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: themeColors.border, width: 2),
             boxShadow: [
               BoxShadow(
-                color: themeColors.shadow.withAlpha(150),
+                color: isDark 
+                    ? Colors.black.withAlpha(80)
+                    : bgColor.withAlpha(60),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -54,8 +70,8 @@ class GridWidget extends StatelessWidget {
             child: Stack(
               clipBehavior: Clip.hardEdge,
               children: [
-                // Background cells
-                ..._buildBackgroundCells(tileSize, themeColors),
+                // Background cells (empty slots)
+                ..._buildBackgroundCells(tileSize, emptyCellColor),
                 // Tiles
                 ..._buildTiles(tileSize),
               ],
@@ -66,10 +82,7 @@ class GridWidget extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildBackgroundCells(
-    double tileSize,
-    ThemeColorSet themeColors,
-  ) {
+  List<Widget> _buildBackgroundCells(double tileSize, Color emptyCellColor) {
     final cells = <Widget>[];
     for (int row = 0; row < 4; row++) {
       for (int col = 0; col < 4; col++) {
@@ -84,7 +97,7 @@ class GridWidget extends StatelessWidget {
               width: tileSize,
               height: tileSize,
               decoration: BoxDecoration(
-                color: themeColors.card.withAlpha(150),
+                color: emptyCellColor,
                 borderRadius: BorderRadius.circular(6),
               ),
             ),

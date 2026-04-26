@@ -126,7 +126,7 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    _buildCurrentStep(context, isDark, l10n, true),
+                    _buildCurrentStep(context, isDark, l10n, isLandscape),
                   ],
                 ),
               ),

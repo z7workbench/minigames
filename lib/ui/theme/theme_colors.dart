@@ -264,6 +264,9 @@ class ThemeColors {
               ? StarlightColors.darkOnPrimary
               : StarlightColors.lightOnPrimary,
           pattern: Colors.white.withAlpha(180),
+          disabled: isDark
+              ? StarlightColors.darkDisabled
+              : StarlightColors.lightDisabled,
         );
       case ColorSchemeType.forest:
         return ThemeColorSet(
@@ -304,6 +307,9 @@ class ThemeColors {
               ? ForestColors.darkOnPrimary
               : ForestColors.lightOnPrimary,
           pattern: ForestColors.accentMoss.withAlpha(150),
+          disabled: isDark
+              ? ForestColors.darkDisabled
+              : ForestColors.lightDisabled,
         );
       case ColorSchemeType.wooden:
         return ThemeColorSet(
@@ -344,6 +350,9 @@ class ThemeColors {
               ? WoodenColors.darkOnPrimary
               : WoodenColors.lightOnPrimary,
           pattern: WoodenColors.accentCopper.withAlpha(150),
+          disabled: isDark
+              ? WoodenColors.darkDisabled
+              : WoodenColors.lightDisabled,
         );
     }
   }
@@ -368,6 +377,7 @@ class ThemeColorSet {
   final Color warning;
   final Color onPrimary;
   final Color pattern;
+  final Color disabled;
 
   const ThemeColorSet({
     required this.primary,
@@ -387,5 +397,6 @@ class ThemeColorSet {
     required this.warning,
     required this.onPrimary,
     required this.pattern,
+    required this.disabled,
   });
 }
