@@ -120,6 +120,27 @@
     "description": "Seconds unit label"
   },
 
+  "category_dice": "骰子",
+  "@category_dice": {
+    "description": "Dice category label"
+  },
+  "category_cards": "卡牌",
+  "@category_cards": {
+    "description": "Cards category label"
+  },
+  "category_board": "棋盘",
+  "@category_board": {
+    "description": "Board category label"
+  },
+  "category_reaction": "反应",
+  "@category_reaction": {
+    "description": "Reaction category label"
+  },
+  "category_casual": "休闲",
+  "@category_casual": {
+    "description": "Casual category label"
+  },
+
   "game_hit_and_blow": "猜数字",
   "@game_hit_and_blow": {
     "description": "Hit & Blow game title"
@@ -2140,5 +2161,64 @@
   "at_countdownGo": "开始!",
   "@at_countdownGo": {
     "description": "Countdown GO! message"
-  }
+  },
+
+  "category_dice": "骰子",
+  "@category_dice": {
+    "description": "Category name for dice games"
+  },
+  "category_cards": "牌类",
+  "@category_cards": {
+    "description": "Category name for card games"
+  },
+  "category_board": "棋类",
+  "@category_board": {
+    "description": "Category name for board games"
+  },
+  "category_reaction": "反应力",
+  "@category_reaction": {
+    "description": "Category name for reaction games"
+  },
+  "category_casual": "休闲",
+  "@category_casual": {
+    "description": "Category name for casual games"
+  },
+  "category_favorites": "喜好",
+  "@category_favorites": {
+    "description": "Favorites category header"
+  },
+  "favorites_count": "{count} 个游戏",
+  "@favorites_count": {
+    "description": "Game count in favorites section",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+   "sort_by_category": "按分类",
+   "@sort_by_category": {
+     "description": "Sort mode option"
+   },
+   "sort_by_release_time": "按推出时间",
+   "@sort_by_release_time": {
+     "description": "Sort mode option - by release time"
+   },
+   "category_recent": "最近推出",
+   "@category_recent": {
+     "description": "Category name for recent releases"
+   },
+"recent_count": "{count} 个新游戏",
+    "@recent_count": {
+      "description": "Game count in recent releases section",
+      "placeholders": {
+        "count": {
+          "type": "int"
+        }
+      }
+    },
+    "category_all_games": "其他游戏",
+    "@category_all_games": {
+      "description": "Category name for other games section"
+    }
 }

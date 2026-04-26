@@ -272,6 +272,36 @@ abstract class AppLocalizations {
   /// **'seconds'**
   String get seconds;
 
+  /// Category name for dice games
+  ///
+  /// In en, this message translates to:
+  /// **'Dice'**
+  String get category_dice;
+
+  /// Category name for card games
+  ///
+  /// In en, this message translates to:
+  /// **'Cards'**
+  String get category_cards;
+
+  /// Category name for board games
+  ///
+  /// In en, this message translates to:
+  /// **'Board'**
+  String get category_board;
+
+  /// Category name for reaction games
+  ///
+  /// In en, this message translates to:
+  /// **'Reaction'**
+  String get category_reaction;
+
+  /// Category name for casual games
+  ///
+  /// In en, this message translates to:
+  /// **'Casual'**
+  String get category_casual;
+
   /// Hit & Blow game title
   ///
   /// In en, this message translates to:
@@ -3289,6 +3319,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'GO!'**
   String get at_countdownGo;
+
+  /// Favorites category header
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get category_favorites;
+
+  /// Game count in favorites section
+  ///
+  /// In en, this message translates to:
+  /// **'{count} games'**
+  String favorites_count(int count);
+
+  /// Sort mode option
+  ///
+  /// In en, this message translates to:
+  /// **'By Category'**
+  String get sort_by_category;
+
+  /// Sort mode option - by release time
+  ///
+  /// In en, this message translates to:
+  /// **'By Release Time'**
+  String get sort_by_release_time;
+
+  /// Category name for recent releases
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Releases'**
+  String get category_recent;
+
+  /// Game count in recent releases section
+  ///
+  /// In en, this message translates to:
+  /// **'{count} new games'**
+  String recent_count(int count);
+
+  /// Category name for other games section
+  ///
+  /// In en, this message translates to:
+  /// **'Other Games'**
+  String get category_all_games;
 }
 
 class _AppLocalizationsDelegate

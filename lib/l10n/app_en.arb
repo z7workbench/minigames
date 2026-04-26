@@ -120,6 +120,27 @@
     "description": "Seconds unit label"
   },
 
+  "category_dice": "Dice",
+  "@category_dice": {
+    "description": "Dice category label"
+  },
+  "category_cards": "Cards",
+  "@category_cards": {
+    "description": "Cards category label"
+  },
+  "category_board": "Board",
+  "@category_board": {
+    "description": "Board category label"
+  },
+  "category_reaction": "Reaction",
+  "@category_reaction": {
+    "description": "Reaction category label"
+  },
+  "category_casual": "Casual",
+  "@category_casual": {
+    "description": "Casual category label"
+  },
+
   "game_hit_and_blow": "Hit & Blow",
   "@game_hit_and_blow": {
     "description": "Hit & Blow game title"
@@ -2140,5 +2161,64 @@
   "at_countdownGo": "GO!",
   "@at_countdownGo": {
     "description": "Countdown GO! message"
-  }
+  },
+
+  "category_dice": "Dice",
+  "@category_dice": {
+    "description": "Category name for dice games"
+  },
+  "category_cards": "Cards",
+  "@category_cards": {
+    "description": "Category name for card games"
+  },
+  "category_board": "Board",
+  "@category_board": {
+    "description": "Category name for board games"
+  },
+  "category_reaction": "Reaction",
+  "@category_reaction": {
+    "description": "Category name for reaction games"
+  },
+  "category_casual": "Casual",
+  "@category_casual": {
+    "description": "Category name for casual games"
+  },
+  "category_favorites": "Favorites",
+  "@category_favorites": {
+    "description": "Favorites category header"
+  },
+  "favorites_count": "{count} games",
+  "@favorites_count": {
+    "description": "Game count in favorites section",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+   "sort_by_category": "By Category",
+   "@sort_by_category": {
+     "description": "Sort mode option"
+   },
+   "sort_by_release_time": "By Release Time",
+   "@sort_by_release_time": {
+     "description": "Sort mode option - by release time"
+   },
+   "category_recent": "Recent Releases",
+   "@category_recent": {
+     "description": "Category name for recent releases"
+   },
+"recent_count": "{count} new games",
+    "@recent_count": {
+      "description": "Game count in recent releases section",
+      "placeholders": {
+        "count": {
+          "type": "int"
+        }
+      }
+    },
+    "category_all_games": "Other Games",
+    "@category_all_games": {
+      "description": "Category name for other games section"
+    }
 }

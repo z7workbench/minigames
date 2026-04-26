@@ -96,6 +96,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get seconds => 'seconds';
 
   @override
+  String get category_dice => 'Dice';
+
+  @override
+  String get category_cards => 'Cards';
+
+  @override
+  String get category_board => 'Board';
+
+  @override
+  String get category_reaction => 'Reaction';
+
+  @override
+  String get category_casual => 'Casual';
+
+  @override
   String get game_hit_and_blow => 'Hit & Blow';
 
   @override
@@ -1752,4 +1767,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get at_countdownGo => 'GO!';
+
+  @override
+  String get category_favorites => 'Favorites';
+
+  @override
+  String favorites_count(int count) {
+    return '$count games';
+  }
+
+  @override
+  String get sort_by_category => 'By Category';
+
+  @override
+  String get sort_by_release_time => 'By Release Time';
+
+  @override
+  String get category_recent => 'Recent Releases';
+
+  @override
+  String recent_count(int count) {
+    return '$count new games';
+  }
+
+  @override
+  String get category_all_games => 'Other Games';
 }

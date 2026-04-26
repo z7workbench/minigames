@@ -96,6 +96,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get seconds => '秒';
 
   @override
+  String get category_dice => '骰子';
+
+  @override
+  String get category_cards => '牌类';
+
+  @override
+  String get category_board => '棋类';
+
+  @override
+  String get category_reaction => '反应力';
+
+  @override
+  String get category_casual => '休闲';
+
+  @override
   String get game_hit_and_blow => '猜数字';
 
   @override
@@ -1706,4 +1721,29 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get at_countdownGo => '开始!';
+
+  @override
+  String get category_favorites => '喜好';
+
+  @override
+  String favorites_count(int count) {
+    return '$count 个游戏';
+  }
+
+  @override
+  String get sort_by_category => '按分类';
+
+  @override
+  String get sort_by_release_time => '按推出时间';
+
+  @override
+  String get category_recent => '最近推出';
+
+  @override
+  String recent_count(int count) {
+    return '$count 个新游戏';
+  }
+
+  @override
+  String get category_all_games => '其他游戏';
 }
