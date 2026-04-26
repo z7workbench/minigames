@@ -15,6 +15,8 @@ import '../../games/dice_battle/screens/start_screen.dart' as dice_battle;
 import '../../games/mancala/screens/mancala_start_screen.dart';
 import '../../games/hearts/screens/hearts_start_screen.dart';
 import '../../games/bluff_bar/screens/bluff_bar_start_screen.dart';
+import '../../games/reaction_test/screens/reaction_test_start_screen.dart';
+import '../../games/aim_test/screens/aim_test_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -83,6 +85,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           MaterialPageRoute(builder: (context) => const BluffBarStartScreen()),
         );
         break;
+      case GameType.reactionTest:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ReactionTestStartScreen()),
+        );
+        break;
+      case GameType.aimTest:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AimTestStartScreen()),
+        );
+        break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -120,6 +134,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.hearts_game_hearts;
       case GameType.bluffBar:
         return l10n.bb_game_title;
+      case GameType.reactionTest:
+        return l10n.game_reaction_test;
+      case GameType.aimTest:
+        return l10n.game_aim_test;
       default:
         return gameType.displayName;
     }
@@ -144,6 +162,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.hearts_description;
       case GameType.bluffBar:
         return l10n.bb_gameDescription;
+      case GameType.reactionTest:
+        return l10n.rt_gameDescription;
+      case GameType.aimTest:
+        return l10n.at_gameDescription;
       default:
         return '${gameType.displayName} - Coming Soon!';
     }
@@ -152,7 +174,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// Check if a game is a placeholder
   bool _isPlaceholder(GameType gameType) {
     return gameType.index >=
-        8; // First 8 games are real (0-7), rest are placeholders
+        10; // First 10 games are real (0-9), rest are placeholders
   }
 
   @override
