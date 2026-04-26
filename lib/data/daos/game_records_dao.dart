@@ -114,4 +114,13 @@ class GameRecordsDao extends DatabaseAccessor<AppDatabase>
           ..orderBy([(tbl) => OrderingTerm.desc(tbl.playedAt)]))
         .get();
   }
+
+  /// Gets top N scores for a specific game type, ordered by score ascending (lower is better for reaction time).
+  Future<List<GameRecord>> getTopScoresByGameType(String gameType, {int limit = 10}) {
+    return (select(gameRecords)
+          ..where((tbl) => tbl.gameType.equals(gameType))
+          ..orderBy([(tbl) => OrderingTerm.asc(tbl.score)])
+          ..limit(limit))
+        .get();
+  }
 }
