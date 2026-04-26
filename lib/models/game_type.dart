@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Game type enumeration for all games in the collection.
-/// Currently supports 12 games in a responsive grid layout.
+/// Currently supports 10 games in a responsive grid layout.
 enum GameType {
   hitAndBlow,
   yachtDice,
@@ -13,8 +13,6 @@ enum GameType {
   bluffBar,
   reactionTest,
   aimTest,
-  placeholder11,
-  placeholder12,
 }
 
 extension GameTypeExtension on GameType {
@@ -41,10 +39,6 @@ extension GameTypeExtension on GameType {
         return 'Reaction Test';
       case GameType.aimTest:
         return 'Aim Test';
-      case GameType.placeholder11:
-        return 'Game 11';
-      case GameType.placeholder12:
-        return 'Game 12';
     }
   }
 
@@ -71,10 +65,6 @@ extension GameTypeExtension on GameType {
         return Icons.touch_app;
       case GameType.aimTest:
         return Icons.gps_fixed;
-      case GameType.placeholder11:
-        return Icons.toys;
-      case GameType.placeholder12:
-        return Icons.games;
     }
   }
 
@@ -101,10 +91,37 @@ extension GameTypeExtension on GameType {
         return '/reaction-test';
       case GameType.aimTest:
         return '/aim-test';
-      case GameType.placeholder11:
-        return '/game-11';
-      case GameType.placeholder12:
-        return '/game-12';
     }
+  }
+
+  /// Release date of the game
+  DateTime get releaseDate {
+    switch (this) {
+      case GameType.hitAndBlow:
+        return DateTime(2022, 1, 7);
+      case GameType.yachtDice:
+        return DateTime(2022, 2, 4);
+      case GameType.mancala:
+        return DateTime(2026, 4, 6);
+      case GameType.twenty48:
+        return DateTime(2026, 4, 6);
+      case GameType.guessArrangement:
+        return DateTime(2026, 4, 6);
+      case GameType.diceBattle:
+        return DateTime(2026, 4, 6);
+      case GameType.hearts:
+        return DateTime(2026, 4, 12);
+      case GameType.bluffBar:
+        return DateTime(2026, 4, 25);
+      case GameType.reactionTest:
+        return DateTime(2026, 4, 26);
+      case GameType.aimTest:
+        return DateTime(2026, 4, 26);
+    }
+  }
+
+  /// Whether this game is still in development
+  bool get isWip {
+    return this == GameType.diceBattle;
   }
 }
