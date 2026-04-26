@@ -78,22 +78,25 @@ class WoodenButton extends StatelessWidget {
     final foregroundColor = _foregroundColor(context);
 
     if (text != null && icon != null) {
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: foregroundColor, size: _iconSize),
-          SizedBox(width: size == WoodenButtonSize.small ? 4 : 8),
-          Text(
-            text!,
-            style: TextStyle(
-              color: foregroundColor,
-              fontSize: _fontSize,
-              fontWeight: FontWeight.w500,
-              letterSpacing: 0.5,
+      return FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: foregroundColor, size: _iconSize),
+            SizedBox(width: size == WoodenButtonSize.small ? 4 : 8),
+            Text(
+              text!,
+              style: TextStyle(
+                color: foregroundColor,
+                fontSize: _fontSize,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.5,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     } else if (icon != null) {
       return Icon(icon, color: foregroundColor, size: _iconSize);
