@@ -1770,6 +1770,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sort_by_release_time => '按推出时间';
 
   @override
+  String get sort_by_creator => '按创造者';
+
+  @override
+  String get creator_glm => 'GLM-5 + qwen3.5-plus';
+
+  @override
+  String get creator_minimax => 'MiniMax-M2.7';
+
+  @override
+  String get creator_mimo => 'mimo-v2.5-pro';
+
+  @override
   String get category_recent => '最近推出';
 
   @override

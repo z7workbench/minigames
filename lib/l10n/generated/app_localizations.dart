@@ -3410,6 +3410,30 @@ abstract class AppLocalizations {
   /// **'By Release Time'**
   String get sort_by_release_time;
 
+  /// Sort mode option - by creator/AI model
+  ///
+  /// In en, this message translates to:
+  /// **'By Creator'**
+  String get sort_by_creator;
+
+  /// Creator group name for GLM models
+  ///
+  /// In en, this message translates to:
+  /// **'GLM-5 + qwen3.5-plus'**
+  String get creator_glm;
+
+  /// Creator group name for MiniMax model
+  ///
+  /// In en, this message translates to:
+  /// **'MiniMax-M2.7'**
+  String get creator_minimax;
+
+  /// Creator group name for mimo model
+  ///
+  /// In en, this message translates to:
+  /// **'mimo-v2.5-pro'**
+  String get creator_mimo;
+
   /// Category name for recent releases
   ///
   /// In en, this message translates to:

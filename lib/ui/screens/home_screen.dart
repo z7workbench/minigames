@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../models/game_type.dart';
 import '../../models/game_category.dart';
+import '../../models/game_creator.dart';
 import '../../providers/favorites_provider.dart';
 import '../../providers/category_provider.dart';
 import '../theme/theme_colors.dart';
@@ -228,6 +229,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ],
                 ),
               ),
+              PopupMenuItem(
+                value: SortMode.creator,
+                child: Row(
+                  children: [
+                    Expanded(child: Text(l10n.sort_by_creator)),
+                    if (sortSettings.sortMode == SortMode.creator)
+                      Icon(Icons.check, color: context.themeAccent, size: 18),
+                  ],
+                ),
+              ),
             ],
             icon: Icon(Icons.sort, color: context.themeOnPrimary, size: 20),
             tooltip: l10n.sort_by_category,
@@ -248,7 +259,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: sortSettings.sortMode == SortMode.category
           ? _buildCategoryModeBody(l10n, sortSettings, favorites)
-          : _buildReleaseTimeModeBody(l10n, favorites),
+          : sortSettings.sortMode == SortMode.creator
+              ? _buildCreatorModeBody(l10n, favorites)
+              : _buildReleaseTimeModeBody(l10n, favorites),
     );
   }
 
@@ -261,16 +274,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final orderedCategories = settings.categoryOrder;
     final hasFavorites = favorites.isNotEmpty;
 
+    // Number of fixed (non-reorderable) sections at the top
+    final fixedSections = (hasFavorites ? 1 : 0) + 1; // favorites + recent
+
     return ReorderableListView(
       onReorder: (oldIndex, newIndex) {
-        // Adjust indices if favorites section exists at top
+        // Adjust indices for fixed sections (favorites + recent)
         int adjustedOld = oldIndex;
         int adjustedNew = newIndex;
-        if (hasFavorites) {
-          if (adjustedOld == 0 || adjustedNew == 0) return; // Can't reorder favorites
-          adjustedOld -= 1;
-          adjustedNew -= 1;
-        }
+        if (adjustedOld < fixedSections || adjustedNew < fixedSections) return;
+        adjustedOld -= fixedSections;
+        adjustedNew -= fixedSections;
         if (adjustedNew > adjustedOld) adjustedNew -= 1;
         ref.read(sortSettingsProvider.notifier).reorderCategory(adjustedOld, adjustedNew);
       },
@@ -289,13 +303,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: _buildFavoritesSection(l10n, favorites),
           ),
 
+        // Recent releases section
+        Container(
+          key: const ValueKey('recent_releases'),
+          child: _buildRecentReleasesSection(l10n),
+        ),
+
         // Category sections
         for (int i = 0; i < orderedCategories.length; i++)
           Container(
             key: ValueKey(orderedCategories[i].name),
             child: Column(
               children: [
-                _buildCategoryHeader(orderedCategories[i], i, l10n),
+                _buildCategoryHeader(orderedCategories[i], i, l10n, fixedSections: fixedSections),
                 _buildGameGrid(context, orderedCategories[i].gameTypes, l10n, nested: true),
               ],
             ),
@@ -327,6 +347,62 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         _buildRecentReleasesSection(l10n),
         _buildAllGamesSection(l10n, otherGames),
       ],
+    );
+  }
+
+  /// Build body for creator mode: games grouped by AI model/creator
+  Widget _buildCreatorModeBody(
+    AppLocalizations l10n,
+    Set<GameType> favorites,
+  ) {
+    final hasFavorites = favorites.isNotEmpty;
+
+    return ListView(
+      children: [
+        if (hasFavorites) _buildFavoritesSection(l10n, favorites),
+        _buildRecentReleasesSection(l10n),
+        for (final creator in GameCreator.values)
+          _buildCreatorSection(creator, l10n),
+      ],
+    );
+  }
+
+  /// Build a creator group section with header
+  Widget _buildCreatorSection(GameCreator creator, AppLocalizations l10n) {
+    return Container(
+      padding: const EdgeInsets.only(top: 12, bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Icon(creator.icon, color: context.themeAccent, size: 20),
+                const SizedBox(width: 8),
+                Text(
+                  creator.displayName(l10n),
+                  style: TextStyle(
+                    color: context.themeTextPrimary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  l10n.favorites_count(creator.gameTypes.length),
+                  style: TextStyle(
+                    color: context.themeTextSecondary,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 4),
+          _buildGameGrid(context, creator.gameTypes, l10n, nested: true),
+        ],
+      ),
     );
   }
 
@@ -460,15 +536,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildCategoryHeader(
     GameCategory category,
     int index,
-    AppLocalizations l10n,
-  ) {
+    AppLocalizations l10n, {
+    required int fixedSections,
+  }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           // Drag handle (wrapped in ReorderableDragStartListener)
           ReorderableDragStartListener(
-            index: index + 1, // +1 because favorites section takes index 0
+            index: index + fixedSections, // +fixedSections for favorites + recent
             child: Icon(Icons.drag_handle, size: 20, color: context.themeDisabled),
           ),
           const SizedBox(width: 8),

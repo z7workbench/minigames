@@ -5,7 +5,7 @@ import 'package:minigames/models/game_category.dart';
 
 part 'category_provider.g.dart';
 
-enum SortMode { category, releaseTime }
+enum SortMode { category, releaseTime, creator }
 
 class SortSettingsModel {
   final SortMode sortMode;
@@ -42,10 +42,18 @@ class SortSettings extends _$SortSettings {
     final sortModeStr = prefs.getString('sort_mode');
     final categoryOrderList = prefs.getStringList('category_order');
     
-    // Match the enum name format (camelCase): "category" or "releaseTime"
-    SortMode mode = sortModeStr == SortMode.releaseTime.name 
-        ? SortMode.releaseTime 
-        : SortMode.category;
+    // Match the enum name format (camelCase): "category", "releaseTime", or "creator"
+    SortMode mode;
+    switch (sortModeStr) {
+      case 'releaseTime':
+        mode = SortMode.releaseTime;
+        break;
+      case 'creator':
+        mode = SortMode.creator;
+        break;
+      default:
+        mode = SortMode.category;
+    }
     
     List<GameCategory> order;
     if (categoryOrderList != null) {

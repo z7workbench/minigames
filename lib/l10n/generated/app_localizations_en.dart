@@ -1820,6 +1820,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sort_by_release_time => 'By Release Time';
 
   @override
+  String get sort_by_creator => 'By Creator';
+
+  @override
+  String get creator_glm => 'GLM-5 + qwen3.5-plus';
+
+  @override
+  String get creator_minimax => 'MiniMax-M2.7';
+
+  @override
+  String get creator_mimo => 'mimo-v2.5-pro';
+
+  @override
   String get category_recent => 'Recent Releases';
 
   @override
