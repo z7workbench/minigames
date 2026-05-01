@@ -33,6 +33,9 @@
 | **Hearts** | ✅ Complete | Easy/Medium/Hard | 5 slots |
 | **Bluff Bar** | ✅ Complete | Easy/Medium/Hard | 5 slots |
 | **Dice Battle** | 🚧 WIP | Easy/Medium/Hard | Records |
+| **Reaction Test** | ✅ Complete | - | Leaderboard |
+| **Aim Test** | ✅ Complete | - | Leaderboard |
+| **Chess** | ✅ Complete | Easy/Hard | Records |
 
 ---
 
@@ -253,6 +256,35 @@ A tactical dice battle game where players roll dice to attack and defend. Altern
 
 ---
 
+### Chess
+
+Classic international chess with AI opponent, FEN import and PGN export.
+
+**Description:**
+Full-featured chess implementation with complete rules engine, two AI difficulty levels, and standard notation support. Play as white or black against the AI, import custom positions via FEN, and export your games in PGN format.
+
+**Gameplay:**
+- Tap a piece to see legal moves highlighted on the board
+- Tap a highlighted square to move (including castling, en passant, promotion)
+- AI responds automatically after your move
+- Game detects check, checkmate, stalemate, and draw conditions
+
+**Game Modes:**
+- **vs AI**: Easy (greedy + random), Hard (alpha-beta pruning + iterative deepening)
+
+**Features:**
+- Complete rules engine (castling, en passant, pawn promotion, 50-move rule, threefold repetition, insufficient material)
+- FEN position import with validation
+- PGN export (standard notation with headers)
+- Move history display (algebraic notation)
+- Captured pieces tracking with material advantage
+- Two piece styles: Outline and Filled
+- Portrait and landscape layouts
+- Undo move support
+- Check/checkmate/stalemate/draw detection
+
+---
+
 ## Screenshots
 
 ### Available Screenshots
@@ -404,7 +436,11 @@ lib/
 │   ├── twenty48/              # 2048 puzzle
 │   ├── mancala/               # Seed-sowing game
 │   ├── hearts/                # Trick-taking card game
-│   └── dice_battle/           # Dice combat RPG
+│   ├── bluff_bar/             # Bluffing card game
+│   ├── dice_battle/           # Dice combat RPG
+│   ├── reaction_test/         # Reaction speed test
+│   ├── aim_test/              # Aiming accuracy test
+│   └── chess_intl/            # International chess
 │
 ├── ui/                        # Shared UI layer
 │   ├── screens/               # App screens (home, settings)

@@ -3361,6 +3361,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other Games'**
   String get category_all_games;
+
+  /// Chess (International) game title
+  ///
+  /// In en, this message translates to:
+  /// **'Chess'**
+  String get ci_gameTitle;
+
+  /// Chess game description
+  ///
+  /// In en, this message translates to:
+  /// **'Classic chess vs AI with FEN import and PGN export'**
+  String get ci_gameDescription;
+
+  /// Start game button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Game'**
+  String get ci_startGame;
+
+  /// How to play button
+  ///
+  /// In en, this message translates to:
+  /// **'How to Play'**
+  String get ci_howToPlay;
+
+  /// AI difficulty selection label
+  ///
+  /// In en, this message translates to:
+  /// **'AI Difficulty'**
+  String get ci_aiDifficulty;
+
+  /// Easy AI difficulty
+  ///
+  /// In en, this message translates to:
+  /// **'Easy'**
+  String get ci_easy;
+
+  /// Hard AI difficulty
+  ///
+  /// In en, this message translates to:
+  /// **'Hard'**
+  String get ci_hard;
+
+  /// Color selection label
+  ///
+  /// In en, this message translates to:
+  /// **'Play As'**
+  String get ci_playAs;
+
+  /// White pieces
+  ///
+  /// In en, this message translates to:
+  /// **'White'**
+  String get ci_white;
+
+  /// Black pieces
+  ///
+  /// In en, this message translates to:
+  /// **'Black'**
+  String get ci_black;
+
+  /// FEN import section title
+  ///
+  /// In en, this message translates to:
+  /// **'Import Position (FEN)'**
+  String get ci_importFen;
+
+  /// FEN import description
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a FEN string to start from a specific position'**
+  String get ci_importFenDesc;
+
+  /// Validate FEN button
+  ///
+  /// In en, this message translates to:
+  /// **'Validate'**
+  String get ci_validate;
+
+  /// FEN validation success message
+  ///
+  /// In en, this message translates to:
+  /// **'FEN is valid! Position will be imported.'**
+  String get ci_fenValid;
+
+  /// New game menu item
+  ///
+  /// In en, this message translates to:
+  /// **'New Game'**
+  String get ci_newGame;
+
+  /// Undo move button
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get ci_undo;
+
+  /// Copy FEN to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copy FEN'**
+  String get ci_copyFen;
+
+  /// Export PGN menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Export PGN'**
+  String get ci_exportPgn;
+
+  /// Exit game menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Exit Game'**
+  String get ci_exitGame;
+
+  /// Exit game confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit? Current progress will be lost.'**
+  String get ci_exitConfirm;
+
+  /// Restart game confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to restart? Current progress will be lost.'**
+  String get ci_restartConfirm;
+
+  /// FEN copied snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'FEN copied to clipboard'**
+  String get ci_fenCopied;
+
+  /// PGN copied snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'PGN copied to clipboard'**
+  String get ci_pgnCopied;
+
+  /// Copy PGN button
+  ///
+  /// In en, this message translates to:
+  /// **'Copy PGN'**
+  String get ci_copyPgn;
+
+  /// Move history panel title
+  ///
+  /// In en, this message translates to:
+  /// **'Move History'**
+  String get ci_moveHistory;
+
+  /// Empty move history placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'No moves yet'**
+  String get ci_noMovesYet;
+
+  /// Game preparing status
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing...'**
+  String get ci_preparing;
+
+  /// Player's turn indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Your turn'**
+  String get ci_yourTurn;
+
+  /// AI's turn indicator
+  ///
+  /// In en, this message translates to:
+  /// **'AI thinking...'**
+  String get ci_aiTurn;
+
+  /// Player in check warning
+  ///
+  /// In en, this message translates to:
+  /// **'You are in check!'**
+  String get ci_youAreInCheck;
+
+  /// AI in check indicator
+  ///
+  /// In en, this message translates to:
+  /// **'AI is in check'**
+  String get ci_aiInCheck;
+
+  /// Player wins message
+  ///
+  /// In en, this message translates to:
+  /// **'You win!'**
+  String get ci_youWin;
+
+  /// AI wins message
+  ///
+  /// In en, this message translates to:
+  /// **'AI wins'**
+  String get ci_aiWins;
+
+  /// Stalemate result
+  ///
+  /// In en, this message translates to:
+  /// **'Stalemate - Draw'**
+  String get ci_stalemate;
+
+  /// Draw result
+  ///
+  /// In en, this message translates to:
+  /// **'Draw'**
+  String get ci_draw;
+
+  /// Pawn promotion prompt
+  ///
+  /// In en, this message translates to:
+  /// **'Choose promotion piece'**
+  String get ci_choosePromotion;
+
+  /// AI thinking indicator text
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking...'**
+  String get ci_thinking;
+
+  /// Player label
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get ci_you;
+
+  /// Rule 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'Objective'**
+  String get ci_rule1Title;
+
+  /// Rule 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Checkmate the opponent\'s king. The game ends when the king is under attack and cannot escape.'**
+  String get ci_rule1Desc;
+
+  /// Rule 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'Movement'**
+  String get ci_rule2Title;
+
+  /// Rule 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a piece to see legal moves highlighted. Tap a highlighted square to move. Each piece type moves differently.'**
+  String get ci_rule2Desc;
+
+  /// Rule 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'Special Moves'**
+  String get ci_rule3Title;
+
+  /// Rule 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'Castling: King moves 2 squares toward a rook. En passant: Pawn captures an adjacent pawn that just moved 2 squares. Promotion: Pawn reaching the last rank becomes a queen, rook, bishop, or knight.'**
+  String get ci_rule3Desc;
+
+  /// Rule 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'Draw Conditions'**
+  String get ci_rule4Title;
+
+  /// Rule 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'The game is a draw by stalemate, 50-move rule (no captures or pawn moves), threefold repetition, or insufficient material.'**
+  String get ci_rule4Desc;
+
+  /// Rule 5 title
+  ///
+  /// In en, this message translates to:
+  /// **'FEN & PGN'**
+  String get ci_rule5Title;
+
+  /// Rule 5 description
+  ///
+  /// In en, this message translates to:
+  /// **'Import positions using FEN notation. Export your games in PGN format from the menu.'**
+  String get ci_rule5Desc;
+
+  /// Piece style selection label
+  ///
+  /// In en, this message translates to:
+  /// **'Piece Style'**
+  String get ci_pieceStyle;
+
+  /// Outline piece style (white outlined, black filled)
+  ///
+  /// In en, this message translates to:
+  /// **'Outline'**
+  String get ci_styleOutline;
+
+  /// Filled piece style (all pieces use filled characters)
+  ///
+  /// In en, this message translates to:
+  /// **'Filled'**
+  String get ci_styleFilled;
 }
 
 class _AppLocalizationsDelegate

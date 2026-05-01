@@ -2220,5 +2220,209 @@
     "category_all_games": "Other Games",
     "@category_all_games": {
       "description": "Category name for other games section"
+    },
+    "ci_gameTitle": "Chess",
+    "@ci_gameTitle": {
+      "description": "Chess (International) game title"
+    },
+    "ci_gameDescription": "Classic chess vs AI with FEN import and PGN export",
+    "@ci_gameDescription": {
+      "description": "Chess game description"
+    },
+    "ci_startGame": "Start Game",
+    "@ci_startGame": {
+      "description": "Start game button"
+    },
+    "ci_howToPlay": "How to Play",
+    "@ci_howToPlay": {
+      "description": "How to play button"
+    },
+    "ci_aiDifficulty": "AI Difficulty",
+    "@ci_aiDifficulty": {
+      "description": "AI difficulty selection label"
+    },
+    "ci_easy": "Easy",
+    "@ci_easy": {
+      "description": "Easy AI difficulty"
+    },
+    "ci_hard": "Hard",
+    "@ci_hard": {
+      "description": "Hard AI difficulty"
+    },
+    "ci_playAs": "Play As",
+    "@ci_playAs": {
+      "description": "Color selection label"
+    },
+    "ci_white": "White",
+    "@ci_white": {
+      "description": "White pieces"
+    },
+    "ci_black": "Black",
+    "@ci_black": {
+      "description": "Black pieces"
+    },
+    "ci_importFen": "Import Position (FEN)",
+    "@ci_importFen": {
+      "description": "FEN import section title"
+    },
+    "ci_importFenDesc": "Paste a FEN string to start from a specific position",
+    "@ci_importFenDesc": {
+      "description": "FEN import description"
+    },
+    "ci_validate": "Validate",
+    "@ci_validate": {
+      "description": "Validate FEN button"
+    },
+    "ci_fenValid": "FEN is valid! Position will be imported.",
+    "@ci_fenValid": {
+      "description": "FEN validation success message"
+    },
+    "ci_newGame": "New Game",
+    "@ci_newGame": {
+      "description": "New game menu item"
+    },
+    "ci_undo": "Undo",
+    "@ci_undo": {
+      "description": "Undo move button"
+    },
+    "ci_copyFen": "Copy FEN",
+    "@ci_copyFen": {
+      "description": "Copy FEN to clipboard"
+    },
+    "ci_exportPgn": "Export PGN",
+    "@ci_exportPgn": {
+      "description": "Export PGN menu item"
+    },
+    "ci_exitGame": "Exit Game",
+    "@ci_exitGame": {
+      "description": "Exit game menu item"
+    },
+    "ci_exitConfirm": "Are you sure you want to exit? Current progress will be lost.",
+    "@ci_exitConfirm": {
+      "description": "Exit game confirmation message"
+    },
+    "ci_restartConfirm": "Are you sure you want to restart? Current progress will be lost.",
+    "@ci_restartConfirm": {
+      "description": "Restart game confirmation message"
+    },
+    "ci_fenCopied": "FEN copied to clipboard",
+    "@ci_fenCopied": {
+      "description": "FEN copied snackbar message"
+    },
+    "ci_pgnCopied": "PGN copied to clipboard",
+    "@ci_pgnCopied": {
+      "description": "PGN copied snackbar message"
+    },
+    "ci_copyPgn": "Copy PGN",
+    "@ci_copyPgn": {
+      "description": "Copy PGN button"
+    },
+    "ci_moveHistory": "Move History",
+    "@ci_moveHistory": {
+      "description": "Move history panel title"
+    },
+    "ci_noMovesYet": "No moves yet",
+    "@ci_noMovesYet": {
+      "description": "Empty move history placeholder"
+    },
+    "ci_preparing": "Preparing...",
+    "@ci_preparing": {
+      "description": "Game preparing status"
+    },
+    "ci_yourTurn": "Your turn",
+    "@ci_yourTurn": {
+      "description": "Player's turn indicator"
+    },
+    "ci_aiTurn": "AI thinking...",
+    "@ci_aiTurn": {
+      "description": "AI's turn indicator"
+    },
+    "ci_youAreInCheck": "You are in check!",
+    "@ci_youAreInCheck": {
+      "description": "Player in check warning"
+    },
+    "ci_aiInCheck": "AI is in check",
+    "@ci_aiInCheck": {
+      "description": "AI in check indicator"
+    },
+    "ci_youWin": "You win!",
+    "@ci_youWin": {
+      "description": "Player wins message"
+    },
+    "ci_aiWins": "AI wins",
+    "@ci_aiWins": {
+      "description": "AI wins message"
+    },
+    "ci_stalemate": "Stalemate - Draw",
+    "@ci_stalemate": {
+      "description": "Stalemate result"
+    },
+    "ci_draw": "Draw",
+    "@ci_draw": {
+      "description": "Draw result"
+    },
+    "ci_choosePromotion": "Choose promotion piece",
+    "@ci_choosePromotion": {
+      "description": "Pawn promotion prompt"
+    },
+    "ci_thinking": "Thinking...",
+    "@ci_thinking": {
+      "description": "AI thinking indicator text"
+    },
+    "ci_you": "You",
+    "@ci_you": {
+      "description": "Player label"
+    },
+    "ci_rule1Title": "Objective",
+    "@ci_rule1Title": {
+      "description": "Rule 1 title"
+    },
+    "ci_rule1Desc": "Checkmate the opponent's king. The game ends when the king is under attack and cannot escape.",
+    "@ci_rule1Desc": {
+      "description": "Rule 1 description"
+    },
+    "ci_rule2Title": "Movement",
+    "@ci_rule2Title": {
+      "description": "Rule 2 title"
+    },
+    "ci_rule2Desc": "Tap a piece to see legal moves highlighted. Tap a highlighted square to move. Each piece type moves differently.",
+    "@ci_rule2Desc": {
+      "description": "Rule 2 description"
+    },
+    "ci_rule3Title": "Special Moves",
+    "@ci_rule3Title": {
+      "description": "Rule 3 title"
+    },
+    "ci_rule3Desc": "Castling: King moves 2 squares toward a rook. En passant: Pawn captures an adjacent pawn that just moved 2 squares. Promotion: Pawn reaching the last rank becomes a queen, rook, bishop, or knight.",
+    "@ci_rule3Desc": {
+      "description": "Rule 3 description"
+    },
+    "ci_rule4Title": "Draw Conditions",
+    "@ci_rule4Title": {
+      "description": "Rule 4 title"
+    },
+    "ci_rule4Desc": "The game is a draw by stalemate, 50-move rule (no captures or pawn moves), threefold repetition, or insufficient material.",
+    "@ci_rule4Desc": {
+      "description": "Rule 4 description"
+    },
+    "ci_rule5Title": "FEN & PGN",
+    "@ci_rule5Title": {
+      "description": "Rule 5 title"
+    },
+    "ci_rule5Desc": "Import positions using FEN notation. Export your games in PGN format from the menu.",
+    "@ci_rule5Desc": {
+      "description": "Rule 5 description"
+    },
+    "ci_pieceStyle": "Piece Style",
+    "@ci_pieceStyle": {
+      "description": "Piece style selection label"
+    },
+    "ci_styleOutline": "Outline",
+    "@ci_styleOutline": {
+      "description": "Outline piece style (white outlined, black filled)"
+    },
+    "ci_styleFilled": "Filled",
+    "@ci_styleFilled": {
+      "description": "Filled piece style (all pieces use filled characters)"
     }
 }

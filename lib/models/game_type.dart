@@ -13,6 +13,7 @@ enum GameType {
   bluffBar,
   reactionTest,
   aimTest,
+  chessIntl,
 }
 
 extension GameTypeExtension on GameType {
@@ -39,6 +40,8 @@ extension GameTypeExtension on GameType {
         return 'Reaction Test';
       case GameType.aimTest:
         return 'Aim Test';
+      case GameType.chessIntl:
+        return 'Chess';
     }
   }
 
@@ -60,11 +63,24 @@ extension GameTypeExtension on GameType {
       case GameType.hearts:
         return Icons.favorite;
       case GameType.bluffBar:
-        return Icons.local_bar;  // 酒吧/鸡尾酒图标，符合"吹牛酒吧"主题
+        return Icons.local_bar;
       case GameType.reactionTest:
         return Icons.touch_app;
       case GameType.aimTest:
         return Icons.gps_fixed;
+      case GameType.chessIntl:
+        return Icons.grid_on;
+    }
+  }
+
+  /// Optional text icon (Unicode character) for games that prefer text over IconData.
+  /// When non-null, GameCard renders this instead of iconData.
+  String? get iconText {
+    switch (this) {
+      case GameType.chessIntl:
+        return '\u265A';
+      default:
+        return null;
     }
   }
 
@@ -91,6 +107,8 @@ extension GameTypeExtension on GameType {
         return '/reaction-test';
       case GameType.aimTest:
         return '/aim-test';
+      case GameType.chessIntl:
+        return '/chess-intl';
     }
   }
 
@@ -117,6 +135,8 @@ extension GameTypeExtension on GameType {
         return DateTime(2026, 4, 26);
       case GameType.aimTest:
         return DateTime(2026, 4, 26);
+      case GameType.chessIntl:
+        return DateTime(2026, 4, 29);
     }
   }
 

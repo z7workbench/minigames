@@ -20,6 +20,7 @@ import '../../games/hearts/screens/hearts_start_screen.dart';
 import '../../games/bluff_bar/screens/bluff_bar_start_screen.dart';
 import '../../games/reaction_test/screens/reaction_test_start_screen.dart';
 import '../../games/aim_test/screens/aim_test_start_screen.dart';
+import '../../games/chess_intl/screens/chess_intl_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -102,6 +103,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           MaterialPageRoute(builder: (context) => const AimTestStartScreen()),
         );
         break;
+      case GameType.chessIntl:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ChessIntlStartScreen()),
+        );
+        break;
     }
   }
 
@@ -136,6 +143,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.game_reaction_test;
       case GameType.aimTest:
         return l10n.game_aim_test;
+      case GameType.chessIntl:
+        return l10n.ci_gameTitle;
     }
   }
 
@@ -162,6 +171,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.rt_gameDescription;
       case GameType.aimTest:
         return l10n.at_gameDescription;
+      case GameType.chessIntl:
+        return l10n.ci_gameDescription;
     }
   }
 

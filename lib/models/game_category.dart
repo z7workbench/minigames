@@ -46,7 +46,7 @@ extension GameCategoryExtension on GameCategory {
       case GameCategory.cards:
         return [GameType.guessArrangement, GameType.hearts, GameType.bluffBar];
       case GameCategory.board:
-        return [GameType.mancala];
+        return [GameType.mancala, GameType.chessIntl];
       case GameCategory.reaction:
         return [GameType.reactionTest, GameType.aimTest];
       case GameCategory.casual:
@@ -86,6 +86,7 @@ extension GameTypeCategoryExtension on GameType {
       case GameType.bluffBar:
         return GameCategory.cards;
       case GameType.mancala:
+      case GameType.chessIntl:
         return GameCategory.board;
       case GameType.reactionTest:
       case GameType.aimTest:
@@ -93,7 +94,6 @@ extension GameTypeCategoryExtension on GameType {
       case GameType.hitAndBlow:
       case GameType.twenty48:
         return GameCategory.casual;
-      // No placeholder cases - they will be removed
     }
   }
 }

@@ -1792,4 +1792,166 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get category_all_games => 'Other Games';
+
+  @override
+  String get ci_gameTitle => 'Chess';
+
+  @override
+  String get ci_gameDescription =>
+      'Classic chess vs AI with FEN import and PGN export';
+
+  @override
+  String get ci_startGame => 'Start Game';
+
+  @override
+  String get ci_howToPlay => 'How to Play';
+
+  @override
+  String get ci_aiDifficulty => 'AI Difficulty';
+
+  @override
+  String get ci_easy => 'Easy';
+
+  @override
+  String get ci_hard => 'Hard';
+
+  @override
+  String get ci_playAs => 'Play As';
+
+  @override
+  String get ci_white => 'White';
+
+  @override
+  String get ci_black => 'Black';
+
+  @override
+  String get ci_importFen => 'Import Position (FEN)';
+
+  @override
+  String get ci_importFenDesc =>
+      'Paste a FEN string to start from a specific position';
+
+  @override
+  String get ci_validate => 'Validate';
+
+  @override
+  String get ci_fenValid => 'FEN is valid! Position will be imported.';
+
+  @override
+  String get ci_newGame => 'New Game';
+
+  @override
+  String get ci_undo => 'Undo';
+
+  @override
+  String get ci_copyFen => 'Copy FEN';
+
+  @override
+  String get ci_exportPgn => 'Export PGN';
+
+  @override
+  String get ci_exitGame => 'Exit Game';
+
+  @override
+  String get ci_exitConfirm =>
+      'Are you sure you want to exit? Current progress will be lost.';
+
+  @override
+  String get ci_restartConfirm =>
+      'Are you sure you want to restart? Current progress will be lost.';
+
+  @override
+  String get ci_fenCopied => 'FEN copied to clipboard';
+
+  @override
+  String get ci_pgnCopied => 'PGN copied to clipboard';
+
+  @override
+  String get ci_copyPgn => 'Copy PGN';
+
+  @override
+  String get ci_moveHistory => 'Move History';
+
+  @override
+  String get ci_noMovesYet => 'No moves yet';
+
+  @override
+  String get ci_preparing => 'Preparing...';
+
+  @override
+  String get ci_yourTurn => 'Your turn';
+
+  @override
+  String get ci_aiTurn => 'AI thinking...';
+
+  @override
+  String get ci_youAreInCheck => 'You are in check!';
+
+  @override
+  String get ci_aiInCheck => 'AI is in check';
+
+  @override
+  String get ci_youWin => 'You win!';
+
+  @override
+  String get ci_aiWins => 'AI wins';
+
+  @override
+  String get ci_stalemate => 'Stalemate - Draw';
+
+  @override
+  String get ci_draw => 'Draw';
+
+  @override
+  String get ci_choosePromotion => 'Choose promotion piece';
+
+  @override
+  String get ci_thinking => 'Thinking...';
+
+  @override
+  String get ci_you => 'You';
+
+  @override
+  String get ci_rule1Title => 'Objective';
+
+  @override
+  String get ci_rule1Desc =>
+      'Checkmate the opponent\'s king. The game ends when the king is under attack and cannot escape.';
+
+  @override
+  String get ci_rule2Title => 'Movement';
+
+  @override
+  String get ci_rule2Desc =>
+      'Tap a piece to see legal moves highlighted. Tap a highlighted square to move. Each piece type moves differently.';
+
+  @override
+  String get ci_rule3Title => 'Special Moves';
+
+  @override
+  String get ci_rule3Desc =>
+      'Castling: King moves 2 squares toward a rook. En passant: Pawn captures an adjacent pawn that just moved 2 squares. Promotion: Pawn reaching the last rank becomes a queen, rook, bishop, or knight.';
+
+  @override
+  String get ci_rule4Title => 'Draw Conditions';
+
+  @override
+  String get ci_rule4Desc =>
+      'The game is a draw by stalemate, 50-move rule (no captures or pawn moves), threefold repetition, or insufficient material.';
+
+  @override
+  String get ci_rule5Title => 'FEN & PGN';
+
+  @override
+  String get ci_rule5Desc =>
+      'Import positions using FEN notation. Export your games in PGN format from the menu.';
+
+  @override
+  String get ci_pieceStyle => 'Piece Style';
+
+  @override
+  String get ci_styleOutline => 'Outline';
+
+  @override
+  String get ci_styleFilled => 'Filled';
 }

@@ -9,6 +9,27 @@
 - **应用名称**: 小游戏合集 (minigames)
 - **目标平台**: iOS, Android, Windows, macOS, Linux, Web
 
+## 游戏时间线
+
+| # | 游戏 | 引入时间 | 版本 |
+|---|------|---------|------|
+| 1 | 猜数字 (Hit & Blow) | 2022.1.7 | v0.1.2 |
+| 2 | 游艇骰子 (Yacht Dice) | 2022.2.4 | v0.2.0 |
+| 3 | 播棋 (Mancala)、2048、猜排列 (Guess Arrangement) | 2026.4.6 | v4.1.0 |
+| 4 | 骰子对战 (Dice Battle) 🚧 WIP | 2026.4.6 | v4.1.0 |
+| 5 | 红心大战 (Hearts) | 2026.4.12 | v5.0.0 |
+| 6 | 吹牛酒馆 (Bluff Bar) | 2026.4.25 | v5.1.1 |
+| 7 | 反应力测试 (Reaction Test)、瞄准测试 (Aim Test) | 2026.4.26 | v5.2.0 |
+| 8 | 国际象棋 (Chess) | 待定 | 待定 |
+
+### 最近推出逻辑
+
+首页「最近推出」区域的规则：
+- **仅展示最近 2 个游戏**，由 `home_screen.dart` 中的 `recentGames` 列表硬编码
+- **仅在最近推出列表中的游戏记录引入时间**，通过 `GameType.releaseDate` 属性返回
+- 新游戏加入最近推出时，排在末尾的旧游戏移出列表并**删除其 `releaseDate` 值**（改用默认值或不再查询）
+- 当前最近推出：`reactionTest`（2026.4.26）、`aimTest`（2026.4.26）
+
 ## 技术栈
 
 | 层级 | 技术 | 版本 | 用途 |
@@ -163,6 +184,29 @@ lib/
 │       │   └── bluff_bar_start_screen.dart # 开始页面
 │       ├── bluff_bar_provider.dart     # Riverpod Provider
 │       └── bluff_bar_screen.dart       # 主游戏界面
+│
+│   └── chess_intl/            # 国际象棋游戏
+│       ├── models/            # 数据模型
+│       │   ├── chess_piece.dart        # 棋子模型
+│       │   ├── chess_move.dart         # 走法模型(UCI)
+│       │   ├── chess_state.dart        # 游戏状态(FEN)
+│       │   └── enums.dart              # 游戏枚举(PieceType, PieceColor, PieceStyle等)
+│       ├── logic/             # 游戏逻辑
+│       │   ├── fen_validator.dart      # FEN解析与校验
+│       │   ├── san_converter.dart      # SAN记谱转换
+│       │   └── pgn_exporter.dart       # PGN导出
+│       ├── ai/                # AI系统
+│       │   ├── chess_ai.dart           # AI基类
+│       │   ├── easy_ai.dart            # 简单难度(贪心+随机)
+│       │   └── hard_ai.dart            # 困难难度(Alpha-Beta剪枝+迭代加深)
+│       ├── components/        # UI组件
+│       │   ├── chess_board_widget.dart # 棋盘组件
+│       │   ├── promotion_dialog.dart   # 升变选择对话框
+│       │   └── captured_pieces_widget.dart # 被吃棋子显示
+│       ├── screens/           # 游戏页面
+│       │   └── chess_intl_start_screen.dart # 开始页面
+│       ├── chess_intl_provider.dart    # Riverpod Provider
+│       └── chess_intl_screen.dart      # 主游戏界面
 │
 ├── ui/                        # 上层：UI层
 │   ├── screens/               # 页面
@@ -573,6 +617,28 @@ AI决策流程:
 
 **AI延迟**: 固定1秒决策延迟，保证流畅的游戏体验
 
+### 国际象棋AI
+
+AI位于`lib/games/chess_intl/ai/`:
+- `chess_ai.dart` - AI基类
+- `easy_ai.dart` - 简单难度（贪心+随机）
+- `hard_ai.dart` - 困难难度（Alpha-Beta剪枝+迭代加深）
+
+AI决策流程:
+1. 从当前FEN局面生成所有合法走法
+2. 根据难度选择算法路径
+3. 返回最佳走法的UCI坐标（如e2e4）
+
+**AI难度差异:**
+- **Easy**: 贪心评估（基础子力分值+中心格加分）+ 合法走法随机扰动（约20%概率选非最优步）
+- **Hard**: Alpha-Beta剪枝 + 迭代加深（3-5层）+ MVV-LVA走法排序 + 空步剪枝 + 子力位置表(Piece-Square Tables) + 兵型结构评估 + 残局权重调整
+
+**统一调用契约:**
+- 输入: FEN局面字符串、难度枚举、可选时间限制
+- 输出: 最佳走法UCI坐标（如`e2e4`或`e7e8q`升变）
+- 中断: 支持取消信号，返回已缓存最优步
+- 性能: 简单AI < 0.5秒，困难AI上限2秒
+
 ## 常见问题
 
 ### Q: 如何添加新平台支持？
@@ -608,5 +674,5 @@ AI决策流程:
 
 ---
 
-**最后更新**: 2026年3月
+**最后更新**: 2026年5月
 **项目状态**: 活跃开发中

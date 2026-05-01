@@ -1746,4 +1746,158 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get category_all_games => '其他游戏';
+
+  @override
+  String get ci_gameTitle => '国际象棋';
+
+  @override
+  String get ci_gameDescription => '经典国际象棋对弈AI，支持FEN导入和PGN导出';
+
+  @override
+  String get ci_startGame => '开始游戏';
+
+  @override
+  String get ci_howToPlay => '玩法说明';
+
+  @override
+  String get ci_aiDifficulty => 'AI难度';
+
+  @override
+  String get ci_easy => '简单';
+
+  @override
+  String get ci_hard => '困难';
+
+  @override
+  String get ci_playAs => '执棋颜色';
+
+  @override
+  String get ci_white => '白棋';
+
+  @override
+  String get ci_black => '黑棋';
+
+  @override
+  String get ci_importFen => '导入局面 (FEN)';
+
+  @override
+  String get ci_importFenDesc => '粘贴FEN字符串以从特定局面开始';
+
+  @override
+  String get ci_validate => '验证';
+
+  @override
+  String get ci_fenValid => 'FEN有效！局面将被导入。';
+
+  @override
+  String get ci_newGame => '新对局';
+
+  @override
+  String get ci_undo => '悔棋';
+
+  @override
+  String get ci_copyFen => '复制FEN';
+
+  @override
+  String get ci_exportPgn => '导出PGN';
+
+  @override
+  String get ci_exitGame => '退出游戏';
+
+  @override
+  String get ci_exitConfirm => '确定要退出吗？当前进度将会丢失。';
+
+  @override
+  String get ci_restartConfirm => '确定要重新开始吗？当前进度将会丢失。';
+
+  @override
+  String get ci_fenCopied => 'FEN已复制到剪贴板';
+
+  @override
+  String get ci_pgnCopied => 'PGN已复制到剪贴板';
+
+  @override
+  String get ci_copyPgn => '复制PGN';
+
+  @override
+  String get ci_moveHistory => '走棋记录';
+
+  @override
+  String get ci_noMovesYet => '暂无走棋';
+
+  @override
+  String get ci_preparing => '准备中...';
+
+  @override
+  String get ci_yourTurn => '你的回合';
+
+  @override
+  String get ci_aiTurn => 'AI思考中...';
+
+  @override
+  String get ci_youAreInCheck => '将军！请注意';
+
+  @override
+  String get ci_aiInCheck => 'AI被将军';
+
+  @override
+  String get ci_youWin => '你赢了！';
+
+  @override
+  String get ci_aiWins => 'AI获胜';
+
+  @override
+  String get ci_stalemate => '逼和 - 平局';
+
+  @override
+  String get ci_draw => '平局';
+
+  @override
+  String get ci_choosePromotion => '选择升变棋子';
+
+  @override
+  String get ci_thinking => '思考中...';
+
+  @override
+  String get ci_you => '你';
+
+  @override
+  String get ci_rule1Title => '目标';
+
+  @override
+  String get ci_rule1Desc => '将杀对方的王。当王被攻击且无法逃脱时，游戏结束。';
+
+  @override
+  String get ci_rule2Title => '移动';
+
+  @override
+  String get ci_rule2Desc => '点击棋子查看合法走法高亮显示。点击高亮格子进行移动。每种棋子走法不同。';
+
+  @override
+  String get ci_rule3Title => '特殊走法';
+
+  @override
+  String get ci_rule3Desc =>
+      '王车易位：王向车方向移动两格。吃过路兵：兵吃相邻刚走两步的兵。升变：兵到达底线可升变为后、车、象或马。';
+
+  @override
+  String get ci_rule4Title => '和棋条件';
+
+  @override
+  String get ci_rule4Desc => '逼和（无合法走法但未被将军）、50步规则（无吃子或兵移动）、三次重复局面或子力不足时判和。';
+
+  @override
+  String get ci_rule5Title => 'FEN与PGN';
+
+  @override
+  String get ci_rule5Desc => '使用FEN记谱法导入局面。通过菜单以PGN格式导出对局记录。';
+
+  @override
+  String get ci_pieceStyle => '棋子风格';
+
+  @override
+  String get ci_styleOutline => '空心';
+
+  @override
+  String get ci_styleFilled => '实心';
 }
