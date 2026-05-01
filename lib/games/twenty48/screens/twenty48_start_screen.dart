@@ -101,6 +101,14 @@ class _Twenty48StartScreenState extends ConsumerState<Twenty48StartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByGlm,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: textSecondaryColor,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.t48_gameDescription,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(

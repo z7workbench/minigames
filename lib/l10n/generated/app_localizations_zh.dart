@@ -1977,4 +1977,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sg_clearConfirm => '确定要清空该尺寸的所有记录吗？';
+
+  @override
+  String get createdByGlm => '由 GLM-5 + qwen3.5-plus 生成';
+
+  @override
+  String get createdByMinimax => '由 MiniMax-M2.7 生成';
+
+  @override
+  String get createdByMimo => '由 mimo-v2.5-pro 生成';
 }

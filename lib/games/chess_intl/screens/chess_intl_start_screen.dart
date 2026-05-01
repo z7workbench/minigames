@@ -269,6 +269,11 @@ class _ChessIntlStartScreenState extends ConsumerState<ChessIntlStartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByMimo,
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.ci_gameDescription,
           style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
         ),

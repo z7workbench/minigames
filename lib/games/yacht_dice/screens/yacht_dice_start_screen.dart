@@ -147,6 +147,13 @@ class _YachtDiceStartScreenState extends ConsumerState<YachtDiceStartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByGlm,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: textSecondaryColor,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.yd_gameDescription,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: textSecondaryColor,

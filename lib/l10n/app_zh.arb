@@ -2335,5 +2335,8 @@
     "sg_leaderboard": "排行榜",
     "sg_noRecords": "暂无记录。\n完成一次训练来创建你的第一条记录！",
     "sg_clearLeaderboard": "清空排行榜",
-    "sg_clearConfirm": "确定要清空该尺寸的所有记录吗？"
+    "sg_clearConfirm": "确定要清空该尺寸的所有记录吗？",
+    "createdByGlm": "由 GLM-5 + qwen3.5-plus 生成",
+    "createdByMinimax": "由 MiniMax-M2.7 生成",
+    "createdByMimo": "由 mimo-v2.5-pro 生成"
 }

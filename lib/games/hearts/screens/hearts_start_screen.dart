@@ -167,6 +167,12 @@ class _HeartsStartScreenState extends ConsumerState<HeartsStartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByGlm,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.hearts_description,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(fontSize: 14, color: context.themeTextSecondary),

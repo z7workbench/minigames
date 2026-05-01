@@ -2039,4 +2039,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sg_clearConfirm =>
       'Are you sure you want to clear all records for this grid size?';
+
+  @override
+  String get createdByGlm => 'Created by GLM-5 + qwen3.5-plus';
+
+  @override
+  String get createdByMinimax => 'Created by MiniMax-M2.7';
+
+  @override
+  String get createdByMimo => 'Created by mimo-v2.5-pro';
 }

@@ -70,6 +70,12 @@ class _DiceBattleStartScreenState extends ConsumerState<DiceBattleStartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByGlm,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.db_gameDescription,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(fontSize: 14, color: context.themeTextSecondary),

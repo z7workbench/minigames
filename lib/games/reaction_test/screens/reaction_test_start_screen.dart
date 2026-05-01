@@ -102,6 +102,13 @@ class _ReactionTestStartScreenState
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByMinimax,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: textSecondaryColor,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.rt_gameDescription,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: textSecondaryColor,

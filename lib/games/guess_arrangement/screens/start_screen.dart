@@ -129,12 +129,9 @@ class _GuessArrangementStartScreenState
         ),
         const SizedBox(height: 8),
         Text(
-          'Guess Arrangement',
+          l10n.createdByGlm,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
-          style: TextStyle(
-            fontSize: 16,
-            color: context.themeTextSecondary,
-          ),
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
         ),
         const SizedBox(height: 8),
         Text(

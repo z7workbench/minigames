@@ -154,6 +154,12 @@ class _HitAndBlowStartScreenState extends ConsumerState<HitAndBlowStartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByGlm,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.hnb_gameDescription,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(fontSize: 14, color: context.themeTextSecondary),

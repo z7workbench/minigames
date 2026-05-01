@@ -3817,6 +3817,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to clear all records for this grid size?'**
   String get sg_clearConfirm;
+
+  /// Creator credit for games built by GLM-5 + qwen3.5-plus
+  ///
+  /// In en, this message translates to:
+  /// **'Created by GLM-5 + qwen3.5-plus'**
+  String get createdByGlm;
+
+  /// Creator credit for games built by MiniMax-M2.7
+  ///
+  /// In en, this message translates to:
+  /// **'Created by MiniMax-M2.7'**
+  String get createdByMinimax;
+
+  /// Creator credit for games built by mimo-v2.5-pro
+  ///
+  /// In en, this message translates to:
+  /// **'Created by mimo-v2.5-pro'**
+  String get createdByMimo;
 }
 
 class _AppLocalizationsDelegate

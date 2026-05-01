@@ -162,6 +162,12 @@ class _BluffBarStartScreenState extends ConsumerState<BluffBarStartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
+          l10n.createdByGlm,
+          textAlign: isLandscape ? TextAlign.start : TextAlign.center,
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
+        ),
+        const SizedBox(height: 8),
+        Text(
           l10n.bb_gameDescription,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(fontSize: 14, color: context.themeTextSecondary),
