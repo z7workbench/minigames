@@ -14,6 +14,7 @@ enum GameType {
   reactionTest,
   aimTest,
   chessIntl,
+  schulteGrid,
 }
 
 extension GameTypeExtension on GameType {
@@ -42,6 +43,8 @@ extension GameTypeExtension on GameType {
         return 'Aim Test';
       case GameType.chessIntl:
         return 'Chess';
+      case GameType.schulteGrid:
+        return 'Schulte Grid';
     }
   }
 
@@ -70,6 +73,8 @@ extension GameTypeExtension on GameType {
         return Icons.gps_fixed;
       case GameType.chessIntl:
         return Icons.grid_on;
+      case GameType.schulteGrid:
+        return Icons.grid_4x4;
     }
   }
 
@@ -109,6 +114,8 @@ extension GameTypeExtension on GameType {
         return '/aim-test';
       case GameType.chessIntl:
         return '/chess-intl';
+      case GameType.schulteGrid:
+        return '/schulte-grid';
     }
   }
 
@@ -137,6 +144,8 @@ extension GameTypeExtension on GameType {
         return DateTime(2026, 4, 26);
       case GameType.chessIntl:
         return DateTime(2026, 4, 29);
+      case GameType.schulteGrid:
+        return DateTime(2026, 5, 1);
     }
   }
 

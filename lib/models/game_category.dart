@@ -48,7 +48,7 @@ extension GameCategoryExtension on GameCategory {
       case GameCategory.board:
         return [GameType.mancala, GameType.chessIntl];
       case GameCategory.reaction:
-        return [GameType.reactionTest, GameType.aimTest];
+        return [GameType.reactionTest, GameType.aimTest, GameType.schulteGrid];
       case GameCategory.casual:
         return [GameType.hitAndBlow, GameType.twenty48];
     }
@@ -90,6 +90,7 @@ extension GameTypeCategoryExtension on GameType {
         return GameCategory.board;
       case GameType.reactionTest:
       case GameType.aimTest:
+      case GameType.schulteGrid:
         return GameCategory.reaction;
       case GameType.hitAndBlow:
       case GameType.twenty48:

@@ -21,6 +21,7 @@ import '../../games/bluff_bar/screens/bluff_bar_start_screen.dart';
 import '../../games/reaction_test/screens/reaction_test_start_screen.dart';
 import '../../games/aim_test/screens/aim_test_start_screen.dart';
 import '../../games/chess_intl/screens/chess_intl_start_screen.dart';
+import '../../games/schulte_grid/screens/schulte_grid_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -109,6 +110,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           MaterialPageRoute(builder: (context) => const ChessIntlStartScreen()),
         );
         break;
+      case GameType.schulteGrid:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SchulteGridStartScreen()),
+        );
+        break;
     }
   }
 
@@ -145,6 +152,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.game_aim_test;
       case GameType.chessIntl:
         return l10n.ci_gameTitle;
+      case GameType.schulteGrid:
+        return l10n.sg_gameTitle;
     }
   }
 
@@ -173,6 +182,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.at_gameDescription;
       case GameType.chessIntl:
         return l10n.ci_gameDescription;
+      case GameType.schulteGrid:
+        return l10n.sg_gameDescription;
     }
   }
 
@@ -304,8 +315,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final allGames = GameType.values.toList();
     allGames.sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
     
-    // Recent releases (top 2 most recent) - reactionTest and aimTest
-    final recentGames = [GameType.reactionTest, GameType.aimTest];
+    // Recent releases (top 2 most recent) - schulteGrid and chessIntl
+    final recentGames = [GameType.schulteGrid, GameType.chessIntl];
     
     // All other games (excluding only recent releases, keeping favorites)
     final otherGames = allGames.where((g) => !recentGames.contains(g)).toList();
@@ -362,8 +373,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// Build the recent releases section
   Widget _buildRecentReleasesSection(AppLocalizations l10n) {
     final recentGames = [
-      GameType.reactionTest,
-      GameType.aimTest,
+      GameType.schulteGrid,
+      GameType.chessIntl,
     ];
     
     return Container(
