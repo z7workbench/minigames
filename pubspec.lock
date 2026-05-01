@@ -377,6 +377,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.12.0"
+  flame_forge2d:
+    dependency: "direct main"
+    description:
+      name: flame_forge2d
+      sha256: "3c5a841cdce6d7620b274b055db39ac1a09ef4ad7aad48aa324ce38d44d60b22"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.19.2+5"
+  flame_riverpod:
+    dependency: "direct main"
+    description:
+      name: flame_riverpod
+      sha256: "38922ea1c91451e229185c931747a07e50fe872a8c1cd2c80196aebbbcdfcdc8"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.4.21"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -413,6 +429,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  forge2d:
+    dependency: "direct main"
+    description:
+      name: forge2d
+      sha256: "0f63d177f2e137a5007b879fda4076d0b81de065fcd72056c6fc896c82758bb7"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.14.2+1"
   freezed_annotation:
     dependency: transitive
     description:

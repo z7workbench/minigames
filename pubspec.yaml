@@ -18,6 +18,9 @@ dependencies:
   # Game engine
   flame: ^1.19.0
   flame_audio: ^2.10.0
+  flame_forge2d: ^0.19.2
+  flame_riverpod: ^5.4.21
+  forge2d: ^0.14.0
 
   # State management
   flutter_riverpod: ^2.5.1

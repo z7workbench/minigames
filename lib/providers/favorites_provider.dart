@@ -13,7 +13,11 @@ class Favorites extends _$Favorites {
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     final list = prefs.getStringList('favorites') ?? [];
-    state = list.map((e) => GameType.values[int.parse(e)]).toSet();
+    state = list
+        .map((e) => int.parse(e))
+        .where((index) => index < GameType.values.length)
+        .map((index) => GameType.values[index])
+        .toSet();
   }
 
   Future<void> toggleFavorite(GameType gameType) async {

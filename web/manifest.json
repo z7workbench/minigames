@@ -6,7 +6,7 @@
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
     "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "orientation": "any",  // FIX #9: Allow all orientations - individual games will set their own preferred orientation
     "prefer_related_applications": false,
     "icons": [
         {
