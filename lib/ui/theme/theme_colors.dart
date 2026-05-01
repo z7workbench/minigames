@@ -337,7 +337,9 @@ class ThemeColors {
               ? WoodenColors.darkDivider
               : WoodenColors.lightDivider,
           shadow: isDark ? WoodenColors.darkShadow : WoodenColors.lightShadow,
-          accent: WoodenColors.accentAmber,
+          accent: isDark
+              ? WoodenColors.accentAmber
+              : WoodenColors.accentBronze,
           accentSecondary: WoodenColors.accentCopper,
           error: isDark ? WoodenColors.darkError : WoodenColors.lightError,
           success: isDark
