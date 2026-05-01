@@ -351,42 +351,62 @@ class _ThemeAndColorSchemeSetting extends ConsumerWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: context.themeBorder, width: 1.5),
       ),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: _ColorSchemeOption(
-              context: context,
-              label: l10n.woodenScheme,
-              icon: Icons.table_restaurant,
-              isSelected: colorScheme == ColorSchemeType.wooden,
-              onTap: () => ref
-                  .read(colorSchemeNotifierProvider.notifier)
-                  .setColorScheme(ColorSchemeType.wooden),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: _ColorSchemeOption(
+                  context: context,
+                  label: l10n.starlightScheme,
+                  icon: Icons.auto_awesome,
+                  isSelected: colorScheme == ColorSchemeType.starlight,
+                  onTap: () => ref
+                      .read(colorSchemeNotifierProvider.notifier)
+                      .setColorScheme(ColorSchemeType.starlight),
+                ),
+              ),
+              Container(width: 1, height: 40, color: context.themeDivider),
+              Expanded(
+                child: _ColorSchemeOption(
+                  context: context,
+                  label: l10n.woodenScheme,
+                  icon: Icons.table_restaurant,
+                  isSelected: colorScheme == ColorSchemeType.wooden,
+                  onTap: () => ref
+                      .read(colorSchemeNotifierProvider.notifier)
+                      .setColorScheme(ColorSchemeType.wooden),
+                ),
+              ),
+            ],
           ),
-          Container(width: 1, height: 40, color: context.themeDivider),
-          Expanded(
-            child: _ColorSchemeOption(
-              context: context,
-              label: l10n.starlightScheme,
-              icon: Icons.auto_awesome,
-              isSelected: colorScheme == ColorSchemeType.starlight,
-              onTap: () => ref
-                  .read(colorSchemeNotifierProvider.notifier)
-                  .setColorScheme(ColorSchemeType.starlight),
-            ),
-          ),
-          Container(width: 1, height: 40, color: context.themeDivider),
-          Expanded(
-            child: _ColorSchemeOption(
-              context: context,
-              label: l10n.forestScheme,
-              icon: Icons.forest,
-              isSelected: colorScheme == ColorSchemeType.forest,
-              onTap: () => ref
-                  .read(colorSchemeNotifierProvider.notifier)
-                  .setColorScheme(ColorSchemeType.forest),
-            ),
+          Container(height: 1, color: context.themeDivider),
+          Row(
+            children: [
+              Expanded(
+                child: _ColorSchemeOption(
+                  context: context,
+                  label: l10n.forestScheme,
+                  icon: Icons.forest,
+                  isSelected: colorScheme == ColorSchemeType.forest,
+                  onTap: () => ref
+                      .read(colorSchemeNotifierProvider.notifier)
+                      .setColorScheme(ColorSchemeType.forest),
+                ),
+              ),
+              Container(width: 1, height: 40, color: context.themeDivider),
+              Expanded(
+                child: _ColorSchemeOption(
+                  context: context,
+                  label: l10n.volcanoScheme,
+                  icon: Icons.local_fire_department,
+                  isSelected: colorScheme == ColorSchemeType.volcano,
+                  onTap: () => ref
+                      .read(colorSchemeNotifierProvider.notifier)
+                      .setColorScheme(ColorSchemeType.volcano),
+                ),
+              ),
+            ],
           ),
         ],
       ),

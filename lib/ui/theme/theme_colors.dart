@@ -4,6 +4,7 @@ import 'theme_provider.dart';
 import 'wooden_colors.dart';
 import 'starlight_colors.dart';
 import 'forest_colors.dart';
+import 'volcano_colors.dart';
 
 /// Extension to easily access theme-aware colors from BuildContext
 extension ThemeColorsExtension on BuildContext {
@@ -28,6 +29,11 @@ extension ThemeColorsExtension on BuildContext {
       if (primaryColor.toARGB32() == ForestColors.lightPrimary.toARGB32() ||
           primaryColor.toARGB32() == ForestColors.darkPrimary.toARGB32()) {
         return ColorSchemeType.forest;
+      }
+      // Check Volcano
+      if (primaryColor.toARGB32() == VolcanoColors.lightPrimary.toARGB32() ||
+          primaryColor.toARGB32() == VolcanoColors.darkPrimary.toARGB32()) {
+        return ColorSchemeType.volcano;
       }
       return ColorSchemeType.wooden;
     }
@@ -66,7 +72,7 @@ extension ThemeColorsExtension on BuildContext {
   /// Get theme-aware shadow color
   Color get themeShadow => Theme.of(this).colorScheme.shadow;
 
-  /// Get theme-aware accent color (amber for wooden, star for starlight, emerald for forest)
+  /// Get theme-aware accent color
   Color get themeAccent {
     final isDark = isDarkMode;
     switch (colorSchemeType) {
@@ -74,8 +80,9 @@ extension ThemeColorsExtension on BuildContext {
         return StarlightColors.accentStar;
       case ColorSchemeType.forest:
         return ForestColors.accentEmerald;
+      case ColorSchemeType.volcano:
+        return VolcanoColors.accentLava;
       case ColorSchemeType.wooden:
-        // Wooden: use bronze in light mode for better contrast, amber in dark mode
         return isDark ? WoodenColors.accentAmber : WoodenColors.accentBronze;
     }
   }
@@ -88,8 +95,9 @@ extension ThemeColorsExtension on BuildContext {
         return StarlightColors.accentNebula;
       case ColorSchemeType.forest:
         return ForestColors.accentMoss;
+      case ColorSchemeType.volcano:
+        return VolcanoColors.accentEmber;
       case ColorSchemeType.wooden:
-        // Wooden: use copper in light mode, amber secondary in dark mode
         return isDark ? WoodenColors.accentCopper : WoodenColors.accentCopper;
     }
   }
@@ -102,6 +110,8 @@ extension ThemeColorsExtension on BuildContext {
         return StarlightColors.darkSuccess;
       case ColorSchemeType.forest:
         return isDark ? ForestColors.darkSuccess : ForestColors.lightSuccess;
+      case ColorSchemeType.volcano:
+        return isDark ? VolcanoColors.darkSuccess : VolcanoColors.lightSuccess;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkSuccess : WoodenColors.lightSuccess;
     }
@@ -115,6 +125,8 @@ extension ThemeColorsExtension on BuildContext {
         return StarlightColors.darkError;
       case ColorSchemeType.forest:
         return isDark ? ForestColors.darkError : ForestColors.lightError;
+      case ColorSchemeType.volcano:
+        return isDark ? VolcanoColors.darkError : VolcanoColors.lightError;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkError : WoodenColors.lightError;
     }
@@ -128,6 +140,8 @@ extension ThemeColorsExtension on BuildContext {
         return StarlightColors.darkWarning;
       case ColorSchemeType.forest:
         return isDark ? ForestColors.darkWarning : ForestColors.lightWarning;
+      case ColorSchemeType.volcano:
+        return isDark ? VolcanoColors.darkWarning : VolcanoColors.lightWarning;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkWarning : WoodenColors.lightWarning;
     }
@@ -143,6 +157,10 @@ extension ThemeColorsExtension on BuildContext {
             : StarlightColors.lightDisabled;
       case ColorSchemeType.forest:
         return isDark ? ForestColors.darkDisabled : ForestColors.lightDisabled;
+      case ColorSchemeType.volcano:
+        return isDark
+            ? VolcanoColors.darkDisabled
+            : VolcanoColors.lightDisabled;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
     }
@@ -161,6 +179,8 @@ extension ThemeColorsExtension on BuildContext {
         return isDark
             ? ForestColors.darkOnPrimary
             : ForestColors.lightOnPrimary;
+      case ColorSchemeType.volcano:
+        return Colors.white;
       case ColorSchemeType.wooden:
         return Colors.black;
     }
@@ -171,43 +191,34 @@ extension ThemeColorsExtension on BuildContext {
     final isDark = isDarkMode;
     switch (colorSchemeType) {
       case ColorSchemeType.starlight:
-        // Starlight: use bright purple for selection
         return isDark
-            ? StarlightColors.darkPrimary.withAlpha(
-                200,
-              ) // Brighter in dark mode
-            : StarlightColors.lightPrimary.withAlpha(
-                150,
-              ); // Visible in light mode
+            ? StarlightColors.darkPrimary.withAlpha(200)
+            : StarlightColors.lightPrimary.withAlpha(150);
       case ColorSchemeType.forest:
-        // Forest: use emerald for selection
         return isDark
             ? ForestColors.accentEmerald.withAlpha(200)
             : ForestColors.lightPrimary.withAlpha(150);
-      case ColorSchemeType.wooden:
-        // Wooden: use amber/copper for selection
+      case ColorSchemeType.volcano:
         return isDark
-            ? WoodenColors.accentAmber.withAlpha(
-                200,
-              ) // Bright amber in dark mode
-            : WoodenColors.accentCopper.withAlpha(
-                180,
-              ); // Copper in light mode for contrast
+            ? VolcanoColors.accentLava.withAlpha(200)
+            : VolcanoColors.accentMagma.withAlpha(180);
+      case ColorSchemeType.wooden:
+        return isDark
+            ? WoodenColors.accentAmber.withAlpha(200)
+            : WoodenColors.accentCopper.withAlpha(180);
     }
   }
 
   /// Get theme-aware pattern/decorative color (for card back patterns, etc.)
-  /// Wooden: golden/copper tones, Starlight: white/light tones, Forest: moss/spring tones
   Color get themePattern {
     switch (colorSchemeType) {
       case ColorSchemeType.starlight:
-        // Starlight: white pattern for contrast against purple background
         return Colors.white.withAlpha(180);
       case ColorSchemeType.forest:
-        // Forest: moss/spring pattern against green background
         return ForestColors.accentMoss.withAlpha(150);
+      case ColorSchemeType.volcano:
+        return VolcanoColors.accentEmber.withAlpha(150);
       case ColorSchemeType.wooden:
-        // Wooden: golden/copper pattern against brown background
         return WoodenColors.accentCopper.withAlpha(150);
     }
   }
@@ -310,6 +321,51 @@ class ThemeColors {
           disabled: isDark
               ? ForestColors.darkDisabled
               : ForestColors.lightDisabled,
+        );
+      case ColorSchemeType.volcano:
+        return ThemeColorSet(
+          primary: isDark
+              ? VolcanoColors.darkPrimary
+              : VolcanoColors.lightPrimary,
+          secondary: isDark
+              ? VolcanoColors.darkSecondary
+              : VolcanoColors.lightSecondary,
+          background: isDark
+              ? VolcanoColors.darkBackground
+              : VolcanoColors.lightBackground,
+          surface: isDark
+              ? VolcanoColors.darkSurface
+              : VolcanoColors.lightSurface,
+          card: isDark ? VolcanoColors.darkCard : VolcanoColors.lightCard,
+          textPrimary: isDark
+              ? VolcanoColors.darkTextPrimary
+              : VolcanoColors.lightTextPrimary,
+          textSecondary: isDark
+              ? VolcanoColors.darkTextSecondary
+              : VolcanoColors.lightTextSecondary,
+          border:
+              isDark ? VolcanoColors.darkBorder : VolcanoColors.lightBorder,
+          divider: isDark
+              ? VolcanoColors.darkDivider
+              : VolcanoColors.lightDivider,
+          shadow:
+              isDark ? VolcanoColors.darkShadow : VolcanoColors.lightShadow,
+          accent: VolcanoColors.accentLava,
+          accentSecondary: VolcanoColors.accentEmber,
+          error: isDark ? VolcanoColors.darkError : VolcanoColors.lightError,
+          success: isDark
+              ? VolcanoColors.darkSuccess
+              : VolcanoColors.lightSuccess,
+          warning: isDark
+              ? VolcanoColors.darkWarning
+              : VolcanoColors.lightWarning,
+          onPrimary: isDark
+              ? VolcanoColors.darkOnPrimary
+              : VolcanoColors.lightOnPrimary,
+          pattern: VolcanoColors.accentEmber.withAlpha(150),
+          disabled: isDark
+              ? VolcanoColors.darkDisabled
+              : VolcanoColors.lightDisabled,
         );
       case ColorSchemeType.wooden:
         return ThemeColorSet(

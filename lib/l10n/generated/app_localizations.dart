@@ -1742,6 +1742,12 @@ abstract class AppLocalizations {
   /// **'Forest'**
   String get forestScheme;
 
+  /// Volcano color scheme option
+  ///
+  /// In en, this message translates to:
+  /// **'Volcano'**
+  String get volcanoScheme;
+
   /// Dice Battle game title
   ///
   /// In en, this message translates to:

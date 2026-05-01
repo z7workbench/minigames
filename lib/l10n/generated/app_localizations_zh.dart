@@ -871,6 +871,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get forestScheme => '森林风格';
 
   @override
+  String get volcanoScheme => '火山风格';
+
+  @override
   String get game_dice_battle => '骰子对战';
 
   @override

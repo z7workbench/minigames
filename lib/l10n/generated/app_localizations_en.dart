@@ -894,6 +894,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forestScheme => 'Forest';
 
   @override
+  String get volcanoScheme => 'Volcano';
+
+  @override
   String get game_dice_battle => 'Dice Battle';
 
   @override
