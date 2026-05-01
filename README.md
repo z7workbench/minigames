@@ -36,6 +36,7 @@
 | **Reaction Test** | ✅ Complete | - | Leaderboard |
 | **Aim Test** | ✅ Complete | - | Leaderboard |
 | **Chess** | ✅ Complete | Easy/Hard | Records |
+| **Schulte Grid** | ✅ Complete | - | Leaderboard (per size) |
 
 ---
 
@@ -285,6 +286,29 @@ Full-featured chess implementation with complete rules engine, two AI difficulty
 
 ---
 
+### Schulte Grid
+
+Focus training tool using the classic Schulte Grid method.
+
+**Description:**
+Tap numbers from 1 to N in ascending order as fast as you can on a randomly shuffled grid. The timer starts when you tap 1 and stops when you tap the last number. Train your concentration and peripheral vision!
+
+**Grid Sizes:**
+- **4×4**: 16 numbers (1-16)
+- **5×5**: 25 numbers (1-25)
+- **6×6**: 36 numbers (1-36)
+
+**Features:**
+- Millisecond-precision timer (MM:SS.ms format)
+- Wrong tap visual feedback (red flash) without resetting timer
+- Independent leaderboard per grid size (top 10 records)
+- New personal best detection
+- Timer pauses on app backgrounding, resumes on return
+- Portrait and landscape layouts
+- Responsive grid that adapts to screen size
+
+---
+
 ## Screenshots
 
 ### Available Screenshots
@@ -440,7 +464,8 @@ lib/
 │   ├── dice_battle/           # Dice combat RPG
 │   ├── reaction_test/         # Reaction speed test
 │   ├── aim_test/              # Aiming accuracy test
-│   └── chess_intl/            # International chess
+│   ├── chess_intl/            # International chess
+│   └── schulte_grid/          # Schulte Grid focus training
 │
 ├── ui/                        # Shared UI layer
 │   ├── screens/               # App screens (home, settings)
