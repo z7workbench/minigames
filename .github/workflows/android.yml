@@ -12,6 +12,8 @@ jobs:
           java-package: jdk
           architecture: x64
           distribution: 'jetbrains'
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
