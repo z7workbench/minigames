@@ -246,6 +246,46 @@
       }
     }
   },
+  "hnb_start_game": "开始游戏",
+  "@hnb_start_game": {
+    "description": "Hit & Blow start game button"
+  },
+  "hnb_how_to_play": "游戏规则",
+  "@hnb_how_to_play": {
+    "description": "Hit & Blow how to play button"
+  },
+  "hnb_rule1_title": "目标",
+  "@hnb_rule1_title": {
+    "description": "Hit & Blow rule 1 title"
+  },
+  "hnb_rule1_desc": "猜出隐藏的数字序列。每个数字唯一，位置很重要。",
+  "@hnb_rule1_desc": {
+    "description": "Hit & Blow rule 1 description"
+  },
+  "hnb_rule2_title": "命中（Hit）",
+  "@hnb_rule2_title": {
+    "description": "Hit & Blow rule 2 title"
+  },
+  "hnb_rule2_desc": "数字正确且位置正确，称为一次命中。",
+  "@hnb_rule2_desc": {
+    "description": "Hit & Blow rule 2 description"
+  },
+  "hnb_rule3_title": "擦伤（Blow）",
+  "@hnb_rule3_title": {
+    "description": "Hit & Blow rule 3 title"
+  },
+  "hnb_rule3_desc": "数字存在于目标中但位置错误，称为一次擦伤。",
+  "@hnb_rule3_desc": {
+    "description": "Hit & Blow rule 3 description"
+  },
+  "hnb_rule4_title": "胜利条件",
+  "@hnb_rule4_title": {
+    "description": "Hit & Blow rule 4 title"
+  },
+  "hnb_rule4_desc": "全部命中即可获胜！你有10次尝试机会来破解密码。",
+  "@hnb_rule4_desc": {
+    "description": "Hit & Blow rule 4 description"
+  },
 
   "game_yacht_dice": "游艇骰子",
   "@game_yacht_dice": {

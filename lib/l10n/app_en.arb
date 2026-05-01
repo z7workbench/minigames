@@ -246,6 +246,46 @@
       }
     }
   },
+  "hnb_start_game": "Start Game",
+  "@hnb_start_game": {
+    "description": "Hit & Blow start game button"
+  },
+  "hnb_how_to_play": "How to Play",
+  "@hnb_how_to_play": {
+    "description": "Hit & Blow how to play button"
+  },
+  "hnb_rule1_title": "Goal",
+  "@hnb_rule1_title": {
+    "description": "Hit & Blow rule 1 title"
+  },
+  "hnb_rule1_desc": "Guess the hidden number sequence. Each digit is unique and its position matters.",
+  "@hnb_rule1_desc": {
+    "description": "Hit & Blow rule 1 description"
+  },
+  "hnb_rule2_title": "Hit",
+  "@hnb_rule2_title": {
+    "description": "Hit & Blow rule 2 title"
+  },
+  "hnb_rule2_desc": "A Hit means a digit is correct AND in the right position.",
+  "@hnb_rule2_desc": {
+    "description": "Hit & Blow rule 2 description"
+  },
+  "hnb_rule3_title": "Blow",
+  "@hnb_rule3_title": {
+    "description": "Hit & Blow rule 3 title"
+  },
+  "hnb_rule3_desc": "A Blow means the digit exists in the target but is in the wrong position.",
+  "@hnb_rule3_desc": {
+    "description": "Hit & Blow rule 3 description"
+  },
+  "hnb_rule4_title": "Winning",
+  "@hnb_rule4_title": {
+    "description": "Hit & Blow rule 4 title"
+  },
+  "hnb_rule4_desc": "Get all Hits to win! You have 10 attempts to crack the code.",
+  "@hnb_rule4_desc": {
+    "description": "Hit & Blow rule 4 description"
+  },
 
   "game_yacht_dice": "Yacht Dice",
   "@game_yacht_dice": {

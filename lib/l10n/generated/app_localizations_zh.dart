@@ -184,6 +184,36 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get hnb_start_game => '开始游戏';
+
+  @override
+  String get hnb_how_to_play => '游戏规则';
+
+  @override
+  String get hnb_rule1_title => '目标';
+
+  @override
+  String get hnb_rule1_desc => '猜出隐藏的数字序列。每个数字唯一，位置很重要。';
+
+  @override
+  String get hnb_rule2_title => '命中（Hit）';
+
+  @override
+  String get hnb_rule2_desc => '数字正确且位置正确，称为一次命中。';
+
+  @override
+  String get hnb_rule3_title => '擦伤（Blow）';
+
+  @override
+  String get hnb_rule3_desc => '数字存在于目标中但位置错误，称为一次擦伤。';
+
+  @override
+  String get hnb_rule4_title => '胜利条件';
+
+  @override
+  String get hnb_rule4_desc => '全部命中即可获胜！你有10次尝试机会来破解密码。';
+
+  @override
   String get game_yacht_dice => '游艇骰子';
 
   @override

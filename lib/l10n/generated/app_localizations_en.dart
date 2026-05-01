@@ -186,6 +186,40 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get hnb_start_game => 'Start Game';
+
+  @override
+  String get hnb_how_to_play => 'How to Play';
+
+  @override
+  String get hnb_rule1_title => 'Goal';
+
+  @override
+  String get hnb_rule1_desc =>
+      'Guess the hidden number sequence. Each digit is unique and its position matters.';
+
+  @override
+  String get hnb_rule2_title => 'Hit';
+
+  @override
+  String get hnb_rule2_desc =>
+      'A Hit means a digit is correct AND in the right position.';
+
+  @override
+  String get hnb_rule3_title => 'Blow';
+
+  @override
+  String get hnb_rule3_desc =>
+      'A Blow means the digit exists in the target but is in the wrong position.';
+
+  @override
+  String get hnb_rule4_title => 'Winning';
+
+  @override
+  String get hnb_rule4_desc =>
+      'Get all Hits to win! You have 10 attempts to crack the code.';
+
+  @override
   String get game_yacht_dice => 'Yacht Dice';
 
   @override

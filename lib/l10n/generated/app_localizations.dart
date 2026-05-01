@@ -440,6 +440,66 @@ abstract class AppLocalizations {
   /// **'Attempts: {current} / {max}'**
   String hnb_attemptsFormat(int current, int max);
 
+  /// Hit & Blow start game button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Game'**
+  String get hnb_start_game;
+
+  /// Hit & Blow how to play button
+  ///
+  /// In en, this message translates to:
+  /// **'How to Play'**
+  String get hnb_how_to_play;
+
+  /// Hit & Blow rule 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'Goal'**
+  String get hnb_rule1_title;
+
+  /// Hit & Blow rule 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Guess the hidden number sequence. Each digit is unique and its position matters.'**
+  String get hnb_rule1_desc;
+
+  /// Hit & Blow rule 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'Hit'**
+  String get hnb_rule2_title;
+
+  /// Hit & Blow rule 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'A Hit means a digit is correct AND in the right position.'**
+  String get hnb_rule2_desc;
+
+  /// Hit & Blow rule 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'Blow'**
+  String get hnb_rule3_title;
+
+  /// Hit & Blow rule 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'A Blow means the digit exists in the target but is in the wrong position.'**
+  String get hnb_rule3_desc;
+
+  /// Hit & Blow rule 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'Winning'**
+  String get hnb_rule4_title;
+
+  /// Hit & Blow rule 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'Get all Hits to win! You have 10 attempts to crack the code.'**
+  String get hnb_rule4_desc;
+
   /// Yacht Dice game title
   ///
   /// In en, this message translates to:

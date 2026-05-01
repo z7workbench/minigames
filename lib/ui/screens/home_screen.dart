@@ -10,7 +10,7 @@ import '../theme/theme_colors.dart';
 import '../widgets/game_card.dart';
 import '../widgets/wooden_app_bar.dart';
 import 'settings_screen.dart';
-import '../../games/hit_and_blow/hit_and_blow_screen.dart';
+import '../../games/hit_and_blow/screens/hit_and_blow_start_screen.dart';
 import '../../games/yacht_dice/screens/yacht_dice_start_screen.dart';
 import '../../games/guess_arrangement/screens/start_screen.dart';
 import '../../games/twenty48/screens/twenty48_start_screen.dart';
@@ -43,7 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       case GameType.hitAndBlow:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HitAndBlowScreen()),
+          MaterialPageRoute(builder: (context) => const HitAndBlowStartScreen()),
         );
         break;
       case GameType.yachtDice:

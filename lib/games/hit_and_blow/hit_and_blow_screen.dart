@@ -9,7 +9,9 @@ import 'package:minigames/l10n/generated/app_localizations.dart';
 import 'package:minigames/ui/theme/theme_colors.dart';
 
 class HitAndBlowScreen extends ConsumerStatefulWidget {
-  const HitAndBlowScreen({super.key});
+  final Difficulty difficulty;
+
+  const HitAndBlowScreen({super.key, required this.difficulty});
 
   @override
   ConsumerState<HitAndBlowScreen> createState() => _HitAndBlowScreenState();
@@ -22,8 +24,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
   @override
   void initState() {
     super.initState();
-    currentDifficulty = Difficulty.easy;
-    // Auto-start the game when entering the screen
+    currentDifficulty = widget.difficulty;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _startGame(currentDifficulty);
     });
@@ -38,7 +39,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
   }
 
   void _selectNumber(int number) {
-    final state = ref.watch(hitAndBlowStateProviderProvider);
+    final state = ref.read(hitAndBlowStateProviderProvider);
     final targetLength = currentDifficulty == Difficulty.easy ? 4 : 6;
 
     if (state.status != GameStatus.playing) return;
@@ -58,7 +59,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
   }
 
   void _submitGuess() {
-    final state = ref.watch(hitAndBlowStateProviderProvider);
+    final state = ref.read(hitAndBlowStateProviderProvider);
     if (state.status != GameStatus.playing) return;
 
     final targetLength = currentDifficulty == Difficulty.easy ? 4 : 6;
@@ -84,7 +85,8 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
           _startGame(currentDifficulty);
         },
         onGoHome: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(); // Dismiss dialog
+          Navigator.of(context).pop(); // Return to start screen
           Navigator.of(context).pop(); // Return to home screen
         },
       ),
@@ -119,24 +121,6 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
             Navigator.of(context).pop();
           },
         ),
-        actions: [
-          PopupMenuButton<Difficulty>(
-            icon: const Icon(Icons.settings),
-            onSelected: (difficulty) {
-              _startGame(difficulty);
-            },
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: Difficulty.easy,
-                child: Text(localization.hnb_easyMode),
-              ),
-              PopupMenuItem(
-                value: Difficulty.hard,
-                child: Text(localization.hnb_hardMode),
-              ),
-            ],
-          ),
-        ],
       ),
       body: SafeArea(
         child: Padding(
