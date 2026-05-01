@@ -2272,5 +2272,28 @@
     "ci_rule5Desc": "使用FEN记谱法导入局面。通过菜单以PGN格式导出对局记录。",
     "ci_pieceStyle": "棋子风格",
     "ci_styleOutline": "空心",
-    "ci_styleFilled": "实心"
+    "ci_styleFilled": "实心",
+
+    "sg_gameTitle": "舒尔特方格",
+    "sg_gameDescription": "训练专注力！按1到N的顺序尽快点击数字。",
+    "sg_instructions": "选择网格大小开始训练。按1到N的升序点击数字。点击1时开始计时。",
+    "sg_sizeLabel": "{size}x{size} 方格（{total}个数字）",
+    "@sg_sizeLabel": {
+      "description": "Grid size label with total numbers",
+      "placeholders": {
+        "size": { "type": "int" },
+        "total": { "type": "int" }
+      }
+    },
+    "sg_bestTime": "最佳",
+    "sg_noRecord": "暂无记录",
+    "sg_tapToStart": "点击1开始计时",
+    "sg_paused": "已暂停",
+    "sg_next": "下一个",
+    "sg_completed": "完成！",
+    "sg_newBest": "新纪录！",
+    "sg_leaderboard": "排行榜",
+    "sg_noRecords": "暂无记录。\n完成一次训练来创建你的第一条记录！",
+    "sg_clearLeaderboard": "清空排行榜",
+    "sg_clearConfirm": "确定要清空该尺寸的所有记录吗？"
 }

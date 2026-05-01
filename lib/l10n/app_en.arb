@@ -2424,5 +2424,70 @@
     "ci_styleFilled": "Filled",
     "@ci_styleFilled": {
       "description": "Filled piece style (all pieces use filled characters)"
+    },
+
+    "sg_gameTitle": "Schulte Grid",
+    "@sg_gameTitle": {
+      "description": "Schulte Grid game title"
+    },
+    "sg_gameDescription": "Train your focus! Tap numbers 1 to N in order as fast as you can.",
+    "@sg_gameDescription": {
+      "description": "Schulte Grid game description"
+    },
+    "sg_instructions": "Choose a grid size to start. Tap numbers from 1 to N in ascending order. The timer starts when you tap 1.",
+    "@sg_instructions": {
+      "description": "Schulte Grid game instructions"
+    },
+    "sg_sizeLabel": "{size}x{size} Grid ({total} numbers)",
+    "@sg_sizeLabel": {
+      "description": "Grid size label with total numbers",
+      "placeholders": {
+        "size": { "type": "int" },
+        "total": { "type": "int" }
+      }
+    },
+    "sg_bestTime": "Best",
+    "@sg_bestTime": {
+      "description": "Best time label on start screen"
+    },
+    "sg_noRecord": "No record yet",
+    "@sg_noRecord": {
+      "description": "No record label on start screen"
+    },
+    "sg_tapToStart": "Tap 1 to start the timer",
+    "@sg_tapToStart": {
+      "description": "Instruction to tap first number"
+    },
+    "sg_paused": "Paused",
+    "@sg_paused": {
+      "description": "Timer paused indicator"
+    },
+    "sg_next": "Next",
+    "@sg_next": {
+      "description": "Next number to tap label"
+    },
+    "sg_completed": "Completed!",
+    "@sg_completed": {
+      "description": "Training completed dialog title"
+    },
+    "sg_newBest": "New Personal Best!",
+    "@sg_newBest": {
+      "description": "New personal best record badge"
+    },
+    "sg_leaderboard": "Leaderboard",
+    "@sg_leaderboard": {
+      "description": "Schulte Grid leaderboard title"
+    },
+    "sg_noRecords": "No records yet.\nComplete a training to set your first record!",
+    "@sg_noRecords": {
+      "description": "Empty leaderboard message"
+    },
+    "sg_clearLeaderboard": "Clear Leaderboard",
+    "@sg_clearLeaderboard": {
+      "description": "Clear leaderboard button"
+    },
+    "sg_clearConfirm": "Are you sure you want to clear all records for this grid size?",
+    "@sg_clearConfirm": {
+      "description": "Clear leaderboard confirmation message"
     }
 }

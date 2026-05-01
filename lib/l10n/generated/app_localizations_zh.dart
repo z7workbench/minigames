@@ -1900,4 +1900,51 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ci_styleFilled => '实心';
+
+  @override
+  String get sg_gameTitle => '舒尔特方格';
+
+  @override
+  String get sg_gameDescription => '训练专注力！按1到N的顺序尽快点击数字。';
+
+  @override
+  String get sg_instructions => '选择网格大小开始训练。按1到N的升序点击数字。点击1时开始计时。';
+
+  @override
+  String sg_sizeLabel(int size, int total) {
+    return '${size}x$size 方格（$total个数字）';
+  }
+
+  @override
+  String get sg_bestTime => '最佳';
+
+  @override
+  String get sg_noRecord => '暂无记录';
+
+  @override
+  String get sg_tapToStart => '点击1开始计时';
+
+  @override
+  String get sg_paused => '已暂停';
+
+  @override
+  String get sg_next => '下一个';
+
+  @override
+  String get sg_completed => '完成！';
+
+  @override
+  String get sg_newBest => '新纪录！';
+
+  @override
+  String get sg_leaderboard => '排行榜';
+
+  @override
+  String get sg_noRecords => '暂无记录。\n完成一次训练来创建你的第一条记录！';
+
+  @override
+  String get sg_clearLeaderboard => '清空排行榜';
+
+  @override
+  String get sg_clearConfirm => '确定要清空该尺寸的所有记录吗？';
 }

@@ -3667,6 +3667,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Filled'**
   String get ci_styleFilled;
+
+  /// Schulte Grid game title
+  ///
+  /// In en, this message translates to:
+  /// **'Schulte Grid'**
+  String get sg_gameTitle;
+
+  /// Schulte Grid game description
+  ///
+  /// In en, this message translates to:
+  /// **'Train your focus! Tap numbers 1 to N in order as fast as you can.'**
+  String get sg_gameDescription;
+
+  /// Schulte Grid game instructions
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a grid size to start. Tap numbers from 1 to N in ascending order. The timer starts when you tap 1.'**
+  String get sg_instructions;
+
+  /// Grid size label with total numbers
+  ///
+  /// In en, this message translates to:
+  /// **'{size}x{size} Grid ({total} numbers)'**
+  String sg_sizeLabel(int size, int total);
+
+  /// Best time label on start screen
+  ///
+  /// In en, this message translates to:
+  /// **'Best'**
+  String get sg_bestTime;
+
+  /// No record label on start screen
+  ///
+  /// In en, this message translates to:
+  /// **'No record yet'**
+  String get sg_noRecord;
+
+  /// Instruction to tap first number
+  ///
+  /// In en, this message translates to:
+  /// **'Tap 1 to start the timer'**
+  String get sg_tapToStart;
+
+  /// Timer paused indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get sg_paused;
+
+  /// Next number to tap label
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get sg_next;
+
+  /// Training completed dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Completed!'**
+  String get sg_completed;
+
+  /// New personal best record badge
+  ///
+  /// In en, this message translates to:
+  /// **'New Personal Best!'**
+  String get sg_newBest;
+
+  /// Schulte Grid leaderboard title
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get sg_leaderboard;
+
+  /// Empty leaderboard message
+  ///
+  /// In en, this message translates to:
+  /// **'No records yet.\nComplete a training to set your first record!'**
+  String get sg_noRecords;
+
+  /// Clear leaderboard button
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Leaderboard'**
+  String get sg_clearLeaderboard;
+
+  /// Clear leaderboard confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear all records for this grid size?'**
+  String get sg_clearConfirm;
 }
 
 class _AppLocalizationsDelegate

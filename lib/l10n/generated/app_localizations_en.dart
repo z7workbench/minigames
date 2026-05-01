@@ -1954,4 +1954,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ci_styleFilled => 'Filled';
+
+  @override
+  String get sg_gameTitle => 'Schulte Grid';
+
+  @override
+  String get sg_gameDescription =>
+      'Train your focus! Tap numbers 1 to N in order as fast as you can.';
+
+  @override
+  String get sg_instructions =>
+      'Choose a grid size to start. Tap numbers from 1 to N in ascending order. The timer starts when you tap 1.';
+
+  @override
+  String sg_sizeLabel(int size, int total) {
+    return '${size}x$size Grid ($total numbers)';
+  }
+
+  @override
+  String get sg_bestTime => 'Best';
+
+  @override
+  String get sg_noRecord => 'No record yet';
+
+  @override
+  String get sg_tapToStart => 'Tap 1 to start the timer';
+
+  @override
+  String get sg_paused => 'Paused';
+
+  @override
+  String get sg_next => 'Next';
+
+  @override
+  String get sg_completed => 'Completed!';
+
+  @override
+  String get sg_newBest => 'New Personal Best!';
+
+  @override
+  String get sg_leaderboard => 'Leaderboard';
+
+  @override
+  String get sg_noRecords =>
+      'No records yet.\nComplete a training to set your first record!';
+
+  @override
+  String get sg_clearLeaderboard => 'Clear Leaderboard';
+
+  @override
+  String get sg_clearConfirm =>
+      'Are you sure you want to clear all records for this grid size?';
 }
