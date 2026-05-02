@@ -3865,6 +3865,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Created by mimo-v2.5-pro'**
   String get createdByMimo;
+
+  /// Fishing game title
+  ///
+  /// In en, this message translates to:
+  /// **'Fishing'**
+  String get game_fishing;
+
+  /// Fishing game description
+  ///
+  /// In en, this message translates to:
+  /// **'Cast your line and catch fish! Watch for bites and react quickly.'**
+  String get fishing_gameDescription;
+
+  /// Fishing step 1 instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Cast your rod and wait for a bite'**
+  String get fishing_step1;
+
+  /// Fishing step 2 instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Tap quickly when you see the bite indicator'**
+  String get fishing_step2;
+
+  /// Fishing step 3 instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Use up/down buttons to move the power block and align with the fish'**
+  String get fishing_step3;
+
+  /// Fishing step 4 instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the progress bar to catch the fish'**
+  String get fishing_step4;
+
+  /// Throw rod instruction text
+  ///
+  /// In en, this message translates to:
+  /// **'Throw your line!'**
+  String get fishing_throwRod;
+
+  /// Cast line button text
+  ///
+  /// In en, this message translates to:
+  /// **'Cast Line'**
+  String get fishing_cast;
+
+  /// Fish caught success message
+  ///
+  /// In en, this message translates to:
+  /// **'Fish Caught!'**
+  String get fishing_caught;
+
+  /// Fish escaped failure message
+  ///
+  /// In en, this message translates to:
+  /// **'Fish Escaped!'**
+  String get fishing_escaped;
+
+  /// Continue fishing button text
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Fishing'**
+  String get fishing_continue;
+
+  /// Tap now instruction during bite
+  ///
+  /// In en, this message translates to:
+  /// **'TAP NOW!'**
+  String get fishing_tapNow;
+
+  /// Alignment indicator when block is aligned with fish
+  ///
+  /// In en, this message translates to:
+  /// **'ALIGNED!'**
+  String get fishing_aligned;
+
+  /// Alignment indicator when block needs to move
+  ///
+  /// In en, this message translates to:
+  /// **'Move to fish!'**
+  String get fishing_moveToFish;
+
+  /// Up direction label for control button
+  ///
+  /// In en, this message translates to:
+  /// **'UP'**
+  String get fishing_up;
+
+  /// Hold instruction for control button
+  ///
+  /// In en, this message translates to:
+  /// **'HOLD'**
+  String get fishing_hold;
+
+  /// Waiting message when expecting a bite
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for fish...'**
+  String get fishing_waitingForFish;
+
+  /// Caught fish stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Caught'**
+  String get fishing_caughtStat;
+
+  /// Escaped fish stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Escaped'**
+  String get fishing_escapedStat;
 }
 
 class _AppLocalizationsDelegate

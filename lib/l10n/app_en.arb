@@ -2561,5 +2561,82 @@
     "createdByMimo": "Created by mimo-v2.5-pro",
     "@createdByMimo": {
       "description": "Creator credit for games built by mimo-v2.5-pro"
-    }
+    },
+
+  "game_fishing": "Fishing",
+  "@game_fishing": {
+    "description": "Fishing game title"
+  },
+  "fishing_gameDescription": "Cast your line and catch fish! Watch for bites and react quickly.",
+  "@fishing_gameDescription": {
+    "description": "Fishing game description"
+  },
+  "fishing_step1": "Cast your rod and wait for a bite",
+  "@fishing_step1": {
+    "description": "Fishing step 1 instruction"
+  },
+  "fishing_step2": "Tap quickly when you see the bite indicator",
+  "@fishing_step2": {
+    "description": "Fishing step 2 instruction"
+  },
+  "fishing_step3": "Use up/down buttons to move the power block and align with the fish",
+  "@fishing_step3": {
+    "description": "Fishing step 3 instruction"
+  },
+  "fishing_step4": "Fill the progress bar to catch the fish",
+  "@fishing_step4": {
+    "description": "Fishing step 4 instruction"
+  },
+  "fishing_throwRod": "Throw your line!",
+  "@fishing_throwRod": {
+    "description": "Throw rod instruction text"
+  },
+  "fishing_cast": "Cast Line",
+  "@fishing_cast": {
+    "description": "Cast line button text"
+  },
+  "fishing_caught": "Fish Caught!",
+  "@fishing_caught": {
+    "description": "Fish caught success message"
+  },
+  "fishing_escaped": "Fish Escaped!",
+  "@fishing_escaped": {
+    "description": "Fish escaped failure message"
+  },
+  "fishing_continue": "Continue Fishing",
+  "@fishing_continue": {
+    "description": "Continue fishing button text"
+  },
+  "fishing_tapNow": "TAP NOW!",
+  "@fishing_tapNow": {
+    "description": "Tap now instruction during bite"
+  },
+  "fishing_aligned": "ALIGNED!",
+  "@fishing_aligned": {
+    "description": "Alignment indicator when block is aligned with fish"
+  },
+  "fishing_moveToFish": "Move to fish!",
+  "@fishing_moveToFish": {
+    "description": "Alignment indicator when block needs to move"
+  },
+  "fishing_up": "UP",
+  "@fishing_up": {
+    "description": "Up direction label for control button"
+  },
+  "fishing_hold": "HOLD",
+  "@fishing_hold": {
+    "description": "Hold instruction for control button"
+  },
+  "fishing_waitingForFish": "Waiting for fish...",
+  "@fishing_waitingForFish": {
+    "description": "Waiting message when expecting a bite"
+  },
+  "fishing_caughtStat": "Caught",
+  "@fishing_caughtStat": {
+    "description": "Caught fish stat label"
+  },
+  "fishing_escapedStat": "Escaped",
+  "@fishing_escapedStat": {
+    "description": "Escaped fish stat label"
+  }
 }

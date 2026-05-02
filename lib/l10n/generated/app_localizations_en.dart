@@ -2063,4 +2063,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createdByMimo => 'Created by mimo-v2.5-pro';
+
+  @override
+  String get game_fishing => 'Fishing';
+
+  @override
+  String get fishing_gameDescription =>
+      'Cast your line and catch fish! Watch for bites and react quickly.';
+
+  @override
+  String get fishing_step1 => 'Cast your rod and wait for a bite';
+
+  @override
+  String get fishing_step2 => 'Tap quickly when you see the bite indicator';
+
+  @override
+  String get fishing_step3 =>
+      'Use up/down buttons to move the power block and align with the fish';
+
+  @override
+  String get fishing_step4 => 'Fill the progress bar to catch the fish';
+
+  @override
+  String get fishing_throwRod => 'Throw your line!';
+
+  @override
+  String get fishing_cast => 'Cast Line';
+
+  @override
+  String get fishing_caught => 'Fish Caught!';
+
+  @override
+  String get fishing_escaped => 'Fish Escaped!';
+
+  @override
+  String get fishing_continue => 'Continue Fishing';
+
+  @override
+  String get fishing_tapNow => 'TAP NOW!';
+
+  @override
+  String get fishing_aligned => 'ALIGNED!';
+
+  @override
+  String get fishing_moveToFish => 'Move to fish!';
+
+  @override
+  String get fishing_up => 'UP';
+
+  @override
+  String get fishing_hold => 'HOLD';
+
+  @override
+  String get fishing_waitingForFish => 'Waiting for fish...';
+
+  @override
+  String get fishing_caughtStat => 'Caught';
+
+  @override
+  String get fishing_escapedStat => 'Escaped';
 }

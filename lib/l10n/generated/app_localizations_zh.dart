@@ -2001,4 +2001,61 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get createdByMimo => '由 mimo-v2.5-pro 生成';
+
+  @override
+  String get game_fishing => '模拟钓鱼';
+
+  @override
+  String get fishing_gameDescription => '抛出鱼竿，等待鱼儿上钩！注意观察浮标，及时提竿。';
+
+  @override
+  String get fishing_step1 => '抛出鱼竿，等待浮标出现动静';
+
+  @override
+  String get fishing_step2 => '看到提竿提示时，快速点击屏幕';
+
+  @override
+  String get fishing_step3 => '使用上下按钮移动力度条，与鱼的位置对齐';
+
+  @override
+  String get fishing_step4 => '进度条满了就能钓到鱼';
+
+  @override
+  String get fishing_throwRod => '抛出你的鱼竿！';
+
+  @override
+  String get fishing_cast => '抛竿';
+
+  @override
+  String get fishing_caught => '钓到了！';
+
+  @override
+  String get fishing_escaped => '鱼跑了！';
+
+  @override
+  String get fishing_continue => '继续钓鱼';
+
+  @override
+  String get fishing_tapNow => '立即点击！';
+
+  @override
+  String get fishing_aligned => '对齐了！';
+
+  @override
+  String get fishing_moveToFish => '移动到鱼的位置！';
+
+  @override
+  String get fishing_up => '上';
+
+  @override
+  String get fishing_hold => '按住';
+
+  @override
+  String get fishing_waitingForFish => '等待鱼儿上钩...';
+
+  @override
+  String get fishing_caughtStat => '钓到';
+
+  @override
+  String get fishing_escapedStat => '跑掉';
 }

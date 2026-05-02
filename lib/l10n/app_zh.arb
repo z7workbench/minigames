@@ -2358,5 +2358,82 @@
     "sg_clearConfirm": "确定要清空该尺寸的所有记录吗？",
     "createdByGlm": "由 GLM-5 + qwen3.5-plus 生成",
     "createdByMinimax": "由 MiniMax-M2.7 生成",
-    "createdByMimo": "由 mimo-v2.5-pro 生成"
+    "createdByMimo": "由 mimo-v2.5-pro 生成",
+
+    "game_fishing": "模拟钓鱼",
+    "@game_fishing": {
+      "description": "Fishing game title"
+    },
+    "fishing_gameDescription": "抛出鱼竿，等待鱼儿上钩！注意观察浮标，及时提竿。",
+    "@fishing_gameDescription": {
+      "description": "Fishing game description"
+    },
+    "fishing_step1": "抛出鱼竿，等待浮标出现动静",
+    "@fishing_step1": {
+      "description": "Fishing step 1 instruction"
+    },
+    "fishing_step2": "看到提竿提示时，快速点击屏幕",
+    "@fishing_step2": {
+      "description": "Fishing step 2 instruction"
+    },
+    "fishing_step3": "使用上下按钮移动力度条，与鱼的位置对齐",
+    "@fishing_step3": {
+      "description": "Fishing step 3 instruction"
+    },
+    "fishing_step4": "进度条满了就能钓到鱼",
+    "@fishing_step4": {
+      "description": "Fishing step 4 instruction"
+    },
+    "fishing_throwRod": "抛出你的鱼竿！",
+    "@fishing_throwRod": {
+      "description": "Throw rod instruction text"
+    },
+    "fishing_cast": "抛竿",
+    "@fishing_cast": {
+      "description": "Cast line button text"
+    },
+    "fishing_caught": "钓到了！",
+    "@fishing_caught": {
+      "description": "Fish caught success message"
+    },
+    "fishing_escaped": "鱼跑了！",
+    "@fishing_escaped": {
+      "description": "Fish escaped failure message"
+    },
+"fishing_continue": "继续钓鱼",
+    "@fishing_continue": {
+      "description": "Continue fishing button text"
+    },
+    "fishing_tapNow": "立即点击！",
+    "@fishing_tapNow": {
+      "description": "Tap now instruction during bite"
+    },
+    "fishing_aligned": "对齐了！",
+    "@fishing_aligned": {
+      "description": "Alignment indicator when block is aligned with fish"
+    },
+    "fishing_moveToFish": "移动到鱼的位置！",
+    "@fishing_moveToFish": {
+      "description": "Alignment indicator when block needs to move"
+    },
+    "fishing_up": "上",
+    "@fishing_up": {
+      "description": "Up direction label for control button"
+    },
+    "fishing_hold": "按住",
+    "@fishing_hold": {
+      "description": "Hold instruction for control button"
+    },
+    "fishing_waitingForFish": "等待鱼儿上钩...",
+    "@fishing_waitingForFish": {
+      "description": "Waiting message when expecting a bite"
+    },
+    "fishing_caughtStat": "钓到",
+    "@fishing_caughtStat": {
+      "description": "Caught fish stat label"
+    },
+    "fishing_escapedStat": "跑掉",
+    "@fishing_escapedStat": {
+      "description": "Escaped fish stat label"
+    }
 }
