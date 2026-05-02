@@ -23,16 +23,19 @@ class HitAndBlowScreen extends ConsumerStatefulWidget {
 }
 
 class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
-  final List<int> currentGuess = [];
+  late List<int?> currentGuess;
   late Difficulty currentDifficulty;
   late bool currentAllowDuplicates;
   bool _resultDialogShown = false;
+
+  int get _targetLength => currentDifficulty == Difficulty.easy ? 4 : 6;
 
   @override
   void initState() {
     super.initState();
     currentDifficulty = widget.difficulty;
     currentAllowDuplicates = widget.allowDuplicates;
+    currentGuess = List.filled(_targetLength, null);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _startGame(currentDifficulty);
     });
@@ -45,44 +48,41 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
       allowDuplicates: currentAllowDuplicates,
     );
     setState(() {
-      currentGuess.clear();
+      currentGuess = List.filled(_targetLength, null);
       _resultDialogShown = false;
     });
   }
 
   void _selectNumber(int number) {
     final state = ref.read(hitAndBlowStateProviderProvider);
-    final targetLength = currentDifficulty == Difficulty.easy ? 4 : 6;
-
     if (state.status != GameStatus.playing) return;
-    if (currentGuess.length >= targetLength) return;
     if (!currentAllowDuplicates && currentGuess.contains(number)) return;
 
+    final firstEmpty = currentGuess.indexOf(null);
+    if (firstEmpty == -1) return;
+
     setState(() {
-      currentGuess.add(number);
+      currentGuess[firstEmpty] = number;
     });
   }
 
-  void _clearLastNumber() {
-    if (currentGuess.isNotEmpty) {
-      setState(() {
-        currentGuess.removeLast();
-      });
-    }
+  void _removeNumberAt(int index) {
+    if (currentGuess[index] == null) return;
+    setState(() {
+      currentGuess[index] = null;
+    });
   }
 
   void _submitGuess() {
     final state = ref.read(hitAndBlowStateProviderProvider);
     if (state.status != GameStatus.playing) return;
-
-    final targetLength = currentDifficulty == Difficulty.easy ? 4 : 6;
-    if (currentGuess.length < targetLength) return;
+    if (currentGuess.any((v) => v == null)) return;
 
     ref
         .read(hitAndBlowStateProviderProvider.notifier)
-        .submitGuess(List.from(currentGuess));
+        .submitGuess(currentGuess.cast<int>());
     setState(() {
-      currentGuess.clear();
+      currentGuess = List.filled(_targetLength, null);
     });
   }
 
@@ -123,7 +123,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
       });
     }
 
-    final targetLength = currentDifficulty == Difficulty.easy ? 4 : 6;
+    final targetLength = _targetLength;
     final maxDigit = currentDifficulty == Difficulty.easy ? 6 : 8;
 
     return Scaffold(
@@ -144,7 +144,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              // Current guess display
+              // Current guess display — tap to remove
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -155,28 +155,31 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: List.generate(targetLength, (index) {
-                    final hasValue = index < currentGuess.length;
-                    final value = hasValue ? currentGuess[index] : 0;
+                    final value = currentGuess[index];
+                    final hasValue = value != null;
 
-                    return Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: hasValue
-                            ? context.themePrimary
-                            : context.themeCard,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: context.themeBorder),
-                      ),
-                      child: Center(
-                        child: Text(
-                          hasValue ? value.toString() : '',
-                          style: TextStyle(
-                            color: hasValue
-                                ? context.themeOnPrimary
-                                : Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                    return GestureDetector(
+                      onTap: hasValue ? () => _removeNumberAt(index) : null,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: hasValue
+                              ? context.themePrimary
+                              : context.themeCard,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: context.themeBorder),
+                        ),
+                        child: Center(
+                          child: Text(
+                            hasValue ? value.toString() : '',
+                            style: TextStyle(
+                              color: hasValue
+                                  ? context.themeOnPrimary
+                                  : Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       ),
@@ -188,7 +191,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
 
               // Submit button
               ElevatedButton(
-                onPressed: currentGuess.length == targetLength
+                onPressed: currentGuess.every((v) => v != null)
                     ? _submitGuess
                     : null,
                 style: ElevatedButton.styleFrom(
@@ -218,16 +221,6 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
                     onTap: () => _selectNumber(number),
                   );
                 }),
-              ),
-              const SizedBox(height: 16),
-
-              // Clear button
-              TextButton(
-                onPressed: currentGuess.isNotEmpty ? _clearLastNumber : null,
-                style: TextButton.styleFrom(
-                  foregroundColor: context.themeTextSecondary,
-                ),
-                child: Text(localization.hnb_clear),
               ),
               const SizedBox(height: 16),
 
