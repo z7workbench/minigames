@@ -161,6 +161,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hnb_hardDescription => '6个位置，数字1-8';
 
   @override
+  String get hnb_allowDuplicates => '允许重复数字';
+
+  @override
+  String get hnb_allowDuplicatesDesc => '关闭时，目标中每个数字唯一';
+
+  @override
   String get hnb_gameWon => '恭喜！你猜对了！';
 
   @override
@@ -193,7 +199,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hnb_rule1_title => '目标';
 
   @override
-  String get hnb_rule1_desc => '猜出隐藏的数字序列。每个数字唯一，位置很重要。';
+  String get hnb_rule1_desc => '猜出隐藏的数字序列。位置很重要。';
 
   @override
   String get hnb_rule2_title => '命中（Hit）';

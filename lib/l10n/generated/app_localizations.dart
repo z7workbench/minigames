@@ -398,6 +398,18 @@ abstract class AppLocalizations {
   /// **'6 positions, digits 1-8'**
   String get hnb_hardDescription;
 
+  /// Hit & Blow allow duplicate digits toggle label
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Duplicate Digits'**
+  String get hnb_allowDuplicates;
+
+  /// Hit & Blow allow duplicate digits toggle description
+  ///
+  /// In en, this message translates to:
+  /// **'When off, each digit in the target is unique'**
+  String get hnb_allowDuplicatesDesc;
+
   /// Hit & Blow game won message
   ///
   /// In en, this message translates to:
@@ -461,7 +473,7 @@ abstract class AppLocalizations {
   /// Hit & Blow rule 1 description
   ///
   /// In en, this message translates to:
-  /// **'Guess the hidden number sequence. Each digit is unique and its position matters.'**
+  /// **'Guess the hidden number sequence. Its position matters.'**
   String get hnb_rule1_desc;
 
   /// Hit & Blow rule 2 title

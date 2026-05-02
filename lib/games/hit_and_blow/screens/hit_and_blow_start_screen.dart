@@ -17,12 +17,16 @@ class HitAndBlowStartScreen extends ConsumerStatefulWidget {
 
 class _HitAndBlowStartScreenState extends ConsumerState<HitAndBlowStartScreen> {
   Difficulty _difficulty = Difficulty.easy;
+  bool _allowDuplicates = false;
 
   void _startGame() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => HitAndBlowScreen(difficulty: _difficulty),
+        builder: (context) => HitAndBlowScreen(
+          difficulty: _difficulty,
+          allowDuplicates: _allowDuplicates,
+        ),
       ),
     );
   }
@@ -286,6 +290,32 @@ class _HitAndBlowStartScreenState extends ConsumerState<HitAndBlowStartScreen> {
                 Difficulty.hard,
               ),
             ],
+          ),
+          const SizedBox(height: 16),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              l10n.hnb_allowDuplicates,
+              style: TextStyle(
+                color: context.themeTextPrimary,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            subtitle: Text(
+              l10n.hnb_allowDuplicatesDesc,
+              style: TextStyle(
+                color: context.themeTextSecondary,
+                fontSize: 12,
+              ),
+            ),
+            value: _allowDuplicates,
+            activeThumbColor: context.themeAccent,
+            onChanged: (value) {
+              setState(() {
+                _allowDuplicates = value;
+              });
+            },
           ),
         ],
       ),

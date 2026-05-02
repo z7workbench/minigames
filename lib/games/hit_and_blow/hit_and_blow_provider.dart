@@ -17,20 +17,27 @@ class HitAndBlowStateProvider extends _$HitAndBlowStateProvider {
     return HitAndBlowState.initial(Difficulty.easy);
   }
 
-  void startGame(Difficulty difficulty) {
+  void startGame(Difficulty difficulty, {bool allowDuplicates = false}) {
     final targetLength = difficulty == Difficulty.easy ? 4 : 6;
     final maxDigit = difficulty == Difficulty.easy ? 6 : 8;
 
-    // Generate random target number
     final random = Random();
-    final targetNumber = List.generate(
-      targetLength,
-      (_) => random.nextInt(maxDigit) + 1,
-    );
+    final List<int> targetNumber;
+
+    if (allowDuplicates) {
+      targetNumber = List.generate(
+        targetLength,
+        (_) => random.nextInt(maxDigit) + 1,
+      );
+    } else {
+      final pool = List.generate(maxDigit, (i) => i + 1)..shuffle(random);
+      targetNumber = pool.sublist(0, targetLength);
+    }
 
     state = HitAndBlowState.playing(
       difficulty: difficulty,
       targetNumber: targetNumber,
+      allowDuplicates: allowDuplicates,
     );
   }
 
@@ -44,6 +51,11 @@ class HitAndBlowStateProvider extends _$HitAndBlowStateProvider {
     // Validate guess - ensure all digits are in valid range
     final maxDigit = state.difficulty == Difficulty.easy ? 6 : 8;
     if (guess.any((digit) => digit < 1 || digit > maxDigit)) {
+      return;
+    }
+
+    // Validate no duplicates when not allowed
+    if (!state.allowDuplicates && guess.toSet().length != guess.length) {
       return;
     }
 
@@ -82,7 +94,7 @@ class HitAndBlowStateProvider extends _$HitAndBlowStateProvider {
   }
 
   void resetGame() {
-    state = HitAndBlowState.initial(state.difficulty);
+    state = HitAndBlowState.initial(state.difficulty, allowDuplicates: state.allowDuplicates);
   }
 
   int calculateHits(List<int> guess, List<int> target) {

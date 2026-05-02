@@ -13,6 +13,7 @@ class HitAndBlowState {
   final List<int> blowsHistory; // Blows for each guess
   final int attemptsUsed;
   final int maxAttempts;
+  final bool allowDuplicates;
   final DateTime? startTime;
   final Duration? duration;
 
@@ -25,11 +26,12 @@ class HitAndBlowState {
     required this.blowsHistory,
     required this.attemptsUsed,
     required this.maxAttempts,
+    required this.allowDuplicates,
     this.startTime,
     this.duration,
   });
 
-  factory HitAndBlowState.initial(Difficulty difficulty) {
+  factory HitAndBlowState.initial(Difficulty difficulty, {bool allowDuplicates = false}) {
     final maxAttempts = 10;
     final targetLength = difficulty == Difficulty.easy ? 4 : 6;
 
@@ -42,12 +44,14 @@ class HitAndBlowState {
       blowsHistory: [],
       attemptsUsed: 0,
       maxAttempts: maxAttempts,
+      allowDuplicates: allowDuplicates,
     );
   }
 
   factory HitAndBlowState.playing({
     required Difficulty difficulty,
     required List<int> targetNumber,
+    required bool allowDuplicates,
   }) {
     final maxAttempts = 10;
 
@@ -60,6 +64,7 @@ class HitAndBlowState {
       blowsHistory: [],
       attemptsUsed: 0,
       maxAttempts: maxAttempts,
+      allowDuplicates: allowDuplicates,
       startTime: DateTime.now(),
     );
   }
@@ -73,6 +78,7 @@ class HitAndBlowState {
     List<int>? blowsHistory,
     int? attemptsUsed,
     int? maxAttempts,
+    bool? allowDuplicates,
     DateTime? startTime,
     Duration? duration,
   }) {
@@ -85,6 +91,7 @@ class HitAndBlowState {
       blowsHistory: blowsHistory ?? this.blowsHistory,
       attemptsUsed: attemptsUsed ?? this.attemptsUsed,
       maxAttempts: maxAttempts ?? this.maxAttempts,
+      allowDuplicates: allowDuplicates ?? this.allowDuplicates,
       startTime: startTime ?? this.startTime,
       duration: duration ?? this.duration,
     );
@@ -102,6 +109,7 @@ class HitAndBlowState {
         listEquals(blowsHistory, other.blowsHistory) &&
         attemptsUsed == other.attemptsUsed &&
         maxAttempts == other.maxAttempts &&
+        allowDuplicates == other.allowDuplicates &&
         startTime == other.startTime &&
         duration == other.duration;
   }
@@ -116,6 +124,7 @@ class HitAndBlowState {
     blowsHistory,
     attemptsUsed,
     maxAttempts,
+    allowDuplicates,
     startTime,
     duration,
   ]);

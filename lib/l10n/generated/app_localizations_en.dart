@@ -163,6 +163,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hnb_hardDescription => '6 positions, digits 1-8';
 
   @override
+  String get hnb_allowDuplicates => 'Allow Duplicate Digits';
+
+  @override
+  String get hnb_allowDuplicatesDesc =>
+      'When off, each digit in the target is unique';
+
+  @override
   String get hnb_gameWon => 'Congratulations! You guessed the number!';
 
   @override
@@ -196,7 +203,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hnb_rule1_desc =>
-      'Guess the hidden number sequence. Each digit is unique and its position matters.';
+      'Guess the hidden number sequence. Its position matters.';
 
   @override
   String get hnb_rule2_title => 'Hit';

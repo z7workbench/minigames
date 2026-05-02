@@ -10,8 +10,13 @@ import 'package:minigames/ui/theme/theme_colors.dart';
 
 class HitAndBlowScreen extends ConsumerStatefulWidget {
   final Difficulty difficulty;
+  final bool allowDuplicates;
 
-  const HitAndBlowScreen({super.key, required this.difficulty});
+  const HitAndBlowScreen({
+    super.key,
+    required this.difficulty,
+    this.allowDuplicates = false,
+  });
 
   @override
   ConsumerState<HitAndBlowScreen> createState() => _HitAndBlowScreenState();
@@ -20,11 +25,14 @@ class HitAndBlowScreen extends ConsumerStatefulWidget {
 class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
   final List<int> currentGuess = [];
   late Difficulty currentDifficulty;
+  late bool currentAllowDuplicates;
+  bool _resultDialogShown = false;
 
   @override
   void initState() {
     super.initState();
     currentDifficulty = widget.difficulty;
+    currentAllowDuplicates = widget.allowDuplicates;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _startGame(currentDifficulty);
     });
@@ -32,9 +40,13 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
 
   void _startGame(Difficulty difficulty) {
     currentDifficulty = difficulty;
-    ref.read(hitAndBlowStateProviderProvider.notifier).startGame(difficulty);
+    ref.read(hitAndBlowStateProviderProvider.notifier).startGame(
+      difficulty,
+      allowDuplicates: currentAllowDuplicates,
+    );
     setState(() {
       currentGuess.clear();
+      _resultDialogShown = false;
     });
   }
 
@@ -44,6 +56,7 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
 
     if (state.status != GameStatus.playing) return;
     if (currentGuess.length >= targetLength) return;
+    if (!currentAllowDuplicates && currentGuess.contains(number)) return;
 
     setState(() {
       currentGuess.add(number);
@@ -74,20 +87,24 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
   }
 
   void _showResultDialog(BuildContext context, HitAndBlowState state) {
+    if (_resultDialogShown) return;
+    _resultDialogShown = true;
+
     showDialog(
       context: context,
-      builder: (context) => GameResultDialog(
+      barrierDismissible: false,
+      builder: (dialogContext) => GameResultDialog(
         isWin: state.status == GameStatus.won,
         attempts: state.attemptsUsed,
         duration: state.duration!,
+        targetNumber: state.status == GameStatus.lost ? state.targetNumber : null,
         onPlayAgain: () {
-          Navigator.of(context).pop();
+          Navigator.of(dialogContext).pop();
           _startGame(currentDifficulty);
         },
         onGoHome: () {
-          Navigator.of(context).pop(); // Dismiss dialog
-          Navigator.of(context).pop(); // Return to start screen
-          Navigator.of(context).pop(); // Return to home screen
+          Navigator.of(dialogContext).pop();
+          Navigator.of(context).pop();
         },
       ),
     );
@@ -193,9 +210,11 @@ class _HitAndBlowScreenState extends ConsumerState<HitAndBlowScreen> {
                 children: List.generate(maxDigit, (index) {
                   final number = index + 1;
                   final isSelected = currentGuess.contains(number);
+                  final isDisabled = !currentAllowDuplicates && isSelected;
                   return NumberSelector(
                     number: number,
                     isSelected: isSelected,
+                    isDisabled: isDisabled,
                     onTap: () => _selectNumber(number),
                   );
                 }),

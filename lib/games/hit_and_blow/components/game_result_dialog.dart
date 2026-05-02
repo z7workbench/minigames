@@ -12,6 +12,7 @@ class GameResultDialog extends StatelessWidget {
     required this.duration,
     required this.onPlayAgain,
     required this.onGoHome,
+    this.targetNumber,
   });
 
   final bool isWin;
@@ -19,6 +20,7 @@ class GameResultDialog extends StatelessWidget {
   final Duration duration;
   final VoidCallback onPlayAgain;
   final VoidCallback onGoHome;
+  final List<int>? targetNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,47 @@ class GameResultDialog extends StatelessWidget {
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
+            if (!isWin && targetNumber != null) ...[
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: context.themeCard,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: context.themeBorder),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '${l10n.hnb_targetNumber}: ',
+                      style: TextStyle(
+                        color: context.themeTextSecondary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    ...targetNumber!.map((digit) => Container(
+                      width: 28,
+                      height: 28,
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
+                      decoration: BoxDecoration(
+                        color: context.themeAccent,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Center(
+                        child: Text(
+                          digit.toString(),
+                          style: TextStyle(
+                            color: context.themeOnAccent,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )),
+                  ],
+                ),
+              ),
+            ],
             const SizedBox(height: 8),
             // Stats
             Text(

@@ -210,6 +210,14 @@
   "@hnb_hardDescription": {
     "description": "Hit & Blow hard mode description"
   },
+  "hnb_allowDuplicates": "允许重复数字",
+  "@hnb_allowDuplicates": {
+    "description": "Hit & Blow allow duplicate digits toggle label"
+  },
+  "hnb_allowDuplicatesDesc": "关闭时，目标中每个数字唯一",
+  "@hnb_allowDuplicatesDesc": {
+    "description": "Hit & Blow allow duplicate digits toggle description"
+  },
   "hnb_gameWon": "恭喜！你猜对了！",
   "@hnb_gameWon": {
     "description": "Hit & Blow game won message"
@@ -258,7 +266,7 @@
   "@hnb_rule1_title": {
     "description": "Hit & Blow rule 1 title"
   },
-  "hnb_rule1_desc": "猜出隐藏的数字序列。每个数字唯一，位置很重要。",
+  "hnb_rule1_desc": "猜出隐藏的数字序列。位置很重要。",
   "@hnb_rule1_desc": {
     "description": "Hit & Blow rule 1 description"
   },
