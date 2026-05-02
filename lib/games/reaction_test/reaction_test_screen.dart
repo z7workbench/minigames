@@ -99,7 +99,7 @@ class _ReactionTestScreenState extends ConsumerState<ReactionTestScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              l10n.rt_testNumber(index + 1, reactionTimes.length),
+                              '${index + 1}',
                               style: Theme.of(dialogContext).textTheme.bodyLarge,
                             ),
                             Row(
