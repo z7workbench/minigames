@@ -37,6 +37,7 @@
 | **Aim Test** | ✅ Complete | - | Leaderboard |
 | **Chess** | ✅ Complete | Easy/Hard | Records |
 | **Schulte Grid** | ✅ Complete | - | Leaderboard (per size) |
+| **Fishing** | ✅ Complete | - | - |
 
 ---
 
@@ -309,6 +310,28 @@ Tap numbers from 1 to N in ascending order as fast as you can on a randomly shuf
 
 ---
 
+### Fishing
+
+Relaxing fishing simulation - cast your line and reel them in!
+
+**Description:**
+Cast your rod and wait for a fish to bite. When you see the bite indicator, tap quickly! Then play a mini-game to reel in the fish by keeping the power block aligned with the fish position.
+
+**Gameplay:**
+- **Cast**: Throw your line into the water and wait
+- **Bite**: Fish bites randomly - a countdown timer appears
+- **Reel Mini-Game**: Move the power block up/down to track the fish
+- **Progress**: Fill the progress bar by staying aligned to catch the fish
+- **Timer**: Complete the mini-game before time runs out
+
+**Features:**
+- Animated bite indicator with countdown timer
+- Power block alignment mini-game with progress tracking
+- Portrait and landscape layouts
+- Fish caught/escaped statistics
+
+---
+
 ## Screenshots
 
 ### Available Screenshots
@@ -324,6 +347,7 @@ Tap numbers from 1 to N in ascending order as fast as you can on a randomly shuf
 - Mancala
 - Hearts
 - Dice Battle
+- Fishing
 
 ---
 
@@ -465,7 +489,8 @@ lib/
 │   ├── reaction_test/         # Reaction speed test
 │   ├── aim_test/              # Aiming accuracy test
 │   ├── chess_intl/            # International chess
-│   └── schulte_grid/          # Schulte Grid focus training
+│   ├── schulte_grid/          # Schulte Grid focus training
+│   └── fishing/               # Fishing simulation
 │
 ├── ui/                        # Shared UI layer
 │   ├── screens/               # App screens (home, settings)

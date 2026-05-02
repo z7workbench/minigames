@@ -21,6 +21,7 @@
 | 6 | 吹牛酒馆 (Bluff Bar) | 2026.4.25 | v5.1.1 |
 | 7 | 反应力测试 (Reaction Test)、瞄准测试 (Aim Test) | 2026.4.26 | v5.2.0 |
 | 8 | 国际象棋 (Chess)、舒尔特方格 (Schulte Grid) | 2026.5.2 | v6.0.0 |
+| 9 | 模拟钓鱼 (Fishing) | 2026.5.2 | v6.0.0 |
 
 ### 最近推出逻辑
 
@@ -28,7 +29,7 @@
 - **仅展示最近 2 个游戏**，由 `home_screen.dart` 中的 `recentGames` 列表硬编码
 - **仅在最近推出列表中的游戏记录引入时间**，通过 `GameType.releaseDate` 属性返回
 - 新游戏加入最近推出时，排在末尾的旧游戏移出列表并**删除其 `releaseDate` 值**（改用默认值或不再查询）
-- 当前最近推出：`chessIntl`（2026.5.2）、`schulteGrid`（2026.5.2）
+- 当前最近推出：`schulteGrid`（2026.5.1）、`fishing`（2026.5.2）
 
 ## 技术栈
 
@@ -207,6 +208,15 @@ lib/
 │       │   └── chess_intl_start_screen.dart # 开始页面
 │       ├── chess_intl_provider.dart    # Riverpod Provider
 │       └── chess_intl_screen.dart      # 主游戏界面
+│
+│   └── fishing/               # 模拟钓鱼游戏
+│       ├── models/            # 数据模型
+│       │   └── fishing_state.dart      # 游戏状态
+│       ├── screens/           # 游戏页面
+│       │   └── fishing_start_screen.dart # 开始页面
+│       ├── fishing_config.dart         # 游戏配置常量
+│       ├── fishing_provider.dart       # Riverpod Provider
+│       └── fishing_screen.dart         # 主游戏界面
 │
 ├── ui/                        # 上层：UI层
 │   ├── screens/               # 页面
