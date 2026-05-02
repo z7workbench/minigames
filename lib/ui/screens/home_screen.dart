@@ -23,6 +23,7 @@ import '../../games/reaction_test/screens/reaction_test_start_screen.dart';
 import '../../games/aim_test/screens/aim_test_start_screen.dart';
 import '../../games/chess_intl/screens/chess_intl_start_screen.dart';
 import '../../games/schulte_grid/screens/schulte_grid_start_screen.dart';
+import '../../games/fishing/screens/fishing_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -117,6 +118,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           MaterialPageRoute(builder: (context) => const SchulteGridStartScreen()),
         );
         break;
+      case GameType.fishing:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const FishingStartScreen()),
+        );
+        break;
     }
   }
 
@@ -155,6 +162,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.ci_gameTitle;
       case GameType.schulteGrid:
         return l10n.sg_gameTitle;
+      case GameType.fishing:
+        return l10n.game_fishing;
     }
   }
 
@@ -185,6 +194,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.ci_gameDescription;
       case GameType.schulteGrid:
         return l10n.sg_gameDescription;
+      case GameType.fishing:
+        return l10n.fishing_gameDescription;
     }
   }
 
@@ -335,8 +346,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final allGames = GameType.values.toList();
     allGames.sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
     
-    // Recent releases (top 2 most recent) - schulteGrid and chessIntl
-    final recentGames = [GameType.schulteGrid, GameType.chessIntl];
+    // Recent releases (top 2 most recent) - schulteGrid and fishing
+    final recentGames = [GameType.schulteGrid, GameType.fishing];
     
     // All other games (excluding only recent releases, keeping favorites)
     final otherGames = allGames.where((g) => !recentGames.contains(g)).toList();
@@ -450,7 +461,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildRecentReleasesSection(AppLocalizations l10n) {
     final recentGames = [
       GameType.schulteGrid,
-      GameType.chessIntl,
+      GameType.fishing,
     ];
     
     return Container(

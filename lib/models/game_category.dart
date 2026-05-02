@@ -50,7 +50,7 @@ extension GameCategoryExtension on GameCategory {
       case GameCategory.reaction:
         return [GameType.reactionTest, GameType.aimTest, GameType.schulteGrid];
       case GameCategory.casual:
-        return [GameType.hitAndBlow, GameType.twenty48];
+        return [GameType.hitAndBlow, GameType.twenty48, GameType.fishing];
     }
   }
 
@@ -94,6 +94,7 @@ extension GameTypeCategoryExtension on GameType {
         return GameCategory.reaction;
       case GameType.hitAndBlow:
       case GameType.twenty48:
+      case GameType.fishing:
         return GameCategory.casual;
     }
   }

@@ -41,7 +41,7 @@ extension GameCreatorExtension on GameCreator {
           GameType.bluffBar,
         ];
       case GameCreator.minimax:
-        return [GameType.reactionTest, GameType.aimTest];
+        return [GameType.reactionTest, GameType.aimTest, GameType.fishing];
       case GameCreator.mimo:
         return [GameType.chessIntl, GameType.schulteGrid];
     }
@@ -73,6 +73,8 @@ extension GameTypeCreatorExtension on GameType {
       case GameType.chessIntl:
       case GameType.schulteGrid:
         return GameCreator.mimo;
+      case GameType.fishing:
+        return GameCreator.minimax;
     }
   }
 }

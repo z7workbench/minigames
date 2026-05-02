@@ -15,6 +15,7 @@ enum GameType {
   aimTest,
   chessIntl,
   schulteGrid,
+  fishing,
 }
 
 extension GameTypeExtension on GameType {
@@ -43,12 +44,13 @@ extension GameTypeExtension on GameType {
         return 'Aim Test';
       case GameType.chessIntl:
         return 'Chess';
-      case GameType.schulteGrid:
+case GameType.schulteGrid:
         return 'Schulte Grid';
+      case GameType.fishing:
+        return 'Fishing';
     }
   }
 
-  /// Icon for the game
   IconData get iconData {
     switch (this) {
       case GameType.hitAndBlow:
@@ -75,11 +77,11 @@ extension GameTypeExtension on GameType {
         return Icons.grid_on;
       case GameType.schulteGrid:
         return Icons.grid_4x4;
+      case GameType.fishing:
+        return Icons.phishing;
     }
   }
 
-  /// Optional text icon (Unicode character) for games that prefer text over IconData.
-  /// When non-null, GameCard renders this instead of iconData.
   String? get iconText {
     switch (this) {
       case GameType.chessIntl:
@@ -116,10 +118,11 @@ extension GameTypeExtension on GameType {
         return '/chess-intl';
       case GameType.schulteGrid:
         return '/schulte-grid';
+      case GameType.fishing:
+        return '/fishing';
     }
   }
 
-  /// Release date of the game
   DateTime get releaseDate {
     switch (this) {
       case GameType.hitAndBlow:
@@ -146,10 +149,11 @@ extension GameTypeExtension on GameType {
         return DateTime(2026, 4, 29);
       case GameType.schulteGrid:
         return DateTime(2026, 5, 1);
+      case GameType.fishing:
+        return DateTime(2026, 5, 2);
     }
   }
 
-  /// Whether this game is still in development
   bool get isWip {
     return this == GameType.diceBattle;
   }
