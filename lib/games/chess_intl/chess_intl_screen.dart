@@ -156,6 +156,7 @@ class _ChessIntlScreenState extends ConsumerState<ChessIntlScreen> {
       },
       child: Scaffold(
         backgroundColor: context.themeBackground,
+        extendBody: true,
         appBar: _buildAppBar(context, state, l10n),
         body: _buildBody(context, state, provider, isDark, l10n),
       ),

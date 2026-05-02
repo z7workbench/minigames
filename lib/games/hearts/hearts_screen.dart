@@ -114,6 +114,7 @@ class _HeartsScreenState extends ConsumerState<HeartsScreen>
       },
       child: Scaffold(
         backgroundColor: context.themeBackground,
+        extendBody: true,
         appBar: _buildAppBar(context, state, isDark, l10n),
         body: _buildBody(context, state, isDark, l10n),
       ),
