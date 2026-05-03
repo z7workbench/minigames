@@ -141,7 +141,7 @@ case GameType.schulteGrid:
       case GameType.schulteGrid:
         return DateTime(2026, 5, 1);
       case GameType.fishing:
-        return DateTime(2026, 5, 2);
+        return DateTime(2026, 5, 3);
     }
   }
 

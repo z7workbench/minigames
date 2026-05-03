@@ -2,7 +2,7 @@ name: minigames
 description: "A Flutter minigames collection app."
 publish_to: 'none'
 
-version: 6.0.0+600
+version: 6.1.0+610
 
 environment:
   sdk: ^3.11.1

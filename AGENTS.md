@@ -29,7 +29,7 @@
 - **仅展示最近 2 个游戏**，由 `home_screen.dart` 中的 `recentGames` 列表硬编码
 - **仅在最近推出列表中的游戏记录引入时间**，通过 `GameType.releaseDate` 属性返回
 - 新游戏加入最近推出时，排在末尾的旧游戏移出列表并**删除其 `releaseDate` 值**（改用默认值或不再查询）
-- 当前最近推出：`schulteGrid`（2026.5.1）、`fishing`（2026.5.2）
+- 当前最近推出：`fishing`（2026.5.3）、`schulteGrid`（2026.5.2）
 
 ## 技术栈
 
