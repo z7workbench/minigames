@@ -3991,6 +3991,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Escaped'**
   String get fishing_escapedStat;
+
+  /// Small fish name (easy difficulty)
+  ///
+  /// In en, this message translates to:
+  /// **'Small Fish'**
+  String get fishing_fishSmall;
+
+  /// Medium fish name (medium difficulty)
+  ///
+  /// In en, this message translates to:
+  /// **'Medium Fish'**
+  String get fishing_fishMedium;
+
+  /// Large fish name (hard difficulty)
+  ///
+  /// In en, this message translates to:
+  /// **'Large Fish'**
+  String get fishing_fishLarge;
+
+  /// Wild fish name (wild difficulty)
+  ///
+  /// In en, this message translates to:
+  /// **'Wild Fish'**
+  String get fishing_fishWild;
+
+  /// Legendary fish name
+  ///
+  /// In en, this message translates to:
+  /// **'Legendary Fish'**
+  String get fishing_fishLegendary;
 }
 
 class _AppLocalizationsDelegate

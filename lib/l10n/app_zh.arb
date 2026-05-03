@@ -2443,5 +2443,25 @@
     "fishing_escapedStat": "跑掉",
     "@fishing_escapedStat": {
       "description": "Escaped fish stat label"
+    },
+    "fishing_fishSmall": "小鱼",
+    "@fishing_fishSmall": {
+      "description": "Small fish name (easy difficulty)"
+    },
+    "fishing_fishMedium": "中鱼",
+    "@fishing_fishMedium": {
+      "description": "Medium fish name (medium difficulty)"
+    },
+    "fishing_fishLarge": "大鱼",
+    "@fishing_fishLarge": {
+      "description": "Large fish name (hard difficulty)"
+    },
+    "fishing_fishWild": "狂鱼",
+    "@fishing_fishWild": {
+      "description": "Wild fish name (wild difficulty)"
+    },
+    "fishing_fishLegendary": "传说之鱼",
+    "@fishing_fishLegendary": {
+      "description": "Legendary fish name"
     }
 }

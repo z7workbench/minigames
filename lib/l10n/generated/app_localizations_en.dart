@@ -2129,4 +2129,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fishing_escapedStat => 'Escaped';
+
+  @override
+  String get fishing_fishSmall => 'Small Fish';
+
+  @override
+  String get fishing_fishMedium => 'Medium Fish';
+
+  @override
+  String get fishing_fishLarge => 'Large Fish';
+
+  @override
+  String get fishing_fishWild => 'Wild Fish';
+
+  @override
+  String get fishing_fishLegendary => 'Legendary Fish';
 }

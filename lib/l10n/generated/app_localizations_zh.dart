@@ -2064,4 +2064,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fishing_escapedStat => '跑掉';
+
+  @override
+  String get fishing_fishSmall => '小鱼';
+
+  @override
+  String get fishing_fishMedium => '中鱼';
+
+  @override
+  String get fishing_fishLarge => '大鱼';
+
+  @override
+  String get fishing_fishWild => '狂鱼';
+
+  @override
+  String get fishing_fishLegendary => '传说之鱼';
 }

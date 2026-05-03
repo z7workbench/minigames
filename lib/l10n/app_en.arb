@@ -2646,5 +2646,25 @@
   "fishing_escapedStat": "Escaped",
   "@fishing_escapedStat": {
     "description": "Escaped fish stat label"
+  },
+  "fishing_fishSmall": "Small Fish",
+  "@fishing_fishSmall": {
+    "description": "Small fish name (easy difficulty)"
+  },
+  "fishing_fishMedium": "Medium Fish",
+  "@fishing_fishMedium": {
+    "description": "Medium fish name (medium difficulty)"
+  },
+  "fishing_fishLarge": "Large Fish",
+  "@fishing_fishLarge": {
+    "description": "Large fish name (hard difficulty)"
+  },
+  "fishing_fishWild": "Wild Fish",
+  "@fishing_fishWild": {
+    "description": "Wild fish name (wild difficulty)"
+  },
+  "fishing_fishLegendary": "Legendary Fish",
+  "@fishing_fishLegendary": {
+    "description": "Legendary fish name"
   }
 }

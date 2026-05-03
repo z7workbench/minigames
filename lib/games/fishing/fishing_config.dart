@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/generated/app_localizations.dart';
+
 enum FishType {
   easy,
   medium,
@@ -9,6 +11,7 @@ enum FishType {
 }
 
 class FishConfig {
+  final FishType type;
   final double size;
   final double moveTime;
   final double stayDuration;
@@ -17,6 +20,7 @@ class FishConfig {
   final String name;
 
   const FishConfig({
+    required this.type,
     required this.size,
     required this.moveTime,
     required this.stayDuration,
@@ -29,6 +33,7 @@ class FishConfig {
     switch (type) {
       case FishType.easy:
         return FishConfig(
+          type: FishType.easy,
           size: 8,
           moveTime: 0.3,
           stayDuration: 2.5,
@@ -38,6 +43,7 @@ class FishConfig {
         );
       case FishType.medium:
         return FishConfig(
+          type: FishType.medium,
           size: 8,
           moveTime: 0.25,
           stayDuration: 2.0,
@@ -47,6 +53,7 @@ class FishConfig {
         );
       case FishType.hard:
         return FishConfig(
+          type: FishType.hard,
           size: 8,
           moveTime: 0.2,
           stayDuration: 1.5,
@@ -56,6 +63,7 @@ class FishConfig {
         );
       case FishType.wild:
         return FishConfig(
+          type: FishType.wild,
           size: 8,
           moveTime: 0.15,
           stayDuration: 1.0,
@@ -65,6 +73,7 @@ class FishConfig {
         );
       case FishType.legendary:
         return FishConfig(
+          type: FishType.legendary,
           size: 8,
           moveTime: 0.1,
           stayDuration: 0.7,
@@ -82,6 +91,21 @@ class FishConfig {
     if (rand < 80) return FishType.hard;
     if (rand < 95) return FishType.wild;
     return FishType.legendary;
+  }
+
+  String localizedName(AppLocalizations l10n) {
+    switch (type) {
+      case FishType.easy:
+        return l10n.fishing_fishSmall;
+      case FishType.medium:
+        return l10n.fishing_fishMedium;
+      case FishType.hard:
+        return l10n.fishing_fishLarge;
+      case FishType.wild:
+        return l10n.fishing_fishWild;
+      case FishType.legendary:
+        return l10n.fishing_fishLegendary;
+    }
   }
 }
 

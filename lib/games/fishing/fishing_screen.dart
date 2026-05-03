@@ -107,8 +107,7 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
     });
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      extendBody: true,
+      backgroundColor: FishingColors.waterDeep,
       appBar: AppBar(
         title: Text(l10n.game_fishing),
         backgroundColor: context.themePrimary,
@@ -131,6 +130,8 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
         onTap: _onTap,
         behavior: HitTestBehavior.opaque,
         child: Container(
+          width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -142,6 +143,7 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
             ),
           ),
           child: SafeArea(
+            top: false,
             child: _buildBody(state, l10n),
           ),
         ),
@@ -269,35 +271,38 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
     final blockWidth = trackWidth * 1.2;
 
     return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildFishTypeIndicator(state),
-            const SizedBox(height: 12),
-            SizedBox(
-              width: trackWidth + 50,
-              height: trackHeight,
-              child: _buildTrack(
-                trackWidth + 50,
-                trackHeight,
-                blockWidth,
-                blockHeight,
-                fishY,
-                blockY,
-                true,
-                state.fishConfig.color,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: availableHeight),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildFishTypeIndicator(state, l10n),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: trackWidth + 50,
+                height: trackHeight,
+                child: _buildTrack(
+                  trackWidth + 50,
+                  trackHeight,
+                  blockWidth,
+                  blockHeight,
+                  fishY,
+                  blockY,
+                  true,
+                  state.fishConfig.color,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            _buildAlignmentLabel(isAligned, l10n),
-            const SizedBox(height: 8),
-            _buildProgressBar(state, availableWidth),
-            const SizedBox(height: 6),
-            _buildTimerText(state),
-            const SizedBox(height: 16),
-            _buildControlButton(l10n),
-          ],
+              const SizedBox(height: 12),
+              _buildAlignmentLabel(isAligned, l10n),
+              const SizedBox(height: 8),
+              _buildProgressBar(state, availableWidth),
+              const SizedBox(height: 6),
+              _buildTimerText(state),
+              const SizedBox(height: 16),
+              _buildControlButton(l10n),
+            ],
+          ),
         ),
       ),
     );
@@ -325,8 +330,8 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildFishTypeIndicator(state),
-              const SizedBox(height: 8),
+              _buildFishTypeIndicator(state, l10n),
+              const SizedBox(height: 24),
               SizedBox(
                 width: trackWidth,
                 height: trackHeight,
@@ -418,13 +423,13 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
         ),
         if (isVertical)
           Positioned(
-            left: fishPos * width - 8,
-            top: -18,
-            child: const Icon(Icons.arrow_drop_down, color: Colors.white, size: 18),
+            right: -18,
+            top: fishPos * height - 9,
+            child: const Icon(Icons.arrow_left, color: Colors.white, size: 18),
           )
         else
           Positioned(
-            left: fishPos * width - 8,
+            left: fishPos * width - 9,
             top: -18,
             child: const Icon(Icons.arrow_drop_down, color: Colors.white, size: 18),
           ),
@@ -476,7 +481,7 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
     );
   }
 
-  Widget _buildFishTypeIndicator(FishingState state) {
+  Widget _buildFishTypeIndicator(FishingState state, AppLocalizations l10n) {
     final fishConfig = state.fishConfig;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -490,7 +495,7 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
           const Icon(Icons.pets, color: Colors.white, size: 20),
           const SizedBox(width: 8),
           Text(
-            fishConfig.name,
+            fishConfig.localizedName(l10n),
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -667,6 +672,8 @@ class _FishingScreenState extends ConsumerState<FishingScreen>
             ),
           ),
 const SizedBox(height: 32),
+          _buildThrowButton(state, l10n),
+          const SizedBox(height: 24),
           _buildStatsPanel(state, l10n),
         ],
       ),
@@ -754,7 +761,7 @@ const SizedBox(height: 32),
             ),
             const SizedBox(height: 8),
             Text(
-              state.fishConfig.name,
+              state.fishConfig.localizedName(l10n),
               style: TextStyle(
                 color: state.fishConfig.color,
                 fontSize: 20,
