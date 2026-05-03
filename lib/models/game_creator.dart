@@ -34,7 +34,6 @@ extension GameCreatorExtension on GameCreator {
           GameType.yachtDice,
           GameType.guessArrangement,
           GameType.twenty48,
-          GameType.diceBattle,
           GameType.mancala,
           GameType.hearts,
           GameType.bluffBar,
@@ -60,7 +59,6 @@ extension GameTypeCreatorExtension on GameType {
       case GameType.yachtDice:
       case GameType.guessArrangement:
       case GameType.twenty48:
-      case GameType.diceBattle:
       case GameType.mancala:
       case GameType.hearts:
       case GameType.bluffBar:

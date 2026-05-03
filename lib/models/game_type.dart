@@ -7,7 +7,6 @@ enum GameType {
   yachtDice,
   guessArrangement,
   twenty48,
-  diceBattle,
   mancala,
   hearts,
   bluffBar,
@@ -30,8 +29,6 @@ extension GameTypeExtension on GameType {
         return 'Guess Arrangement';
       case GameType.twenty48:
         return '2048';
-      case GameType.diceBattle:
-        return 'Dice Battle';
       case GameType.mancala:
         return 'Mancala';
       case GameType.hearts:
@@ -61,8 +58,6 @@ case GameType.schulteGrid:
         return Icons.style;
       case GameType.twenty48:
         return Icons.grid_4x4;
-      case GameType.diceBattle:
-        return Icons.sports_mma;
       case GameType.mancala:
         return Icons.grain;
       case GameType.hearts:
@@ -102,8 +97,6 @@ case GameType.schulteGrid:
         return '/guess-arrangement';
       case GameType.twenty48:
         return '/2048';
-      case GameType.diceBattle:
-        return '/dice-battle';
       case GameType.mancala:
         return '/mancala';
       case GameType.hearts:
@@ -135,8 +128,6 @@ case GameType.schulteGrid:
         return DateTime(2026, 4, 6);
       case GameType.guessArrangement:
         return DateTime(2026, 4, 6);
-      case GameType.diceBattle:
-        return DateTime(2026, 4, 6);
       case GameType.hearts:
         return DateTime(2026, 4, 12);
       case GameType.bluffBar:
@@ -154,7 +145,5 @@ case GameType.schulteGrid:
     }
   }
 
-  bool get isWip {
-    return this == GameType.diceBattle;
-  }
+  bool get isWip => false;
 }

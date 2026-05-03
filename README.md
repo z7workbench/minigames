@@ -32,7 +32,6 @@
 | **Mancala** | ✅ Complete | Easy/Medium/Hard | 5 slots |
 | **Hearts** | ✅ Complete | Easy/Medium/Hard | 5 slots |
 | **Bluff Bar** | ✅ Complete | Easy/Medium/Hard | 5 slots |
-| **Dice Battle** | 🚧 WIP | Easy/Medium/Hard | Records |
 | **Reaction Test** | ✅ Complete | - | Leaderboard |
 | **Aim Test** | ✅ Complete | - | Leaderboard |
 | **Chess** | ✅ Complete | Easy/Hard | Records |
@@ -225,39 +224,6 @@ Four-player bluffing game where you play cards face-down claiming they match the
 
 ---
 
-### Dice Battle 🚧 (Work In Progress)
-
-Strategic dice combat with attack/defense phases and special effects!
-
-**Description:**
-A tactical dice battle game where players roll dice to attack and defend. Alternate between attack and defense phases, selecting dice for maximum damage or defense.
-
-**Gameplay:**
-- **Setup**: Each player chooses a dice set with unique attack/defense values
-- **Coin Flip**: Random first player
-- **Attack Phase**: Roll dice, select for attack, reroll up to 2 times
-- **Defense Phase**: Defender rolls and selects dice for defense
-- **Damage**: Attack total - Defense total = Damage dealt
-- **Effects**: Special field effects activate from Round 2+
-- Game ends when a player reaches 0 HP
-
-**Game Modes:**
-- **2 Players**: Local multiplayer
-- **vs AI**: Easy (random), Medium (basic strategy), Hard (optimal selection + reroll)
-
-**Note:** This game is currently under active development. Core mechanics are implemented but may have incomplete features or visual polish.
-
-**Features (Implemented):**
-- 6 unique dice types (Standard, Attack, Defense, etc.)
-- 8 field effects (Odd Bonus, Even Bonus, Combo, Double Damage, etc.)
-- Dice reroll system (max 2 per attack)
-- Health bar visualization
-- Battle log with turn history
-- Animated damage display
-- Dice selection and confirmation UI
-
----
-
 ### Chess
 
 Classic international chess with AI opponent, FEN import and PGN export.
@@ -346,7 +312,6 @@ Cast your rod and wait for a fish to bite. When you see the bite indicator, tap 
 - 2048
 - Mancala
 - Hearts
-- Dice Battle
 - Fishing
 
 ---

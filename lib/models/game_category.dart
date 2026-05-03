@@ -42,7 +42,7 @@ extension GameCategoryExtension on GameCategory {
   List<GameType> get gameTypes {
     switch (this) {
       case GameCategory.dice:
-        return [GameType.yachtDice, GameType.diceBattle];
+        return [GameType.yachtDice];
       case GameCategory.cards:
         return [GameType.guessArrangement, GameType.hearts, GameType.bluffBar];
       case GameCategory.board:
@@ -79,7 +79,6 @@ extension GameTypeCategoryExtension on GameType {
   GameCategory? get category {
     switch (this) {
       case GameType.yachtDice:
-      case GameType.diceBattle:
         return GameCategory.dice;
       case GameType.guessArrangement:
       case GameType.hearts:

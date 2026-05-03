@@ -15,7 +15,6 @@ import '../../games/hit_and_blow/screens/hit_and_blow_start_screen.dart';
 import '../../games/yacht_dice/screens/yacht_dice_start_screen.dart';
 import '../../games/guess_arrangement/screens/start_screen.dart';
 import '../../games/twenty48/screens/twenty48_start_screen.dart';
-import '../../games/dice_battle/screens/start_screen.dart' as dice_battle;
 import '../../games/mancala/screens/mancala_start_screen.dart';
 import '../../games/hearts/screens/hearts_start_screen.dart';
 import '../../games/bluff_bar/screens/bluff_bar_start_screen.dart';
@@ -66,14 +65,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Twenty48StartScreen()),
-        );
-        break;
-      case GameType.diceBattle:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const dice_battle.DiceBattleStartScreen(),
-          ),
         );
         break;
       case GameType.mancala:
@@ -146,8 +137,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.game_guess_arrangement;
       case GameType.twenty48:
         return l10n.game_2048;
-      case GameType.diceBattle:
-        return l10n.game_dice_battle;
       case GameType.mancala:
         return l10n.game_mancala;
       case GameType.hearts:
@@ -178,8 +167,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.ga_gameDescription;
       case GameType.twenty48:
         return l10n.t48_gameDescription;
-      case GameType.diceBattle:
-        return l10n.db_gameDescription;
       case GameType.mancala:
         return l10n.mc_gameDescription;
       case GameType.hearts:
