@@ -186,9 +186,7 @@ class _SchulteGridStartScreenState
           const SizedBox(height: 8),
           Text(
             l10n.createdByMimo,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: colors.textSecondary,
-                ),
+            style: TextStyle(fontSize: 12, color: context.themeAccent),
           ),
           const SizedBox(height: 8),
           Text(

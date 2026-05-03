@@ -77,9 +77,7 @@ class _AimTestStartScreenState extends ConsumerState<AimTestStartScreen> {
         Text(
           l10n.createdByMinimax,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: textSecondaryColor,
-          ),
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
         ),
         const SizedBox(height: 8),
         Text(

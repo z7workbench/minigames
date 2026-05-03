@@ -158,7 +158,7 @@ class _HitAndBlowStartScreenState extends ConsumerState<HitAndBlowStartScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          l10n.createdByGlm,
+          l10n.createdByMimo,
           textAlign: isLandscape ? TextAlign.start : TextAlign.center,
           style: TextStyle(fontSize: 12, color: context.themeAccent),
         ),

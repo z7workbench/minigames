@@ -31,7 +31,6 @@ extension GameCreatorExtension on GameCreator {
     switch (this) {
       case GameCreator.glm:
         return [
-          GameType.hitAndBlow,
           GameType.yachtDice,
           GameType.guessArrangement,
           GameType.twenty48,
@@ -43,7 +42,7 @@ extension GameCreatorExtension on GameCreator {
       case GameCreator.minimax:
         return [GameType.reactionTest, GameType.aimTest, GameType.fishing];
       case GameCreator.mimo:
-        return [GameType.chessIntl, GameType.schulteGrid];
+        return [GameType.hitAndBlow, GameType.chessIntl, GameType.schulteGrid];
     }
   }
 
@@ -58,7 +57,6 @@ extension GameCreatorExtension on GameCreator {
 extension GameTypeCreatorExtension on GameType {
   GameCreator get creator {
     switch (this) {
-      case GameType.hitAndBlow:
       case GameType.yachtDice:
       case GameType.guessArrangement:
       case GameType.twenty48:
@@ -70,6 +68,7 @@ extension GameTypeCreatorExtension on GameType {
       case GameType.reactionTest:
       case GameType.aimTest:
         return GameCreator.minimax;
+      case GameType.hitAndBlow:
       case GameType.chessIntl:
       case GameType.schulteGrid:
         return GameCreator.mimo;

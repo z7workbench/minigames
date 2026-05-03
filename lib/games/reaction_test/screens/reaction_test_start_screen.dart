@@ -103,9 +103,7 @@ class _ReactionTestStartScreenState
         const SizedBox(height: 8),
         Text(
           l10n.createdByMinimax,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: textSecondaryColor,
-          ),
+          style: TextStyle(fontSize: 12, color: context.themeAccent),
         ),
         const SizedBox(height: 8),
         Text(
