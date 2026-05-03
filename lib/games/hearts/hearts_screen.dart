@@ -387,6 +387,13 @@ class _HeartsScreenState extends ConsumerState<HeartsScreen>
     bool isDark,
     AppLocalizations l10n,
   ) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final isNarrow = screenWidth < 520;
+
+    if (isNarrow) {
+      return _buildCompactPlayingState(context, state, isDark, l10n);
+    }
+
     return SafeArea(
       child: Column(
         children: [
@@ -411,6 +418,168 @@ class _HeartsScreenState extends ConsumerState<HeartsScreen>
 
           // Bottom section: South player (human) with hand
           _buildSouthPlayerSection(context, state, isDark, l10n),
+        ],
+      ),
+    );
+  }
+
+  /// Compact layout for narrow screens (mobile).
+  /// Top row: West | North | East player info (name + card count + score).
+  /// Middle: Status bar + trick display + turn indicator (full width).
+  /// Bottom: South player hand.
+  Widget _buildCompactPlayingState(
+    BuildContext context,
+    HeartsState state,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
+    final westPlayer = _getPlayerAtPosition(state, 1);
+    final northPlayer = _getPlayerAtPosition(state, 2);
+    final eastPlayer = _getPlayerAtPosition(state, 3);
+
+    return SafeArea(
+      child: Column(
+        children: [
+          // Top row: West, North, East player info
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            decoration: BoxDecoration(
+              color: context.themeSurface.withAlpha(80),
+              border: Border(
+                bottom: BorderSide(color: context.themeBorder.withAlpha(100)),
+              ),
+            ),
+            child: Row(
+              children: [
+                if (westPlayer != null)
+                  Expanded(
+                    child: _buildCompactPlayerInfo(
+                      context,
+                      westPlayer,
+                      state,
+                      PlayerPosition.west,
+                    ),
+                  ),
+                if (northPlayer != null)
+                  Expanded(
+                    child: _buildCompactPlayerInfo(
+                      context,
+                      northPlayer,
+                      state,
+                      PlayerPosition.north,
+                    ),
+                  ),
+                if (eastPlayer != null)
+                  Expanded(
+                    child: _buildCompactPlayerInfo(
+                      context,
+                      eastPlayer,
+                      state,
+                      PlayerPosition.east,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+
+          // Middle: Center section (full width)
+          Expanded(
+            child: _buildCenterSection(state, isDark, l10n),
+          ),
+
+          // Bottom: South player hand
+          _buildSouthPlayerSection(context, state, isDark, l10n),
+        ],
+      ),
+    );
+  }
+
+  /// Compact player info for the narrow-screen top bar.
+  /// Shows: position icon, name, card count badge, score.
+  Widget _buildCompactPlayerInfo(
+    BuildContext context,
+    HeartsPlayer player,
+    HeartsState state,
+    PlayerPosition position,
+  ) {
+    final isCurrentTurn = state.currentPlayerIndex == player.index;
+    final name = position == PlayerPosition.north
+        ? 'N'
+        : position == PlayerPosition.west
+            ? 'W'
+            : 'E';
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+      decoration: BoxDecoration(
+        color: isCurrentTurn
+            ? context.themeAccent.withAlpha(100)
+            : context.themeCard.withAlpha(100),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: isCurrentTurn ? context.themeAccent : context.themeBorder.withAlpha(50),
+          width: isCurrentTurn ? 2 : 1,
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Name + card count
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (!player.isHuman) ...[
+                Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: _getDifficultyColor(player.aiDifficulty),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 3),
+              ],
+              Flexible(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    color: context.themeTextPrimary,
+                    fontSize: 11,
+                    fontWeight: isCurrentTurn ? FontWeight.bold : FontWeight.normal,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 3),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+                decoration: BoxDecoration(
+                  color: context.themeCard,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  '${player.cardCount}',
+                  style: TextStyle(
+                    color: context.themeTextSecondary,
+                    fontSize: 10,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 2),
+          // Score
+          Text(
+            '${player.totalScore} (${player.roundScore > 0 ? '+${player.roundScore}' : player.roundScore})',
+            style: TextStyle(
+              color: player.totalScore >= 100
+                  ? context.themeError
+                  : context.themeTextSecondary,
+              fontSize: 10,
+            ),
+          ),
         ],
       ),
     );
@@ -841,6 +1010,19 @@ class _HeartsScreenState extends ConsumerState<HeartsScreen>
   }
 
   // ==================== Helper Methods ====================
+
+  Color _getDifficultyColor(AiDifficulty? difficulty) {
+    switch (difficulty) {
+      case AiDifficulty.easy:
+        return Colors.green;
+      case AiDifficulty.medium:
+        return Colors.orange;
+      case AiDifficulty.hard:
+        return Colors.red.shade700;
+      default:
+        return Colors.grey;
+    }
+  }
 
   Color _getCardColor(PlayingCard card, bool isDark) {
     if (card.suit == CardSuit.hearts || card.suit == CardSuit.diamonds) {
