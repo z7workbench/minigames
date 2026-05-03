@@ -1624,16 +1624,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rt_selectPreset => '选择配色方案';
 
   @override
-  String get rt_redGreenColorblind => '红绿色盲';
+  String get rt_redGreenColorblind => '红绿组合';
 
   @override
-  String get rt_blueYellowColorblind => '蓝黄色盲';
+  String get rt_blueYellowColorblind => '蓝黄组合';
 
   @override
-  String get rt_monochromacy => '全色盲';
+  String get rt_monochromacy => '黑白组合';
 
   @override
-  String get rt_custom => '自定义';
+  String get rt_custom => '自定义组合';
 
   @override
   String get rt_beforeColor => '变化前颜色';

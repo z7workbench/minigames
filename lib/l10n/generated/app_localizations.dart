@@ -3137,19 +3137,19 @@ abstract class AppLocalizations {
   /// Red-green colorblind friendly preset
   ///
   /// In en, this message translates to:
-  /// **'Red-Green Colorblind'**
+  /// **'Red-Green'**
   String get rt_redGreenColorblind;
 
   /// Blue-yellow colorblind friendly preset
   ///
   /// In en, this message translates to:
-  /// **'Blue-Yellow Colorblind'**
+  /// **'Blue-Yellow'**
   String get rt_blueYellowColorblind;
 
   /// Monochromacy (grayscale) preset
   ///
   /// In en, this message translates to:
-  /// **'Monochromacy'**
+  /// **'Black-White'**
   String get rt_monochromacy;
 
   /// Custom color selection option

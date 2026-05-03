@@ -1672,13 +1672,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rt_selectPreset => 'Select Color Scheme';
 
   @override
-  String get rt_redGreenColorblind => 'Red-Green Colorblind';
+  String get rt_redGreenColorblind => 'Red-Green';
 
   @override
-  String get rt_blueYellowColorblind => 'Blue-Yellow Colorblind';
+  String get rt_blueYellowColorblind => 'Blue-Yellow';
 
   @override
-  String get rt_monochromacy => 'Monochromacy';
+  String get rt_monochromacy => 'Black-White';
 
   @override
   String get rt_custom => 'Custom';

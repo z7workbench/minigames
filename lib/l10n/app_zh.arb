@@ -2019,19 +2019,19 @@
   "@rt_selectPreset": {
     "description": "Color preset selection label"
   },
-  "rt_redGreenColorblind": "红绿色盲",
+  "rt_redGreenColorblind": "红绿组合",
   "@rt_redGreenColorblind": {
     "description": "Red-green colorblind friendly preset"
   },
-  "rt_blueYellowColorblind": "蓝黄色盲",
+  "rt_blueYellowColorblind": "蓝黄组合",
   "@rt_blueYellowColorblind": {
     "description": "Blue-yellow colorblind friendly preset"
   },
-  "rt_monochromacy": "全色盲",
+  "rt_monochromacy": "黑白组合",
   "@rt_monochromacy": {
     "description": "Monochromacy (grayscale) preset"
   },
-  "rt_custom": "自定义",
+  "rt_custom": "自定义组合",
   "@rt_custom": {
     "description": "Custom color selection option"
   },

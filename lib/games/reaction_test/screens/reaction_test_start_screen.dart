@@ -181,7 +181,9 @@ class _ReactionTestStartScreenState
                       children: [
                         _buildGameIcon(isDark, themeColors, 80),
                         const SizedBox(width: 16),
-                        _buildTitleSection(l10n, context, textPrimaryColor, textSecondaryColor),
+                        Expanded(
+                          child: _buildTitleSection(l10n, context, textPrimaryColor, textSecondaryColor),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 24),
