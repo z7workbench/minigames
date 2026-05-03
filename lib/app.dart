@@ -17,7 +17,7 @@ class App extends ConsumerWidget {
     final colorSchemeAsync = ref.watch(colorSchemeNotifierProvider);
     final settings = ref.watch(settingsProvider);
 
-    final colorScheme = colorSchemeAsync.valueOrNull ?? ColorSchemeType.wooden;
+    final colorScheme = colorSchemeAsync.valueOrNull ?? ColorSchemeType.starlight;
 
     return MaterialApp(
       title: 'Mini Games',

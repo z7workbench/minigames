@@ -7,7 +7,7 @@ part 'theme_provider.g.dart';
 /// Available color schemes
 enum ColorSchemeType { wooden, starlight, forest, volcano }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ThemeModeNotifier extends _$ThemeModeNotifier {
   late final SharedPreferences _prefs;
 
@@ -66,7 +66,7 @@ class ThemeModeNotifier extends _$ThemeModeNotifier {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ColorSchemeNotifier extends _$ColorSchemeNotifier {
   late final SharedPreferences _prefs;
 
