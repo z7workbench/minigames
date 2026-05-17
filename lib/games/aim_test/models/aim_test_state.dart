@@ -9,6 +9,7 @@ enum BubbleColor {
   coral,
   turquoise,
   lemonYellow,
+  black, // For e-ink displays
 }
 
 /// The game status for the Aim Test game.

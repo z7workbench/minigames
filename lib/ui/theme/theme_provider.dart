@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'theme_provider.g.dart';
 
 /// Available color schemes
-enum ColorSchemeType { wooden, starlight, forest, volcano }
+enum ColorSchemeType { wooden, starlight, forest, volcano, eink }
 
 @Riverpod(keepAlive: true)
 class ThemeModeNotifier extends _$ThemeModeNotifier {
@@ -82,6 +82,8 @@ class ColorSchemeNotifier extends _$ColorSchemeNotifier {
         return ColorSchemeType.forest;
       case 'volcano':
         return ColorSchemeType.volcano;
+      case 'eink':
+        return ColorSchemeType.eink;
       case 'starlight':
       default:
         return ColorSchemeType.starlight;
@@ -98,6 +100,7 @@ class ColorSchemeNotifier extends _$ColorSchemeNotifier {
       ColorSchemeType.forest => 'forest',
       ColorSchemeType.volcano => 'volcano',
       ColorSchemeType.wooden => 'wooden',
+      ColorSchemeType.eink => 'eink',
     };
 
     await _prefs.setString('color_scheme', schemeString);

@@ -29,9 +29,19 @@ class _AimTestSettingsPageState extends ConsumerState<AimTestSettingsPage> {
     final config = ref.read(aimTestGameProvider).bubbleConfig;
     _deadZonePercentage = config.deadZonePercentage;
     _bubbleSize = (config.minSize + config.maxSize) / 2;
-    _selectedColor = config.selectedColor;
     _gameDuration = config.gameDurationSeconds;
     _enableAppearAnimation = config.enableAppearAnimation;
+    // Defer color init to didChangeDependencies for context access
+    _selectedColor = config.selectedColor;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (context.isEinkScheme && _selectedColor != BubbleColor.black) {
+      _selectedColor = BubbleColor.black;
+      ref.read(aimTestGameProvider.notifier).updateSelectedColor(BubbleColor.black);
+    }
   }
 
   Color _getBubbleColor(BubbleColor color) {
@@ -54,6 +64,8 @@ class _AimTestSettingsPageState extends ConsumerState<AimTestSettingsPage> {
         return const Color(0xFF40E0D0);
       case BubbleColor.lemonYellow:
         return const Color(0xFFFFEB3B);
+      case BubbleColor.black:
+        return const Color(0xFF000000);
     }
   }
 
@@ -444,41 +456,39 @@ class _AimTestSettingsPageState extends ConsumerState<AimTestSettingsPage> {
                             ),
                             const SizedBox(height: 12),
 
-                            // Bubble Size slider
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.circle,
-                                  color: themeColors.onPrimary,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 8),
-                                Expanded(
-                                  child: Text(
-                                    '${l10n.at_bubbleSize}: ${_bubbleSize.toInt()}dp',
+                            // Bubble Color picker (hidden on e-ink)
+                            if (!context.isEinkScheme) ...[
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.palette,
+                                    color: themeColors.onPrimary,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    l10n.at_bubbleColor,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Slider(
-                              value: _bubbleSize,
-                              min: 40,
-                              max: 100,
-                              divisions: 12,
-                              activeColor: themeColors.accent,
-                              inactiveColor: themeColors.accent.withAlpha(50),
-                              onChanged: (value) {
-                                setState(() => _bubbleSize = value);
-                                ref
-                                    .read(aimTestGameProvider.notifier)
-                                    .updateBubbleSize(value);
-                              },
-                            ),
-                            const SizedBox(height: 16),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              Wrap(
+                                spacing: 12,
+                                runSpacing: 8,
+                                alignment: WrapAlignment.center,
+                                children: BubbleColor.values
+                                    .where((c) => c != BubbleColor.black)
+                                    .map((color) {
+                                  final isSelected = _selectedColor == color;
+                                  return _buildColorButton(color, isSelected);
+                                }).toList(),
+                              ),
+                              const SizedBox(height: 16),
+                            ],
 
                             // Bubble Color picker
                             Row(

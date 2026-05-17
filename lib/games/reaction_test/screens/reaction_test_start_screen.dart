@@ -127,13 +127,23 @@ class _ReactionTestStartScreenState
     final textSecondaryColor = themeColors.textSecondary;
 
     final gameState = ref.watch(reactionTestGameProvider);
-    final selectedPreset = gameState.selectedPresetIndex;
-    final isCustom = selectedPreset == 3;
+    final isEink = context.isEinkScheme;
 
-    final allPresets = [
-      ...ReactionTestState.colorPresets,
-      const ColorPreset(name: '', beforeColor: Colors.grey, afterColor: Colors.grey),
-    ];
+    if (isEink && gameState.selectedPresetIndex != 2) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(reactionTestGameProvider.notifier).setColorPreset(2);
+      });
+    }
+
+    final selectedPreset = isEink ? 2 : gameState.selectedPresetIndex;
+    final isCustom = !isEink && selectedPreset == 3;
+
+    final allPresets = isEink
+        ? [ReactionTestState.colorPresets[2]]
+        : [
+            ...ReactionTestState.colorPresets,
+            const ColorPreset(name: '', beforeColor: Colors.grey, afterColor: Colors.grey),
+          ];
 
     final colorsSame = isCustom &&
         _customBeforeColor != null &&
@@ -222,13 +232,15 @@ class _ReactionTestStartScreenState
                             physics: const NeverScrollableScrollPhysics(),
                             children: List.generate(allPresets.length, (index) {
                               final preset = allPresets[index];
-                              final isSelected = selectedPreset == index;
+                              final presetIndex = isEink ? 2 : index;
+                              final isSelected = selectedPreset == presetIndex;
                               return _PresetCard(
                                 preset: preset,
-                                presetName: _getPresetName(l10n, index),
+                                presetName: _getPresetName(l10n, presetIndex),
                                 isSelected: isSelected,
                                 isLandscape: isLandscape,
                                 onTap: () {
+                                  if (isEink) return;
                                   if (index == allPresets.length - 1) {
                                     ref
                                         .read(reactionTestGameProvider.notifier)

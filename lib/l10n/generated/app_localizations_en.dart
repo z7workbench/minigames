@@ -898,6 +898,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get volcanoScheme => 'Volcano';
 
   @override
+  String get einkScheme => 'E-Ink';
+
+  @override
   String get hearts_game_hearts => 'Hearts';
 
   @override

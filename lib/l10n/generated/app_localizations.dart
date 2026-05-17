@@ -1748,6 +1748,12 @@ abstract class AppLocalizations {
   /// **'Volcano'**
   String get volcanoScheme;
 
+  /// E-Ink grayscale color scheme option for e-ink displays
+  ///
+  /// In en, this message translates to:
+  /// **'E-Ink'**
+  String get einkScheme;
+
   /// Hearts game title
   ///
   /// In en, this message translates to:

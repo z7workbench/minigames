@@ -408,6 +408,22 @@ class _ThemeAndColorSchemeSetting extends ConsumerWidget {
               ),
             ],
           ),
+          Container(height: 1, color: context.themeDivider),
+          Row(
+            children: [
+              Expanded(
+                child: _ColorSchemeOption(
+                  context: context,
+                  label: l10n.einkScheme,
+                  icon: Icons.e_mobiledata,
+                  isSelected: colorScheme == ColorSchemeType.eink,
+                  onTap: () => ref
+                      .read(colorSchemeNotifierProvider.notifier)
+                      .setColorScheme(ColorSchemeType.eink),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

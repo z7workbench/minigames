@@ -1224,6 +1224,10 @@
   "@volcanoScheme": {
     "description": "Volcano color scheme option"
   },
+  "einkScheme": "E-Ink",
+  "@einkScheme": {
+    "description": "E-Ink grayscale color scheme option for e-ink displays"
+  },
   "hearts_game_hearts": "Hearts",
   "@hearts_game_hearts": { "description": "Hearts game title" },
   "hearts_description": "Avoid hearts and Queen of Spades!",

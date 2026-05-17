@@ -874,6 +874,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get volcanoScheme => '火山风格';
 
   @override
+  String get einkScheme => '墨水屏';
+
+  @override
   String get hearts_game_hearts => '红心大战';
 
   @override

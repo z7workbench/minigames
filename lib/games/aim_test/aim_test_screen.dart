@@ -305,9 +305,12 @@ class _AimTestScreenState extends ConsumerState<AimTestScreen>
 
     // Determine bubble color
     final selectedColor = state.bubbleConfig.selectedColor;
-    final bubbleColor = selectedColor == BubbleColor.random
-        ? BubbleConfig.allColors[state.bubblesSpawned % BubbleConfig.allColors.length]
-        : selectedColor;
+    final isEink = context.isEinkScheme;
+    final bubbleColor = isEink
+        ? BubbleColor.black
+        : selectedColor == BubbleColor.random
+            ? BubbleConfig.allColors[state.bubblesSpawned % BubbleConfig.allColors.length]
+            : selectedColor;
 
     final enableAnimation = state.bubbleConfig.enableAppearAnimation;
 

@@ -5,6 +5,7 @@ import 'wooden_colors.dart';
 import 'starlight_colors.dart';
 import 'forest_colors.dart';
 import 'volcano_colors.dart';
+import 'eink_colors.dart';
 
 /// Extension to easily access theme-aware colors from BuildContext
 extension ThemeColorsExtension on BuildContext {
@@ -35,12 +36,20 @@ extension ThemeColorsExtension on BuildContext {
           primaryColor.toARGB32() == VolcanoColors.darkPrimary.toARGB32()) {
         return ColorSchemeType.volcano;
       }
+      // Check E-Ink
+      if (primaryColor.toARGB32() == EinkColors.lightPrimary.toARGB32() ||
+          primaryColor.toARGB32() == EinkColors.darkPrimary.toARGB32()) {
+        return ColorSchemeType.eink;
+      }
       return ColorSchemeType.wooden;
     }
   }
 
   /// Check if current theme is dark mode
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+
+  /// Check if current color scheme is e-ink (grayscale, no shadows)
+  bool get isEinkScheme => colorSchemeType == ColorSchemeType.eink;
 
   /// Get theme-aware primary color
   Color get themePrimary => Theme.of(this).colorScheme.primary;
@@ -82,6 +91,8 @@ extension ThemeColorsExtension on BuildContext {
         return ForestColors.accentEmerald;
       case ColorSchemeType.volcano:
         return VolcanoColors.accentLava;
+      case ColorSchemeType.eink:
+        return isDark ? EinkColors.accentSilver : EinkColors.accentInk;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.accentAmber : WoodenColors.accentBronze;
     }
@@ -97,6 +108,8 @@ extension ThemeColorsExtension on BuildContext {
         return ForestColors.accentMoss;
       case ColorSchemeType.volcano:
         return VolcanoColors.accentEmber;
+      case ColorSchemeType.eink:
+        return isDark ? EinkColors.accentSlate : EinkColors.accentCharcoal;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.accentCopper : WoodenColors.accentCopper;
     }
@@ -112,6 +125,8 @@ extension ThemeColorsExtension on BuildContext {
         return isDark ? ForestColors.darkSuccess : ForestColors.lightSuccess;
       case ColorSchemeType.volcano:
         return isDark ? VolcanoColors.darkSuccess : VolcanoColors.lightSuccess;
+      case ColorSchemeType.eink:
+        return isDark ? EinkColors.darkSuccess : EinkColors.lightSuccess;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkSuccess : WoodenColors.lightSuccess;
     }
@@ -127,6 +142,8 @@ extension ThemeColorsExtension on BuildContext {
         return isDark ? ForestColors.darkError : ForestColors.lightError;
       case ColorSchemeType.volcano:
         return isDark ? VolcanoColors.darkError : VolcanoColors.lightError;
+      case ColorSchemeType.eink:
+        return isDark ? EinkColors.darkError : EinkColors.lightError;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkError : WoodenColors.lightError;
     }
@@ -142,6 +159,8 @@ extension ThemeColorsExtension on BuildContext {
         return isDark ? ForestColors.darkWarning : ForestColors.lightWarning;
       case ColorSchemeType.volcano:
         return isDark ? VolcanoColors.darkWarning : VolcanoColors.lightWarning;
+      case ColorSchemeType.eink:
+        return isDark ? EinkColors.darkWarning : EinkColors.lightWarning;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkWarning : WoodenColors.lightWarning;
     }
@@ -161,6 +180,8 @@ extension ThemeColorsExtension on BuildContext {
         return isDark
             ? VolcanoColors.darkDisabled
             : VolcanoColors.lightDisabled;
+      case ColorSchemeType.eink:
+        return isDark ? EinkColors.darkDisabled : EinkColors.lightDisabled;
       case ColorSchemeType.wooden:
         return isDark ? WoodenColors.darkDisabled : WoodenColors.lightDisabled;
     }
@@ -181,6 +202,8 @@ extension ThemeColorsExtension on BuildContext {
             : ForestColors.lightOnPrimary;
       case ColorSchemeType.volcano:
         return Colors.white;
+      case ColorSchemeType.eink:
+        return isDark ? EinkColors.darkOnPrimary : EinkColors.lightOnPrimary;
       case ColorSchemeType.wooden:
         return Colors.black;
     }
@@ -202,6 +225,10 @@ extension ThemeColorsExtension on BuildContext {
         return isDark
             ? VolcanoColors.accentLava.withAlpha(200)
             : VolcanoColors.accentMagma.withAlpha(180);
+      case ColorSchemeType.eink:
+        return isDark
+            ? EinkColors.accentSilver.withAlpha(200)
+            : EinkColors.accentInk.withAlpha(180);
       case ColorSchemeType.wooden:
         return isDark
             ? WoodenColors.accentAmber.withAlpha(200)
@@ -218,6 +245,10 @@ extension ThemeColorsExtension on BuildContext {
         return ForestColors.accentMoss.withAlpha(150);
       case ColorSchemeType.volcano:
         return VolcanoColors.accentEmber.withAlpha(150);
+      case ColorSchemeType.eink:
+        return isDarkMode
+            ? EinkColors.accentSilver.withAlpha(150)
+            : EinkColors.accentCharcoal.withAlpha(150);
       case ColorSchemeType.wooden:
         return WoodenColors.accentCopper.withAlpha(150);
     }
@@ -411,6 +442,55 @@ class ThemeColors {
           disabled: isDark
               ? WoodenColors.darkDisabled
               : WoodenColors.lightDisabled,
+        );
+      case ColorSchemeType.eink:
+        return ThemeColorSet(
+          primary: isDark
+              ? EinkColors.darkPrimary
+              : EinkColors.lightPrimary,
+          secondary: isDark
+              ? EinkColors.darkSecondary
+              : EinkColors.lightSecondary,
+          background: isDark
+              ? EinkColors.darkBackground
+              : EinkColors.lightBackground,
+          surface: isDark
+              ? EinkColors.darkSurface
+              : EinkColors.lightSurface,
+          card: isDark ? EinkColors.darkCard : EinkColors.lightCard,
+          textPrimary: isDark
+              ? EinkColors.darkTextPrimary
+              : EinkColors.lightTextPrimary,
+          textSecondary: isDark
+              ? EinkColors.darkTextSecondary
+              : EinkColors.lightTextSecondary,
+          border: isDark ? EinkColors.darkBorder : EinkColors.lightBorder,
+          divider: isDark
+              ? EinkColors.darkDivider
+              : EinkColors.lightDivider,
+          shadow: isDark ? EinkColors.darkShadow : EinkColors.lightShadow,
+          accent: isDark
+              ? EinkColors.accentSilver
+              : EinkColors.accentInk,
+          accentSecondary: isDark
+              ? EinkColors.accentSlate
+              : EinkColors.accentCharcoal,
+          error: isDark ? EinkColors.darkError : EinkColors.lightError,
+          success: isDark
+              ? EinkColors.darkSuccess
+              : EinkColors.lightSuccess,
+          warning: isDark
+              ? EinkColors.darkWarning
+              : EinkColors.lightWarning,
+          onPrimary: isDark
+              ? EinkColors.darkOnPrimary
+              : EinkColors.lightOnPrimary,
+          pattern: isDark
+              ? EinkColors.accentSilver.withAlpha(150)
+              : EinkColors.accentCharcoal.withAlpha(150),
+          disabled: isDark
+              ? EinkColors.darkDisabled
+              : EinkColors.lightDisabled,
         );
     }
   }

@@ -1224,6 +1224,10 @@
   "@volcanoScheme": {
     "description": "Volcano color scheme option"
   },
+  "einkScheme": "墨水屏",
+  "@einkScheme": {
+    "description": "E-Ink grayscale color scheme option for e-ink displays"
+  },
   "hearts_game_hearts": "红心大战",
   "@hearts_game_hearts": { "description": "Hearts game title" },
   "hearts_description": "避开红心和黑桃皇后！",

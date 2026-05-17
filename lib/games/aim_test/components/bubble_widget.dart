@@ -125,6 +125,8 @@ class _BubbleWidgetState extends State<BubbleWidget>
         return (const Color(0xFF40E0D0), const Color(0xFFAFEEEE));
       case BubbleColor.lemonYellow:
         return (const Color(0xFFFFFACD), const Color(0xFFFFFF99));
+      case BubbleColor.black:
+        return (const Color(0xFF000000), const Color(0xFF333333));
     }
   }
 

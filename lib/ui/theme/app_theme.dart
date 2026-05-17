@@ -3,6 +3,7 @@ import 'wooden_colors.dart';
 import 'starlight_colors.dart';
 import 'forest_colors.dart';
 import 'volcano_colors.dart';
+import 'eink_colors.dart';
 import 'theme_provider.dart';
 
 /// Application theme configuration with wooden board game aesthetic.
@@ -138,6 +139,10 @@ class AppTheme {
         return brightness == Brightness.light
             ? _volcanoLightColorScheme
             : _volcanoDarkColorScheme;
+      case ColorSchemeType.eink:
+        return brightness == Brightness.light
+            ? _einkLightColorScheme
+            : _einkDarkColorScheme;
       case ColorSchemeType.wooden:
         return brightness == Brightness.light
             ? _woodenLightColorScheme
@@ -418,6 +423,76 @@ class AppTheme {
   );
 
   // ===========================================================================
+  // E-INK COLOR SCHEMES
+  // ===========================================================================
+
+  static ColorScheme get _einkLightColorScheme => const ColorScheme(
+    brightness: Brightness.light,
+    primary: EinkColors.lightPrimary,
+    onPrimary: EinkColors.lightOnPrimary,
+    primaryContainer: EinkColors.lightSecondary,
+    onPrimaryContainer: EinkColors.lightOnPrimary,
+    secondary: EinkColors.lightSecondary,
+    onSecondary: EinkColors.lightOnSecondary,
+    secondaryContainer: EinkColors.lightCard,
+    onSecondaryContainer: EinkColors.lightTextPrimary,
+    tertiary: EinkColors.accentInk,
+    onTertiary: EinkColors.lightOnPrimary,
+    tertiaryContainer: EinkColors.accentCharcoal,
+    onTertiaryContainer: EinkColors.lightOnPrimary,
+    surface: EinkColors.lightSurface,
+    onSurface: EinkColors.lightOnSurface,
+    surfaceContainerHighest: EinkColors.lightCard,
+    onSurfaceVariant: EinkColors.lightTextSecondary,
+    background: EinkColors.lightBackground,
+    onBackground: EinkColors.lightOnBackground,
+    error: EinkColors.lightError,
+    onError: EinkColors.lightOnError,
+    errorContainer: Color(0xFFDDDDDD),
+    onErrorContainer: Color(0xFF333333),
+    outline: EinkColors.lightBorder,
+    outlineVariant: EinkColors.lightDivider,
+    shadow: EinkColors.lightShadow,
+    scrim: Color(0xFF000000),
+    inverseSurface: EinkColors.darkSurface,
+    onInverseSurface: EinkColors.darkTextPrimary,
+    inversePrimary: EinkColors.darkPrimary,
+  );
+
+  static ColorScheme get _einkDarkColorScheme => const ColorScheme(
+    brightness: Brightness.dark,
+    primary: EinkColors.darkPrimary,
+    onPrimary: EinkColors.darkOnPrimary,
+    primaryContainer: EinkColors.darkSecondary,
+    onPrimaryContainer: EinkColors.darkOnPrimary,
+    secondary: EinkColors.darkSecondary,
+    onSecondary: EinkColors.darkOnSecondary,
+    secondaryContainer: EinkColors.darkCard,
+    onSecondaryContainer: EinkColors.darkTextPrimary,
+    tertiary: EinkColors.accentSilver,
+    onTertiary: EinkColors.darkOnPrimary,
+    tertiaryContainer: EinkColors.accentSlate,
+    onTertiaryContainer: EinkColors.darkOnPrimary,
+    surface: EinkColors.darkSurface,
+    onSurface: EinkColors.darkOnSurface,
+    surfaceContainerHighest: EinkColors.darkCard,
+    onSurfaceVariant: EinkColors.darkTextSecondary,
+    background: EinkColors.darkBackground,
+    onBackground: EinkColors.darkOnBackground,
+    error: EinkColors.darkError,
+    onError: EinkColors.darkOnError,
+    errorContainer: Color(0xFF333333),
+    onErrorContainer: Color(0xFFDDDDDD),
+    outline: EinkColors.darkBorder,
+    outlineVariant: EinkColors.darkDivider,
+    shadow: EinkColors.darkShadow,
+    scrim: Color(0xFF000000),
+    inverseSurface: EinkColors.lightSurface,
+    onInverseSurface: EinkColors.lightTextPrimary,
+    inversePrimary: EinkColors.lightPrimary,
+  );
+
+  // ===========================================================================
   // TEXT THEME
   // ===========================================================================
 
@@ -560,6 +635,11 @@ class AppTheme {
         VolcanoColors.lightOnPrimary,
         VolcanoColors.lightShadow,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightPrimary,
+        EinkColors.lightOnPrimary,
+        EinkColors.lightShadow,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightPrimary,
         WoodenColors.lightOnPrimary,
@@ -604,6 +684,11 @@ class AppTheme {
         VolcanoColors.darkPrimary,
         VolcanoColors.darkOnPrimary,
         VolcanoColors.darkShadow,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.darkPrimary,
+        EinkColors.darkOnPrimary,
+        EinkColors.darkShadow,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.darkPrimary,
@@ -654,6 +739,11 @@ class AppTheme {
         VolcanoColors.lightShadow,
         VolcanoColors.lightBorder,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightCard,
+        EinkColors.lightShadow,
+        EinkColors.lightBorder,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightCard,
         WoodenColors.lightShadow,
@@ -692,6 +782,11 @@ class AppTheme {
         VolcanoColors.darkCard,
         VolcanoColors.darkShadow,
         VolcanoColors.darkBorder,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.darkCard,
+        EinkColors.darkShadow,
+        EinkColors.darkBorder,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.darkCard,
@@ -751,6 +846,14 @@ class AppTheme {
         VolcanoColors.lightTextSecondary,
         VolcanoColors.lightShadow,
         VolcanoColors.lightBorder,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.lightPrimary,
+        EinkColors.lightOnPrimary,
+        EinkColors.lightDisabled,
+        EinkColors.lightTextSecondary,
+        EinkColors.lightShadow,
+        EinkColors.lightBorder,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.lightPrimary,
@@ -820,6 +923,14 @@ class AppTheme {
         VolcanoColors.darkShadow,
         VolcanoColors.darkBorder,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.darkPrimary,
+        EinkColors.darkOnPrimary,
+        EinkColors.darkDisabled,
+        EinkColors.darkTextSecondary,
+        EinkColors.darkShadow,
+        EinkColors.darkBorder,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.darkPrimary,
         WoodenColors.darkOnPrimary,
@@ -873,6 +984,10 @@ class AppTheme {
         VolcanoColors.lightPrimary,
         VolcanoColors.lightDisabled,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightPrimary,
+        EinkColors.lightDisabled,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightPrimary,
         WoodenColors.lightDisabled,
@@ -912,6 +1027,10 @@ class AppTheme {
       ColorSchemeType.volcano => (
         VolcanoColors.accentLava,
         VolcanoColors.darkDisabled,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.accentInk,
+        EinkColors.darkDisabled,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.accentAmber,
@@ -960,6 +1079,11 @@ class AppTheme {
         VolcanoColors.lightDisabled,
         VolcanoColors.lightBorder,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightPrimary,
+        EinkColors.lightDisabled,
+        EinkColors.lightBorder,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightPrimary,
         WoodenColors.lightDisabled,
@@ -1004,6 +1128,11 @@ class AppTheme {
         VolcanoColors.accentLava,
         VolcanoColors.darkDisabled,
         VolcanoColors.darkBorder,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.accentInk,
+        EinkColors.darkDisabled,
+        EinkColors.darkBorder,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.accentAmber,
@@ -1059,6 +1188,13 @@ class AppTheme {
         VolcanoColors.lightPrimary,
         VolcanoColors.lightError,
         VolcanoColors.lightDisabled,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.lightSurface,
+        EinkColors.lightBorder,
+        EinkColors.lightPrimary,
+        EinkColors.lightError,
+        EinkColors.lightDisabled,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.lightSurface,
@@ -1132,6 +1268,13 @@ class AppTheme {
         VolcanoColors.darkError,
         VolcanoColors.darkDisabled,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.darkSurface,
+        EinkColors.darkBorder,
+        EinkColors.accentSilver,
+        EinkColors.darkError,
+        EinkColors.darkDisabled,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.darkSurface,
         WoodenColors.darkBorder,
@@ -1202,6 +1345,11 @@ class AppTheme {
         VolcanoColors.lightTextPrimary,
         VolcanoColors.lightBorder,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.accentInk,
+        EinkColors.lightTextPrimary,
+        EinkColors.lightBorder,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.accentAmber,
         WoodenColors.lightTextPrimary,
@@ -1243,6 +1391,11 @@ class AppTheme {
         VolcanoColors.accentLava,
         VolcanoColors.darkTextPrimary,
         VolcanoColors.darkBorder,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.accentSilver,
+        EinkColors.darkTextPrimary,
+        EinkColors.darkBorder,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.accentAmber,
@@ -1287,6 +1440,7 @@ class AppTheme {
       ColorSchemeType.starlight => StarlightColors.lightDivider,
       ColorSchemeType.forest => ForestColors.lightDivider,
       ColorSchemeType.volcano => VolcanoColors.lightDivider,
+      ColorSchemeType.eink => EinkColors.lightDivider,
       ColorSchemeType.wooden => WoodenColors.lightDivider,
     };
 
@@ -1303,6 +1457,7 @@ class AppTheme {
       ColorSchemeType.starlight => StarlightColors.darkDivider,
       ColorSchemeType.forest => ForestColors.darkDivider,
       ColorSchemeType.volcano => VolcanoColors.darkDivider,
+      ColorSchemeType.eink => EinkColors.darkDivider,
       ColorSchemeType.wooden => WoodenColors.darkDivider,
     };
 
@@ -1340,6 +1495,12 @@ class AppTheme {
         VolcanoColors.lightShadow,
         VolcanoColors.lightBorder,
         VolcanoColors.lightTextPrimary,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.lightCard,
+        EinkColors.lightShadow,
+        EinkColors.lightBorder,
+        EinkColors.lightTextPrimary,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.lightCard,
@@ -1388,6 +1549,12 @@ class AppTheme {
         VolcanoColors.darkShadow,
         VolcanoColors.darkBorder,
         VolcanoColors.darkTextPrimary,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.darkCard,
+        EinkColors.darkShadow,
+        EinkColors.darkBorder,
+        EinkColors.darkTextPrimary,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.darkCard,
@@ -1441,6 +1608,12 @@ class AppTheme {
         VolcanoColors.lightDisabled,
         VolcanoColors.lightBorder,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightSurface,
+        EinkColors.lightPrimary,
+        EinkColors.lightDisabled,
+        EinkColors.lightBorder,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightSurface,
         WoodenColors.lightPrimary,
@@ -1485,6 +1658,12 @@ class AppTheme {
         VolcanoColors.accentLava,
         VolcanoColors.darkDisabled,
         VolcanoColors.darkBorder,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.darkSurface,
+        EinkColors.accentInk,
+        EinkColors.darkDisabled,
+        EinkColors.darkBorder,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.darkSurface,
@@ -1532,6 +1711,11 @@ class AppTheme {
         VolcanoColors.lightShadow,
         VolcanoColors.lightBorder,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightCard,
+        EinkColors.lightShadow,
+        EinkColors.lightBorder,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightCard,
         WoodenColors.lightShadow,
@@ -1571,6 +1755,11 @@ class AppTheme {
         VolcanoColors.darkCard,
         VolcanoColors.darkShadow,
         VolcanoColors.darkBorder,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.darkCard,
+        EinkColors.darkShadow,
+        EinkColors.darkBorder,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.darkCard,
@@ -1621,6 +1810,13 @@ class AppTheme {
         VolcanoColors.lightPrimary,
         VolcanoColors.lightSecondary,
         VolcanoColors.lightBorder,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.lightSurface,
+        EinkColors.lightDisabled,
+        EinkColors.lightPrimary,
+        EinkColors.lightSecondary,
+        EinkColors.lightBorder,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.lightSurface,
@@ -1675,6 +1871,13 @@ class AppTheme {
         VolcanoColors.darkBorder,
         VolcanoColors.accentEmber,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.darkSurface,
+        EinkColors.darkDisabled,
+        EinkColors.accentInk,
+        EinkColors.darkBorder,
+        EinkColors.accentCharcoal,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.darkSurface,
         WoodenColors.darkDisabled,
@@ -1726,6 +1929,11 @@ class AppTheme {
         VolcanoColors.lightTextSecondary,
         VolcanoColors.lightDivider,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightPrimary,
+        EinkColors.lightTextSecondary,
+        EinkColors.lightDivider,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightPrimary,
         WoodenColors.lightTextSecondary,
@@ -1774,6 +1982,11 @@ class AppTheme {
         VolcanoColors.accentLava,
         VolcanoColors.darkTextSecondary,
         VolcanoColors.darkDivider,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.accentInk,
+        EinkColors.darkTextSecondary,
+        EinkColors.darkDivider,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.accentAmber,
@@ -1828,6 +2041,11 @@ class AppTheme {
         VolcanoColors.lightDivider,
         VolcanoColors.accentLava,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightPrimary,
+        EinkColors.lightDivider,
+        EinkColors.accentInk,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightPrimary,
         WoodenColors.lightDivider,
@@ -1870,6 +2088,11 @@ class AppTheme {
         VolcanoColors.accentLava,
         VolcanoColors.darkDivider,
         VolcanoColors.accentEmber,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.accentInk,
+        EinkColors.darkDivider,
+        EinkColors.accentSilver,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.accentAmber,
@@ -1921,6 +2144,12 @@ class AppTheme {
         VolcanoColors.lightShadow,
         VolcanoColors.lightTextPrimary,
       ),
+      ColorSchemeType.eink => (
+        EinkColors.lightSurface,
+        EinkColors.lightBorder,
+        EinkColors.lightShadow,
+        EinkColors.lightTextPrimary,
+      ),
       ColorSchemeType.wooden => (
         WoodenColors.lightSurface,
         WoodenColors.lightBorder,
@@ -1970,6 +2199,12 @@ class AppTheme {
         VolcanoColors.darkBorder,
         VolcanoColors.darkShadow,
         VolcanoColors.darkTextPrimary,
+      ),
+      ColorSchemeType.eink => (
+        EinkColors.darkSurface,
+        EinkColors.darkBorder,
+        EinkColors.darkShadow,
+        EinkColors.darkTextPrimary,
       ),
       ColorSchemeType.wooden => (
         WoodenColors.darkSurface,
