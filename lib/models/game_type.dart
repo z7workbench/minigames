@@ -15,6 +15,7 @@ enum GameType {
   chessIntl,
   schulteGrid,
   fishing,
+  connectFour,
 }
 
 extension GameTypeExtension on GameType {
@@ -45,6 +46,8 @@ case GameType.schulteGrid:
         return 'Schulte Grid';
       case GameType.fishing:
         return 'Fishing';
+      case GameType.connectFour:
+        return 'Connect Four';
     }
   }
 
@@ -74,6 +77,8 @@ case GameType.schulteGrid:
         return Icons.grid_4x4;
       case GameType.fishing:
         return Icons.phishing;
+      case GameType.connectFour:
+        return Icons.circle_outlined;
     }
   }
 
@@ -81,6 +86,15 @@ case GameType.schulteGrid:
     switch (this) {
       case GameType.chessIntl:
         return '\u265A';
+      default:
+        return null;
+    }
+  }
+
+  Widget? get iconWidget {
+    switch (this) {
+      case GameType.connectFour:
+        return _ConnectFourGridIcon();
       default:
         return null;
     }
@@ -113,6 +127,8 @@ case GameType.schulteGrid:
         return '/schulte-grid';
       case GameType.fishing:
         return '/fishing';
+      case GameType.connectFour:
+        return '/connect-four';
     }
   }
 
@@ -142,8 +158,53 @@ case GameType.schulteGrid:
         return DateTime(2026, 5, 1);
       case GameType.fishing:
         return DateTime(2026, 5, 3);
+      case GameType.connectFour:
+        return DateTime(2026, 5, 18);
     }
   }
 
   bool get isWip => false;
+}
+
+class _ConnectFourGridIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    const gap = 2.0;
+    final color = Theme.of(context).colorScheme.primary;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _circle(false, color),
+            const SizedBox(width: gap),
+            _circle(true, color),
+          ],
+        ),
+        const SizedBox(height: gap),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _circle(false, color),
+            const SizedBox(width: gap),
+            _circle(false, color),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _circle(bool filled, Color color) {
+    return Container(
+      width: 9,
+      height: 9,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: filled ? color : Colors.transparent,
+        border: Border.all(color: color, width: 1.5),
+      ),
+    );
+  }
 }

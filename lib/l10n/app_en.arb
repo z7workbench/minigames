@@ -2479,5 +2479,142 @@
   "fishing_fishLegendary": "Legendary Fish",
   "@fishing_fishLegendary": {
     "description": "Legendary fish name"
+  },
+
+  "game_connect_four": "Connect Four",
+  "@game_connect_four": {
+    "description": "Connect Four game display name"
+  },
+  "c4_gameTitle": "Connect Four",
+  "@c4_gameTitle": {
+    "description": "Connect Four game title"
+  },
+  "c4_gameDescription": "Classic two-player strategy game. Drop discs into a 7×6 grid and be the first to connect four in a row!",
+  "@c4_gameDescription": {
+    "description": "Connect Four game description"
+  },
+  "c4_howToPlay": "How to Play",
+  "@c4_howToPlay": {
+    "description": "How to play title"
+  },
+  "c4_rule1Title": "Board",
+  "@c4_rule1Title": {
+    "description": "Rule 1 title"
+  },
+  "c4_rule1Desc": "The board has 7 rows and 6 columns. Players take turns dropping discs into any column.",
+  "@c4_rule1Desc": {
+    "description": "Rule 1 description"
+  },
+  "c4_rule2Title": "Gravity",
+  "@c4_rule2Title": {
+    "description": "Rule 2 title"
+  },
+  "c4_rule2Desc": "Discs fall to the lowest available position in the selected column due to gravity.",
+  "@c4_rule2Desc": {
+    "description": "Rule 2 description"
+  },
+  "c4_rule3Title": "Winning",
+  "@c4_rule3Title": {
+    "description": "Rule 3 title"
+  },
+  "c4_rule3Desc": "The first player to connect four discs in a row — horizontally, vertically, or diagonally — wins!",
+  "@c4_rule3Desc": {
+    "description": "Rule 3 description"
+  },
+  "c4_rule4Title": "Draw",
+  "@c4_rule4Title": {
+    "description": "Rule 4 title"
+  },
+  "c4_rule4Desc": "If all 42 positions are filled and no one has connected four, the game is a draw.",
+  "@c4_rule4Desc": {
+    "description": "Rule 4 description"
+  },
+  "c4_startGame": "Start Game",
+  "@c4_startGame": {
+    "description": "Start game button"
+  },
+  "c4_newGame": "New Game",
+  "@c4_newGame": {
+    "description": "New game button"
+  },
+  "c4_undo": "Undo",
+  "@c4_undo": {
+    "description": "Undo button"
+  },
+  "c4_exitGame": "Exit Game",
+  "@c4_exitGame": {
+    "description": "Exit game button"
+  },
+  "c4_exitConfirm": "Are you sure you want to exit the current game?",
+  "@c4_exitConfirm": {
+    "description": "Exit confirmation message"
+  },
+  "c4_restartConfirm": "Start a new game? Current progress will be lost.",
+  "@c4_restartConfirm": {
+    "description": "Restart confirmation message"
+  },
+  "c4_aiDifficulty": "AI Difficulty",
+  "@c4_aiDifficulty": {
+    "description": "AI difficulty label"
+  },
+  "c4_easy": "Easy",
+  "@c4_easy": {
+    "description": "Easy difficulty"
+  },
+  "c4_medium": "Medium",
+  "@c4_medium": {
+    "description": "Medium difficulty"
+  },
+  "c4_hard": "Hard",
+  "@c4_hard": {
+    "description": "Hard difficulty"
+  },
+  "c4_you": "You",
+  "@c4_you": {
+    "description": "Player label"
+  },
+  "c4_ai": "AI",
+  "@c4_ai": {
+    "description": "AI label"
+  },
+  "c4_vs": "VS",
+  "@c4_vs": {
+    "description": "Versus label"
+  },
+  "c4_thinking": "Thinking...",
+  "@c4_thinking": {
+    "description": "AI thinking indicator"
+  },
+  "c4_preparing": "Preparing...",
+  "@c4_preparing": {
+    "description": "Game preparing status"
+  },
+  "c4_yourTurn": "Your turn — tap a column to drop",
+  "@c4_yourTurn": {
+    "description": "Player turn status"
+  },
+  "c4_aiTurn": "AI is thinking...",
+  "@c4_aiTurn": {
+    "description": "AI turn status"
+  },
+  "c4_youWin": "You Win!",
+  "@c4_youWin": {
+    "description": "Player wins message"
+  },
+  "c4_aiWins": "AI Wins!",
+  "@c4_aiWins": {
+    "description": "AI wins message"
+  },
+  "c4_draw": "It's a Draw!",
+  "@c4_draw": {
+    "description": "Draw message"
+  },
+  "c4_moveHistory": "Move History",
+  "@c4_moveHistory": {
+    "description": "Move history panel title"
+  },
+  "c4_noMovesYet": "No moves yet",
+  "@c4_noMovesYet": {
+    "description": "Empty move history message"
   }
 }

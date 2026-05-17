@@ -39,6 +39,8 @@ class GameCard extends StatelessWidget {
 
   String? get _iconText => gameType.iconText;
 
+  Widget? get _iconWidget => gameType.iconWidget;
+
   @override
   Widget build(BuildContext context) {
     final cardColor = context.themeCard;
@@ -84,21 +86,23 @@ class GameCard extends StatelessWidget {
                         width: 2.0,
                       ),
                     ),
-                    child: _iconText != null
-                        ? Text(
-                            _iconText!,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 28,
-                              color: accentColor,
-                              height: 1,
-                            ),
-                          )
-                        : Icon(
-                            _iconData,
-                            size: 28,
-                            color: accentColor,
-                          ),
+                    child: _iconWidget != null
+                        ? _iconWidget!
+                        : _iconText != null
+                            ? Text(
+                                _iconText!,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  color: accentColor,
+                                  height: 1,
+                                ),
+                              )
+                            : Icon(
+                                _iconData,
+                                size: 28,
+                                color: accentColor,
+                              ),
                   ),
                   const SizedBox(height: 10.0),
                   // Game Title

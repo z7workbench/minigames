@@ -1890,4 +1890,113 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fishing_fishLegendary => 'Legendary Fish';
+
+  @override
+  String get game_connect_four => 'Connect Four';
+
+  @override
+  String get c4_gameTitle => 'Connect Four';
+
+  @override
+  String get c4_gameDescription =>
+      'Classic two-player strategy game. Drop discs into a 7×6 grid and be the first to connect four in a row!';
+
+  @override
+  String get c4_howToPlay => 'How to Play';
+
+  @override
+  String get c4_rule1Title => 'Board';
+
+  @override
+  String get c4_rule1Desc =>
+      'The board has 7 rows and 6 columns. Players take turns dropping discs into any column.';
+
+  @override
+  String get c4_rule2Title => 'Gravity';
+
+  @override
+  String get c4_rule2Desc =>
+      'Discs fall to the lowest available position in the selected column due to gravity.';
+
+  @override
+  String get c4_rule3Title => 'Winning';
+
+  @override
+  String get c4_rule3Desc =>
+      'The first player to connect four discs in a row — horizontally, vertically, or diagonally — wins!';
+
+  @override
+  String get c4_rule4Title => 'Draw';
+
+  @override
+  String get c4_rule4Desc =>
+      'If all 42 positions are filled and no one has connected four, the game is a draw.';
+
+  @override
+  String get c4_startGame => 'Start Game';
+
+  @override
+  String get c4_newGame => 'New Game';
+
+  @override
+  String get c4_undo => 'Undo';
+
+  @override
+  String get c4_exitGame => 'Exit Game';
+
+  @override
+  String get c4_exitConfirm =>
+      'Are you sure you want to exit the current game?';
+
+  @override
+  String get c4_restartConfirm =>
+      'Start a new game? Current progress will be lost.';
+
+  @override
+  String get c4_aiDifficulty => 'AI Difficulty';
+
+  @override
+  String get c4_easy => 'Easy';
+
+  @override
+  String get c4_medium => 'Medium';
+
+  @override
+  String get c4_hard => 'Hard';
+
+  @override
+  String get c4_you => 'You';
+
+  @override
+  String get c4_ai => 'AI';
+
+  @override
+  String get c4_vs => 'VS';
+
+  @override
+  String get c4_thinking => 'Thinking...';
+
+  @override
+  String get c4_preparing => 'Preparing...';
+
+  @override
+  String get c4_yourTurn => 'Your turn — tap a column to drop';
+
+  @override
+  String get c4_aiTurn => 'AI is thinking...';
+
+  @override
+  String get c4_youWin => 'You Win!';
+
+  @override
+  String get c4_aiWins => 'AI Wins!';
+
+  @override
+  String get c4_draw => 'It\'s a Draw!';
+
+  @override
+  String get c4_moveHistory => 'Move History';
+
+  @override
+  String get c4_noMovesYet => 'No moves yet';
 }

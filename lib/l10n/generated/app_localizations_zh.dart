@@ -1837,4 +1837,106 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fishing_fishLegendary => '传说之鱼';
+
+  @override
+  String get game_connect_four => '四子棋';
+
+  @override
+  String get c4_gameTitle => '四子棋';
+
+  @override
+  String get c4_gameDescription => '经典双人策略游戏。在7×6的棋盘中投入棋子，率先将四枚棋子连成一线即可获胜！';
+
+  @override
+  String get c4_howToPlay => '玩法说明';
+
+  @override
+  String get c4_rule1Title => '棋盘';
+
+  @override
+  String get c4_rule1Desc => '棋盘共有7行6列。双方轮流将棋子投入任意一列。';
+
+  @override
+  String get c4_rule2Title => '重力';
+
+  @override
+  String get c4_rule2Desc => '棋子受重力影响，自动落入所选列的最低空位。';
+
+  @override
+  String get c4_rule3Title => '胜利条件';
+
+  @override
+  String get c4_rule3Desc => '率先将四枚棋子在横向、纵向或对角线方向连成一线者获胜！';
+
+  @override
+  String get c4_rule4Title => '平局';
+
+  @override
+  String get c4_rule4Desc => '若42个格位全部填满且无人连成四子，则判定为平局。';
+
+  @override
+  String get c4_startGame => '开始游戏';
+
+  @override
+  String get c4_newGame => '新游戏';
+
+  @override
+  String get c4_undo => '撤销';
+
+  @override
+  String get c4_exitGame => '退出游戏';
+
+  @override
+  String get c4_exitConfirm => '确定要退出当前游戏吗？';
+
+  @override
+  String get c4_restartConfirm => '开始新游戏？当前进度将会丢失。';
+
+  @override
+  String get c4_aiDifficulty => 'AI难度';
+
+  @override
+  String get c4_easy => '简单';
+
+  @override
+  String get c4_medium => '中等';
+
+  @override
+  String get c4_hard => '困难';
+
+  @override
+  String get c4_you => '你';
+
+  @override
+  String get c4_ai => 'AI';
+
+  @override
+  String get c4_vs => 'VS';
+
+  @override
+  String get c4_thinking => '思考中...';
+
+  @override
+  String get c4_preparing => '准备中...';
+
+  @override
+  String get c4_yourTurn => '你的回合 — 点击一列投入棋子';
+
+  @override
+  String get c4_aiTurn => 'AI正在思考...';
+
+  @override
+  String get c4_youWin => '你赢了！';
+
+  @override
+  String get c4_aiWins => 'AI获胜！';
+
+  @override
+  String get c4_draw => '平局！';
+
+  @override
+  String get c4_moveHistory => '落子记录';
+
+  @override
+  String get c4_noMovesYet => '暂无落子';
 }

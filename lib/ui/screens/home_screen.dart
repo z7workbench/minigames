@@ -23,6 +23,7 @@ import '../../games/aim_test/screens/aim_test_start_screen.dart';
 import '../../games/chess_intl/screens/chess_intl_start_screen.dart';
 import '../../games/schulte_grid/screens/schulte_grid_start_screen.dart';
 import '../../games/fishing/screens/fishing_start_screen.dart';
+import '../../games/connect_four/screens/connect_four_start_screen.dart';
 
 /// The home screen displaying a scrollable grid of game cards.
 ///
@@ -115,6 +116,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           MaterialPageRoute(builder: (context) => const FishingStartScreen()),
         );
         break;
+      case GameType.connectFour:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ConnectFourStartScreen()),
+        );
+        break;
     }
   }
 
@@ -153,6 +160,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.sg_gameTitle;
       case GameType.fishing:
         return l10n.game_fishing;
+      case GameType.connectFour:
+        return l10n.game_connect_four;
     }
   }
 
@@ -183,6 +192,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.sg_gameDescription;
       case GameType.fishing:
         return l10n.fishing_gameDescription;
+      case GameType.connectFour:
+        return l10n.c4_gameDescription;
     }
   }
 
@@ -334,7 +345,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     allGames.sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
     
     // Recent releases (top 2 most recent) - schulteGrid and fishing
-    final recentGames = [GameType.schulteGrid, GameType.fishing];
+    final recentGames = [GameType.connectFour, GameType.fishing];
     
     // All other games (excluding only recent releases, keeping favorites)
     final otherGames = allGames.where((g) => !recentGames.contains(g)).toList();
@@ -447,7 +458,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// Build the recent releases section
   Widget _buildRecentReleasesSection(AppLocalizations l10n) {
     final recentGames = [
-      GameType.schulteGrid,
+      GameType.connectFour,
       GameType.fishing,
     ];
     

@@ -41,7 +41,7 @@ extension GameCreatorExtension on GameCreator {
       case GameCreator.minimax:
         return [GameType.reactionTest, GameType.aimTest, GameType.fishing];
       case GameCreator.mimo:
-        return [GameType.hitAndBlow, GameType.chessIntl, GameType.schulteGrid];
+        return [GameType.hitAndBlow, GameType.chessIntl, GameType.schulteGrid, GameType.connectFour];
     }
   }
 
@@ -69,6 +69,7 @@ extension GameTypeCreatorExtension on GameType {
       case GameType.hitAndBlow:
       case GameType.chessIntl:
       case GameType.schulteGrid:
+      case GameType.connectFour:
         return GameCreator.mimo;
       case GameType.fishing:
         return GameCreator.minimax;

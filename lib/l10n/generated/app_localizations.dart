@@ -3583,6 +3583,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Legendary Fish'**
   String get fishing_fishLegendary;
+
+  /// Connect Four game display name
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Four'**
+  String get game_connect_four;
+
+  /// Connect Four game title
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Four'**
+  String get c4_gameTitle;
+
+  /// Connect Four game description
+  ///
+  /// In en, this message translates to:
+  /// **'Classic two-player strategy game. Drop discs into a 7×6 grid and be the first to connect four in a row!'**
+  String get c4_gameDescription;
+
+  /// How to play title
+  ///
+  /// In en, this message translates to:
+  /// **'How to Play'**
+  String get c4_howToPlay;
+
+  /// Rule 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'Board'**
+  String get c4_rule1Title;
+
+  /// Rule 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'The board has 7 rows and 6 columns. Players take turns dropping discs into any column.'**
+  String get c4_rule1Desc;
+
+  /// Rule 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'Gravity'**
+  String get c4_rule2Title;
+
+  /// Rule 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Discs fall to the lowest available position in the selected column due to gravity.'**
+  String get c4_rule2Desc;
+
+  /// Rule 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'Winning'**
+  String get c4_rule3Title;
+
+  /// Rule 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'The first player to connect four discs in a row — horizontally, vertically, or diagonally — wins!'**
+  String get c4_rule3Desc;
+
+  /// Rule 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'Draw'**
+  String get c4_rule4Title;
+
+  /// Rule 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'If all 42 positions are filled and no one has connected four, the game is a draw.'**
+  String get c4_rule4Desc;
+
+  /// Start game button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Game'**
+  String get c4_startGame;
+
+  /// New game button
+  ///
+  /// In en, this message translates to:
+  /// **'New Game'**
+  String get c4_newGame;
+
+  /// Undo button
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get c4_undo;
+
+  /// Exit game button
+  ///
+  /// In en, this message translates to:
+  /// **'Exit Game'**
+  String get c4_exitGame;
+
+  /// Exit confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit the current game?'**
+  String get c4_exitConfirm;
+
+  /// Restart confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Start a new game? Current progress will be lost.'**
+  String get c4_restartConfirm;
+
+  /// AI difficulty label
+  ///
+  /// In en, this message translates to:
+  /// **'AI Difficulty'**
+  String get c4_aiDifficulty;
+
+  /// Easy difficulty
+  ///
+  /// In en, this message translates to:
+  /// **'Easy'**
+  String get c4_easy;
+
+  /// Medium difficulty
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get c4_medium;
+
+  /// Hard difficulty
+  ///
+  /// In en, this message translates to:
+  /// **'Hard'**
+  String get c4_hard;
+
+  /// Player label
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get c4_you;
+
+  /// AI label
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get c4_ai;
+
+  /// Versus label
+  ///
+  /// In en, this message translates to:
+  /// **'VS'**
+  String get c4_vs;
+
+  /// AI thinking indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking...'**
+  String get c4_thinking;
+
+  /// Game preparing status
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing...'**
+  String get c4_preparing;
+
+  /// Player turn status
+  ///
+  /// In en, this message translates to:
+  /// **'Your turn — tap a column to drop'**
+  String get c4_yourTurn;
+
+  /// AI turn status
+  ///
+  /// In en, this message translates to:
+  /// **'AI is thinking...'**
+  String get c4_aiTurn;
+
+  /// Player wins message
+  ///
+  /// In en, this message translates to:
+  /// **'You Win!'**
+  String get c4_youWin;
+
+  /// AI wins message
+  ///
+  /// In en, this message translates to:
+  /// **'AI Wins!'**
+  String get c4_aiWins;
+
+  /// Draw message
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s a Draw!'**
+  String get c4_draw;
+
+  /// Move history panel title
+  ///
+  /// In en, this message translates to:
+  /// **'Move History'**
+  String get c4_moveHistory;
+
+  /// Empty move history message
+  ///
+  /// In en, this message translates to:
+  /// **'No moves yet'**
+  String get c4_noMovesYet;
 }
 
 class _AppLocalizationsDelegate

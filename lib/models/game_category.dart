@@ -46,7 +46,7 @@ extension GameCategoryExtension on GameCategory {
       case GameCategory.cards:
         return [GameType.guessArrangement, GameType.hearts, GameType.bluffBar];
       case GameCategory.board:
-        return [GameType.mancala, GameType.chessIntl];
+        return [GameType.mancala, GameType.chessIntl, GameType.connectFour];
       case GameCategory.reaction:
         return [GameType.reactionTest, GameType.aimTest, GameType.schulteGrid];
       case GameCategory.casual:
@@ -86,6 +86,7 @@ extension GameTypeCategoryExtension on GameType {
         return GameCategory.cards;
       case GameType.mancala:
       case GameType.chessIntl:
+      case GameType.connectFour:
         return GameCategory.board;
       case GameType.reactionTest:
       case GameType.aimTest:

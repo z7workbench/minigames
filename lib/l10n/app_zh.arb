@@ -2276,5 +2276,142 @@
     "fishing_fishLegendary": "传说之鱼",
     "@fishing_fishLegendary": {
       "description": "Legendary fish name"
+    },
+
+    "game_connect_four": "四子棋",
+    "@game_connect_four": {
+      "description": "Connect Four game display name"
+    },
+    "c4_gameTitle": "四子棋",
+    "@c4_gameTitle": {
+      "description": "Connect Four game title"
+    },
+    "c4_gameDescription": "经典双人策略游戏。在7×6的棋盘中投入棋子，率先将四枚棋子连成一线即可获胜！",
+    "@c4_gameDescription": {
+      "description": "Connect Four game description"
+    },
+    "c4_howToPlay": "玩法说明",
+    "@c4_howToPlay": {
+      "description": "How to play title"
+    },
+    "c4_rule1Title": "棋盘",
+    "@c4_rule1Title": {
+      "description": "Rule 1 title"
+    },
+    "c4_rule1Desc": "棋盘共有7行6列。双方轮流将棋子投入任意一列。",
+    "@c4_rule1Desc": {
+      "description": "Rule 1 description"
+    },
+    "c4_rule2Title": "重力",
+    "@c4_rule2Title": {
+      "description": "Rule 2 title"
+    },
+    "c4_rule2Desc": "棋子受重力影响，自动落入所选列的最低空位。",
+    "@c4_rule2Desc": {
+      "description": "Rule 2 description"
+    },
+    "c4_rule3Title": "胜利条件",
+    "@c4_rule3Title": {
+      "description": "Rule 3 title"
+    },
+    "c4_rule3Desc": "率先将四枚棋子在横向、纵向或对角线方向连成一线者获胜！",
+    "@c4_rule3Desc": {
+      "description": "Rule 3 description"
+    },
+    "c4_rule4Title": "平局",
+    "@c4_rule4Title": {
+      "description": "Rule 4 title"
+    },
+    "c4_rule4Desc": "若42个格位全部填满且无人连成四子，则判定为平局。",
+    "@c4_rule4Desc": {
+      "description": "Rule 4 description"
+    },
+    "c4_startGame": "开始游戏",
+    "@c4_startGame": {
+      "description": "Start game button"
+    },
+    "c4_newGame": "新游戏",
+    "@c4_newGame": {
+      "description": "New game button"
+    },
+    "c4_undo": "撤销",
+    "@c4_undo": {
+      "description": "Undo button"
+    },
+    "c4_exitGame": "退出游戏",
+    "@c4_exitGame": {
+      "description": "Exit game button"
+    },
+    "c4_exitConfirm": "确定要退出当前游戏吗？",
+    "@c4_exitConfirm": {
+      "description": "Exit confirmation message"
+    },
+    "c4_restartConfirm": "开始新游戏？当前进度将会丢失。",
+    "@c4_restartConfirm": {
+      "description": "Restart confirmation message"
+    },
+    "c4_aiDifficulty": "AI难度",
+    "@c4_aiDifficulty": {
+      "description": "AI difficulty label"
+    },
+    "c4_easy": "简单",
+    "@c4_easy": {
+      "description": "Easy difficulty"
+    },
+    "c4_medium": "中等",
+    "@c4_medium": {
+      "description": "Medium difficulty"
+    },
+    "c4_hard": "困难",
+    "@c4_hard": {
+      "description": "Hard difficulty"
+    },
+    "c4_you": "你",
+    "@c4_you": {
+      "description": "Player label"
+    },
+    "c4_ai": "AI",
+    "@c4_ai": {
+      "description": "AI label"
+    },
+    "c4_vs": "VS",
+    "@c4_vs": {
+      "description": "Versus label"
+    },
+    "c4_thinking": "思考中...",
+    "@c4_thinking": {
+      "description": "AI thinking indicator"
+    },
+    "c4_preparing": "准备中...",
+    "@c4_preparing": {
+      "description": "Game preparing status"
+    },
+    "c4_yourTurn": "你的回合 — 点击一列投入棋子",
+    "@c4_yourTurn": {
+      "description": "Player turn status"
+    },
+    "c4_aiTurn": "AI正在思考...",
+    "@c4_aiTurn": {
+      "description": "AI turn status"
+    },
+    "c4_youWin": "你赢了！",
+    "@c4_youWin": {
+      "description": "Player wins message"
+    },
+    "c4_aiWins": "AI获胜！",
+    "@c4_aiWins": {
+      "description": "AI wins message"
+    },
+    "c4_draw": "平局！",
+    "@c4_draw": {
+      "description": "Draw message"
+    },
+    "c4_moveHistory": "落子记录",
+    "@c4_moveHistory": {
+      "description": "Move history panel title"
+    },
+    "c4_noMovesYet": "暂无落子",
+    "@c4_noMovesYet": {
+      "description": "Empty move history message"
     }
 }
